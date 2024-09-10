@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
   <link rel="stylesheet" href="/pi_gandara/css/style.css">
   <title>Ceres Sistema</title>
+
 </head>
 
 <body>
