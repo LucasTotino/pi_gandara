@@ -31,7 +31,7 @@ if (isset($_POST['submit'])) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.css" crossorigin="anonymous">
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
 
-    <title>Cadastro de Clientes</title>
+    <title>Cadastro de Fornecedores</title>
 </head>
 
 <body>
@@ -42,7 +42,7 @@ if (isset($_POST['submit'])) {
     </header>
     <main>
         <div class="container-1">
-            <h1 style="text-align:center;">Cadastro de Cliente</h1>
+        <h1 style="text-align:center;">Cadastro de Fornecedor</h1>
             <!-- Confirmação Email e Senha -->
             <?php
             if (isset($_POST['submit'])) {
