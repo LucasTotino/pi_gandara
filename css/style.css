@@ -1,10 +1,26 @@
 @import url(https://fonts.googleapis.com/css?family=Raleway:400);
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,300,100);
+
 body {
   margin: 0;
   padding: 0;
   background: #eee;
-  font-family: Roboto,'Helvetica Neue', Helvetica, sans-serif;
+  font-family: Roboto, 'Helvetica Neue', Helvetica, sans-serif;
+  background-image: url("/pi_gandara/imgs/Logo 2.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+main {
+  margin-top: 3rem;
+  margin-left: 11rem;
+  margin-right: 1rem;
 }
 
 nav {
@@ -15,13 +31,17 @@ nav {
   overflow: hidden;
   transition: width .3s ease;
 }
-nav:hover, nav.pinned {
+
+nav:hover,
+nav.pinned {
   width: 10rem;
 }
+
 nav #teste {
   width: 500px;
   background: red;
 }
+
 nav #teste .icon-bar {
   display: block;
   width: 18px;
@@ -35,16 +55,19 @@ nav #teste .icon-bar {
   -moz-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
 }
+
 nav a {
   color: #fff;
   text-decoration: none;
   display: table;
   width: 10rem;
 }
+
 nav a:hover {
   background: #084C57;
   color: #fff;
 }
+
 nav a .fa {
   width: 4rem;
   display: table-cell;
@@ -52,6 +75,17 @@ nav a .fa {
   padding: 1rem 0;
   text-align: center;
 }
+
 nav a.label {
   display: table-cell;
+}
+
+.card-cadastro {
+  align-items: center;
+}
+
+.card-img-top {
+  margin-top: 1rem;
+  width: 3rem;
+  height: 100%;
 }
