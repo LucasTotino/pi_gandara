@@ -6,9 +6,6 @@ body {
   padding: 0;
   background: #eee;
   font-family: Roboto, 'Helvetica Neue', Helvetica, sans-serif;
-  background-image: url("/pi_gandara/imgs/Logo 2.jpeg");
-  background-repeat: no-repeat;
-  background-size: cover;
 }
 
 header {
