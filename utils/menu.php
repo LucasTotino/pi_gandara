@@ -1,3 +1,4 @@
+<!-- Menu -->
 <nav class="">
   <a href="../index.php" title="Home">
     <span class="fa fa-bars" aria-hidden="true"></span>
