@@ -26,7 +26,7 @@
         <a href="../index.php" class="btn" style="width: 15rem;">
           <div class="col-3 p-5 m-1">
             <div>
-              <span class="fa fa-industry fa-4x" aria-hidden="true"></span>
+              <span class="fa-solid fa-city fa-4x" aria-hidden="true"></span>
               <div class="card-body">
                 <h3>Razão Geral</h3>
               </div>
@@ -37,7 +37,7 @@
         <a href="../index.php" class="btn" style="width: 15rem;">
           <div class="col-3 p-5 m-1">
             <div>
-              <span class="fa fa-industry fa-4x" aria-hidden="true"></span>
+              <span class="fa-solid fa-money-bill-transfer fa-4x" aria-hidden="true"></span>
               <div class="card-body">
                 <h3>Contas a Pagar</h3>
               </div>
@@ -48,7 +48,7 @@
         <a href="../index.php" class="btn" style="width: 15rem;">
           <div class="col-3 p-5 m-1">
             <div>
-              <span class="fa fa-industry fa-4x" aria-hidden="true"></span>
+              <span class="fa-solid fa-money-bill-transfer fa-4x" aria-hidden="true"></span>
               <div class="card-body">
                 <h3>Contas a Receber</h3>
               </div>
@@ -59,7 +59,7 @@
         <a href="../index.php" class="btn" style="width: 15rem;">
           <div class="col-3 p-5 m-1">
             <div>
-              <span class="fa fa-industry fa-4x" aria-hidden="true"></span>
+              <span class="fa-solid fa-scale-balanced fa-4x" aria-hidden="true"></span>
               <div class="card-body">
                 <h3>Gerenciamento de Caixa</h3>
               </div>
@@ -74,7 +74,7 @@
         <a href="../index.php" class="btn" style="width: 15rem;">
           <div class="col-3 p-5 m-1">
             <div>
-              <span class="fa fa-industry fa-4x" aria-hidden="true"></span>
+              <span class="fa-solid fa-truck fa-4x" aria-hidden="true"></span>
               <div class="card-body">
                 <h3>Gerenciamento de Fornecedores</h3>
               </div>
@@ -85,7 +85,7 @@
         <a href="../index.php" class="btn" style="width: 15rem;">
           <div class="col-3 p-5 m-1">
             <div>
-              <span class="fa fa-industry fa-4x" aria-hidden="true"></span>
+              <span class="fa-solid fa-landmark fa-4x" aria-hidden="true"></span>
               <div class="card-body">
                 <h3>Gerenciamento Bancário</h3>
               </div>
