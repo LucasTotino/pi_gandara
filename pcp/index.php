@@ -14,13 +14,13 @@
   <body>
     <header>
     <?php
-    include_once('utils/menu.php');
+    include_once('../utils/menu.php');
     ?>
   </header>
   <main>
     <div class="container">
       <div class="row p-5 justify-content-center d-flex align-items-center">
-        <a href="pi_gandara/pcp/planejamento.php" class="btn">
+        <a href="/pi_gandara/pcp/planejamento.php" class="btn">
           <div class="col-6 p-5 m-1">
             <div style="width: 18rem;">
               <span class="fa fa-columns fa-5x" aria-hidden="true"></span>
@@ -31,7 +31,7 @@
           </div>
         </a>
 
-        <a href="pi_gandara/index.php" class="btn">
+        <a href="/pi_gandara/index.php" class="btn">
           <div class="col-6 p-5 m-1">
             <div style="width: 18rem;">
               <span class="fa fa-industry fa-5x" aria-hidden="true"></span>
