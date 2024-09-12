@@ -20,7 +20,11 @@
 
       <div class="row p-5 justify-content-center d-flex align-items-center">
         
-        <a href="pi_gandara/estoque/index.php" class="btn">
+<<<<<<< HEAD
+        <a href="estoque/index.php" class="btn">
+=======
+        <a href="/pi_gandara/estoque/index.php" class="btn">
+>>>>>>> 8f7ea920add2f84b965184367ad2d500fbbe866b
           <div class="col-4 p-2 m-1">
             <div style="width: 18rem;">
               <span class="fa fa-solid fa-box fa-5x" aria-hidden="true"></span>
@@ -31,7 +35,7 @@
           </div>
         </a>
 
-        <a href="pi_gandara/compras/index.php" class="btn">
+        <a href="/pi_gandara/compras/index.php" class="btn">
           <div class="col-4 p-2 m-1">
             <div style="width: 18rem;">
               <span class="fa fa-money fa-5x" aria-hidden="true"></span>
@@ -42,7 +46,7 @@
           </div>
         </a>
 
-        <a href="pi_gandara/pcp/index.php" class="btn">
+        <a href="/pi_gandara/pcp/index.php" class="btn">
           <div class="col-4 p-2 m-1">
             <div style="width: 18rem;">
               <span class="fa fa-helmet-safety fa-5x" aria-hidden="true"></span>
@@ -56,7 +60,7 @@
       </div> <!--Fim da row -->
 
       <div class="row p-5 justify-content-center d-flex align-items-center">
-        <a href="pi_gandara/financeiro/index.php" class="btn">
+        <a href="/pi_gandara/financeiro/index.php" class="btn">
           <div class="col-4 p-2 m-1">
             <div style="width: 18rem;">
               <span class="fa fa-solid fa-dollar-sign fa-5x" aria-hidden="true"></span>
@@ -67,7 +71,7 @@
           </div>
         </a>
 
-        <a href="pi_gandara/folhaPagamento" class="btn">
+        <a href="/pi_gandara/folhaPagamento" class="btn">
           <div class="col-4 p-2 m-1">
             <div style="width: 18rem;">
               <span class="fa fa-file-invoice-dollar fa-5x" aria-hidden="true"></span>
@@ -78,7 +82,7 @@
           </div>
         </a>
 
-        <a href="pi_gandara/comercial" class="btn">
+        <a href="/pi_gandara/comercial" class="btn">
           <div class="col-4 p-2 m-1">
             <div style="width: 18rem;">
               <span class="fa fa-chart-line fa-5x" aria-hidden="true"></span>
