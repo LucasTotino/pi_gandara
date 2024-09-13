@@ -46,7 +46,7 @@
 <body>
   <div class="container">
 <h4>Inserir um kanban, que quando checado identifica e passa pra próxima etapa, e marca a etapa anterior como feito</h4>
-<h4>realizar o acompanhamento do crescimento da planta (de x em x tempos, realiza o acompanhamento do crecsimento da árvore e do fruto)</h4>
+<h4>realizar o acompanhamento do crescimento da planta (de x em x tempos, realiza o acompanhamento do crecsimento da árvore e do fruto) colocar barra com acompanhamento do crescimneto, sendo 100% a colheita</h4>
 </div>
 
 
