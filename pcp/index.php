@@ -31,7 +31,7 @@
           </div>
         </a>
 
-        <a href="/pi_gandara/index.php" class="btn">
+        <a href="/pi_gandara/pcp/controleProd.php" class="btn">
           <div class="col-6 p-5 m-1">
             <div style="width: 18rem;">
               <span class="fa fa-industry fa-5x" aria-hidden="true"></span>
@@ -45,7 +45,7 @@
       </div> <!--Fim da row -->
 
       <div class="row p-5 justify-content-center d-flex align-items-center">
-        <a class="btn">
+        <a href="/pi_gandara/pcp/qualidade.php" class="btn">
           <div class="col-6 p-5 m-1">
             <div style="width: 18rem;">
               <span class="fa fa-check-circle fa-5x" aria-hidden="true"></span>
@@ -55,7 +55,7 @@
             </div>
           </div>
         </a>
-        <a class="btn">
+        <a href="/pi_gandara/pcp/estoqueLog.php" class="btn">
           <div class="col-6 p-5 m-1">
             <div style="width: 18rem;">
               <span class="fa fa fa-truck fa-5x" aria-hidden="true"></span>
