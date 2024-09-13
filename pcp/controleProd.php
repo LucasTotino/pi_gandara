@@ -1,3 +1,51 @@
+<?php
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "kanban_db";
+
+// Conectando ao banco de dados
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+    die("Falha ao conectar: " . $conn->connect_error);
+}
+
+// Adiciona uma nova tarefa
+if (isset($_POST['add_task'])) {
+    $title = $_POST['title'];
+    $description = $_POST['description'];
+    $sql = "INSERT INTO tasks (title, description, status) VALUES ('$title', '$description', 'todo')";
+    $conn->query($sql);
+}
+
+// Move a tarefa entre colunas
+if (isset($_POST['move_task'])) {
+    $id = $_POST['task_id'];
+    $new_status = $_POST['new_status'];
+    $sql = "UPDATE tasks SET status='$new_status' WHERE id=$id";
+    if ($conn->query($sql) === TRUE) {
+        echo "Tarefa movida com sucesso!";
+    } else {
+        echo "Erro ao mover a tarefa: " . $conn->error;
+    }
+}
+
+// Apaga uma tarefa
+if (isset($_POST['delete_task'])) {
+    $id = $_POST['task_id'];
+    $sql = "DELETE FROM tasks WHERE id=$id";
+    $conn->query($sql);
+}
+
+// Seleciona todas as tarefas
+$tasks_todo = $conn->query("SELECT * FROM tasks WHERE status='todo'");
+$tasks_inprogress = $conn->query("SELECT * FROM tasks WHERE status='inprogress'");
+$tasks_done = $conn->query("SELECT * FROM tasks WHERE status='done'");
+?>
+
+
+
 <!doctype html>
 <html lang="pt-br">
 
@@ -43,11 +91,110 @@
   </nav>
 
 </header>
+
+<style>
+        .kanban-board {
+            display: flex;
+            justify-content: space-between;
+        }
+        .kanban-column {
+            width: 30%;
+            padding: 10px;
+        }
+        .kanban-task {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+    </style>
+
 <body>
   <div class="container">
 <h4>Inserir um kanban, que quando checado identifica e passa pra próxima etapa, e marca a etapa anterior como feito</h4>
 <h4>realizar o acompanhamento do crescimento da planta (de x em x tempos, realiza o acompanhamento do crecsimento da árvore e do fruto) colocar barra com acompanhamento do crescimneto, sendo 100% a colheita</h4>
 </div>
+
+
+    <div class="container mt-5">
+        <h1 class="text-center">Kanban Board</h1>
+
+        <!-- Formulário para adicionar uma nova tarefa -->
+        <form action="" method="POST" class="mb-4">
+            <div class="form-row">
+                <div class="col">
+                    <input type="text" class="form-control" name="title" placeholder="Título da Tarefa" required>
+                </div>
+                <div class="col">
+                    <input type="text" class="form-control" name="description" placeholder="Descrição">
+                </div>
+                <div class="col">
+                    <button type="submit" name="add_task" class="btn btn-primary">Adicionar Tarefa</button>
+                </div>
+            </div>
+        </form>
+
+        <!-- Kanban Board -->
+        <div class="kanban-board">
+            <!-- Coluna To Do -->
+            <div class="kanban-column">
+                <h3>To Do</h3>
+                <?php while ($task = $tasks_todo->fetch_assoc()): ?>
+                    <div class="kanban-task">
+                        <h5><?php echo $task['title']; ?></h5>
+                        <p><?php echo $task['description']; ?></p>
+                        <form action="" method="POST" class="d-inline-block">
+                            <input type="hidden" name="task_id" value="<?php echo $task['id']; ?>">
+                            <input type="hidden" name="new_status" value="inprogress">
+                            <button type="submit" name="move_task" class="btn btn-warning btn-sm">Mover para In Progress</button>
+                        </form>
+                        <form action="" method="POST" class="d-inline-block">
+                            <input type="hidden" name="task_id" value="<?php echo $task['id']; ?>">
+                            <button type="submit" name="delete_task" class="btn btn-danger btn-sm">Excluir</button>
+                        </form>
+                    </div>
+                <?php endwhile; ?>
+            </div>
+
+            <!-- Coluna In Progress -->
+            <div class="kanban-column">
+                <h3>In Progress</h3>
+                <?php while ($task = $tasks_inprogress->fetch_assoc()): ?>
+                    <div class="kanban-task">
+                        <h5><?php echo $task['title']; ?></h5>
+                        <p><?php echo $task['description']; ?></p>
+                        <form action="" method="POST" class="d-inline-block">
+                            <input type="hidden" name="task_id" value="<?php echo $task['id']; ?>">
+                            <input type="hidden" name="new_status" value="done">
+                            <button type="submit" name="move_task" class="btn btn-success btn-sm">Mover para Done</button>
+                        </form>
+                        <form action="" method="POST" class="d-inline-block">
+                            <input type="hidden" name="task_id" value="<?php echo $task['id']; ?>">
+                            <button type="submit" name="delete_task" class="btn btn-danger btn-sm">Excluir</button>
+                        </form>
+                    </div>
+                <?php endwhile; ?>
+            </div>
+
+            <!-- Coluna Done -->
+            <div class="kanban-column">
+                <h3>Done</h3>
+                <?php while ($task = $tasks_done->fetch_assoc()): ?>
+                    <div class="kanban-task">
+                        <h5><?php echo $task['title']; ?></h5>
+                        <p><?php echo $task['description']; ?></p>
+                        <form action="" method="POST" class="d-inline-block">
+                            <input type="hidden" name="task_id" value="<?php echo $task['id']; ?>">
+                            <button type="submit" name="delete_task" class="btn btn-danger btn-sm">Excluir</button>
+                        </form>
+                    </div>
+                <?php endwhile; ?>
+            </div>
+        </div>
+    </div>
+
+
 
 
 
