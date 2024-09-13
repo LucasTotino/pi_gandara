@@ -19,105 +19,106 @@
         ?>
   </header>
 
-<div class="container">
+      <div class="container">
 
-      <div class="row p-5 justify-content-center d-flex align-items-center">
+         <div class="row p-5 d-flex">
 
-        <a href="../index.php" class="btn" style="width: 15rem;">
-          <div class="col-3 p-5 m-1">
-            <div>
-              <span class="fa-solid fa-city fa-4x" aria-hidden="true"></span>
-              <div class="card-body">
-                <h3>Razão Geral</h3>
-              </div>
-            </div>
-          </div>
-        </a>
+                <a href="razaoGeral.php" class="btn" style="width: 16rem;">
+                  <div class="col-3 p-5 m-1 d-flex">
+                    <div>
+                      <span class="fa-solid fa-city fa-4x" aria-hidden="true"></span>
+                      <div class="card-body d-flex">
+                        <h3>Razão Geral</h3>
+                      </div>
+                    </div>
+                  </div>
+                </a>
 
-        <a href="../index.php" class="btn" style="width: 15rem;">
-          <div class="col-3 p-5 m-1">
-            <div>
-              <span class="fa-solid fa-money-bill-transfer fa-4x" aria-hidden="true"></span>
-              <div class="card-body">
-                <h3>Contas a Pagar</h3>
-              </div>
-            </div>
-          </div>
-        </a>
+                <a href="contasPagar.php" class="btn" style="width: 16rem;">
+                  <div class="col-3 p-5 m-1 d-flex">
+                    <div>
+                      <span class="fa-solid fa-money-bill-transfer fa-4x" aria-hidden="true"></span>
+                      <div class="card-body d-flex">
+                        <h3><nobr>Contas a</nobr> Pagar</h3>
+                      </div>
+                    </div>
+                  </div>
+                </a>
 
-        <a href="../index.php" class="btn" style="width: 15rem;">
-          <div class="col-3 p-5 m-1">
-            <div>
-              <span class="fa-solid fa-money-bill-transfer fa-4x" aria-hidden="true"></span>
-              <div class="card-body">
-                <h3>Contas a Receber</h3>
-              </div>
-            </div>
-          </div>
-        </a>
+                <a href="contasReceber.php" class="btn" style="width: 16rem;">
+                  <div class="col-3 p-5 m-1 d-flex">
+                    <div>
+                      <span class="fa-solid fa-money-bill-transfer fa-4x" aria-hidden="true"></span>
+                      <div class="card-body d-flex">
+                        <h3><nobr>Contas a</nobr> Receber</h3>
+                      </div>
+                    </div>
+                  </div>
+                </a>
 
-        <a href="../index.php" class="btn" style="width: 15rem;">
-          <div class="col-3 p-5 m-1">
-            <div>
-              <span class="fa-solid fa-scale-balanced fa-4x" aria-hidden="true"></span>
-              <div class="card-body">
-                <h3>Gerenciamento de Caixa</h3>
-              </div>
-            </div>
-          </div>
-        </a>
+                <a href="gerCaixa.php" class="btn" style="width: 16rem;">
+                  <div class="col-3 p-5 m-1 d-flex">
+                    <div>
+                      <span class="fa-solid fa-scale-balanced fa-4x" aria-hidden="true"></span>
+                      <div class="card-body d-flex">
+                        <h3><nobr>Gerenciamento de</nobr> Caixa</h3>
+                      </div>
+                    </div>
+                  </div>
+                </a>
 
-      </div><!--  Fim da row --> 
+            </div><!--  Fim da row --> 
 
-      <div class="row p-5 justify-content-center d-flex align-items-center">
 
-        <a href="../index.php" class="btn" style="width: 15rem;">
-          <div class="col-3 p-5 m-1">
-            <div>
-              <span class="fa-solid fa-truck fa-4x" aria-hidden="true"></span>
-              <div class="card-body">
-                <h3>Gerenciamento de Fornecedores</h3>
-              </div>
-            </div>
-          </div>
-        </a>
+            <div class="row p-5 d-flex">
 
-        <a href="../index.php" class="btn" style="width: 15rem;">
-          <div class="col-3 p-5 m-1">
-            <div>
-              <span class="fa-solid fa-landmark fa-4x" aria-hidden="true"></span>
-              <div class="card-body">
-                <h3>Gerenciamento Bancário</h3>
-              </div>
-            </div>
-          </div>
-        </a>
+                <a href="gerFornecedores.php" class="btn" style="width: 16rem;">
+                  <div class="col-3 p-5 m-1 d-flex">
+                    <div>
+                      <span class="fa-solid fa-truck fa-4x" aria-hidden="true"></span>
+                      <div class="card-body d-flex">
+                        <h3><nobr>Gerenciamento de</nobr> Fornecedores</h3>
+                      </div>
+                    </div>
+                  </div>
+                </a>
 
-        <a href="../index.php" class="btn" style="width: 15rem;">
-          <div class="col-3 p-5 m-1">
-            <div>
-              <span class="fa fa-industry fa-4x" aria-hidden="true"></span>
-              <div class="card-body">
-                <h3 class="justify-content-center d-flex align-items-center">Gerenciamento Fiscal</h3>
-              </div>
-            </div>
-          </div>
-        </a>
+                <a href="gerBancario.php" class="btn" style="width: 16rem;">
+                  <div class="col-3 p-5 m-1 d-flex">
+                    <div>
+                      <span class="fa-solid fa-landmark fa-4x" aria-hidden="true"></span>
+                      <div class="card-body d-flex">
+                        <h3>Gerenciamento Bancário</h3>
+                      </div>
+                    </div>
+                  </div>
+                </a>
 
-        <a href="../index.php" class="btn" style="width: 15rem; ">
-          <div class="col-3 p-5 m-1">
-            <div>
-              <span class="fa fa-pie-chart fa-4x" aria-hidden="true"></span>
-              <div class="card-body">
-                <h3>Relatórios e Análises</h3>
-              </div>
-            </div>
-          </div>
-        </a>
+                <a href="gerFiscal.php" class="btn" style="width: 16rem;">
+                  <div class="col-3 p-5 m-1 d-flex">
+                    <div>
+                      <span class="fa fa-industry fa-4x" aria-hidden="true"></span>
+                      <div class="card-body d-flex">
+                        <h3>Gerenciamento Fiscal</h3>
+                      </div>
+                    </div>
+                  </div>
+                </a>
 
-      </div> <!--Fim da row -->
+                <a href="relatoriosAnalises.php" class="btn" style="width: 16rem; ">
+                  <div class="col-3 p-5 m-1 d-flex">
+                    <div>
+                      <span class="fa fa-pie-chart fa-4x" aria-hidden="true"></span>
+                      <div class="card-body d-flex">
+                        <h3><nobr>Relatórios e</nobr> Análises</h3>
+                      </div>
+                    </div>
+                  </div>
+                </a>
 
-  </div>
+            </div> <!--Fim da row -->
+
+      </div>
  
 
 
