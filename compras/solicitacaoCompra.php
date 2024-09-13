@@ -44,22 +44,9 @@ if (isset($_POST['submit'])) {
         <div class="container-1">
         <h1 style="text-align:center;">Solicitação de Compra</h1>
             <!-- Confirmação Email e Senha -->
-            <?php
-            if (isset($_POST['submit'])) {
-                if ($email == $confirmaEmail) {
-                    if ($senha == $confirmaSenha) {
-                        $result = mysqli_query($mysqli, "INSERT INTO usuarios (nome, cpf, data_nascimento, qualificacao, senha, email, celular, cep, 
-                                                logradouro, numero, complemento, bairro, cidade, estado)
-                                        VALUES           ('$nome', '$cpf', '$nascimento', '$qualificacao', '$senha', '$email',
-                                                '$celular', '$cep', '$logradouro', '$numLogradouro', '$complemento', '$bairro', '$cidade', '$estado')");
-                    } else {
-                        echo "<div class=\"alert alert-warning\" role=\"alert\">Senhas Divergentes</div>";
-                    }
-                } else {
-                    echo "<div class=\"alert alert-warning\" role=\"alert\">Emails Divergentes</div>";
-                }
-            }
-            ?>
+            
+                    
+                                               
 
             <form action="/onstudies/usuarios/iu_usuario.php" method="POST"><!-- Inicio Formulário -->
                 <div class="form-group">
