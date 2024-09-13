@@ -10,11 +10,12 @@
   <title>Ceres Sistema</title>
 
   <body>
-    <header>
-    <?php
-    include_once('utils/menu.php');
-    ?>
-    </header>
+      <header>
+        <?php
+           include_once('utils/menu.php');
+        ?>
+      </header>
+
   <main>
     <div class="container">
 
