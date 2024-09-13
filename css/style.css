@@ -16,6 +16,7 @@ body::before{
   background: url("/pi_gandara/imgs/logoceres.jpeg") no-repeat center scroll;
   background-color: #BABABA;
   background-repeat: no-repeat;
+
   opacity: 0.3;
 }
 header {
