@@ -56,10 +56,6 @@ if (isset($_POST['submit'])) {
                             <label for="nome">Item</label>
                             <input type="text" class="form-control" id="nome" name="nome">
                         </div>
-                        <div class="col-sm-6">
-                            <label for="cpf">Descrição</label>
-                            <input type="text" class="form-control" id="cpf" name="cpf" maxlength="14" onkeypress="mascara('###.###.###-##', this)">
-                        </div>
                     </div>
                     
                     <!-- Celular e Email -->
