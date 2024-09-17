@@ -28,4 +28,8 @@
     <span class="fa fa-chart-line"></span>
     <span class="label">Comercial</span>
   </a>
+  <a href="/pi_gandara/login.php" title="Sair">
+    <span class="fa fa-sharp fa-solid fa-door-open"></span>
+    <span class="label">Sair</span>
+  </a>
 </nav>

@@ -9,11 +9,11 @@ body {
 
 body::before{
   content: "";
-  position: absolute;
+  position: fixed;
   inset: 0;
-  height: 100vh;
+  height: auto;
   width: 100%;
-  background: url("/pi_gandara/imgs/logoceres.jpeg") no-repeat center scroll;
+  background: url("/pi_gandara/imgs/logoceres.jpeg") no-repeat center;
   background-color: #BABABA;
   background-repeat: no-repeat;
 
@@ -33,7 +33,7 @@ main {
 
 nav {
   position: fixed;
-  height: 100vh;
+  height: 100%;
   width: 4rem;
   background: #217500de;
   overflow: hidden;
