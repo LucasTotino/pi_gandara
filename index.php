@@ -2,104 +2,64 @@
 <html lang="pt-br">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.css" crossorigin="anonymous">
-  <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
-  <link rel="stylesheet" href="/pi_gandara/css/style.css">
-  <title>Ceres Sistema</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <body>
-      <header>
-        <?php
-           include_once('utils/menu.php');
-        ?>
-      </header>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/pi_gandara/css/login.css">
+    <title>Login</title>
+</head>
 
-  <main>
-    <div class="container">
-
-      <div class="row p-5 justify-content-center d-flex align-items-center">
-        
-
-        <a href="/pi_gandara/estoque/index.php" class="btn">
-          <div class="col-4 p-2 m-1">
-            <div style="width: 18rem;">
-              <span class="fa fa-solid fa-box fa-5x" aria-hidden="true"></span>
-              <div class="card-body">
-                <h3>Estoque</h3>
-              </div>
+<body>
+    <div class="container" id="container">
+        <div class="form-container sign-up">
+            <form>
+                <h1>Create Account</h1>
+                <div class="social-icons">
+                    <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
+                    <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" class="icon"><i class="fa-brands fa-github"></i></a>
+                    <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>
+                </div>
+                <span>or use your email for registeration</span>
+                <input type="text" placeholder="Name">
+                <input type="email" placeholder="Email">
+                <input type="password" placeholder="Password">
+                <button>Sign Up</button>
+            </form>
+        </div>
+        <div class="form-container sign-in">
+            <form>
+                <h1>Sign In</h1>
+                <div class="social-icons">
+                    <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
+                    <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" class="icon"><i class="fa-brands fa-github"></i></a>
+                    <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>
+                </div>
+                <span>or use your email password</span>
+                <input type="email" placeholder="Email">
+                <input type="password" placeholder="Password">
+                <a href="#">Forget Your Password?</a>
+                <button>Sign In</button>
+            </form>
+        </div>
+        <div class="toggle-container">
+            <div class="toggle">
+                <div class="toggle-panel toggle-left">
+                    <h1>Welcome Back!</h1>
+                    <p>Enter your personal details to use all of site features</p>
+                    <button class="hidden" id="login">Sign In</button>
+                </div>
+                <div class="toggle-panel toggle-right">
+                    <h1>Hello, Friend!</h1>
+                    <p>Register with your personal details to use all of site features</p>
+                    <button class="hidden" id="register">Sign Up</button>
+                </div>
             </div>
-          </div>
-        </a>
-
-        <a href="/pi_gandara/compras/index.php" class="btn">
-          <div class="col-4 p-2 m-1">
-            <div style="width: 18rem;">
-              <span class="fa fa-money fa-5x" aria-hidden="true"></span>
-              <div class="card-body">
-                <h3>Compras</h3>
-              </div>
-            </div>
-          </div>
-        </a>
-
-        <a href="/pi_gandara/pcp/index.php" class="btn">
-          <div class="col-4 p-2 m-1">
-            <div style="width: 18rem;">
-              <span class="fa fa-helmet-safety fa-5x" aria-hidden="true"></span>
-              <div class="card-body">
-                <h3>PCP</h3>
-              </div>
-            </div>
-          </div>
-        </a>
-
-      </div> <!--Fim da row -->
-
-      <div class="row p-5 justify-content-center d-flex align-items-center">
-        <a href="/pi_gandara/financeiro/index.php" class="btn">
-          <div class="col-4 p-2 m-1">
-            <div style="width: 18rem;">
-              <span class="fa fa-solid fa-dollar-sign fa-5x" aria-hidden="true"></span>
-              <div class="card-body">
-                <h3>Financeiro</h3>
-              </div>
-            </div>
-          </div>
-        </a>
-
-        <a href="/pi_gandara/folhaPagamento" class="btn">
-          <div class="col-4 p-2 m-1">
-            <div style="width: 18rem;">
-              <span class="fa fa-file-invoice-dollar fa-5x" aria-hidden="true"></span>
-              <div class="card-body">
-                <h3>Folha de pagamento</h3>
-              </div>
-            </div>
-          </div>
-        </a>
-
-        <a href="/pi_gandara/comercial" class="btn">
-          <div class="col-4 p-2 m-1">
-            <div style="width: 18rem;">
-              <span class="fa fa-chart-line fa-5x" aria-hidden="true"></span>
-              <div class="card-body">
-                <h3>Comercial</h3>
-              </div>
-            </div>
-          </div>
-        </a>
-      </div> <!--Fim da row -->
-
-
+        </div>
     </div>
-  </main>
-
-
-
-    <script src="https://kit.fontawesome.com/74ecb76a40.js" crossorigin="anonymous"></script>
-
-  </body>
-
-  </html>
+    <script src="js/script.js"></script>
+</body>
+</html>
