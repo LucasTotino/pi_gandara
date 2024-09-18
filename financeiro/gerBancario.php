@@ -2,7 +2,7 @@
 <html lang="pt-br">
 
 <head>
-  <meta charset="utf-8">  
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <link rel="stylesheet" type="text/css" href="styles.css">
@@ -12,33 +12,110 @@
   <title>Razão Geral</title>
 </head>
 
-<body>  <!-- VERIFICAR FOTO  DO LIVRO  FINANCEIRO DO GANDARA -->
-<header>
-        <?php
-            include_once('../utils/menu.php');
-        ?>
+<body> <!-- VERIFICAR FOTO  DO LIVRO  FINANCEIRO DO GANDARA -->
+  <header>
+    <?php
+    include_once('../utils/menu.php');
+    ?>
   </header>
 
+  <!-- Tela de Gerenciamento Bancário -->
+
+  <main>
     <div class="container">
-
-        <div class="row p-5 justify-content-center d-flex align-items-center">
-
-                <a href="../index.php" class="btn" style="width: 16rem;">
-                  <div class="col-3 p-5 m-1 d-flex">
-                    <div>
-                      <span class="fa-solid fa-landmark fa-4x" aria-hidden="true"></span>
-                      <div class="card-body d-flex">
-                        <h3>Gerenciamento Bancário</h3>
-                      </div>
-                    </div>
-                  </div>
-                </a>
-                
-        </div> <!--Fim da row -->
-
+      <div class="row p-3 justify-content-center d-flex align-items-center">
+        <h1>Gerenciamento Bancário</h1>
+      </div>
+      <div class="row p-3 justify-content-center d-flex align-items-center">
+        <div class="col-6">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Contas Bancárias</h5>
+              <ul class="list-group">
+                <li class="list-group-item">
+                  <span class="fa fa-bank" aria-hidden="true"></span>
+                  <span>Conta Corrente - Banco do Brasil</span>
+                  <span class="badge badge-primary">R$ 10.000,00</span>
+                </li>
+                <li class="list-group-item">
+                  <span class="fa fa-bank" aria-hidden="true"></span>
+                  <span>Conta Poupança - Caixa Econômica</span>
+                  <span class="badge badge-primary">R$ 5.000,00</span>
+                </li>
+                <li class="list-group-item">
+                  <span class="fa fa-bank" aria-hidden="true"></span>
+                  <span>Conta Investimento - Banco Santander</span>
+                  <span class="badge badge-primary">R$ 20.000,00</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Movimentações Bancárias</h5>
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Data</th>
+                    <th>Tipo</th>
+                    <th>Valor</th>
+                    <th>Conta</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>2023-02-20</td>
+                    <td>Depósito</td>
+                    <td>R$ 1.000,00</td>
+                    <td>Conta Corrente - Banco do Brasil</td>
+                  </tr>
+                  <tr>
+                    <td>2023-02-19</td>
+                    <td>Saque</td>
+                    <td>R$ 500,00</td>
+                    <td>Conta Poupança - Caixa Econômica</td>
+                  </tr>
+                  <tr>
+                    <td>2023-02-18</td>
+                    <td>Transferência</td>
+                    <td>R$ 2.000,00</td>
+                    <td>Conta Investimento - Banco Santander</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row p-3 justify-content-center d-flex align-items-center">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Relatórios Bancários</h5>
+              <ul class="list-group">
+                <li class="list-group-item">
+                  <span class="fa fa-file" aria-hidden="true"></span>
+                  <span>Relatório de Movimentações Bancárias</span>
+                </li>
+                <li class="list-group-item">
+                  <span class="fa fa-file" aria-hidden="true"></span>
+                  <span>Relatório de Saldo Bancário</span>
+                </li>
+                <li class="list-group-item">
+                  <span class="fa fa-file" aria-hidden="true"></span>
+                  <span>Relatório de Investimentos Bancários</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  
- 
+  </main>
+
+
 
 
   <script src="https://kit.fontawesome.com/74ecb76a40.js" crossorigin="anonymous"></script>

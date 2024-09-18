@@ -23,16 +23,6 @@
 
             <div class="row p-3 justify-content-center d-flex align-items-center">
 
-                <a href="razaoGeral.php" class="btn">
-                    <div class="col-2 p-2 m-1">
-                        <div style="width: 14rem;">
-                            <span class="fa-solid fa-city fa-5x" aria-hidden="true"></span>
-                            <div class="card-body justify-content-center">
-                                <h4><b>Razão Geral</b></h4>
-                            </div>
-                        </div>
-                    </div>
-                </a>
 
                 <a href="contasPagar.php" class="btn">
                     <div class="col-2 p-2 m-1">
