@@ -131,9 +131,6 @@
 
   </main>
 
-
-
-
   <script src="https://kit.fontawesome.com/74ecb76a40.js" crossorigin="anonymous"></script>
 </body>
 
