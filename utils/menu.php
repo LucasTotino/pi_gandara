@@ -1,5 +1,5 @@
 <!-- Menu -->
-<nav class="">
+<nav class="nav-pills nav-sidebar">
   <a href="/pi_gandara/index.php" title="Home">
     <span class="fa fa-bars" aria-hidden="true"></span>
     <span class="label">Menu</span>
@@ -27,5 +27,9 @@
   <a href="/pi_gandara/comercial/index.php" title="Comercial">
     <span class="fa fa-chart-line"></span>
     <span class="label">Comercial</span>
+  </a>
+  <a href="/pi_gandara/login.php" title="Sair">
+    <span class="fa fa-sharp fa-solid fa-door-open"></span>
+    <span class="label">Sair</span>
   </a>
 </nav>
