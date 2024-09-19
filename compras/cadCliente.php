@@ -85,6 +85,56 @@ if (isset($_POST['submit'])) {
                     </div>
 
                     <!-- Endereço -->
+                    
+                    <div class="row justify-content-center mt-2">
+                        <div class="col-sm-2">
+                            <label for="complemento">Complemento</label>
+                            <input type="text" class="form-control" id="complemento" name="complemento">
+                        </div>
+                        <div class="col-sm-3">
+                            <label for="bairro">Bairro</label>
+                            <input type="text" class="form-control" id="bairro" name="bairro">
+                        </div>
+                        <div class="col-sm-3">
+                            <label for="cidade">Cidade</label>
+                            <input type="text" class="form-control" id="cidade" name="cidade">
+                        </div>
+                        <div class="col-sm-2">
+                            <label for="estado">Estado</label>
+                            <div class="input-group">
+                            <select class="form-control" id="estado" name="estado">
+                            <option value=""> -- ESCOLHA -- </option>
+                            <option <?= (isset($_GET['id']) && $user['estado'] == "AC") ? "selected" : null ?> value="AC">Acre</option>
+                            <option <?= (isset($_GET['id']) && $user['estado'] == "AL") ? "selected" : null ?> value="AL">Alagoas</option>
+                            <option <?= (isset($_GET['id']) && $user['estado'] == "AP") ? "selected" : null ?> value="AP">Amapá</option>
+                            <option <?= (isset($_GET['id']) && $user['estado'] == "AM") ? "selected" : null ?> value="AM">Amazonas</option>
+                            <option <?= (isset($_GET['id']) && $user['estado'] == "BA") ? "selected" : null ?> value="BA">Bahia</option>
+                            <option <?= (isset($_GET['id']) && $user['estado'] == "CE") ? "selected" : null ?> value="CE">Ceará</option>
+                            <option <?= (isset($_GET['id']) && $user['estado'] == "DF") ? "selected" : null ?> value="DF">Distrito Federal</option>
+                            <option <?= (isset($_GET['id']) && $user['estado'] == "ES") ? "selected" : null ?> value="ES">Espírito Santo</option>
+                            <option <?= (isset($_GET['id']) && $user['estado'] == "GO") ? "selected" : null ?> value="GO">Goiás</option>
+                            <option <?= (isset($_GET['id']) && $user['estado'] == "MA") ? "selected" : null ?> value="MA">Maranhão</option>
+                            <option <?= (isset($_GET['id']) && $user['estado'] == "MT") ? "selected" : null ?> value="MT">Mato Grosso</option>
+                            <option <?= (isset($_GET['id']) && $user['estado'] == "MS") ? "selected" : null ?> value="MS">Mato Grosso do Sul</option>
+                            <option <?= (isset($_GET['id']) && $user['estado'] == "MG") ? "selected" : null ?> value="MG">Minas Gerais</option>
+                            <option <?= (isset($_GET['id']) && $user['estado'] == "PA") ? "selected" : null ?> value="PA">Pará</option>
+                            <option <?= (isset($_GET['id']) && $user['estado'] == "PB") ? "selected" : null ?> value="PB">Paraíba</option>
+                            <option <?= (isset($_GET['id']) && $user['estado'] == "PR") ? "selected" : null ?> value="PR">Paraná</option>
+                            <option <?= (isset($_GET['id']) && $user['estado'] == "PE") ? "selected" : null ?> value="PE">Pernambuco</option>
+                            <option <?= (isset($_GET['id']) && $user['estado'] == "PI") ? "selected" : null ?> value="PI">Piauí</option>
+                            <option <?= (isset($_GET['id']) && $user['estado'] == "RJ") ? "selected" : null ?> value="RJ">Rio de Janeiro</option>
+                            <option <?= (isset($_GET['id']) && $user['estado'] == "RN") ? "selected" : null ?> value="RN">Rio Grande do Norte</option>
+                            <option <?= (isset($_GET['id']) && $user['estado'] == "RS") ? "selected" : null ?> value="RS">Rio Grande do Sul</option>
+                            <option <?= (isset($_GET['id']) && $user['estado'] == "RO") ? "selected" : null ?> value="RO">Rondônia</option>
+                            <option <?= (isset($_GET['id']) && $user['estado'] == "RR") ? "selected" : null ?> value="RR">Roraima</option>
+                            <option <?= (isset($_GET['id']) && $user['estado'] == "SC") ? "selected" : null ?> value="SC">Santa Catarina</option>
+                            <option <?= (isset($_GET['id']) && $user['estado'] == "SP") ? "selected" : null ?> value="SP">São Paulo</option>
+                            <option <?= (isset($_GET['id']) && $user['estado'] == "SE") ? "selected" : null ?> value="SE">Sergipe</option>
+                            <option <?= (isset($_GET['id']) && $user['estado'] == "TO") ? "selected" : null ?> value="TO">Tocantins</option>
+                        </select>
+                            </div>
+                        </div>
+                    </div>
                     <div class="row justify-content-center mt-2">
                         <div class="col-sm-2">
                             <label for="cep">CEP</label>
@@ -98,33 +148,6 @@ if (isset($_POST['submit'])) {
                             <label for="numLogradouro">Número</label>
                             <input type="number" class="form-control" id="numLogradouro" name="numLogradouro">
                         </div>
-                    </div>
-                    <div class="row justify-content-center mt-2">
-                        <div class="col-sm-2">
-                            <label for="complemento">Complemento</label>
-                            <input type="text" class="form-control" id="complemento" name="complemento">
-                        </div>
-                        <div class="col-sm-3">
-                            <label for="bairro">Bairro</label>
-                            <input type="text" class="form-control" id="bairro" name="bairro">
-                        </div>
-                        <div class="col-sm-4">
-                            <label for="cidade">Cidade</label>
-                            <input type="text" class="form-control" id="cidade" name="cidade">
-                        </div>
-                        <div class="col-sm-1">
-                            <label for="estado">Estado</label>
-                            <div class="input-group">
-                                <select class="custom-select" id="estado" name="estado">
-                                    <option></option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Qualificação -->
-                    <div class="form-row justify-content-center mt-2">
-                        
                     </div>
 
                     <!-- Botões -->
