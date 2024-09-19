@@ -53,7 +53,7 @@ if (isset($_POST['submit'])) {
                     <!-- Nome, CPF e Data Nascimento -->
                     <div class="form-row justify-content-center mt-2">
                         <div class="col-sm-6">
-                            <label for="nome">Nome/Razão Social</label>
+                            <label for="nome">Nome </label>
                             <input type="text" class="form-control" id="nome" name="nome">
                         </div>
                         <div class="col-sm-3">
