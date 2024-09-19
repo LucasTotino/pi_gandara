@@ -47,7 +47,7 @@
 
         <a href="cadFornecedor.php" class="btn">
           <div class="col-2 p-2 m-1">
-            <div style="width: 10rem;">
+            <div style="width: 12rem;">
               <span class="fa fa-solid fa-clipboard-list fa-5x" aria-hidden="true"></span>
               <div class="card-body">
                 <h3>Cadastro de Fornecedores</h3>
