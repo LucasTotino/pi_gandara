@@ -9,23 +9,25 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.css" crossorigin="anonymous">
   <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
   <link rel="stylesheet" href="/pi_gandara/css/style.css">
-  <title>Razão Geral</title>
+  <title>Gerenciamento Bancário</title>
 </head>
 
-<body> <!-- VERIFICAR FOTO  DO LIVRO  FINANCEIRO DO GANDARA -->
+<body>
   <header>
     <?php
     include_once('../utils/menu.php');
     ?>
   </header>
 
-  <!-- Tela de Gerenciamento Bancário -->
 
   <main>
     <div class="container">
       <div class="row p-3 justify-content-center d-flex align-items-center">
-        <h1>Gerenciamento Bancário</h1>
+        <a type="button" style="text-align: left;" class="col-1 btn btn-primary justify-content-center d-flex" href="/pi_gandara/financeiro/">Voltar</a>
+        <h1 style="text-align: center;" class="col-11 display-4">Gerenciamento Bancário</h1>
       </div>
+
+
       <div class="row p-3 justify-content-center d-flex align-items-center">
         <div class="col-6">
           <div class="card">
@@ -48,7 +50,12 @@
                   <span class="badge badge-primary">R$ 20.000,00</span>
                 </li>
               </ul>
+
+              <br>
+              <a type="button" style="text-align: justify;" class="btn btn-primary justify-content-center d-flex" href="/pi_gandara/financeiro/novoBanco.php">Adicionar nova conta</a>
+
             </div>
+
           </div>
         </div>
         <div class="col-6">

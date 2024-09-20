@@ -13,20 +13,21 @@
   <title>Gerenciamento de Caixa</title>
 </head>
 
-<body> <!-- VERIFICAR FOTO  DO LIVRO  FINANCEIRO DO GANDARA -->
+<body>
   <header>
     <?php
     include_once('../utils/menu.php');
     ?>
   </header>
 
-  <!-- Tela de Gerenciamento de Caixa -->
 
   <main>
     <div class="container">
       <div class="row p-3 justify-content-center d-flex align-items-center">
-        <h1>Gerenciamento de Caixa</h1>
+        <a type="button" style="text-align: left;" class="col-1 btn btn-primary justify-content-center d-flex" href="/pi_gandara/financeiro/">Voltar</a>
+        <h1 style="text-align: center;" class="col-11 display-4">Gerenciamento de Caixa</h1>
       </div>
+
       <div class="row p-3 justify-content-center d-flex align-items-center">
         <div class="col-6">
           <div class="card">
@@ -84,6 +85,8 @@
           </div>
         </div>
       </div>
+
+
     </div>
   </main>
 
