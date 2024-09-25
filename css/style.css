@@ -100,3 +100,28 @@ nav a.label {
 .c1{
   opacity: .4;
 }
+
+ /* Style the tab */
+ .tab-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.tab {
+  background-color: #ddd;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.tab-content {
+  display: none;
+}
+
+.active-tab {
+  background-color: green;
+}
+
+.active-content {
+  display: block;
+}
