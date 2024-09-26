@@ -5,6 +5,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: Roboto, 'Helvetica Neue', Helvetica, sans-serif;
+  
 }
 
 body::before{
@@ -16,9 +17,9 @@ body::before{
   background: url("/pi_gandara/imgs/logoceres.jpeg") no-repeat center;
   background-color: #BABABA;
   background-repeat: no-repeat;
-
   opacity: 0.3;
 }
+
 header {
   position: fixed;
   top: 0;

@@ -28,14 +28,13 @@ if (isset($_POST['submit'])) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="/pi_gandara/css/style.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.css" crossorigin="anonymous">
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 
     <title>Cadastro de Tipos de Entrada e Saída</title>
 </head>
 
 <body>
-
     <header>
         <?php
         include_once('../utils/menu.php');
@@ -60,27 +59,22 @@ if (isset($_POST['submit'])) {
                     </div>
 
                     <!-- Tab links -->
-                    <div class="tab-container">
-                        <div class="tab" onclick="openTab('tab1')">Tab 1</div>
-                        <div class="tab" onclick="openTab('tab2')">Tab 2</div>
-                        <div class="tab" onclick="openTab('tab3')">Tab 3</div>
+                    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="pills-home-tab" data-toggle="pill" data-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Home</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="pills-profile-tab" data-toggle="pill" data-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Profile</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="pills-contact-tab" data-toggle="pill" data-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Contact</button>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="pills-tabContent">
+                        <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">Aba nunber one beltrames</div>
+                        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">aba number two predo</div>
+                        <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">...</div>
                     </div>
-
-                    <div id="tab1" class="tab-content active-content">
-                        <h2>Content for Tab 1</h2>
-                        <p>This is the content for Tab 1.</p>
-                    </div>
-
-                    <div id="tab2" class="tab-content">
-                        <h2>Content for Tab 2</h2>
-                        <p>This is the content for Tab 2.</p>
-                    </div>
-
-                    <div id="tab3" class="tab-content">
-                        <h2>Content for Tab 3</h2>
-                        <p>This is the content for Tab 3.</p>
-                    </div>
-
 
                     <!-- Botões -->
                     <div class="form-row justify-content-center">
@@ -98,10 +92,9 @@ if (isset($_POST['submit'])) {
             </form>
         </div>
     </main>
-
     <script src="https://kit.fontawesome.com/74ecb76a40.js" crossorigin="anonymous"></script>
-    <script src="../js/script.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
 </body>
 
 </html>
