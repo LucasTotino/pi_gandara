@@ -14,7 +14,7 @@ body::before{
   inset: 0;
   height: auto;
   width: 100%;
-  background: url("/pi_gandara/imgs/logoceres.jpeg") no-repeat center;
+  background: url("/pi_gandara/imgs/logoceres.jpeg") center;
   background-color: #BABABA;
   background-repeat: no-repeat;
   opacity: 0.3;
@@ -126,3 +126,6 @@ nav a.label {
 .active-content {
   display: block;
 }
+
+/* Estilo da Tabela Compras*/
+
