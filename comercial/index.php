@@ -5,51 +5,112 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="/pi_gandara/css/style.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.css" crossorigin="anonymous">
-  <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
 
-  <title>Comercial</title>
+  <title>Comercial e Faturamento</title>
 </head>
-<header>
-<nav>
-    <a href="/pi_gandara/index.php" title="Home">
-      <span class="fa fa-bars" aria-hidden="true"></span>
-      <span class="label">Menu</span>
-    </a>
-    <a href="/pi_gandara/estoque/index.php" title="Estoque">
-      <span class="fa fa-solid fa-box"></span>
-      <span class="label">Estoque</span>
-    </a>
-    <a href="/pi_gandara/compras/index.php" title="Compras" class="active">
-      <span class="fa fa-money"></span>
-      <span class="label">Compras</span>
-    </a>
-    <a href="/pi_gandara/pcp/index.php" title="PCP">
-      <span class="fa fa-helmet-safety"></span>
-      <span class="label">PCP</span>
-    </a>
-    <a href="/pi_gandara/financeiro/index.php" title="Financeiro">
-      <span class="fa fa-solid fa-dollar-sign"></span>
-      <span class="label">Financeiro</span>
-    </a>
-    <a href="/pi_gandara/folhaPagamento/index.php" title="Folha de Pagamento">
-      <span class="fa fa-file-invoice-dollar"></span>
-      <span class="label">Folha de Pagamento</span>
-    </a>
-    <a href="/pi_gandara/comercial/index.php" title="Comercial">
-      <span class="fa fa-chart-line"></span>
-      <span class="label">Comercial</span>
-    </a>
-  </nav>
 
-</header>
+
 <body>
+  <header>
+    <?php
+    include_once('../utils/menu.php');
+    ?>
+  </header>
+  <main>
+    <h1 class="text-center">COMERCIAL E FATURAMENTO</h1>
+    <div class="container">
+      <div class="row p-3 justify-content-center d-flex align-items-center">
 
+        <a href="cadVendedores.php" class="btn">
+          <div class="col-2 p-2 m-1">
+            <div style="width: 12rem;">
+              <span class="fa fa-solid fa-user-plus fa-5x" aria-hidden="true"></span>
+              <div class="card-body">
+                <h3>Cadastro de Vendedores Internos</h3>
+              </div>
+            </div>
+          </div>
+        </a>
 
+        <a href="cadRepresentantes.php" class="btn">
+          <div class="col-2 p-2 m-1">
+            <div style="width: 12rem;">
+              <span class="fa fa-solid fa-user-plus fa-5x" aria-hidden="true"></span>
+              <div class="card-body">
+                <h3>Cadastro de Representantes Externos</h3>
+              </div>
+            </div>
+          </div>
+        </a>
 
+        <a href="cadDistribuidores.php" class="btn">
+          <div class="col-2 p-2 m-1">
+            <div style="width: 12rem;">
+              <span class="fa fa-solid fa-truck fa-5x" aria-hidden="true"></span>
+              <div class="card-body">
+                <h3>Cadastro de Distribuidores</h3>
+              </div>
+            </div>
+          </div>
+        </a>
+
+        <a href="cadTributacao.php" class="btn">
+          <div class="col-2 p-2 m-1">
+            <div style="width: 12rem;">
+              <span class="fa fa-solid fa-database fa-5x" aria-hidden="true"></span>
+              <div class="card-body">
+                <h3>Tributação</h3>
+              </div>
+            </div>
+          </div>
+        </a>
+
+      </div> <!-- ROW end -->
+
+      <div class="row p-3 justify-content-center d-flex align-items-center">
+
+        <a href="cadVendas.php" class="btn">
+          <div class="col-2 p-2 m-1">
+            <div style="width: 12rem;">
+              <span class="fa fa-solid fa-user-plus fa-5x" aria-hidden="true"></span>
+              <div class="card-body">
+                <h3>Vendas</h3>
+              </div>
+            </div>
+          </div>
+        </a>
+
+        <a href="cadDescontos.php" class="btn">
+          <div class="col-2 p-2 m-1">
+            <div style="width: 12rem;">
+              <span class="fa fa-solid fa-user-plus fa-5x" aria-hidden="true"></span>
+              <div class="card-body">
+                <h3>Politica de Descontos</h3>
+              </div>
+            </div>
+          </div>
+        </a>
+
+        <a href="relatorio.php" class="btn">
+          <div class="col-2 p-2 m-1">
+            <div style="width: 12rem;">
+              <span class="fa fa-solid fa-list fa-5x" aria-hidden="true"></span>
+              <div class="card-body">
+                <h3>Relatórios</h3>
+              </div>
+            </div>
+          </div>
+        </a>
+  
+      </div> <!-- ROW end -->
+
+    </div>
+  </main>
 
 
   <script src="https://kit.fontawesome.com/74ecb76a40.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.css" crossorigin="anonymous">
+  <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
 
 </body>
 

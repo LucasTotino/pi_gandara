@@ -55,7 +55,7 @@
     </div>
   </a>
 
-  <a href="holerite.php" class="btn">
+  <a href="cadTipoES.php" class="btn">
     <div class="col-2 p-2 m-1">
       <div style="width: 10rem;">
         <span class="fa fa-solid fa-wallet fa-5x" aria-hidden="true"></span>

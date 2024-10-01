@@ -5,6 +5,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: Roboto, 'Helvetica Neue', Helvetica, sans-serif;
+  
 }
 
 body::before{
@@ -13,12 +14,12 @@ body::before{
   inset: 0;
   height: auto;
   width: 100%;
-  background: url("/pi_gandara/imgs/logoceres.jpeg") no-repeat center;
+  background: url("/pi_gandara/imgs/logoceres.jpeg") center;
   background-color: #BABABA;
   background-repeat: no-repeat;
-
   opacity: 0.3;
 }
+
 header {
   position: fixed;
   top: 0;
@@ -59,7 +60,6 @@ nav #teste .icon-bar {
   -webkit-border-radius: 1px;
   -moz-border-radius: 1px;
   border-radius: 1px;
-  -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
   -moz-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
 }
@@ -98,4 +98,34 @@ nav a.label {
   height: 100%;
 }
 
-/* STYLE FINANCEIRO */
+.c1{
+  opacity: .4;
+}
+
+ /* Style the tab */
+ .tab-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.tab {
+  background-color: #ddd;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.tab-content {
+  display: none;
+}
+
+.active-tab {
+  background-color: green;
+}
+
+.active-content {
+  display: block;
+}
+
+/* Estilo da Tabela Compras*/
+

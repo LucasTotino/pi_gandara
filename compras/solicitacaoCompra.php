@@ -50,16 +50,12 @@ if (isset($_POST['submit'])) {
 
             <form action="/onstudies/usuarios/iu_usuario.php" method="POST"><!-- Inicio Formulário -->
                 <div class="form-group">
-                    <!-- Nome, CPF e Data Nascimento -->
-                    <div class="form-row justify-content-center mt-2">
-                        <div class="col-sm-2">
+                
+                    <div class="form-row justify-content-center mt-3">
+                    <div class="col-sm-2">
                             <label for="nome">Item</label>
                             <input type="text" class="form-control" id="nome" name="nome">
                         </div>
-                    </div>
-                    
-                    <!-- Celular e Email -->
-                    <div class="form-row justify-content-center mt-2">
                     <div class="col-sm-2">
                         <label for="criador">Criador</label>
                         <input type="text" class="form-control" id="criador" name="criador">

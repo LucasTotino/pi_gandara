@@ -34,9 +34,20 @@
           </div>
         </a>
 
-        <a href="cadFornecedor.php" class="btn">
+        <a href="cadUsuario.php" class="btn">
           <div class="col-2 p-2 m-1">
             <div style="width: 10rem;">
+              <span class="fa fa-solid fa-user-plus fa-5x" aria-hidden="true"></span>
+              <div class="card-body">
+                <h3>Cadastro de Usuários</h3>
+              </div>
+            </div>
+          </div>
+        </a>
+
+        <a href="cadFornecedor.php" class="btn">
+          <div class="col-2 p-2 m-1">
+            <div style="width: 12rem;">
               <span class="fa fa-solid fa-clipboard-list fa-5x" aria-hidden="true"></span>
               <div class="card-body">
                 <h3>Cadastro de Fornecedores</h3>
@@ -67,16 +78,7 @@
           </div>
         </a>
 
-        <a href="pedidoCompra.php" class="btn">
-          <div class="col-2 p-2 m-1">
-            <div style="width: 10rem;">
-              <span class="fa fa-cart-shopping fa-5x" aria-hidden="true"></span>
-              <div class="card-body">
-                <h3>Pedido de Compra</h3>
-              </div>
-            </div>
-          </div>
-        </a>
+        
 
       </div> <!--Fim da row -->
 
@@ -93,12 +95,12 @@
           </div>
         </a>
 
-        <a href="cadUsuario.php" class="btn">
+        <a href="pedidoCompra.php" class="btn">
           <div class="col-2 p-2 m-1">
             <div style="width: 10rem;">
-              <span class="fa fa-solid fa-user-plus fa-5x" aria-hidden="true"></span>
+              <span class="fa fa-cart-plus fa-5x" aria-hidden="true"></span>
               <div class="card-body">
-                <h3>Cadastro de Usuários</h3>
+                <h3>Pedido de Compra</h3>
               </div>
             </div>
           </div>
@@ -130,9 +132,6 @@
       </div>
 
   </main>
-
-
-
 
   <script src="https://kit.fontawesome.com/74ecb76a40.js" crossorigin="anonymous"></script>
 </body>
