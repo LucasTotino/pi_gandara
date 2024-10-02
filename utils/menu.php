@@ -1,5 +1,5 @@
 <!-- Menu -->
-<nav class="nav-pills nav-sidebar">
+<nav class="nav-pills nav-sidebar" id="mySidenav" onclick="abreMenu()">
 
   <a href="/pi_gandara/dashboard.php" title="Home">
     <span class="fa fa-bars" aria-hidden="true"></span>
