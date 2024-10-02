@@ -33,15 +33,6 @@
         </div>
 
         <div class="row p-3 justify-content-center d-flex align-items-center">
-          <div class="col-md-3">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Fluxo de Caixa</h5>
-                <p class="card-text">Visualize o fluxo de caixa da empresa.</p>
-                <a href="#" class="btn btn-primary">Ver Relatório</a>
-              </div>
-            </div>
-          </div>
 
           <div class="col-md-3">
             <div class="card">
