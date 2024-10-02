@@ -10,25 +10,89 @@
   <title>Estoque</title>
 </head>
 <body>
-    <header>
-        <?php
-        include_once('../utils/menu.php');
-        ?>
-    </header>
+  <header>
+    <!-- Menu -->
+    <nav class="nav-pills nav-sidebar">
+      <a href="/pi_gandara/index.php" title="Home">
+        <span class="fa fa-bars" aria-hidden="true"></span>
+        <span class="label">Menu</span>
+      </a>
+      <a href="/pi_gandara/estoque/index.php" title="Estoque">
+        <span class="fa fa-solid fa-box"></span>
+        <span class="label">Estoque</span>
+      </a>
+      <a href="/pi_gandara/compras/index.php" title="Compras">
+        <span class="fa fa-money"></span>
+        <span class="label">Compras</span>
+      </a>
+      <a href="/pi_gandara/pcp/index.php" title="PCP">
+        <span class="fa fa-helmet-safety"></span>
+        <span class="label">PCP</span>
+      </a>
+      <a href="/pi_gandara/financeiro/index.php" title="Financeiro">
+        <span class="fa fa-solid fa-dollar-sign"></span>
+        <span class="label">Financeiro</span>
+      </a>
+      <a href="/pi_gandara/index.php" title="Sair">
+        <span class="fa fa-sharp fa-solid fa-door-open"></span>
+        <span class="label">Sair</span>
+      </a>
+    </nav>
+  </header>
   
-  <div class="card" style="width: 18rem;">
-    <img class="card-img-top" src=".../100px180/" alt="Imagem de capa do card">
-    <div class="card-body">
-      <h5 class="card-title">Título do card</h5>
-      <p class="card-text">Um exemplo de texto rápido para construir o título do card e fazer preencher o conteúdo do card.</p>
-      <a href="#" class="btn btn-primary">Visitar</a>
-    </div>
-  </div>
+  <main>
+    <div class="container mt-4">
+      
 
+      <div class="row p-3 justify-content-center d-flex align-items-center">
+        <a href="produtosPlantio.php" class="btn">
+          <div class="col-2 p-2 m-1">
+            <div style="width: 10rem;">
+              <span class="fa fa-seedling fa-5x" aria-hidden="true"></span>
+              <div class="card-body">
+                <h3>Insumos</h3>
+              </div>
+            </div>
+          </div>
+        </a>
 
+        <a href="produtosManutencao.php" class="btn">
+          <div class="col-2 p-2 m-1">
+            <div style="width: 10rem;">
+              <span class="fa fa-tools fa-5x" aria-hidden="true"></span>
+              <div class="card-body">
+                <h3>Manutenção</h3>
+              </div>
+            </div>
+          </div>
+        </a>
+
+        <a href="produtosAlmoxarifado.php" class="btn">
+          <div class="col-2 p-2 m-1">
+            <div style="width: 10rem;">
+              <span class="fa fa-box fa-5x" aria-hidden="true"></span>
+              <div class="card-body">
+                <h3>Produtos</h3>
+              </div>
+            </div>
+          </div>
+        </a>
+
+        <a href="produtosEquipamentos.php" class="btn">
+          <div class="col-2 p-2 m-1">
+            <div style="width: 10rem;">
+              <span class="fa fa-tools fa-5x" aria-hidden="true"></span>
+              <div class="card-body">
+                <h3>Estoque Atual</h3>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div> <!-- Fim da row -->
+    </div> <!-- Fim do container -->
+  </main>
 
   <script src="https://kit.fontawesome.com/74ecb76a40.js" crossorigin="anonymous"></script>
-
 </body>
 
 </html>
