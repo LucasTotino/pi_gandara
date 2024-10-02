@@ -19,20 +19,54 @@
   <main>
     <h1 class="text-center">COMERCIAL E FATURAMENTO</h1>
     <div class="container">
-      <h3 class="text-center">Cadastro de Tributação</h3>
+      <h3 class="text-center">Cadastro de Transportadora</h3>
       <div class="card card-cds">
         <form class="mt-3 mb-3 ml-3 mr-3" id="userform" action="" method="POST">
 
           <div class="form-row">
             <div class="form-group col-md-8 text-white">
-              <label class="text-dark" for=""><b></b></label>
+              <label class="text-dark" for=""><b>Nome/Razão Social:</b></label>
               <input type="text" class="form-control" id="" name="">
             </div>
             <div class="form-group col-md-4 text-white">
-              <label class="text-dark" for=""><b></b></label>
+              <label class="text-dark" for=""><b>CPF/CNPJ:</b></label>
               <input type="text" class="form-control" id="" name="">
             </div>
-          </div> <!--  -->
+          </div> <!-- Linha 1: Nome dos Distribuidores e CPF/CNPJ -->
+
+          <hr>
+          <h4 class="text-start">Complemento de Cadastro:</h4>
+
+          <div class="form-row">
+            <div class="form-group col-md-6 text-white">
+              <label class="text-dark" for=""><b>Modelo do Veículo:</b></label>
+              <input type="text" class="form-control" id="" name="">
+            </div>
+            <div class="form-group col-md-2 text-white">
+              <label class="text-dark" for=""><b>Placa:</b></label>
+              <input type="text" class="form-control" id="" name="">
+            </div>
+            <div class="form-group col-md-4 text-white">
+              <label class="text-dark" for=""><b>Status:</b></label>
+              <select id="" name="" class="form-control">
+                <option value="" selected>-- ESCOLHA --</option>
+                <option value="">Ativo</option>
+                <option value="">Inativo</option>
+              </select>
+            </div>
+          </div> <!-- Linha 4: Comissão, Máximo de desconto e Status -->
+
+          <div class="form-row">
+            <div class="form-group col-md-3 text-white">
+              <label class="text-dark" for=""><b>Estado/UF:</b></label>
+              <input type="text" class="form-control" id="" name="">
+            </div>
+            <div class="form-group col-md-3 text-white">
+              <label class="text-dark" for=""><b>Volume:</b></label>
+              <input type="text" class="form-control" id="" name="">
+            </div>
+          </div>
+
 
           <hr>
 
