@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.css" crossorigin="anonymous">
   <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
   <link rel="stylesheet" href="/pi_gandara/css/style.css">
-  <title>Relatórios e Analise</title>
+  <title>Relatórios e Analises</title>
 </head>
 
 <body>
@@ -28,19 +28,11 @@
     <main>
       <div class="container">
         <div class="row p-3 justify-content-center d-flex align-items-center">
-          <h1 class="display-4">Relatórios e Análises Financeiras</h1>
+        <a type="button" style="text-align: left;" class="col-1 btn btn-primary justify-content-center d-flex" href="/pi_gandara/financeiro/">Voltar</a>
+          <h1 style="text-align: center;" class="col-11 display-4">Relatórios e Análises Financeiras</h1>
         </div>
 
         <div class="row p-3 justify-content-center d-flex align-items-center">
-          <div class="col-md-3">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Fluxo de Caixa</h5>
-                <p class="card-text">Visualize o fluxo de caixa da empresa.</p>
-                <a href="#" class="btn btn-primary">Ver Relatório</a>
-              </div>
-            </div>
-          </div>
 
           <div class="col-md-3">
             <div class="card">

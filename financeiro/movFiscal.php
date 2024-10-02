@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
   <link rel="stylesheet" href="/pi_gandara/css/style.css">
   <link rel="stylesheet" href="/pi_gandara/css/styleFinanceiro.css">
-  <title>Gerenciamento de Caixa</title>
+  <title>Movimentações Fiscais</title>
 </head>
 
 <body>
@@ -25,7 +25,7 @@
     <div class="container">
       <div class="row p-3 justify-content-center d-flex align-items-center">
         <a type="button" style="text-align: left;" class="col-1 btn btn-primary justify-content-center d-flex" href="/pi_gandara/financeiro/">Voltar</a>
-        <h1 style="text-align: center;" class="col-11 display-4">Gerenciamento de Caixa</h1>
+        <h1 style="text-align: center;" class="col-11 display-4">Movimentações Fiscais</h1>
       </div>
 
       <div class="row p-3 justify-content-center d-flex align-items-center">
