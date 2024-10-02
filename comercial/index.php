@@ -24,7 +24,7 @@
         <a href="cadVendedores.php" class="btn">
           <div class="col-2 p-2 m-1">
             <div style="width: 12rem;">
-              <span class="fa fa-solid fa-user-plus fa-5x" aria-hidden="true"></span>
+              <span class="fa fa-solid fa-address-card fa-5x" aria-hidden="true"></span>
               <div class="card-body">
                 <h3>Cadastro de Vendedores Internos</h3>
               </div>
@@ -43,23 +43,23 @@
           </div>
         </a>
 
-        <a href="cadDistribuidores.php" class="btn">
+        <a href="cadTransportadores.php" class="btn">
           <div class="col-2 p-2 m-1">
             <div style="width: 12rem;">
               <span class="fa fa-solid fa-truck fa-5x" aria-hidden="true"></span>
               <div class="card-body">
-                <h3>Cadastro de Distribuidores</h3>
+                <h3>Cadastro de Transportadora</h3>
               </div>
             </div>
           </div>
         </a>
 
-        <a href="cadTributacao.php" class="btn">
+        <a href="cadDescontos.php" class="btn">
           <div class="col-2 p-2 m-1">
             <div style="width: 12rem;">
-              <span class="fa fa-solid fa-database fa-5x" aria-hidden="true"></span>
+              <span class="fa fa-solid fa-tag fa-5x" aria-hidden="true"></span>
               <div class="card-body">
-                <h3>Tributação</h3>
+                <h3>Politica de Descontos</h3>
               </div>
             </div>
           </div>
@@ -72,7 +72,7 @@
         <a href="cadVendas.php" class="btn">
           <div class="col-2 p-2 m-1">
             <div style="width: 12rem;">
-              <span class="fa fa-solid fa-user-plus fa-5x" aria-hidden="true"></span>
+              <span class="fa fa-solid fa-money fa-5x" aria-hidden="true"></span>
               <div class="card-body">
                 <h3>Vendas</h3>
               </div>
@@ -80,12 +80,23 @@
           </div>
         </a>
 
-        <a href="cadDescontos.php" class="btn">
+        <a href="cadNotaSaida.php" class="btn">
           <div class="col-2 p-2 m-1">
             <div style="width: 12rem;">
-              <span class="fa fa-solid fa-user-plus fa-5x" aria-hidden="true"></span>
+              <span class="fa fa-solid fa-receipt fa-5x" aria-hidden="true"></span>
               <div class="card-body">
-                <h3>Politica de Descontos</h3>
+                <h3>Cadastro de NFS</h3>
+              </div>
+            </div>
+          </div>
+        </a>
+
+        <a href="Faturar.php" class="btn">
+          <div class="col-2 p-2 m-1">
+            <div style="width: 12rem;">
+              <span class="fa fa-solid fa-inbox fa-5x" aria-hidden="true"></span>
+              <div class="card-body">
+                <h3>Faturar</h3>
               </div>
             </div>
           </div>
@@ -94,14 +105,14 @@
         <a href="relatorio.php" class="btn">
           <div class="col-2 p-2 m-1">
             <div style="width: 12rem;">
-              <span class="fa fa-solid fa-list fa-5x" aria-hidden="true"></span>
+              <span class="fa fa-solid fa-book fa-5x" aria-hidden="true"></span>
               <div class="card-body">
                 <h3>Relatórios</h3>
               </div>
             </div>
           </div>
         </a>
-  
+
       </div> <!-- ROW end -->
 
     </div>

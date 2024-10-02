@@ -40,6 +40,21 @@
 
           <hr>
 
+          <div class="form-row">
+            <div class="form-group col-md-1 text-white">
+              <label class="text-dark" for=""><b>Código:</b></label>
+              <input type="text" class="form-control" id="" name="">
+            </div>
+            <div class="form-group col-md-8 text-white">
+              <label class="text-dark" for=""><b>Produto:</b></label>
+              <input type="text" class="form-control" id="" name="">
+            </div>
+            <div class="form-group col-md-3 text-white">
+              <label class="text-dark" for=""><b>% Promoção:</b></label>
+              <input type="number" class="form-control" id="" name="">
+            </div>
+          </div> <!-- Cadastro de Promoções -->
+
           <div class="form-row mt-3">
             <div class="col-md-4 text-left">
               <a class="btn btn-warning" href="../comercial/index.php">Voltar</a>

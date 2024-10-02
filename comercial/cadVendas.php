@@ -25,7 +25,7 @@
 
           <div class="form-row">
             <div class="form-group col-md-8 text-white">
-              <label class="text-dark" for=""><b>Vendedor:</b></label>
+              <label class="text-dark" for=""><b>Razão Social:</b></label>
               <input type="text" class="form-control" id="" name="">
             </div>
             <div class="form-group col-md-2 text-white">
@@ -48,11 +48,11 @@
 
           <h4>Informações da Venda:</h4>
           <div class="form-row">
-            <div class="form-group col-md-2 text-white">
-              <label class="text-dark" for=""><b>Cód. Produto:</b></label>
+            <div class="form-group col-md-1 text-white">
+              <label class="text-dark" for=""><b>Código:</b></label>
               <input type="text" class="form-control" id="" name="">
             </div>
-            <div class="form-group col-md-7 text-white">
+            <div class="form-group col-md-8 text-white">
               <label class="text-dark" for=""><b>Produto vendido:</b></label>
               <input type="text" class="form-control" id="" name="">
             </div>
@@ -61,13 +61,14 @@
               <input type="number" class="form-control" id="" name="">
             </div>
             <div class="form-group col-md-1 text-white">
-              <button type="button" class="btn btn-primary">Adicionar</button>
+              <label class="text-dark" for=""><b>Adicionar</b></label>
+              <button type="button" class="btn btn-primary">+</button>
             </div>
           </div> <!--  -->
           <table class="table">
             <thead>
               <tr>
-                <th scope="col">#</th>
+                <th scope="col">Nº</th>
                 <th scope="col">Cód. Produto:</th>
                 <th scope="col">Produto vendido:</th>
                 <th scope="col">Quantidade:</th>
@@ -76,9 +77,9 @@
             <tbody>
               <tr>
                 <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
+                <td>00020</td>
+                <td>Laranja Padrão</td>
+                <td>80Kg</td>
               </tr>
             </tbody>
           </table>
