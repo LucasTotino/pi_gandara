@@ -81,7 +81,7 @@ if (isset($_POST['submit'])) {
                             <input type="date" class="form-control" id="previsaocompra" name="previsaocompra" maxlength="15" onkeypress="mascara('(##) #####-####', this)">
                         </div>
                         <div class="col-sm-2">
-                            <label for="dataultima">Data Ultima compra</label>
+                            <label for="dataultima">Data Ultima Compra</label>
                             <input type="date" class="form-control" id="dataultima" name="dataultima" autocomplete="on">
                         </div>
 
