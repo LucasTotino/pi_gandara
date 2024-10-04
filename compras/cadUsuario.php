@@ -1,5 +1,5 @@
 <?php
-//require '../utils/conexao.php';
+require '../utils/conexao.php';
 // Verifica se veio um id na URL
 $id = isset($_GET['id']) ? $_GET['id'] : false;
 $cor = ($id) ? "btn-warning" : "btn-success";
@@ -26,10 +26,38 @@ if ($id) {
         </script>
 <?php
     }
-
-    //Como converter data do JP para PT-BR
-
 }
+
+// Prepara a consulta SQL
+$sql = "SELECT * FROM usuarios;";
+
+// Seleciona apenas os campos que serão usados
+$sql_eficiente = " SELECT id_usuario, nome, email, cpf, celular, nivel_acesso FROM usuarios;";
+
+// Envia o SQL para o Prepare Statement:
+$stmt = $conn->prepare($sql);
+
+//Executa a consulta SQL
+$stmt->execute();
+
+//Pega o resultado e adiciona em uma variavel
+$dados = $stmt->get_result();
+
+/* Caso use o SQL Eficiente: 
+Liga os resultados a variáveis para serem utilizadas no HTML
+    
+    Colocar na mesma ordem do Script SQL
+    $stmt->bind_param($id_usuario, $nome, $email, $cpf, $celular, $nivel_acesso);
+*/
+$nivel = array(
+    'Administrador', // Posição 0
+    'Usuário' //Posição 1
+);
+$corNivel = array(
+    'badge-danger', // Posição 0
+    'badge-primary' // Posição 1
+)
+
 ?>
 <!doctype html>
 <html lang="pt-br">
@@ -73,7 +101,7 @@ if ($id) {
                 }
                 ?>
 
-                <form id="userForm" action="/site-pi/bd/bd-usuario.php" method="POST">
+                <form id="userForm" action="/pi_gandara/compras/bd/bd_usuario.php" method="POST">
                     <input type="hidden" id="id_usuario" name="id_usuario" value="<?= isset($_GET['id']) ? $_GET['id'] : null ?>">
                     <input type="hidden" name="acao" id="acao" value="<?= isset($_GET['id']) ? "ALTERAR" : "INCLUIR" ?>">
                     <div class="form-row justify-content-center mt-2">
@@ -210,6 +238,47 @@ if ($id) {
                         </div>
                     </div>
                 </form>
+            </div>
+        </div>
+
+        <div class="container mt-3">
+            <div class="card">
+                <table class="table table-hover table-striped">
+                    <thead>
+                        <th>NOME</th>
+                        <th>EMAIL</th>
+                        <th>CELULAR</th>
+                        <th>NÍVEL</th>
+                        <th>AÇÕES</th>
+                    </thead>
+                    <tbody>
+                        <?php
+                        // Aqui adicionamos o laço de repetição
+                        // Que irá exibir uma linha da tabela para cada registro no bd
+
+                        // Adiciona cada registro na variavel linha como um Arrey.
+                        while ($linha = $dados->fetch_assoc()) {
+                        ?>
+                            <tr>
+                                <td><?= $linha['nome'] ?></td>
+                                <td><?= $linha['email'] ?></td>
+                                <td><?= $linha['cpf'] ?></td>
+                                <td>
+                                    <span class="badge <?= $corNivel[$linha['nivel_acesso']] ?>">
+                                        <?= $nivel[$linha['nivel_acesso']] ?>
+                                    </span>
+                                </td>
+                                <td>
+                                    <!-- Chamo a página do formulario e envio o Id do usuario que será alterado-->
+                                    <a href="cadUsuario.php?id=<?= $linha['id_usuario'] ?>" class="btn btn-warning">Editar</a>
+                                    <button class="btn btn-danger btn-excluir" data-table="usuarios" data-id="<?= $linha['id_usuario'] ?>">Excluir</button>
+                                </td>
+                            </tr>
+                        <?php
+                        }
+                        ?>
+                    </tbody>
+                </table>
             </div>
         </div>
     </main>
