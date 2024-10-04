@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="pt-br">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -9,40 +10,16 @@
 
   <title>Estoque</title>
 </head>
+
 <body>
-  <header>
-    <!-- Menu -->
-    <nav class="nav-pills nav-sidebar">
-      <a href="/pi_gandara/index.php" title="Home">
-        <span class="fa fa-bars" aria-hidden="true"></span>
-        <span class="label">Menu</span>
-      </a>
-      <a href="/pi_gandara/estoque/index.php" title="Estoque">
-        <span class="fa fa-solid fa-box"></span>
-        <span class="label">Estoque</span>
-      </a>
-      <a href="/pi_gandara/compras/index.php" title="Compras">
-        <span class="fa fa-money"></span>
-        <span class="label">Compras</span>
-      </a>
-      <a href="/pi_gandara/pcp/index.php" title="PCP">
-        <span class="fa fa-helmet-safety"></span>
-        <span class="label">PCP</span>
-      </a>
-      <a href="/pi_gandara/financeiro/index.php" title="Financeiro">
-        <span class="fa fa-solid fa-dollar-sign"></span>
-        <span class="label">Financeiro</span>
-      </a>
-      <a href="/pi_gandara/index.php" title="Sair">
-        <span class="fa fa-sharp fa-solid fa-door-open"></span>
-        <span class="label">Sair</span>
-      </a>
-    </nav>
-  </header>
   
-  <main>
+    <header>
+      <?php
+      include_once('../utils/menu.php');
+      ?>
+    </header>
+    <main>
     <div class="container mt-4">
-      
 
       <div class="row p-3 justify-content-center d-flex align-items-center">
         <a href="produtosPlantio.php" class="btn">
