@@ -16,7 +16,7 @@ if ($id) {
     // Verifica se encontrou o usuario ou se ele existe no BD
     if ($dados->num_rows > 0) {
         // Coloca os dados do usuário em uma variavel como array
-        $user = $dados->fetch_assoc();
+        $cliente = $dados->fetch_assoc();
     } else {
         // Se não encontrou um usuario retorna para a página anterior.
 ?>
@@ -32,7 +32,7 @@ if ($id) {
 $sql = "SELECT * FROM cad_cliente;";
 
 // Seleciona apenas os campos que serão usados
-$sql_eficiente = " SELECT id, nome, email, cpf_cnpj, celular, tipo_acesso FROM cad_cliente;";
+$sql_eficiente = " SELECT id, nome, email, cpf_cnpj, celular, tipo_cliente FROM cad_cliente;";
 
 // Envia o SQL para o Prepare Statement:
 $stmt = $conn->prepare($sql);
@@ -85,18 +85,20 @@ $corNivel = array(
         <div class="container">
             <div class="card card-cds">
                 <form class="mt-3 mb-3 ml-3 mr-3" action="/pi_gandara/compras/bd/bd_cliente.php" method="POST"><!-- Inicio Formulário -->
-                    <div class="form-group ">
+                <input type="hidden" id="id" name="id" value="<?= isset($_GET['id']) ? $_GET['id'] : null ?>">
+                    <input type="hidden" name="acao" id="acao" value="<?= isset($_GET['id']) ? "ALTERAR" : "INCLUIR" ?>">    
+                <div class="form-group ">
                         <!-- Nome, CPF -->
                         <div class="form-row justify-content-center mt-2">
                             <div class="col-sm-8">
                                 <label for="nome">Nome </label>
-                                <input type="text" class="form-control" id="nome" name="nome"
-                                    value="<?= ($id) ? $user['nome'] : null ?>">
+                                <input type="text" class="form-control" id="nome" name="nome" required
+                                    value="<?= ($id) ? $cliente['nome'] : null ?>">
                             </div>
                             <div class="col-sm-4">
                                 <label for="cpf_cnpj">CPF/CNPJ</label>
                                 <input type="text" class="form-control" id="cpf_cnpj" name="cpf_cnpj" maxlength="18"
-                                    value="<?= ($id) ? $user['cpf_cnpj'] : null ?>">
+                                    value="<?= ($id) ? $cliente['cpf_cnpj'] : null ?>">
                             </div>
                         </div>
 
@@ -106,21 +108,21 @@ $corNivel = array(
                                 <label for="tipo_cliente" class="text-danger font-weight-bold">Tipo de Cliente:</label>
                                 <select class="form-control" id="tipo_cliente" name="tipo_cliente">
                                     <option value=""> -- ESCOLHA -- </option>
-                                    <option <?= (isset($_GET['id']) && $user['tipo_cliente'] == 1) ? "selected" : null ?>
+                                    <option <?= (isset($_GET['id']) && $cliente['tipo_cliente'] == 1) ? "selected" : null ?>
                                         value="1">Pessoa Física</option>
-                                    <option <?= (isset($_GET['id']) && $user['tipo_cliente'] == 0) ? "selected" : null ?>
+                                    <option <?= (isset($_GET['id']) && $cliente['tipo_cliente'] == 0) ? "selected" : null ?>
                                         value="0">Pessoa Jurídica</option>
                                 </select>
                             </div>
                             <div class="col-sm-6">
                                 <label for="email">Email</label>
                                 <input type="email" class="form-control" id="email" name="email" autocomplete="on"
-                                    value="<?= ($id) ? $user['email'] : null ?>">
+                                    value="<?= ($id) ? $cliente['email'] : null ?>">
                             </div>
                             <div class="col-sm-3">
                                 <label for="celular">Celular</label>
                                 <input type="celular" class="form-control" id="celular" name="celular" maxlength="15"
-                                    value="<?= ($id) ? $user['celular'] : null ?>">
+                                    value="<?= ($id) ? $cliente['celular'] : null ?>">
                             </div>
                         </div>
 
@@ -132,69 +134,69 @@ $corNivel = array(
                             <div class="col-sm-8">
                                 <label for="logradouro">Logradouro</label>
                                 <input type="text" class="form-control" id="logradouro" name="logradouro"
-                                    value="<?= ($id) ? $user['logradouro'] : null ?>">
+                                    value="<?= ($id) ? $cliente['logradouro'] : null ?>">
                             </div>
                             <div class="col-sm-2">
                                 <label for="numero">Número</label>
                                 <input type="number" class="form-control" id="numero" name="numero"
-                                    value="<?= ($id) ? $user['numero'] : null ?>">
+                                    value="<?= ($id) ? $cliente['numero'] : null ?>">
                             </div>
                             <div class="col-sm-2">
                                 <label for="complemento">Complemento</label>
                                 <input type="text" class="form-control" id="complemento" name="complemento"
-                                    value="<?= ($id) ? $user['complemento'] : null ?>">
+                                    value="<?= ($id) ? $cliente['complemento'] : null ?>">
                             </div>
                         </div>
                         <div class="row justify-content-center mt-2">
                             <div class="col-sm-3">
                                 <label for="bairro">Bairro</label>
                                 <input type="text" class="form-control" id="bairro" name="bairro"
-                                    value="<?= ($id) ? $user['bairro'] : null ?>">
+                                    value="<?= ($id) ? $cliente['bairro'] : null ?>">
                             </div>
                             <div class="form-group col-sm-5">
                                 <label for="cidade">Cidade:</label>
                                 <input type="text" class="form-control" id="cidade" name="cidade"
-                                    value="<?= ($id) ? $user['cidade'] : null ?>">
+                                    value="<?= ($id) ? $cliente['cidade'] : null ?>">
                             </div>
                             <div class="col-sm-2">
                                 <label for="estado">Estado</label>
                                 <div class="input-group">
                                     <select class="form-control" id="estado" name="estado">
                                         <option value=""> -- ESCOLHA -- </option>
-                                        <option <?= (isset($_GET['id']) && $user['estado'] == "AC") ? "selected" : null ?> value="AC">Acre</option>
-                                        <option <?= (isset($_GET['id']) && $user['estado'] == "AL") ? "selected" : null ?> value="AL">Alagoas</option>
-                                        <option <?= (isset($_GET['id']) && $user['estado'] == "AP") ? "selected" : null ?> value="AP">Amapá</option>
-                                        <option <?= (isset($_GET['id']) && $user['estado'] == "AM") ? "selected" : null ?> value="AM">Amazonas</option>
-                                        <option <?= (isset($_GET['id']) && $user['estado'] == "BA") ? "selected" : null ?> value="BA">Bahia</option>
-                                        <option <?= (isset($_GET['id']) && $user['estado'] == "CE") ? "selected" : null ?> value="CE">Ceará</option>
-                                        <option <?= (isset($_GET['id']) && $user['estado'] == "DF") ? "selected" : null ?> value="DF">Distrito Federal</option>
-                                        <option <?= (isset($_GET['id']) && $user['estado'] == "ES") ? "selected" : null ?> value="ES">Espírito Santo</option>
-                                        <option <?= (isset($_GET['id']) && $user['estado'] == "GO") ? "selected" : null ?> value="GO">Goiás</option>
-                                        <option <?= (isset($_GET['id']) && $user['estado'] == "MA") ? "selected" : null ?> value="MA">Maranhão</option>
-                                        <option <?= (isset($_GET['id']) && $user['estado'] == "MT") ? "selected" : null ?> value="MT">Mato Grosso</option>
-                                        <option <?= (isset($_GET['id']) && $user['estado'] == "MS") ? "selected" : null ?> value="MS">Mato Grosso do Sul</option>
-                                        <option <?= (isset($_GET['id']) && $user['estado'] == "MG") ? "selected" : null ?> value="MG">Minas Gerais</option>
-                                        <option <?= (isset($_GET['id']) && $user['estado'] == "PA") ? "selected" : null ?> value="PA">Pará</option>
-                                        <option <?= (isset($_GET['id']) && $user['estado'] == "PB") ? "selected" : null ?> value="PB">Paraíba</option>
-                                        <option <?= (isset($_GET['id']) && $user['estado'] == "PR") ? "selected" : null ?> value="PR">Paraná</option>
-                                        <option <?= (isset($_GET['id']) && $user['estado'] == "PE") ? "selected" : null ?> value="PE">Pernambuco</option>
-                                        <option <?= (isset($_GET['id']) && $user['estado'] == "PI") ? "selected" : null ?> value="PI">Piauí</option>
-                                        <option <?= (isset($_GET['id']) && $user['estado'] == "RJ") ? "selected" : null ?> value="RJ">Rio de Janeiro</option>
-                                        <option <?= (isset($_GET['id']) && $user['estado'] == "RN") ? "selected" : null ?> value="RN">Rio Grande do Norte</option>
-                                        <option <?= (isset($_GET['id']) && $user['estado'] == "RS") ? "selected" : null ?> value="RS">Rio Grande do Sul</option>
-                                        <option <?= (isset($_GET['id']) && $user['estado'] == "RO") ? "selected" : null ?> value="RO">Rondônia</option>
-                                        <option <?= (isset($_GET['id']) && $user['estado'] == "RR") ? "selected" : null ?> value="RR">Roraima</option>
-                                        <option <?= (isset($_GET['id']) && $user['estado'] == "SC") ? "selected" : null ?> value="SC">Santa Catarina</option>
-                                        <option <?= (isset($_GET['id']) && $user['estado'] == "SP") ? "selected" : null ?> value="SP">São Paulo</option>
-                                        <option <?= (isset($_GET['id']) && $user['estado'] == "SE") ? "selected" : null ?> value="SE">Sergipe</option>
-                                        <option <?= (isset($_GET['id']) && $user['estado'] == "TO") ? "selected" : null ?> value="TO">Tocantins</option>
+                                        <option <?= (isset($_GET['id']) && $cliente['estado'] == "AC") ? "selected" : null ?> value="AC">Acre</option>
+                                        <option <?= (isset($_GET['id']) && $cliente['estado'] == "AL") ? "selected" : null ?> value="AL">Alagoas</option>
+                                        <option <?= (isset($_GET['id']) && $cliente['estado'] == "AP") ? "selected" : null ?> value="AP">Amapá</option>
+                                        <option <?= (isset($_GET['id']) && $cliente['estado'] == "AM") ? "selected" : null ?> value="AM">Amazonas</option>
+                                        <option <?= (isset($_GET['id']) && $cliente['estado'] == "BA") ? "selected" : null ?> value="BA">Bahia</option>
+                                        <option <?= (isset($_GET['id']) && $cliente['estado'] == "CE") ? "selected" : null ?> value="CE">Ceará</option>
+                                        <option <?= (isset($_GET['id']) && $cliente['estado'] == "DF") ? "selected" : null ?> value="DF">Distrito Federal</option>
+                                        <option <?= (isset($_GET['id']) && $cliente['estado'] == "ES") ? "selected" : null ?> value="ES">Espírito Santo</option>
+                                        <option <?= (isset($_GET['id']) && $cliente['estado'] == "GO") ? "selected" : null ?> value="GO">Goiás</option>
+                                        <option <?= (isset($_GET['id']) && $cliente['estado'] == "MA") ? "selected" : null ?> value="MA">Maranhão</option>
+                                        <option <?= (isset($_GET['id']) && $cliente['estado'] == "MT") ? "selected" : null ?> value="MT">Mato Grosso</option>
+                                        <option <?= (isset($_GET['id']) && $cliente['estado'] == "MS") ? "selected" : null ?> value="MS">Mato Grosso do Sul</option>
+                                        <option <?= (isset($_GET['id']) && $cliente['estado'] == "MG") ? "selected" : null ?> value="MG">Minas Gerais</option>
+                                        <option <?= (isset($_GET['id']) && $cliente['estado'] == "PA") ? "selected" : null ?> value="PA">Pará</option>
+                                        <option <?= (isset($_GET['id']) && $cliente['estado'] == "PB") ? "selected" : null ?> value="PB">Paraíba</option>
+                                        <option <?= (isset($_GET['id']) && $cliente['estado'] == "PR") ? "selected" : null ?> value="PR">Paraná</option>
+                                        <option <?= (isset($_GET['id']) && $cliente['estado'] == "PE") ? "selected" : null ?> value="PE">Pernambuco</option>
+                                        <option <?= (isset($_GET['id']) && $cliente['estado'] == "PI") ? "selected" : null ?> value="PI">Piauí</option>
+                                        <option <?= (isset($_GET['id']) && $cliente['estado'] == "RJ") ? "selected" : null ?> value="RJ">Rio de Janeiro</option>
+                                        <option <?= (isset($_GET['id']) && $cliente['estado'] == "RN") ? "selected" : null ?> value="RN">Rio Grande do Norte</option>
+                                        <option <?= (isset($_GET['id']) && $cliente['estado'] == "RS") ? "selected" : null ?> value="RS">Rio Grande do Sul</option>
+                                        <option <?= (isset($_GET['id']) && $cliente['estado'] == "RO") ? "selected" : null ?> value="RO">Rondônia</option>
+                                        <option <?= (isset($_GET['id']) && $cliente['estado'] == "RR") ? "selected" : null ?> value="RR">Roraima</option>
+                                        <option <?= (isset($_GET['id']) && $cliente['estado'] == "SC") ? "selected" : null ?> value="SC">Santa Catarina</option>
+                                        <option <?= (isset($_GET['id']) && $cliente['estado'] == "SP") ? "selected" : null ?> value="SP">São Paulo</option>
+                                        <option <?= (isset($_GET['id']) && $cliente['estado'] == "SE") ? "selected" : null ?> value="SE">Sergipe</option>
+                                        <option <?= (isset($_GET['id']) && $cliente['estado'] == "TO") ? "selected" : null ?> value="TO">Tocantins</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group col-sm-2">
                                 <label for="cep">CEP:</label>
                                 <input type="text" class="form-control" id="cep" name="cep"
-                                    value="<?= ($id) ? $user['cep'] : null ?>">
+                                    value="<?= ($id) ? $cliente['cep'] : null ?>">
                             </div>
                         </div>
 
@@ -257,6 +259,43 @@ $corNivel = array(
         </div>
     </main>
     <script src="https://kit.fontawesome.com/74ecb76a40.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function() {
+            $('.btn-excluir').click(function() {
+                var agenteId = $(this).data('id');
+                var tabela = $(this).data('table');
+                
+                var confirma = confirm(`Você tem certeza que 
+                deseja excluir o Agente [ ${agenteId} ] ?`);
+
+                if (confirma) {
+                    $.ajax({
+                        url: `../bd/bd-${tabela}.php`,
+                        type: 'POST',
+                        data: {
+                            acao: "DELETAR",
+                            id_agente: agenteId
+                        },
+                        success: function(response) {
+                            var result = JSON.parse(response);
+                            if (result.status === "sucesso") {
+                                alert(result.message);
+                                location.reload();
+                            } else {
+                                alert(result.message);
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            console.error(xhr);
+                            alert("Ocorreu um erro: " + error);
+                        }
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
