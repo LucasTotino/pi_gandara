@@ -27,7 +27,7 @@
             <h1 style="text-align:center;">Cadastro de Insumos</h1>
 
 
-            <form action="/onstudies/usuarios/iu_usuario.php" method="POST"><!-- Inicio Formulário -->
+            <form action="" method="POST"><!-- Inicio Formulário -->
                 <div class="form-group">
                     <!-- Nome, CPF e Data Nascimento -->
                     <div class="form-row justify-content-center mt-2">
