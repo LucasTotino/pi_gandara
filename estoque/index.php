@@ -22,7 +22,11 @@
     <div class="container mt-4">
 
       <div class="row p-3 justify-content-center d-flex align-items-center">
+<<<<<<< HEAD
+        <a href="insumos.php" class="btn">
+=======
         <a href="produtosPlantio.php" class="btn">
+>>>>>>> b3e485d6a4c06aabc443dcca6c3d15f076fcb00e
           <div class="col-2 p-2 m-1">
             <div style="width: 10rem;">
               <span class="fa fa-seedling fa-5x" aria-hidden="true"></span>
@@ -33,7 +37,11 @@
           </div>
         </a>
 
+<<<<<<< HEAD
+        <a href="manutenção.php" class="btn">
+=======
         <a href="produtosManutencao.php" class="btn">
+>>>>>>> b3e485d6a4c06aabc443dcca6c3d15f076fcb00e
           <div class="col-2 p-2 m-1">
             <div style="width: 10rem;">
               <span class="fa fa-tools fa-5x" aria-hidden="true"></span>
@@ -44,7 +52,11 @@
           </div>
         </a>
 
+<<<<<<< HEAD
+        <a href="produtos.php" class="btn">
+=======
         <a href="produtosAlmoxarifado.php" class="btn">
+>>>>>>> b3e485d6a4c06aabc443dcca6c3d15f076fcb00e
           <div class="col-2 p-2 m-1">
             <div style="width: 10rem;">
               <span class="fa fa-box fa-5x" aria-hidden="true"></span>
@@ -55,7 +67,11 @@
           </div>
         </a>
 
+<<<<<<< HEAD
+        <a href="estoqueAtual.php" class="btn">
+=======
         <a href="produtosEquipamentos.php" class="btn">
+>>>>>>> b3e485d6a4c06aabc443dcca6c3d15f076fcb00e
           <div class="col-2 p-2 m-1">
             <div style="width: 10rem;">
               <span class="fa fa-tools fa-5x" aria-hidden="true"></span>
