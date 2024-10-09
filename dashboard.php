@@ -9,18 +9,18 @@
   <link rel="stylesheet" href="/pi_gandara/css/style.css">
   <title>Ceres Sistema</title>
 
-  <body>
-      <header>
-        <?php
-           include_once('utils/menu.php');
-        ?>
-      </header>
+<body>
+  <header>
+    <?php
+    include_once('utils/menu.php');
+    ?>
+  </header>
 
   <main>
     <div class="container">
 
       <div class="row p-5 justify-content-center d-flex align-items-center">
-        
+
 
         <a href="/pi_gandara/estoque/index.php" class="btn">
           <div class="col-4 p-2 m-1">
@@ -94,18 +94,54 @@
 
 
     </div>
+      
+<div class="container">
 
-    <div class="container">
+<h2>Cadastros:</h2>
+      <div class="row p-5 justify-content-center d-flex align-items-center">
 
-    
+        <a href="/pi_gandara/estoque/index.php" class="btn">
+          <div class="col-4 p-2 m-1">
+            <div style="width: 18rem;">
+              <span class="fa fa-solid fa-box fa-2x" aria-hidden="true"></span>
+              <div class="card-body">
+                <h3>Cadastro de Cliente</h3>
+              </div>
+            </div>
+          </div>
+        </a>
 
-    </div>
+        <a href="/pi_gandara/compras/index.php" class="btn">
+          <div class="col-4 p-2 m-1">
+            <div style="width: 18rem;">
+              <span class="fa fa-money fa-2x" aria-hidden="true"></span>
+              <div class="card-body">
+                <h3>Cadastro de Produto</h3>
+              </div>
+            </div>
+          </div>
+        </a>
+
+        <a href="/pi_gandara/pcp/index.php" class="btn">
+          <div class="col-4 p-2 m-1">
+            <div style="width: 18rem;">
+              <span class="fa fa-helmet-safety fa-2x" aria-hidden="true"></span>
+              <div class="card-body">
+                <h3>Cadastro de Fornecedor</h3>
+              </div>
+            </div>
+          </div>
+        </a>
+
+      </div> <!--Fim da row -->
+
+      </div>
   </main>
 
 
 
-    <script src="https://kit.fontawesome.com/74ecb76a40.js" crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/74ecb76a40.js" crossorigin="anonymous"></script>
 
-  </body>
+</body>
 
-  </html>
+</html>
