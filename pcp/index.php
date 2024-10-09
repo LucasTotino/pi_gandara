@@ -55,12 +55,12 @@
             </div>
           </div>
         </a>
-        <a href="/pi_gandara/pcp/estoqueLog.php" class="btn">
+        <a href="/pi_gandara/pcp/insumos.php" class="btn">
           <div class="col-6 p-5 m-1">
             <div style="width: 18rem;">
               <span class="fa fa fa-truck fa-5x" aria-hidden="true"></span>
               <div class="card-body">
-                <h3>Estoque e Logística</h3>
+                <h3>Insumos</h3>
               </div>
             </div>
           </div>
