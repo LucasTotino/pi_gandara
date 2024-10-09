@@ -22,7 +22,7 @@
 
 <div class="row p-3 justify-content-center d-flex align-items-center">
 
-  <a href="cadFuncionarios.php" class="btn">
+  <a href="cadCliente.php" class="btn">
     <div class="col-2 p-2 m-1">
       <div style="width: 10rem;">
         <span class="fa fa-solid fa-user-plus fa-5x" aria-hidden="true"></span>
@@ -33,7 +33,7 @@
     </div>
   </a>
 
-  <a href="listagemFuncionarios.php" class="btn">
+  <a href="cadFornecedor.php" class="btn">
     <div class="col-2 p-2 m-1">
       <div style="width: 10rem;">
         <span class="fa fa-solid fa-clipboard-list fa-5x" aria-hidden="true"></span>
@@ -44,7 +44,7 @@
     </div>
   </a>
 
-  <a href="lancamentoPonto.php" class="btn">
+  <a href="cadProduto.php" class="btn">
     <div class="col-2 p-2 m-1">
       <div style="width: 10rem;">
         <span class="fa fa-box-open fa-5x" aria-hidden="true"></span>

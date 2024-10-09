@@ -1,7 +1,8 @@
 <!-- Menu -->
-<nav class="nav-pills nav-sidebar">
-  <a href="/pi_gandara/index.php" title="Home">
-    <span class="fa fa-bars" aria-hidden="true"></span>
+<nav class="nav-pills nav-sidebar" id="mySidenav" onclick="abreMenu()">
+
+  <a href="/pi_gandara/dashboard.php" title="Home">
+    <img src="../imgs/logoMenu.png">
     <span class="label">Menu</span>
   </a>
   <a href="/pi_gandara/estoque/index.php" title="Estoque">
@@ -28,8 +29,8 @@
     <span class="fa fa-chart-line"></span>
     <span class="label">Comercial</span>
   </a>
-  <a href="/pi_gandara/index.php" title="Sair">
-    <span class="fa fa-sharp fa-solid fa-door-open"></span>
-    <span class="label">Sair</span>
+  <a href="/pi_gandara/index.php" title="Logout" style="position: absolute; bottom:0px">
+    <span class="fa fa-arrow-right-from-bracket" aria-hidden="true"></span>
+    <span class="label">Logout</span>
   </a>
 </nav>

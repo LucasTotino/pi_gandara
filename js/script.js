@@ -9,3 +9,8 @@ registerBtn.addEventListener('click', () => {
 loginBtn.addEventListener('click', () => {
     container.classList.remove("active");
 });
+
+function abreMenu() {
+    const element = document.getElementById("mySidenav");
+    element.classList.toggle("pinned");
+};

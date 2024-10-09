@@ -49,12 +49,12 @@
                 </a>
 
 
-                <a href="gerCaixa.php" class="btn">
+                <a href="movFiscal.php" class="btn">
                     <div class="col-2 p-2 m-1">
                         <div style="width: 14rem;">
-                            <span class="fa-solid fa-scale-balanced fa-5x" aria-hidden="true"></span>
+                            <span class="fa-solid fa-cash-register fa-5x" aria-hidden="true"></span>
                             <div class="card-body justify-content-center">
-                                <h4><b>Gerenciamento de Caixa</b></h4>
+                                <h4><b>Movimentações Fiscais</b></h4>
                             </div>
                         </div>
                     </div>
@@ -64,7 +64,7 @@
 
             <div class="row p-3 justify-content-center d-flex align-items-center">
 
-                <a href="gerFornecedores.php" class="btn">
+                <!--<a href="gerFornecedores.php" class="btn">
                     <div class="col-2 p-2 m-1">
                         <div style="width: 14rem;">
                             <span class="fa-solid fa-truck fa-5x" aria-hidden="true"></span>
@@ -74,7 +74,7 @@
                             </div>
                         </div>
                     </div>
-                </a>
+                </a>-->
 
                 <a href="gerBancario.php" class="btn">
                     <div class="col-2 p-2 m-1">
@@ -87,12 +87,12 @@
                     </div>
                 </a>
 
-                <a href="gerFiscal.php" class="btn">
+                <a href="fluxoCaixa.php" class="btn">
                     <div class="col-2 p-2 m-1">
                         <div style="width: 14rem;">
-                            <span class="fa fa-industry fa-5x" aria-hidden="true"></span>
+                            <span class="fa-solid fa-scale-balanced fa-5x" aria-hidden="true"></span>
                             <div class="card-body justify-content-center">
-                                <h4><b>Gerenciamento Fiscal</b></h4>
+                                <h4><b>Fluxo de Caixa</b></h4>
                             </div>
                         </div>
                     </div>

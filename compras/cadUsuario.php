@@ -1,5 +1,5 @@
 <?php
-//require '../utils/conexao.php';
+require '../utils/conexao.php';
 // Verifica se veio um id na URL
 $id = isset($_GET['id']) ? $_GET['id'] : false;
 $cor = ($id) ? "btn-warning" : "btn-success";
@@ -26,10 +26,38 @@ if ($id) {
         </script>
 <?php
     }
-
-    //Como converter data do JP para PT-BR
-
 }
+
+// Prepara a consulta SQL
+$sql = "SELECT * FROM usuarios;";
+
+// Seleciona apenas os campos que serão usados
+$sql_eficiente = " SELECT id_usuario, nome, email, cpf, celular, nivel_acesso FROM usuarios;";
+
+// Envia o SQL para o Prepare Statement:
+$stmt = $conn->prepare($sql);
+
+//Executa a consulta SQL
+$stmt->execute();
+
+//Pega o resultado e adiciona em uma variavel
+$dados = $stmt->get_result();
+
+/* Caso use o SQL Eficiente: 
+Liga os resultados a variáveis para serem utilizadas no HTML
+    
+    Colocar na mesma ordem do Script SQL
+    $stmt->bind_param($id_usuario, $nome, $email, $cpf, $celular, $nivel_acesso);
+*/
+$nivel = array(
+    'Administrador', // Posição 0
+    'Usuário' //Posição 1
+);
+$corNivel = array(
+    'badge-danger', // Posição 0
+    'badge-primary' // Posição 1
+)
+
 ?>
 <!doctype html>
 <html lang="pt-br">
@@ -51,99 +79,100 @@ if ($id) {
         ?>
     </header>
     <main>
-        <div class="container-1">
         <h1 style="text-align:center;">Cadastro de Usuário</h1>
-            <!-- Confirmação Email e Senha -->
-            <?php
-            if (isset($_POST['submit'])) {
-                if ($email == $confirmaEmail) {
-                    if ($senha == $confirmaSenha) {
-                        $result = mysqli_query($mysqli, "INSERT INTO usuarios (nome, cpf, data_nascimento, qualificacao, senha, email, celular, cep, 
+
+        <div class="container">
+            <div class="card card-cds">
+                <!-- Confirmação Email e Senha -->
+                <?php
+                if (isset($_POST['submit'])) {
+                    if ($email == $confirmaEmail) {
+                        if ($senha == $confirmaSenha) {
+                            $result = mysqli_query($mysqli, "INSERT INTO usuarios (nome, cpf, data_nascimento, qualificacao, senha, email, celular, cep, 
                                                 logradouro, numero, complemento, bairro, cidade, estado)
                                         VALUES           ('$nome', '$cpf', '$nascimento', '$qualificacao', '$senha', '$email',
                                                 '$celular', '$cep', '$logradouro', '$numLogradouro', '$complemento', '$bairro', '$cidade', '$estado')");
+                        } else {
+                            echo "<div class=\"alert alert-warning\" role=\"alert\">Senhas Divergentes</div>";
+                        }
                     } else {
-                        echo "<div class=\"alert alert-warning\" role=\"alert\">Senhas Divergentes</div>";
+                        echo "<div class=\"alert alert-warning\" role=\"alert\">Emails Divergentes</div>";
                     }
-                } else {
-                    echo "<div class=\"alert alert-warning\" role=\"alert\">Emails Divergentes</div>";
                 }
-            }
-            ?>
+                ?>
 
-<form id="userForm" action="/site-pi/bd/bd-usuario.php" method="POST">
+                <form id="userForm" action="/pi_gandara/compras/bd/bd_usuario.php" method="POST">
                     <input type="hidden" id="id_usuario" name="id_usuario" value="<?= isset($_GET['id']) ? $_GET['id'] : null ?>">
                     <input type="hidden" name="acao" id="acao" value="<?= isset($_GET['id']) ? "ALTERAR" : "INCLUIR" ?>">
-                    <div class="form-row">
-                        <div class="form-group col-sm-6">
+                    <div class="form-row justify-content-center mt-2">
+                        <div class="form-group col-sm-5">
                             <label for="nome">Nome:</label>
                             <input type="text" class="form-control" id="nome" name="nome" required
-                            value="<?= ($id) ? $user['nome'] : null ?>">
+                                value="<?= ($id) ? $user['nome'] : null ?>">
                         </div>
-                        <div class="form-group col-sm-6">
+                        <div class="form-group col-sm-4">
                             <label for="email">Email:</label>
                             <input type="email" class="form-control" id="email" name="email"
-                            value="<?= ($id) ? $user['email'] : null ?>">
+                                value="<?= ($id) ? $user['email'] : null ?>">
                         </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-sm-3">
+                        <div class="form-group col-sm-2">
                             <label for="celular">Celular:</label>
                             <input type="tel" class="form-control" id="celular" name="celular"
-                            value="<?= ($id) ? $user['celular'] : null ?>">
+                                value="<?= ($id) ? $user['celular'] : null ?>">
                         </div>
+                    </div>
+                    <div class="form-row justify-content-center mt-2">
+
                         <div class="form-group col-sm-3">
                             <label for="data_nascimento">Data de Nascimento:</label>
                             <input type="date" class="form-control" id="data_nascimento" name="data_nascimento"
-                            value="<?= ($id) ? $user['data_nascimento'] : null ?>">
+                                value="<?= ($id) ? $user['data_nascimento'] : null ?>">
                         </div>
                         <div class="form-group col-sm-3">
                             <label for="cpf">CPF:</label>
                             <input type="tel" class="form-control" id="cpf" name="cpf"
-                            value="<?= ($id) ? $user['cpf'] : null ?>">
+                                value="<?= ($id) ? $user['cpf'] : null ?>">
                         </div>
                         <div class="form-group col-sm-3">
                             <label for="nivel_acesso" class="text-danger font-weight-bold">Nível de Acesso:</label>
                             <select class="form-control" id="nivel_acesso" name="nivel_acesso">
                                 <option value=""> -- ESCOLHA -- </option>
                                 <option <?= (isset($_GET['id']) && $user['nivel_acesso'] == 1) ? "selected" : null ?>
-                                value="1">Usuário</option>
+                                    value="1">Usuário</option>
                                 <option <?= (isset($_GET['id']) && $user['nivel_acesso'] == 0) ? "selected" : null ?>
-                                value="0">Administrador</option>
+                                    value="0">Administrador</option>
                             </select>
                         </div>
                     </div>
-                    <div class="form-row">
-                        <div class="form-group col-sm-3">
-                            <label for="cep">CEP:</label>
-                            <input type="text" class="form-control" id="cep" name="cep"
-                            value="<?= ($id) ? $user['cep'] : null ?>">
-                        </div>
+
+                    <hr>
+
+                    <div class="form-row justify-content-center mt-2">
                         <div class="form-group col-sm-7">
                             <label for="endereco">Endereço:</label>
                             <input type="text" class="form-control" id="endereco" name="endereco"
-                            value="<?= ($id) ? $user['endereco'] : null ?>">
+                                value="<?= ($id) ? $user['endereco'] : null ?>">
                         </div>
                         <div class="form-group col-sm-2">
                             <label for="numero">Número:</label>
                             <input type="text" class="form-control" id="numero" name="numero"
-                            value="<?= ($id) ? $user['numero'] : null ?>">
+                                value="<?= ($id) ? $user['numero'] : null ?>">
                         </div>
-
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group col-sm-4">
+                        <div class="form-group col-sm-2">
                             <label for="complemento">Complemento:</label>
                             <input type="text" class="form-control" id="complemento" name="complemento"
-                            value="<?= ($id) ? $user['complemento'] : null ?>">
+                                value="<?= ($id) ? $user['complemento'] : null ?>">
                         </div>
-                        <div class="form-group col-sm-4">
+                    </div>
+
+                    <div class="form-row justify-content-center mt-2">
+
+                        <div class="form-group col-sm-5">
                             <label for="cidade">Cidade:</label>
                             <input type="text" class="form-control" id="cidade" name="cidade"
-                            value="<?= ($id) ? $user['cidade'] : null ?>">
+                                value="<?= ($id) ? $user['cidade'] : null ?>">
                         </div>
-                        <div class="form-group col-sm-4">
+                        <div class="form-group col-sm-3">
                             <label for="estado">Estado:</label>
                             <select class="form-control" id="estado" name="estado">
                                 <option value=""> -- ESCOLHA -- </option>
@@ -176,42 +205,85 @@ if ($id) {
                                 <option <?= (isset($_GET['id']) && $user['estado'] == "TO") ? "selected" : null ?> value="TO">Tocantins</option>
                             </select>
                         </div>
-
+                        <div class="form-group col-sm-3">
+                            <label for="cep">CEP:</label>
+                            <input type="text" class="form-control" id="cep" name="cep"
+                                value="<?= ($id) ? $user['cep'] : null ?>">
+                        </div>
                     </div>
 
-                    <div class="form-row">
-                        <div class="col-sm-6 form-group">
+                    <div class="form-row justify-content-center mt-2">
+                        <div class="col-sm-4 form-group">
                             <label for="senha">Digite uma senha:</label>
-                            <input type="password" name="senha" id="senha" class="form-control text-center" 
-                            <?= (isset($_GET['id'])) ? null : "required" ?> >
-                            
+                            <input type="password" name="senha" id="senha" class="form-control text-center"
+                                <?= (isset($_GET['id'])) ? null : "required" ?>>
+
                         </div>
-                        <div class="col-sm-6 form-group">
+                        <div class="col-sm-4 form-group">
                             <label for="confirma_senha">Confirme sua senha:</label>
-                            <input type="password" name="confirma_senha" id="confirma_senha" class="form-control text-center" 
-                            <?= (isset($_GET['id'])) ? null : "" ?>>
+                            <input type="password" name="confirma_senha" id="confirma_senha" class="form-control text-center"
+                                <?= (isset($_GET['id'])) ? null : "" ?>>
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col">
-                            <a href="/site-pi/dashboard.php" class="btn btn-link" id="btnBack">Voltar</a>
+                    <div class="form-row justify-content-center m-3">
+                        <div class="col-sm-3">
+                            <button type="submit" name="submit" class="btn btn-success">Cadastrar</button>
                         </div>
-                        <div class="col text-center">
-                            <button type="reset" class="btn btn-secondary" id="btnClear">Limpar</button>
+                        <div class="col-sm-3">
+                            <button type="reset" class="btn btn-warning">Cancelar</button>
                         </div>
-                        <div class="col d-flex justify-content-end">
-                            <button type="submit" class="btn <?= $cor ?>">Salvar</button>
+                        <div class="col-sm-3">
+                            <a href="/pi_gandara/compras/index.php"><button type="button" class="btn btn-danger">Voltar</button></a>
                         </div>
                     </div>
-
-
-
                 </form>
+            </div>
+        </div>
+
+        <div class="container mt-3">
+            <div class="card">
+                <table class="table table-hover table-striped">
+                    <thead>
+                        <th>NOME</th>
+                        <th>EMAIL</th>
+                        <th>CELULAR</th>
+                        <th>NÍVEL</th>
+                        <th>AÇÕES</th>
+                    </thead>
+                    <tbody>
+                        <?php
+                        // Aqui adicionamos o laço de repetição
+                        // Que irá exibir uma linha da tabela para cada registro no bd
+
+                        // Adiciona cada registro na variavel linha como um Arrey.
+                        while ($linha = $dados->fetch_assoc()) {
+                        ?>
+                            <tr>
+                                <td><?= $linha['nome'] ?></td>
+                                <td><?= $linha['email'] ?></td>
+                                <td><?= $linha['cpf'] ?></td>
+                                <td>
+                                    <span class="badge <?= $corNivel[$linha['nivel_acesso']] ?>">
+                                        <?= $nivel[$linha['nivel_acesso']] ?>
+                                    </span>
+                                </td>
+                                <td>
+                                    <!-- Chamo a página do formulario e envio o Id do usuario que será alterado-->
+                                    <a href="cadUsuario.php?id=<?= $linha['id_usuario'] ?>" class="btn btn-warning">Editar</a>
+                                    <button class="btn btn-danger btn-excluir" data-table="usuarios" data-id="<?= $linha['id_usuario'] ?>">Excluir</button>
+                                </td>
+                            </tr>
+                        <?php
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </main>
 
     <script src="https://kit.fontawesome.com/74ecb76a40.js" crossorigin="anonymous"></script>
-    </body>
+</body>
 
 </html>

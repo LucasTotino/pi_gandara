@@ -17,11 +17,16 @@
   </header>
 
   <main class="container">
+    <div class="row p-3 justify-content-center d-flex align-items-center">
+    <a type="button" style="text-align: left;" class="col-1 btn btn-primary justify-content-center d-flex" href="/pi_gandara/financeiro/">Voltar</a>
+      <h1 style="text-align: center;" class="col-11 display-4">Contas a Pagar</h1>
+    </div>
+
     <section class="button-section">
       <div class="row justify-content-center">
         <div class="col-md-3">
-          <a href="#" class="btn btn-primary">
-            <span class="fa-solid fa-money-bill-transfer fa-4x" aria-hidden="true"></span>
+          <a href="#" class="btn btn-primary ">
+            <span class="fa-solid fa-money-bill-transfer fa-4x " aria-hidden="true"></span>
             <div class="card-body">
               <h3>Novo Pagamento</h3>
             </div>

@@ -31,7 +31,7 @@ if (isset($_POST['submit'])) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.css" crossorigin="anonymous">
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
 
-    <title>Pedido de Compra</title>
+    <title>Solicitação de Compra</title>
 </head>
 
 <body>
@@ -41,94 +41,82 @@ if (isset($_POST['submit'])) {
         ?>
     </header>
     <main>
-        <div class="container-1">
         <h1 style="text-align:center;">Pedido de Compra</h1>
-            <!-- Confirmação Email e Senha -->
-            
-                    
-                                               
 
-            <form action="/onstudies/usuarios/iu_usuario.php" method="POST"><!-- Inicio Formulário -->
-                <div class="form-group">
-                    <!-- Nome, CPF e Data Nascimento -->
-                    <div class="form-row justify-content-center mt-2">
-                        <div class="col-sm-6">
-                            <label for="nome">Nome/Razão Social</label>
-                            <input type="text" class="form-control" id="nome" name="nome">
-                        </div>
-                        <div class="col-sm-3">
-                            <label for="cpf">CPF/CNPJ</label>
-                            <input type="text" class="form-control" id="cpf" name="cpf" maxlength="14" onkeypress="mascara('###.###.###-##', this)">
-                        </div>
-                    </div>
+        <div class="container">
+            <div class="card card-cds">
+                <form action="/onstudies/usuarios/iu_usuario.php" method="POST"><!-- Inicio Formulário -->
+                    <div class="form-group">
 
-                    <!-- Celular e Email -->
-                    <div class="form-row justify-content-center mt-2">
-                        <div class="form-group col-sm-3">
-                            <label for="nivel_acesso" class="text-danger font-weight-bold">Tipo de Cliente:</label>
-                            <select class="form-control" id="nivel_acesso" name="nivel_acesso">
-                                <option value=""> -- ESCOLHA -- </option>
-                                <option <?= (isset($_GET['id']) && $user['nivel_acesso'] == 1) ? "selected" : null ?>
-                                    value="1">Pessoa Física</option>
-                                <option <?= (isset($_GET['id']) && $user['nivel_acesso'] == 0) ? "selected" : null ?>
-                                    value="0">Pessoa Jurídica</option>
-                            </select>
+                        <div class="form-row justify-content-center mt-3">
+                            <div class="col-sm-2">
+                                <label for="codigo">Codigo</label>
+                                <input type="text" class="form-control" id="codigo" name="codigo">
+                            </div>
+                            <div class="col-sm-2">
+                                <label for="fornecedor">Fornecedor</label>
+                                <input type="text" class="form-control" id="fornecedor" name="fornecedor">
+                            </div>
+                            <div class="col-sm-2">
+                            <label for="datapedido">Data do Pedido</label>
+                            <input type="date" class="form-control" id="datapedido" name="datapedido" maxlength="15" onkeypress="mascara('(##) #####-####', this)">
                         </div>
-                        <div class="col-sm-3">
-                            <label for="celular">Celular</label>
-                            <input type="celular" class="form-control" id="celular" name="celular" maxlength="15" onkeypress="mascara('(##) #####-####', this)">
+                            <div class="col-sm-2">
+                            <label for="valor">Valor</label>
+                            <input type="text" class="form-control" id="valor" name="valor">
                         </div>
-                        <div class="col-sm-4">
-                            <label for="email">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" autocomplete="on">
                         </div>
+                        
+
                     </div>
 
                     <!-- Endereço -->
                     <div class="row justify-content-center mt-2">
                         <div class="col-sm-2">
-                            <label for="cep">CEP</label>
-                            <input type="text" class="form-control" id="cep" name="cep" maxlength="9" onkeypress="mascara('#####-###', this)">
-                        </div>
-                        <div class="col-sm-5">
-                            <label for="logradouro">Logradouro</label>
-                            <input type="text" class="form-control" id="logradouro" name="logradouro">
+                            <label for="quantidade">Quantidade</label>
+                            <input type="number" class="form-control" id="quantidade" name="quantidade" maxlength="9" onkeypress="mascara('#####-###', this)">
                         </div>
                         <div class="col-sm-2">
-                            <label for="numLogradouro">Número</label>
-                            <input type="number" class="form-control" id="numLogradouro" name="numLogradouro">
+                            <label for="previsaocompra">Previsão de Compra</label>
+                            <input type="date" class="form-control" id="previsaocompra" name="previsaocompra" maxlength="15" onkeypress="mascara('(##) #####-####', this)">
+                        </div>
+                        <div class="col-sm-2">
+                            <label for="dataultima">Data Ultima Compra</label>
+                            <input type="date" class="form-control" id="dataultima" name="dataultima" autocomplete="on">
+                        </div>
+
+                        <div class="col-sm-2">
+                            <label for="historico">Histórico</label>
+                            <input type="text" class="form-control" id="historico" name="historico">
                         </div>
                     </div>
                     <div class="row justify-content-center mt-2">
                         <div class="col-sm-2">
-                            <label for="complemento">Complemento</label>
-                            <input type="text" class="form-control" id="complemento" name="complemento">
+                            <label for="quantidadebaixada">Quantidade Baixada</label>
+                            <input type="number" class="form-control" id="quantidadebaixada" name="quantidadebaixada" maxlength="9" onkeypress="mascara('#####-###', this)">
                         </div>
-                        <div class="col-sm-3">
-                            <label for="bairro">Bairro</label>
-                            <input type="text" class="form-control" id="bairro" name="bairro">
+                        <div class="col-sm-2">
+                            <label for="valorbaixado">Valor Baixado</label>
+                            <input type="number" class="form-control" id="valorbaixado" name="valorbaixado" maxlength="9" onkeypress="mascara('#####-###', this)">
                         </div>
-                        <div class="col-sm-4">
-                            <label for="cidade">Cidade</label>
-                            <input type="text" class="form-control" id="cidade" name="cidade">
+                        <div class="col-sm-2">
+                            <label for="saldoquantidade">Saldo Quantidade</label>
+                            <input type="number" class="form-control" id="saldoquantidade" name="saldoquantidade" maxlength="9" onkeypress="mascara('#####-###', this)">
                         </div>
-                        <div class="col-sm-1">
-                            <label for="estado">Estado</label>
-                            <div class="input-group">
-                                <select class="custom-select" id="estado" name="estado">
-                                    <option></option>
-                                </select>
-                            </div>
+
+                        <div class="col-sm-2">
+                            <label for="saldocomprado">Saldo Comprado</label>
+                            <input type="number" class="form-control" id="saldocomprado" name="saldocomprado">
                         </div>
                     </div>
 
                     <!-- Qualificação -->
                     <div class="form-row justify-content-center mt-2">
-                        
+
                     </div>
 
                     <!-- Botões -->
-                    <div class="form-row justify-content-center">
+                    <div class="form-row justify-content-center mb-4">
                         <div class="col-sm-3 mt-3">
                             <button type="submit" name="submit" class="btn btn-success">Cadastrar</button>
                         </div>
@@ -139,12 +127,13 @@ if (isset($_POST['submit'])) {
                             <a href="/pi_gandara/compras/index.php"><button type="button" class="btn btn-danger">Voltar</button></a>
                         </div>
                     </div>
-                </div>
+            </div>
             </form>
+        </div>
         </div>
     </main>
 
     <script src="https://kit.fontawesome.com/74ecb76a40.js" crossorigin="anonymous"></script>
-    </body>
+</body>
 
 </html>
