@@ -31,7 +31,8 @@
 
             <br>
             <div class="container">
-                <H2> Aqui ficará as medições que serão puxadas do banco, juntamente com a previsão da produção utilizando os parâmetros que possuímos </H2>
+                <h2>Últimas medições:</h2>
+                
             </div>
     </div>
     <script src="https://kit.fontawesome.com/74ecb76a40.js" crossorigin="anonymous"></script>
