@@ -24,7 +24,7 @@
                 <div class="col-8">
                     <h2>Medição da Produção</h2>
                 </div>
-                
+
             </div>
 
 
@@ -40,17 +40,17 @@
                         <input type="date" class="form-control" id="dataMedicao" name="dataMedicao">
                     </div>
 
-                
+
                 </div>
 
-                
+
 
                 <div class="form-row justify-content-center mt-2">
                     <div class="col-sm-4">
                         <label for="diametroMed">Diâmetro da Fruta (cm)</label>
-                        <input type="number" class="form-control" id="diametroMed" name="diametroMed" placeholder="4">
+                        <input type="number" class="form-control" id="diametroMed" name="diametroMed">
                     </div>
-                    
+
 
                     <div class="col-sm-4">
                         <label for="temPraga">Foi observado praga:</label>
@@ -72,7 +72,12 @@
 
 
                 </div>
-
+                <div class="form-row justify-content-center mt-2">
+                    <div class="col-6">
+                        <label for="comentario">Observação:</label>
+                        <input type="text" class="form-control" id="comentario" name="comentario">
+                    </div>
+                </div>
 
             </div>
 
