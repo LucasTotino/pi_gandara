@@ -43,12 +43,6 @@ $stmt->execute();
 //Pega o resultado e adiciona em uma variavel
 $dados = $stmt->get_result();
 
-/* Caso use o SQL Eficiente: 
-Liga os resultados a variáveis para serem utilizadas no HTML
-    
-    Colocar na mesma ordem do Script SQL
-    $stmt->bind_param($id_usuario, $nome, $email, $cpf, $celular, $nivel_acesso);
-*/
 $nivel = array(
     'Pessoa Juridica', // Posição 0
     'Pessoa Fisica' //Posição 1
@@ -232,7 +226,6 @@ $corNivel = array(
                         // Aqui adicionamos o laço de repetição
                         // Que irá exibir uma linha da tabela para cada registro no bd
 
-                        // Adiciona cada registro na variavel linha como um Arrey.
                         while ($linha = $dados->fetch_assoc()) {
                         ?>
                             <tr>
