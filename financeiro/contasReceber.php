@@ -10,6 +10,8 @@
   <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
   <link rel="stylesheet" href="/pi_gandara/css/style.css">
   <title>Razão Geral</title>
+  
+
 </head>
 
 <body>  <!-- VERIFICAR FOTO  DO LIVRO  FINANCEIRO DO GANDARA -->
@@ -21,20 +23,38 @@
 
     <div class="container">
 
-        <div class="row p-5 justify-content-center d-flex align-items-center">
-
-                <a href="../index.php" class="btn" style="width: 16rem;">
-                  <div class="col-3 p-5 m-1 d-flex">
-                    <div>
-                      <span class="fa-solid fa-money-bill-transfer fa-4x" aria-hidden="true"></span>
-                      <div class="card-body d-flex">
-                        <h3><nobr>Contas a</nobr> Receber</h3>
-                      </div>
-                    </div>
-                  </div>
-                </a>
-                
-        </div> <!--Fim da row -->
+    <div class="container">
+        <h1>Contas a Receber</h1>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Número da Conta</th>
+                    <th>Data de Vencimento</th>
+                    <th>Valor</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody id="tabela-contas">
+                <!-- Aqui serão exibidas as contas a receber -->
+            </tbody>
+        </table>
+        <form id="form-conta">
+            <div class="form-group">
+                <label for="numero-conta">Número da Conta</label>
+                <input type="text" class="form-control" id="numero-conta" required>
+            </div>
+            <div class="form-group">
+                <label for="data-vencimento">Data de Vencimento</label>
+                <input type="date" class="form-control" id="data-vencimento" required>
+            </div>
+            <div class="form-group">
+                <label for="valor">Valor</label>
+                <input type="number" class="form-control" id="valor" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Adicionar Conta</button>
+        </form>
+        <button class="btn btn-secondary" id="gerar-relatorio">Gerar Relatório</button>
+    </div>
 
     </div>
   
