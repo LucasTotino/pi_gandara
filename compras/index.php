@@ -78,23 +78,11 @@
           </div>
         </a>
 
-        
+
 
       </div> <!--Fim da row -->
 
-      <div class="row p-5 justify-content-center d-flex align-items-center">
-
-        <a href="cadNatFinanceira.php" class="btn">
-          <div class="col-2 p-2 m-1">
-            <div style="width: 11rem;">
-              <span class="fa fa-solid fa-dollar-sign fa-5x" aria-hidden="true"></span>
-              <div class="card-body">
-                <h3>Cadastro de Natureza Financeira</h3>
-              </div>
-            </div>
-          </div>
-        </a>
-
+      <div class="row p-3 justify-content-center d-flex align-items-center">
         <a href="pedidoCompra.php" class="btn">
           <div class="col-2 p-2 m-1">
             <div style="width: 10rem;">
@@ -117,12 +105,34 @@
           </div>
         </a>
 
+        <a href="cadNatFinanceira.php" class="btn">
+          <div class="col-2 p-2 m-1">
+            <div style="width: 10rem;">
+              <span class="fa fa-solid fa-dollar-sign fa-5x" aria-hidden="true"></span>
+              <div class="card-body">
+                <h3>Cadastro de Natureza Financeira</h3>
+              </div>
+            </div>
+          </div>
+        </a>
+
         <a href="cotacao.php" class="btn">
           <div class="col-2 p-2 m-1">
             <div style="width: 10rem;">
               <span class="fa-regular fa-clipboard fa-5x" aria-hidden="true"></span>
               <div class="card-body">
                 <h3>Cotação</h3>
+              </div>
+            </div>
+          </div>
+        </a>
+
+        <a href="notaFiscalEn.php" class="btn">
+          <div class="col-2 p-2 m-1">
+            <div style="width: 10rem;">
+              <span class="fa fa-solid fa-receipt fa-5x" aria-hidden="true"></span>
+              <div class="card-body">
+                <h3>Nota Fiscal Entrada</h3>
               </div>
             </div>
           </div>
