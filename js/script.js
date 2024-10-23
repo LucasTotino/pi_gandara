@@ -10,7 +10,30 @@ loginBtn.addEventListener('click', () => {
     container.classList.remove("active");
 });
 
-function abreMenu() {
-    const element = document.getElementById("mySidenav");
-    element.classList.toggle("pinned");
-};
+// Função para buscar e preencher a descrição do produto
+function carregarDescricao(produtoId) {
+    if (produtoId) {
+        fetch('../compras/utils/descricao.php?id=' + produtoId)
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('descricao').value = data;
+            })
+            .catch(error => console.error('Erro:', error));
+    } else {
+        document.getElementById('descricao').value = '';
+    }
+}
+
+function carregaProduto(solCompraId) {
+    if (solCompraId) {
+        fetch('../compras/utils/produto.php?id=' + solCompraId)
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('observacao').value = data;
+            })
+            .catch(error => console.error('Erro:', error));
+    } else {
+        document.getElementById('observacao').value = '';
+    }
+}
+
