@@ -18,7 +18,7 @@
 
 <body>
   <div class="container">
-    <h4>Adicionar os números para que esteja dentro do conforme e analisar junto às medições já realizadas: 
+    <h4>Adicionar os números para que esteja dentro do conforme e analisar junto às medições já realizadas:
       Comparativo do já medido com a expectativa de produção
     </h4>
   </div>
@@ -81,7 +81,18 @@
 
 
       </div>
-
+      <!-- Botões -->
+      <div class="form-row justify-content-center">
+        <div class="col-sm-3 mt-3">
+          <button type="submit" name="submit" class="btn btn-success">Cadastrar</button>
+        </div>
+        <div class="col-sm-3 mt-3">
+          <button type="reset" class="btn btn-warning">Cancelar</button>
+        </div>
+        <div class="col-sm-3 mt-3">
+          <a href="/pi_gandara/compras/index.php"><button type="button" class="btn btn-danger">Voltar</button></a>
+        </div>
+      </div>
     </form>
 
   </div>

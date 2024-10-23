@@ -24,7 +24,7 @@
                 <div class="col-8">
                     <h2>Agendamento de um novo Plantio</h2>
                 </div>
-                
+
             </div>
 
 
@@ -53,7 +53,7 @@
                         <label for="espacoMuda">Espaçamento entre Mudas (m)</label>
                         <input type="number" class="form-control" id="espacoMuda" name="espacoMuda">
                     </div>
-                    
+
 
                     <div class="col-sm-4">
                         <label for="fruto">Fruto:</label>
@@ -73,6 +73,21 @@
 
 
             </div>
+
+
+            <!-- Botões -->
+            <div class="form-row justify-content-center">
+                <div class="col-sm-3 mt-3">
+                    <button type="submit" name="submit" class="btn btn-success">Cadastrar</button>
+                </div>
+                <div class="col-sm-3 mt-3">
+                    <button type="reset" class="btn btn-warning">Cancelar</button>
+                </div>
+                <div class="col-sm-3 mt-3">
+                    <a href="/pi_gandara/compras/index.php"><button type="button" class="btn btn-danger">Voltar</button></a>
+                </div>
+            </div>
+
 
         </form>
 
