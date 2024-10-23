@@ -4,28 +4,24 @@ require "../../utils/conexao.php";
 // Ex: colocar o valor do POST se ele existir, se não deixar em branco.
 
 // variavel = condição ? se VERDADEIRO : se FALSE;
-$nome = isset($_POST['nome']) && !empty($_POST['nome']) ? $_POST['nome'] : null;
-$email = isset($_POST['email']) && !empty($_POST['email']) ? $_POST['email'] : null;
-$celular = isset($_POST['celular']) && !empty($_POST['celular']) ? $_POST['celular'] : null;
-$cpf_cnpj = isset($_POST['cpf_cnpj']) && !empty($_POST['cpf_cnpj']) ? $_POST['cpf_cnpj'] : null;
-$tipoCliente = isset($_POST['tipo_cliente']) ? $_POST['tipo_cliente'] : null;
-$cep = isset($_POST['cep']) && !empty($_POST['cep']) ? $_POST['cep'] : null;
-$logradouro = isset($_POST['logradouro']) && !empty($_POST['logradouro']) ? $_POST['logradouro'] : null;
-$numero = isset($_POST['numero']) && !empty($_POST['numero']) ? $_POST['numero'] : null;
-$complemento = isset($_POST['complemento']) && !empty($_POST['complemento']) ? $_POST['complemento'] : null;
-$cidade = isset($_POST['cidade']) && !empty($_POST['cidade']) ? $_POST['cidade'] : null;
-$estado = isset($_POST['estado']) && !empty($_POST['estado']) ? $_POST['estado'] : null;
-$bairro = isset($_POST['bairro']) && !empty($_POST['bairro']) ? $_POST['bairro'] : null;
-$idCliente = isset($_POST['id']) && !empty($_POST['id']) ? $_POST['id'] : null;
+$idProduto = isset($_POST['id_produto']) && !empty($_POST['id_produto']) ? $_POST['id_produto'] : null;
+$idCriador = isset($_POST['id_usuario']) && !empty($_POST['id_usuario']) ? $_POST['id_usuario'] : null;
+$observacao = isset($_POST['observacao']) && !empty($_POST['observacao']) ? $_POST['observacao'] : null;
+$qtd = isset($_POST['qtd']) && !empty($_POST['qtd']) ? $_POST['qtd'] : null;
+$dataEntrega = isset($_POST['dataentrega']) && !empty($_POST['dataentrega']) ? $_POST['dataentrega'] : null;
+$dataCriacao = isset($_POST['datacriacao']) && !empty($_POST['datacriacao']) ? $_POST['datacriacao'] : null;
+$finalidade = isset($_POST['finalidade']) && !empty($_POST['finalidade']) ? $_POST['finalidade'] : null;
+$origem = isset($_POST['origem']) && !empty($_POST['origem']) ? $_POST['origem'] : null;
+$idSolCompra = isset($_POST['id']) && !empty($_POST['id']) ? $_POST['id'] : null;
 $acao = isset($_POST['acao']) && !empty($_POST['acao']) ? $_POST['acao'] : null;
 
 // Verificamos qual operaçaõ está sendo feita .
 
 if ($acao == "INCLUIR") {
 
-    $sql = "INSERT INTO cad_cliente (nome, email, celular, cpf_cnpj, tipo_cliente, 
-    cep, logradouro, numero, complemento, cidade, estado, bairro) 
-    VALUE (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+    $sql = "INSERT INTO sol_compra (id_produto, id_usuario, observacao, qtd, data_entrega, data_criacao,
+    finalidade, origem) 
+    VALUE (?, ?, ?, ?, ?, ?, ?, ?);";
 
     // Utilizaremos o Prepare Statement para manipular os dados no BD 
     // Esse recurso já possui proteção contra alguns ataques, como SQL INJECTION 
@@ -37,31 +33,27 @@ if ($acao == "INCLUIR") {
     // O primeiro parametro é o tipo do dado, os demais são apenas as variaveis com os dados.
     // i = inteiro, d = flutuante (casas decaimais), s = texto(com tudo que não é numero)
     $stmt->bind_param(
-        "ssssisssssss",
-        $nome,
-        $email,
-        $celular,
-        $cpf_cnpj,
-        $tipoCliente, 
-        $cep,
-        $logradouro,
-        $numero,
-        $complemento,
-        $cidade,
-        $estado,
-        $bairro
+        "iisdssss",
+        $idProduto,
+        $idCriador,
+        $observacao,
+        $qtd,
+        $dataEntrega,
+        $dataCriacao,
+        $finalidade,
+        $origem
     );
 
     // A função execute envia o script SQL todo arrumado para o BD, com as variaveis 
     // nos lugares das ?.
 
     try {
-        if ($stmt->execute()) { 
+        if ($stmt->execute()) {
             // Pega o numero do ID que foi inserido no BD
-            $idCadCliente = $conn->insert_id;
-            echo $idCadCliente;
+            $idCadSolCompra = $conn->insert_id;
+            echo $idCadSolCompra;
 
-            header('Location: /pi_gandara/compras/cadCliente.php');
+            header('Location: /pi_gandara/compras/solicitacaoCompra.php');
         } else {
             echo $stmt->error;
         }
@@ -69,10 +61,10 @@ if ($acao == "INCLUIR") {
         echo "Erro ao cadastrar!";
         // Vamos utilizar JS para poder recuperar os dados digitados 
 ?>
-    <script>
-      history.back();
-    </script>
-<?php
+        <script>
+            history.back();
+        </script>
+    <?php
     }
     //Fecha o Prepared Statement
     $stmt->close();
@@ -84,40 +76,32 @@ if ($acao == "INCLUIR") {
     print_r($_POST);
     echo "</pre>";
 } else if ($acao == "ALTERAR") {
-        $sql = "UPDATE cad_cliente SET
-        nome = ?,
-        email = ?,
-        celular = ?,
-        cpf_cnpj = ?,
-        tipo_cliente = ?,
-        cep = ?,
-        logradouro = ?,
-        numero = ?,
-        complemento = ?,
-        cidade = ?,
-        estado = ?,
-        bairro = ?
+    $sql = "UPDATE sol_compra SET
+        id_produto = ?,
+        id_usuario = ?,
+        observacao = ?,
+        qtd = ?,
+        data_entrega = ?,
+        data_criacao = ?,
+        finalidade = ?,
+        origem = ?
         WHERE id = ?;";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param(
-            "ssssisssssssi",
-            $nome,
-            $email,
-            $celular,
-            $cpf_cnpj,
-            $tipoCliente,
-            $cep,
-            $logradouro,
-            $numero,
-            $complemento,
-            $cidade,
-            $estado,
-            $bairro,
-            $idCliente
-        );
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param(
+        "iisdssssi",
+        $idProduto,
+        $idCriador,
+        $observacao,
+        $qtd,
+        $dataEntrega,
+        $dataCriacao,
+        $finalidade,
+        $origem,
+        $idSolCompra
+    );
     try {
         if ($stmt->execute()) {
-            header('Location: /pi_gandara/compras/cadCliente.php');
+            header('Location: /pi_gandara/compras/solicitacaoCompra.php');
         } else {
             echo $stmt->error;
         }
@@ -134,15 +118,12 @@ if ($acao == "INCLUIR") {
     $stmt->close();
     //Fecha a conexão 
     $conn->close();
-
-
-
 } else if ($acao == "DELETAR") {
     // Neste bloco será excluido um registro que já existe no BD.
-    
-    $sql = "DELETE FROM cad_cliente WHERE id = ?";
+
+    $sql = "DELETE FROM sol_compra WHERE id = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $idCliente);
+    $stmt->bind_param("i", $idSolCompra);
     if ($stmt->execute()) {
         echo json_encode(array(
             "status" => "sucesso",

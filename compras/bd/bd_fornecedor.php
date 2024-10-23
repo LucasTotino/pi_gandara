@@ -8,7 +8,7 @@ $nome = isset($_POST['nome']) && !empty($_POST['nome']) ? $_POST['nome'] : null;
 $email = isset($_POST['email']) && !empty($_POST['email']) ? $_POST['email'] : null;
 $celular = isset($_POST['celular']) && !empty($_POST['celular']) ? $_POST['celular'] : null;
 $cpf_cnpj = isset($_POST['cpf_cnpj']) && !empty($_POST['cpf_cnpj']) ? $_POST['cpf_cnpj'] : null;
-$tipoCliente = isset($_POST['tipo_cliente']) ? $_POST['tipo_cliente'] : null;
+$tipoFornecedor = isset($_POST['tipo_fornecedor']) ? $_POST['tipo_fornecedor'] : null;
 $cep = isset($_POST['cep']) && !empty($_POST['cep']) ? $_POST['cep'] : null;
 $logradouro = isset($_POST['logradouro']) && !empty($_POST['logradouro']) ? $_POST['logradouro'] : null;
 $numero = isset($_POST['numero']) && !empty($_POST['numero']) ? $_POST['numero'] : null;
@@ -16,14 +16,14 @@ $complemento = isset($_POST['complemento']) && !empty($_POST['complemento']) ? $
 $cidade = isset($_POST['cidade']) && !empty($_POST['cidade']) ? $_POST['cidade'] : null;
 $estado = isset($_POST['estado']) && !empty($_POST['estado']) ? $_POST['estado'] : null;
 $bairro = isset($_POST['bairro']) && !empty($_POST['bairro']) ? $_POST['bairro'] : null;
-$idCliente = isset($_POST['id']) && !empty($_POST['id']) ? $_POST['id'] : null;
+$idFornecedor = isset($_POST['id']) && !empty($_POST['id']) ? $_POST['id'] : null;
 $acao = isset($_POST['acao']) && !empty($_POST['acao']) ? $_POST['acao'] : null;
 
 // Verificamos qual operaçaõ está sendo feita .
 
 if ($acao == "INCLUIR") {
 
-    $sql = "INSERT INTO cad_cliente (nome, email, celular, cpf_cnpj, tipo_cliente, 
+    $sql = "INSERT INTO cad_fornecedor (nome, email, celular, cpf_cnpj, tipo_fornecedor, 
     cep, logradouro, numero, complemento, cidade, estado, bairro) 
     VALUE (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
@@ -42,7 +42,7 @@ if ($acao == "INCLUIR") {
         $email,
         $celular,
         $cpf_cnpj,
-        $tipoCliente, 
+        $tipoFornecedor, 
         $cep,
         $logradouro,
         $numero,
@@ -58,10 +58,10 @@ if ($acao == "INCLUIR") {
     try {
         if ($stmt->execute()) { 
             // Pega o numero do ID que foi inserido no BD
-            $idCadCliente = $conn->insert_id;
-            echo $idCadCliente;
+            $idCadFornecedor = $conn->insert_id;
+            echo $idCadFornecedor;
 
-            header('Location: /pi_gandara/compras/cadCliente.php');
+            header('Location: /pi_gandara/compras/cadFornecedor.php');
         } else {
             echo $stmt->error;
         }
@@ -84,12 +84,12 @@ if ($acao == "INCLUIR") {
     print_r($_POST);
     echo "</pre>";
 } else if ($acao == "ALTERAR") {
-        $sql = "UPDATE cad_cliente SET
+        $sql = "UPDATE cad_fornecedor SET
         nome = ?,
         email = ?,
         celular = ?,
         cpf_cnpj = ?,
-        tipo_cliente = ?,
+        tipo_fornecedor = ?,
         cep = ?,
         logradouro = ?,
         numero = ?,
@@ -105,7 +105,7 @@ if ($acao == "INCLUIR") {
             $email,
             $celular,
             $cpf_cnpj,
-            $tipoCliente,
+            $tipoFornecedor,
             $cep,
             $logradouro,
             $numero,
@@ -113,11 +113,11 @@ if ($acao == "INCLUIR") {
             $cidade,
             $estado,
             $bairro,
-            $idCliente
+            $idFornecedor
         );
     try {
         if ($stmt->execute()) {
-            header('Location: /pi_gandara/compras/cadCliente.php');
+            header('Location: /pi_gandara/compras/cadFornecedor.php');
         } else {
             echo $stmt->error;
         }
@@ -140,9 +140,9 @@ if ($acao == "INCLUIR") {
 } else if ($acao == "DELETAR") {
     // Neste bloco será excluido um registro que já existe no BD.
     
-    $sql = "DELETE FROM cad_cliente WHERE id = ?";
+    $sql = "DELETE FROM cad_fornecedor WHERE id = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $idCliente);
+    $stmt->bind_param("i", $idFornecedor);
     if ($stmt->execute()) {
         echo json_encode(array(
             "status" => "sucesso",
