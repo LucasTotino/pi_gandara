@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="/pi_gandara/css/styleFinanceiro.css">
     <link rel="stylesheet" href="/pi_gandara/css/style.css">
-    <title>Contas a Pagar</title>
+    <title>Contas a Receber</title>
 </head>
 
 <body>
@@ -20,11 +20,10 @@
     <main class="container">
         <div class="row p-3 justify-content-center d-flex align-items-center">
             <a type="button" style="text-align: left;" class="col-1 btn btn-primary justify-content-center d-flex" href="/pi_gandara/financeiro/">Voltar</a>
-            <h1 style="text-align: center;" class="col-11 display-4">Contas a Pagar</h1>
+            <h1 style="text-align: center;" class="col-11 display-4">Contas a Receber</h1>
         </div>
 
         <div class="container mt-5">
-            <h1 class="text-center">Contas a Receber</h1>
 
             <div class="mb-4">
                 <button class="btn btn-primary" data-toggle="modal" data-target="#addAccountModal">Adicionar Conta</button>
