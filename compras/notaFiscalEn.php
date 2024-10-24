@@ -41,7 +41,7 @@ if (isset($_POST['submit'])) {
         ?>
     </header>
     <main>
-        <h1 style="text-align:center;">Cotação</h1>
+        <h1 style="text-align:center;">Nota Fiscal De Entrada</h1>
 
         <div class="container">
             <div class="card card-cds">

@@ -2,7 +2,7 @@
 <nav class="nav-pills nav-sidebar" id="mySidenav" onclick="abreMenu()">
 
   <a href="/pi_gandara/dashboard.php" title="Home">
-  <span class="fa fa-solid fa-box"></span>
+  <span class="fa fa-solid fa-bars"></span>
     <span class="label">Menu</span>
   </a>
   <a href="/pi_gandara/estoque/index.php" title="Estoque">
