@@ -1,25 +1,48 @@
 <?php
-if (isset($_POST['submit'])) {
+require '../utils/conexao.php';
+// Verifica se veio um id na URL
+$id = isset($_GET['id']) ? $_GET['id'] : false;
+$cor = ($id) ? "btn-warning" : "btn-success";
+// Caso tenha um ID faz A busca do Produto no BD
+if ($id) {
+    $sql = "SELECT * FROM cad_produtos WHERE id=?;";
+    $stmt = $conn->prepare($sql);
+    // Troca o ? pelo ID que veio na URL
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
 
-    // Iniciando conexao
-    include_once('../funcoes/conexao.php');
+    $dados = $stmt->get_result();
 
-    // Variaveis principais
-    $nome = $_POST['nome'];
-    $cpf = $_POST['cpf'];
-    $nascimento = $_POST['nascimento'];
-    $celular = $_POST['celular'];
-    $email = $_POST['email'];
-    $cep = $_POST['cep'];
-    $logradouro = $_POST['logradouro'];
-    $numLogradouro = $_POST['numLogradouro'];
-    $complemento = $_POST['complemento'];
-    $bairro = $_POST['bairro'];
-    $cidade = $_POST['cidade'];
-    $estado = $_POST['estado'];
-    $senha = $_POST['senha'];
-    $qualificacao = $_POST['qualificacao'];
+    // Verifica se encontrou o Produto ou se ele existe no BD
+    if ($dados->num_rows > 0) {
+        // Coloca os dados do usuário em uma variavel como array
+        $produto = $dados->fetch_assoc();
+    } else {
+        // Se não encontrou um Produto retorna para a página anterior.
+?>
+
+        <script>
+            history.back();
+        </script>
+<?php
+    }
 }
+
+// Prepara a consulta SQL
+$sql = "SELECT * FROM cad_produtos;";
+
+// Seleciona apenas os campos que serão usados
+$sql_eficiente = " SELECT id, produto, descricao, cod_produto, unidade FROM cad_produtos;";
+
+// Envia o SQL para o Prepare Statement:
+$stmt = $conn->prepare($sql);
+
+//Executa a consulta SQL
+$stmt->execute();
+
+//Pega o resultado e adiciona em uma variavel
+$dados = $stmt->get_result();
+
 ?>
 <!doctype html>
 <html lang="pt-br">
@@ -46,29 +69,35 @@ if (isset($_POST['submit'])) {
 
         <div class="container">
             <div class="card card-cds">
-                <form action="/onstudies/usuarios/iu_usuario.php" method="POST"><!-- Inicio Formulário -->
+                <form class="mt-3 mb-3 ml-3 mr-3" action="/pi_gandara/compras/bd/bd_produto.php" method="POST">
+                    <input type="hidden" id="id" name="id" value="<?= isset($_GET['id']) ? $_GET['id'] : null ?>">
+                    <input type="hidden" name="acao" id="acao" value="<?= isset($_GET['id']) ? "ALTERAR" : "INCLUIR" ?>">
                     <div class="form-group">
                         <!-- Nome, CPF e Data Nascimento -->
                         <div class="form-row justify-content-center mt-2">
                             <div class="col-sm-6">
-                                <label for="nome">Produto</label>
-                                <input type="text" class="form-control" id="nome" name="nome">
+                                <label for="produto">Produto</label>
+                                <input type="text" class="form-control" id="produto" name="produto"
+                                    value="<?= ($id) ? $produto['produto'] : null ?>">
                             </div>
                             <div class="col-sm-3">
-                                <label for="cpf">Descrição</label>
-                                <input type="text" class="form-control" id="cpf" name="cpf" maxlength="14" onkeypress="mascara('###.###.###-##', this)">
+                                <label for="descricao">Descrição</label>
+                                <input type="text" class="form-control" id="descricao" name="descricao"
+                                    value="<?= ($id) ? $produto['descricao'] : null ?>">
                             </div>
                         </div>
 
                         <!-- Celular e Email -->
                         <div class="form-row justify-content-center mt-2">
                             <div class="col-sm-3">
-                                <label for="celular">Código do Produto</label>
-                                <input type="celular" class="form-control" id="celular" name="celular" maxlength="15" onkeypress="mascara('(##) #####-####', this)">
+                                <label for="cod_produto">Código do Produto</label>
+                                <input type="cod_produto" class="form-control" id="cod_produto" name="cod_produto"
+                                    value="<?= ($id) ? $produto['cod_produto'] : null ?>">
                             </div>
                             <div class="col-sm-4">
-                                <label for="email">Unidade</label>
-                                <input type="email" class="form-control" id="email" name="email" autocomplete="on">
+                                <label for="unidade">Unidade</label>
+                                <input type="unidade" class="form-control" id="unidade" name="unidade"
+                                    value="<?= ($id) ? $produto['unidade'] : null ?>">
                             </div>
                         </div>
 
@@ -86,6 +115,41 @@ if (isset($_POST['submit'])) {
                         </div>
                     </div>
                 </form>
+            </div>
+        </div>
+        <div class="container">
+            <div class="card">
+                <table class="table table-hover table-striped">
+                    <thead>
+                        <th>Código</th>
+                        <th>Produto</th>
+                        <th>Descrição</th>
+                        <th>Unidade</th>
+                        <th>AÇÕES</th>
+                    </thead>
+                    <tbody>
+                        <?php
+                        // Laço de repetição
+                        // Que irá exibir uma linha da tabela para cada registro no bd
+                        // Adiciona cada registro na variavel linha como um Arrey.
+                        while ($linha = $dados->fetch_assoc()) {
+                        ?>
+                            <tr>
+                                <td><?= $linha['cod_produto'] ?></td>
+                                <td><?= $linha['produto'] ?></td>
+                                <td><?= $linha['descricao'] ?></td>
+                                <td><?= $linha['unidade'] ?></td>
+                                <td>
+                                    <!-- Chamo a página do formulario e envio o Id do Produto que será alterado-->
+                                    <a href="cadProduto.php?id=<?= $linha['id'] ?>" class="btn btn-warning">Editar</a>
+                                    <button class="btn btn-danger btn-excluir" data-table="cad_produtos" data-id="<?= $linha['id'] ?>">Excluir</button>
+                                </td>
+                            </tr>
+                        <?php
+                        }
+                        ?>
+                    </tbody>
+                </table>
             </div>
         </div>
     </main>

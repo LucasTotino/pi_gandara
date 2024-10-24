@@ -18,52 +18,86 @@
 
 <body>
   <div class="container">
-    <h4>Adicionar métodos para identificar os padrões de qualidade e benficiamento</h4>
+    <h4>Adicionar os números para que esteja dentro do conforme e analisar junto às medições já realizadas:
+      Comparativo do já medido com a expectativa de produção
+    </h4>
+  </div>
 
-    <h2>Registrar Não Conformidade</h2>
 
-    <form action="registrar_nao_conformidade.php" method="POST">
-      <label for="produto_id">ID do Produto:</label><br>
-      <input type="number" id="produto_id" name="produto_id" required><br><br>
+  <div class="container mt-5">
+    <form action="" method="POST"><!-- Inicio Formulário -->
+      <div class="row">
+        <div class="col-8">
+          <h2>Registro de conformidade:</h2>
+        </div>
 
-      <label for="descricao">Descrição da Não Conformidade:</label><br>
-      <textarea id="descricao" name="descricao" rows="4" cols="50" required></textarea><br><br>
+      </div>
 
-      <label for="responsavel">Responsável:</label><br>
-      <input type="text" id="responsavel" name="responsavel" required><br><br>
 
-      <label for="data">Data:</label><br>
-      <input type="datetime-local" id="data" name="data" required><br><br>
+      <div class="form-group">
+        <!-- Nome, CPF e Data Nascimento -->
+        <div class="form-row justify-content-center mt-2">
+          <div class="col-sm-6">
+            <label for="areaRef">Área de Referência</label>
+            <input type="number" class="form-control" id="areaRef" name="areaRef">
+          </div>
+          <div class="col-sm-6">
+            <label for="dataMedicao">Data da medição</label>
+            <input type="date" class="form-control" id="dataMedicao" name="dataMedicao">
+          </div>
 
-      <input type="submit" value="Registrar">
+
+        </div>
+
+
+
+        <div class="form-row justify-content-center mt-2">
+          <div class="col-sm-4">
+            <label for="diametroMed">Diâmetro da Fruta (cm)</label>
+            <input type="number" class="form-control" id="diametroMed" name="diametroMed">
+          </div>
+
+
+          <div class="col-sm-4">
+            <label for="temPraga">Foi observado praga:</label>
+            <div class="input-group">
+              <select class="custom-select" id="temPraga" name="temPraga">
+                <option>Selecione</option>
+                <option>Sim</option>
+                <option>Não</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="col-sm-4">
+            <label for="qualPraga">Se sim, qual foi observada?</label>
+            <input type="text" class="form-control" id="qualPraga" name="qualPraga">
+          </div>
+
+
+
+
+        </div>
+
+
+      </div>
+      <!-- Botões -->
+      <div class="form-row justify-content-center">
+        <div class="col-sm-3 mt-3">
+          <button type="submit" name="submit" class="btn btn-success">Cadastrar</button>
+        </div>
+        <div class="col-sm-3 mt-3">
+          <button type="reset" class="btn btn-warning">Cancelar</button>
+        </div>
+        <div class="col-sm-3 mt-3">
+          <a href="/pi_gandara/compras/index.php"><button type="button" class="btn btn-danger">Voltar</button></a>
+        </div>
+      </div>
     </form>
-
-    <h2>Registrar Inspeção de Qualidade</h2>
-
-    <form action="registrar_inspecao.php" method="POST">
-      <label for="lote_id">ID do Lote:</label><br>
-      <input type="number" id="lote_id" name="lote_id" required><br><br>
-
-      <label for="criterios">Critérios de Inspeção:</label><br>
-      <textarea id="criterios" name="criterios" rows="3" cols="50" required></textarea><br><br>
-
-      <label for="resultado">Resultado:</label><br>
-      <select id="resultado" name="resultado" required>
-        <option value="Aprovado">Aprovado</option>
-        <option value="Reprovado">Reprovado</option>
-      </select><br><br>
-
-      <label for="responsavel">Responsável:</label><br>
-      <input type="text" id="responsavel" name="responsavel" required><br><br>
-
-      <label for="data">Data:</label><br>
-      <input type="datetime-local" id="data" name="data" required><br><br>
-
-      <input type="submit" value="Registrar">
-    </form>
-
 
   </div>
+
+
 
 
 

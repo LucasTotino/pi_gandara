@@ -284,6 +284,41 @@ $corNivel = array(
     </main>
 
     <script src="https://kit.fontawesome.com/74ecb76a40.js" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function() {
+            $('.btn-excluir').click(function() {
+                var agenteId = $(this).data('id');
+                var tabela = $(this).data('table');
+                
+                var confirma = confirm(`Você tem certeza que 
+                deseja excluir o Agente [ ${agenteId} ] ?`);
+
+                if (confirma) {
+                    $.ajax({
+                        url: `../bd/bd-${tabela}.php`,
+                        type: 'POST',
+                        data: {
+                            acao: "DELETAR",
+                            id_agente: agenteId
+                        },
+                        success: function(response) {
+                            var result = JSON.parse(response);
+                            if (result.status === "sucesso") {
+                                alert(result.message);
+                                location.reload();
+                            } else {
+                                alert(result.message);
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            console.error(xhr);
+                            alert("Ocorreu um erro: " + error);
+                        }
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
