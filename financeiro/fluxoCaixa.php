@@ -19,25 +19,27 @@
   </header>
 
   <main class="container">
+    <div class="row p-3 justify-content-center d-flex align-items-center">
+      <a type="button" style="text-align: left;" class="col-1 btn btn-primary justify-content-center d-flex" href="/pi_gandara/financeiro/">Voltar</a>
+      <h1 style="text-align: center;" class="col-11 display-4">Fluxo de Caixa</h1>
+    </div>
     <div class="container-fluid p-4">
 
-      <!-- Cabeçalho -->
-      <h1 class="h3">Fluxo de Caixa</h1>
       <!-- Período -->
 
       <div class="d-flex justify-content-center">
-          <div class="col-md-3">
-            <div class="input-group">
-              <span class="input-group-text">Data Inicial:</span>
-              <input type="date" class="form-control" value="2024-09-25">
-            </div>
+        <div class="col-md-3">
+          <div class="input-group">
+            <span class="input-group-text">Data Inicial:</span>
+            <input type="date" class="form-control" value="2024-09-25">
           </div>
-          <div class="col-md-3">
-            <div class="input-group">
-              <span class="input-group-text">Data Final:</span>
-              <input type="date" class="form-control" value="2024-10-01">
-            </div>
+        </div>
+        <div class="col-md-3">
+          <div class="input-group">
+            <span class="input-group-text">Data Final:</span>
+            <input type="date" class="form-control" value="2024-10-01">
           </div>
+        </div>
       </div>
 
       <br>
