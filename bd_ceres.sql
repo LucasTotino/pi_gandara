@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Tempo de geração: 23/10/2024 às 02:23
+-- Tempo de geração: 25/10/2024 às 12:34
 -- Versão do servidor: 10.4.28-MariaDB
 -- Versão do PHP: 8.2.4
 
@@ -20,6 +20,150 @@ SET time_zone = "+00:00";
 --
 -- Banco de dados: `bd_ceres`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `cadastro_descontos`
+--
+
+CREATE TABLE `cadastro_descontos` (
+  `id_cad_desconto` int(11) NOT NULL,
+  `nome_promo` varchar(254) NOT NULL,
+  `inicio_promo` date NOT NULL,
+  `termino_promo` date NOT NULL,
+  `codigo_promo` float NOT NULL,
+  `produto_promo` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `cadastro_funcionarios`
+--
+
+CREATE TABLE `cadastro_funcionarios` (
+  `id_cad_funcionario` int(11) NOT NULL,
+  `fpNome` varchar(255) NOT NULL,
+  `fpRg` varchar(20) NOT NULL,
+  `fpCpf` varchar(14) NOT NULL,
+  `fpEndereco` varchar(255) NOT NULL,
+  `fpNumeroCasa` varchar(10) NOT NULL,
+  `fpEstado` varchar(2) NOT NULL,
+  `fpCidade` varchar(100) NOT NULL,
+  `fpCep` varchar(10) NOT NULL,
+  `fpEtnia` varchar(50) NOT NULL,
+  `fpGenero` varchar(10) NOT NULL,
+  `fpDataNascimento` date NOT NULL,
+  `fpEmail` varchar(255) NOT NULL,
+  `fpTelefone` varchar(15) DEFAULT NULL,
+  `fpCelular` varchar(15) NOT NULL,
+  `fpDependentes` int(11) NOT NULL,
+  `fpIdadeDependentes` varchar(50) NOT NULL,
+  `fpEstadoCivil` varchar(20) NOT NULL,
+  `fpCargo` varchar(100) NOT NULL,
+  `fpSetor` varchar(100) NOT NULL,
+  `fpDataAdimissao` date NOT NULL,
+  `fpDataDemissao` date DEFAULT NULL,
+  `fpSalarioBruto` float NOT NULL,
+  `fpMetodoPagamento` varchar(50) NOT NULL,
+  `fpChavePix` varchar(50) DEFAULT NULL,
+  `fpAgenciaConta` varchar(20) DEFAULT NULL,
+  `fpObservacoes` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `cadastro_nota_saida`
+--
+
+CREATE TABLE `cadastro_nota_saida` (
+  `id_cad_nota_saida` int(11) NOT NULL,
+  `cnpj_saida` float NOT NULL,
+  `ie_saida` float NOT NULL,
+  `cep_saida` float NOT NULL,
+  `rua_saida` varchar(255) NOT NULL,
+  `estado_saida` char(2) NOT NULL,
+  `bairro_saida` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `cadastro_representantes`
+--
+
+CREATE TABLE `cadastro_representantes` (
+  `id_cad_representante` int(11) NOT NULL,
+  `nomerazao_repre` varchar(255) NOT NULL,
+  `cpfoucnpj_repre` float NOT NULL,
+  `nascimento_repre` date NOT NULL,
+  `cidade_repre` char(50) NOT NULL,
+  `bairro_repre` char(50) NOT NULL,
+  `rua_repre` varchar(255) NOT NULL,
+  `numero_repre` float NOT NULL,
+  `complemento_repre` char(50) DEFAULT NULL,
+  `cep_repre` float NOT NULL,
+  `comissao_repre` float NOT NULL,
+  `maxdesconto_repre` float NOT NULL,
+  `status_repre` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `cadastro_transportadores`
+--
+
+CREATE TABLE `cadastro_transportadores` (
+  `id_cad_transportadora` int(11) NOT NULL,
+  `nomerazao_transp` varchar(255) NOT NULL,
+  `cpfoucnpj_transp` float NOT NULL,
+  `modeloveiculo_transp` char(50) NOT NULL,
+  `placa_transp` varchar(20) NOT NULL,
+  `status_transp` char(1) NOT NULL,
+  `estado_transp` char(2) NOT NULL,
+  `volume_transp` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `cadastro_vendas`
+--
+
+CREATE TABLE `cadastro_vendas` (
+  `id_cad_venda` int(11) NOT NULL,
+  `razaosocial_vend` varchar(255) NOT NULL,
+  `tipovenda` char(1) NOT NULL,
+  `data_vend` date NOT NULL,
+  `codigo_vend` float NOT NULL,
+  `produto_vend` varchar(255) NOT NULL,
+  `quantidade_vend` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `cadastro_vendedores`
+--
+
+CREATE TABLE `cadastro_vendedores` (
+  `id_cad_vendedores` int(11) NOT NULL,
+  `nomerazao_vdores` varchar(255) NOT NULL,
+  `cpfoucnpj_vdores` float NOT NULL,
+  `nascimento_vdores` date NOT NULL,
+  `cidade_vdores` char(50) NOT NULL,
+  `bairro_vdores` char(50) NOT NULL,
+  `rua_vdores` varchar(255) NOT NULL,
+  `numero_vdores` float NOT NULL,
+  `complemento_vdores` char(50) DEFAULT NULL,
+  `cep_vdores` float NOT NULL,
+  `comissao_vdores` float NOT NULL,
+  `maxdesconto_vdores` float NOT NULL,
+  `status_vdores` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -230,6 +374,51 @@ CREATE TABLE `usuarios` (
 --
 
 --
+-- Índices de tabela `cadastro_descontos`
+--
+ALTER TABLE `cadastro_descontos`
+  ADD PRIMARY KEY (`id_cad_desconto`);
+
+--
+-- Índices de tabela `cadastro_funcionarios`
+--
+ALTER TABLE `cadastro_funcionarios`
+  ADD PRIMARY KEY (`id_cad_funcionario`);
+
+--
+-- Índices de tabela `cadastro_nota_saida`
+--
+ALTER TABLE `cadastro_nota_saida`
+  ADD PRIMARY KEY (`id_cad_nota_saida`),
+  ADD UNIQUE KEY `cnpj_saida` (`cnpj_saida`);
+
+--
+-- Índices de tabela `cadastro_representantes`
+--
+ALTER TABLE `cadastro_representantes`
+  ADD PRIMARY KEY (`id_cad_representante`),
+  ADD UNIQUE KEY `cpfoucnpj_repre` (`cpfoucnpj_repre`);
+
+--
+-- Índices de tabela `cadastro_transportadores`
+--
+ALTER TABLE `cadastro_transportadores`
+  ADD PRIMARY KEY (`id_cad_transportadora`),
+  ADD UNIQUE KEY `cpfoucnpj_transp` (`cpfoucnpj_transp`);
+
+--
+-- Índices de tabela `cadastro_vendas`
+--
+ALTER TABLE `cadastro_vendas`
+  ADD PRIMARY KEY (`id_cad_venda`);
+
+--
+-- Índices de tabela `cadastro_vendedores`
+--
+ALTER TABLE `cadastro_vendedores`
+  ADD PRIMARY KEY (`id_cad_vendedores`);
+
+--
 -- Índices de tabela `cad_cliente`
 --
 ALTER TABLE `cad_cliente`
@@ -305,6 +494,48 @@ ALTER TABLE `usuarios`
 --
 -- AUTO_INCREMENT para tabelas despejadas
 --
+
+--
+-- AUTO_INCREMENT de tabela `cadastro_descontos`
+--
+ALTER TABLE `cadastro_descontos`
+  MODIFY `id_cad_desconto` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `cadastro_funcionarios`
+--
+ALTER TABLE `cadastro_funcionarios`
+  MODIFY `id_cad_funcionario` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `cadastro_nota_saida`
+--
+ALTER TABLE `cadastro_nota_saida`
+  MODIFY `id_cad_nota_saida` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `cadastro_representantes`
+--
+ALTER TABLE `cadastro_representantes`
+  MODIFY `id_cad_representante` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `cadastro_transportadores`
+--
+ALTER TABLE `cadastro_transportadores`
+  MODIFY `id_cad_transportadora` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `cadastro_vendas`
+--
+ALTER TABLE `cadastro_vendas`
+  MODIFY `id_cad_venda` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `cadastro_vendedores`
+--
+ALTER TABLE `cadastro_vendedores`
+  MODIFY `id_cad_vendedores` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `cad_cliente`

@@ -26,7 +26,7 @@ function carregarDescricao(produtoId) {
 
 function carregaProduto(solCompraId) {
     if (solCompraId) {
-        fetch('../compras/utils/produto.php?id=' + solCompraId)
+        fetch('utils/produto.php?id=' + solCompraId)
             .then(response => response.text())
             .then(data => {
                 document.getElementById('observacao').value = data;
