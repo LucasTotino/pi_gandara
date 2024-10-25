@@ -20,8 +20,7 @@
   </header>
 
 
-  <main>
-    <div class="container">
+  <main class="container">
       <div class="row p-3 justify-content-center d-flex align-items-center">
         <a type="button" style="text-align: left;" class="col-1 btn btn-primary justify-content-center d-flex" href="/pi_gandara/financeiro/">Voltar</a>
         <h1 style="text-align: center;" class="col-11 display-4">Gerenciamento Bancário</h1>
