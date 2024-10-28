@@ -1,112 +1,87 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
+<!doctype html>
+<html lang="pt-br">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Estoque de Insumos</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #fffbe6;
-            color: #333;
-        }
-        h1 {
-            color: #ff9900;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            background-color: #fff;
-        }
-        table, th, td {
-            border: 1px solid #ffcc66;
-        }
-        th, td {
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: #ffcc66;
-            color: #333;
-        }
-        .search-bar {
-            margin-bottom: 20px;
-        }
-        .search-bar input[type="text"] {
-            padding: 8px;
-            border: 1px solid #ffcc66;
-            border-radius: 4px;
-        }
-        .search-bar button {
-            padding: 8px 16px;
-            background-color: #ff9900;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        .search-bar button:hover {
-            background-color: #cc7a00;
-        }
-        .back-button {
-            margin-top: 20px;
-        }
-        .back-button button {
-            padding: 10px 20px;
-            background-color: #ff9900;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        .back-button button:hover {
-            background-color: #cc7a00;
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="/pi_gandara/css/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.css" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <title>Estoque de Insumos</title>
 </head>
+
 <body>
-    <h1>Estoque de Insumos</h1>
-    <div class="search-bar">
-        <form method="GET" action="">
-            <input type="text" name="search" placeholder="Pesquisar insumos...">
-            <button type="submit">Pesquisar</button>
-        </form>
-    </div>
-    <table>
-        <thead>
-            <tr>
+  
+  <header>
+    <?php
+    include_once('../utils/menu.php');
+    ?>
+  </header>
+  
+  <main>
+    <div class="container mt-4">
+      <h1 class="text-warning text-center mb-4">Estoque de Insumos</h1>
+
+      <!-- Barra de Pesquisa -->
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2 w-75" type="search" placeholder="Pesquisar insumos..." aria-label="Pesquisar">
+            <button class="btn btn-warning my-2 my-sm-0" type="submit">Pesquisar</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Tabela de Insumos -->
+      <div class="row justify-content-center mt-4">
+        <div class="col-md-10">
+          <table class="table table-bordered table-striped">
+            <thead class="thead-light">
+              <tr>
                 <th>Nome do Insumo</th>
                 <th>Quantidade</th>
                 <th>Unidade</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
                 <td>Adubo Orgânico</td>
                 <td>50</td>
                 <td>kg</td>
-            </tr>
-            <tr>
+              </tr>
+              <tr>
                 <td>Sementes de Milho</td>
                 <td>200</td>
                 <td>unidades</td>
-            </tr>
-            <tr>
+              </tr>
+              <tr>
                 <td>Herbicida</td>
                 <td>30</td>
                 <td>litros</td>
-            </tr>
-            <tr>
+              </tr>
+              <tr>
                 <td>Fertilizante</td>
                 <td>100</td>
                 <td>kg</td>
-            </tr>
-        </tbody>
-    </table>
-    <div class="back-button">
-        <form action="index.php">
-            <button type="submit">Voltar para a Página Inicial</button>
-        </form>
-    </div>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Botão Voltar -->
+      <div class="text-center mt-4">
+    <a href="index.php" class="btn btn-secondary" style="background-color: #ff9900; border-color: #cc7a00; color: white;">
+        <i class="fas fa-arrow-left"></i> Voltar
+    </a>
+</div>
+    </div> <!-- Fim do container -->
+  </main>
+
+  <script src="https://kit.fontawesome.com/74ecb76a40.js" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+
 </body>
+
 </html>
