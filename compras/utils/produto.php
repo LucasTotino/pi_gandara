@@ -1,22 +1,27 @@
 <?php
 require '../../utils/conexao.php';
-// Verifica se veio um id na URL
 
-$id = intval($_GET['id']);
+// Verifica se veio um ID na URL
+$id = isset($_GET['id']) ? $_GET['id'] : null;
 
-// Consulta para buscar a descrição do produto
-$sql = "SELECT observacao FROM sol_compra WHERE id = $id";
-$result = $conn->query($sql);
+if ($id) {
+    $sql = "SELECT s.observacao, p.produto, p.descricao 
+            FROM sol_compra s
+            JOIN cad_produtos p ON s.id_produto = p.id
+            WHERE s.id = ?";
 
-if ($result->num_rows > 0) {
-    $row = $result->fetch_assoc();
-    echo $row['observacao'];
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        $data = $result->fetch_assoc();
+        echo json_encode($data); // Retorna JSON com os campos
+    } else {
+        echo json_encode(['error' => 'Nenhum registro encontrado']);
+    }
 } else {
-    echo "Observação não encontrada.";
+    echo json_encode(['error' => 'ID inválido']);
 }
-
-$conn->close();
-
-
 ?>
-

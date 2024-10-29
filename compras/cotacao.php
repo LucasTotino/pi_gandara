@@ -36,7 +36,7 @@ $dados = $stmt->get_result();
 // Prepara a consulta SQL
 $sql_sol_compra = "SELECT s.id, p.cod_produto, p.produto, p.descricao, s.data_criacao, s.observacao 
                                FROM sol_compra s 
-                               JOIN cad_produtos p ON s.id_produto = p.id";
+                               INNER JOIN cad_produtos p ON s.id_produto = p.id";
 
 // Envia o SQL para o Prepare Statement:
 $stmt_sol_compra = $conn->prepare($sql_sol_compra);
@@ -104,7 +104,7 @@ $result_fornecedores = $stmt_fornecedores->get_result();
                             </div>
                             <div class="col-sm-5">
                                 <label for="descricao">Descrição</label>
-                                <input type="text" class="form-control" id="descricao" name="descricao" value="<?= $solicitacao['descricao']; ?>">
+                                <input type="text" class="form-control" id="descricao" name="descricao" readonly>
                             </div>
                             <div class="col-sm-2">
                                 <label for="data_abertura">Data de Abertura</label>
@@ -114,8 +114,7 @@ $result_fornecedores = $stmt_fornecedores->get_result();
                         <div class="row justify-content-center mt-2">
                             <div class="form-group col-sm-3">
                                 <label for="id_produto" class="font-weight-bold">Código do Produto:</label>
-                                <input type="text" id="id_produto" name="id_produto" class="form-control" readonly
-                                    value="<?= $solicitacao['produto']; ?>">
+                                <input type="text" id="id_produto" name="id_produto" class="form-control" readonly>
                             </div>
                             <div class="col-sm-2">
                                 <label for="qtd">Quantidade</label>
@@ -150,8 +149,7 @@ $result_fornecedores = $stmt_fornecedores->get_result();
                             </div>
                             <div class="col-sm-6">
                                 <label for="observacao">Observações</label>
-                                <input type="text" class="form-control" id="observacao" name="observacao" readonly
-                                    value="<?php $solicitacao['observacao'] ?>">
+                                <input type="text" class="form-control" id="observacao" name="observacao" readonly>
                             </div>
 
                         </div>
@@ -178,18 +176,27 @@ $result_fornecedores = $stmt_fornecedores->get_result();
     <script src="https://kit.fontawesome.com/74ecb76a40.js" crossorigin="anonymous"></script>
     <script src="/pi_gandara/js/script.js"></script>
     <script>
-        document.getElementById('id_sol_compra').addEventListener('change', function carregaProduto() {
+        document.getElementById('id_sol_compra').addEventListener('change', function() {
             const solCompraId = this.value;
-            // Consulta a página da Descrição para carregar a descrição do produto por id 
+
             if (solCompraId) {
                 fetch('utils/produto.php?id=' + solCompraId)
-                    .then(response => response.text())
+                    .then(response => response.json()) // Espera JSON da API
                     .then(data => {
-                        document.getElementById('observacao').value = data;
+                        if (!data.error) {
+                            document.getElementById('observacao').value = data.observacao || '';
+                            document.getElementById('descricao').value = data.descricao || '';
+                            document.getElementById('id_produto').value = data.produto || '';
+                        } else {
+                            console.error(data.error);
+                            alert('Nenhum dado encontrado.');
+                        }
                     })
                     .catch(error => console.error('Erro:', error));
             } else {
                 document.getElementById('observacao').value = '';
+                document.getElementById('descricao').value = '';
+                document.getElementById('id_produto').value = '';
             }
         });
     </script>

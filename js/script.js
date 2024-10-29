@@ -27,13 +27,22 @@ function carregarDescricao(produtoId) {
 function carregaProduto(solCompraId) {
     if (solCompraId) {
         fetch('utils/produto.php?id=' + solCompraId)
-            .then(response => response.text())
+            .then(response => response.json()) // Espera JSON da API
             .then(data => {
-                document.getElementById('observacao').value = data;
+                if (!data.error) {
+                    document.getElementById('observacao').value = data.observacao || '';
+                    document.getElementById('descricao').value = data.descricao || '';
+                    document.getElementById('id_produto').value = data.produto || '';
+                } else {
+                    console.error(data.error);
+                    alert('Nenhum dado encontrado.');
+                }
             })
             .catch(error => console.error('Erro:', error));
     } else {
         document.getElementById('observacao').value = '';
+        document.getElementById('descricao').value = '';
+        document.getElementById('id_produto').value = '';
     }
 }
 
