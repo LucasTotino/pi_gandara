@@ -4,23 +4,21 @@ require "../../utils/conexao.php";
 // Ex: colocar o valor do POST se ele existir, se não deixar em branco.
 
 // variavel = condição ? se VERDADEIRO : se FALSE;
-$idProduto = isset($_POST['id_produto']) && !empty($_POST['id_produto']) ? $_POST['id_produto'] : null;
-$idCriador = isset($_POST['id_usuario']) && !empty($_POST['id_usuario']) ? $_POST['id_usuario'] : null;
-$observacao = isset($_POST['observacao']) && !empty($_POST['observacao']) ? $_POST['observacao'] : null;
-$qtd = isset($_POST['qtd']) && !empty($_POST['qtd']) ? $_POST['qtd'] : null;
+$idCotacao = isset($_POST['id']) && !empty($_POST['id']) ? $_POST['id'] : null;
+$estado = isset($_POST['status']) && !empty($_POST['status']) ? $_POST['status'] : null;
+$quantidade = isset($_POST['qtd']) && !empty($_POST['qtd']) ? $_POST['qtd'] : null;
 $dataEntrega = isset($_POST['dataentrega']) && !empty($_POST['dataentrega']) ? $_POST['dataentrega'] : null;
-$dataCriacao = isset($_POST['datacriacao']) && !empty($_POST['datacriacao']) ? $_POST['datacriacao'] : null;
-$finalidade = isset($_POST['finalidade']) && !empty($_POST['finalidade']) ? $_POST['finalidade'] : null;
-$origem = isset($_POST['origem']) && !empty($_POST['origem']) ? $_POST['origem'] : null;
-$idSolCompra = isset($_POST['id']) && !empty($_POST['id']) ? $_POST['id'] : null;
+$uniMedida = isset($_POST['u_medida']) && !empty($_POST['u_medida']) ? $_POST['u_medida'] : null;
+$valor = isset($_POST['valor']) && !empty($_POST['valor']) ? $_POST['valor'] : null;
+$idSolCompra = isset($_POST['id_sol_compra']) && !empty($_POST['id_sol_compra']) ? $_POST['id_sol_compra'] : null;
+$idFornecedor = isset($_POST['id_fornecedor']) && !empty($_POST['id_fornecedor']) ? $_POST['id_fornecedor'] : null;
 $acao = isset($_POST['acao']) && !empty($_POST['acao']) ? $_POST['acao'] : null;
 
 // Verificamos qual operaçaõ está sendo feita .
 
 if ($acao == "INCLUIR") {
 
-    $sql = "INSERT INTO sol_compra (id_produto, id_usuario, observacao, qtd, data_entrega, data_criacao,
-    finalidade, origem) 
+    $sql = "INSERT INTO cotacao (id, id_sol_compra, estado, qtd, data_entrega, u_medida, id_fornecedor, valor) 
     VALUE (?, ?, ?, ?, ?, ?, ?, ?);";
 
     // Utilizaremos o Prepare Statement para manipular os dados no BD 
@@ -33,10 +31,10 @@ if ($acao == "INCLUIR") {
     // O primeiro parametro é o tipo do dado, os demais são apenas as variaveis com os dados.
     // i = inteiro, d = flutuante (casas decaimais), s = texto(com tudo que não é numero)
     $stmt->bind_param(
-        "iisdssss",
-        $idProduto,
-        $idCriador,
-        $observacao,
+        "isdssid",
+        $idSolCompra,
+        $estado,
+        $quantidade,
         $qtd,
         $dataEntrega,
         $dataCriacao,
@@ -121,13 +119,13 @@ if ($acao == "INCLUIR") {
 } else if ($acao == "DELETAR") {
     // Neste bloco será excluido um registro que já existe no BD.
 
-    $sql = "DELETE FROM sol_compra WHERE id = ?";
+    $sql = "DELETE FROM cotacao WHERE id = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $idSolCompra);
+    $stmt->bind_param("i", $idCotacao);
     if ($stmt->execute()) {
         echo json_encode(array(
             "status" => "sucesso",
-            "message" => "Registro excluido com sucesso!"
+            "message" => "Cotação excluida com sucesso!"
         ));
     } else {
         echo json_encode(array(

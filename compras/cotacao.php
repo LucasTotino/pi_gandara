@@ -137,7 +137,7 @@ $result_fornecedores = $stmt_fornecedores->get_result();
                         <div class="row justify-content-center mt-2">
                             <div class="form-group col-sm-5">
                                 <label for="id_fornecedor" class="text-danger font-weight-bold">Fornecedor:</label>
-                                <select class="form-control" name="id_sol_compra" id="id_sol_compra">
+                                <select class="form-control" name="id_fornecedor" id="id_fornecedor">
                                     <option value="">Selecione a Solicitação de Compra</option>
                                     <?php
                                     while ($fornecedor = $result_fornecedores->fetch_assoc()) {
