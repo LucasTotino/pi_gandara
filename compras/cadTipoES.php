@@ -1,25 +1,53 @@
 <?php
-if (isset($_POST['submit'])) {
+require '../utils/conexao.php';
+// Verifica se veio um id na URL
+$id = isset($_GET['id']) ? $_GET['id'] : false;
+$cor = ($id) ? "btn-warning" : "btn-success";
+// Caso tenha um ID faz A busca do Usuario no BD
+if ($id) {
+    $sql = "SELECT * FROM cad_nat_financeira WHERE id=?;";
+    $stmt = $conn->prepare($sql);
+    // Troca o ? pelo ID que veio na URL
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
 
-    // Iniciando conexao
-    include_once('../funcoes/conexao.php');
+    $dados = $stmt->get_result();
 
-    // Variaveis principais
-    $nome = $_POST['nome'];
-    $cpf = $_POST['cpf'];
-    $nascimento = $_POST['nascimento'];
-    $celular = $_POST['celular'];
-    $email = $_POST['email'];
-    $cep = $_POST['cep'];
-    $logradouro = $_POST['logradouro'];
-    $numLogradouro = $_POST['numLogradouro'];
-    $complemento = $_POST['complemento'];
-    $bairro = $_POST['bairro'];
-    $cidade = $_POST['cidade'];
-    $estado = $_POST['estado'];
-    $senha = $_POST['senha'];
-    $qualificacao = $_POST['qualificacao'];
+    // Verifica se encontrou o usuario ou se ele existe no BD
+    if ($dados->num_rows > 0) {
+        // Coloca os dados do usuário em uma variavel como array
+        $natFin = $dados->fetch_assoc();
+    } else {
+        // Se não encontrou um usuario retorna para a página anterior.
+?>
+
+        <script>
+            history.back();
+        </script>
+<?php
+    }
 }
+
+// Seleciona apenas os campos que serão usados
+$sql = " SELECT  	id, cod_nat, descricao, cod_pai, tipo_nat, data_inclusao, mov_bancaria FROM cad_nat_financeira;";
+
+// Envia o SQL para o Prepare Statement:
+$stmt = $conn->prepare($sql);
+
+//Executa a consulta SQL
+$stmt->execute();
+
+//Pega o resultado e adiciona em uma variavel
+$dados = $stmt->get_result();
+
+$nivel = array(
+    'Pessoa Juridica', // Posição 0
+    'Pessoa Fisica' //Posição 1
+);
+$corNivel = array(
+    'badge-danger', // Posição 0
+    'badge-primary' // Posição 1
+)
 ?>
 <!doctype html>
 <html lang="pt-br">
