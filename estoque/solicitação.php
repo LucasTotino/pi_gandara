@@ -1,157 +1,114 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Solicitação de Produtos</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #fffbe6;
-            color: #333;
-        }
-        h1 {
-            color: #ff9900;
-        }
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f9f9f9;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-        input[type="text"],
-        input[type="number"],
-        select {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ffcc66;
-            border-radius: 4px;
-        }
-        .item-list {
-            margin-top: 20px;
-            border-top: 1px solid #ddd;
-            padding-top: 10px;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        th, td {
-            padding: 10px;
-            border: 1px solid #ddd;
-            text-align: left;
-        }
-        button {
-            padding: 10px 20px;
-            background-color: #ff9900;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #cc7a00;
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="/pi_gandara/css/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.css" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+  <title>Solicitação de Produtos</title>
 </head>
+
 <body>
-    <h1>Solicitação de Produtos em Falta</h1>
-    <div class="container">
-        <form id="solicitacao-form" method="post" action="">
-            <label for="nome_produto">Nome do Produto:</label>
-            <input type="text" id="nome_produto" name="nome_produto" required>
+  
+  <header>
+    <?php include_once('../utils/menu.php'); ?>
+  </header>
+  
+  <main>
+    <div class="container mt-4">
 
-            <label for="quantidade">Quantidade Necessária:</label>
-            <input type="number" id="quantidade" name="quantidade" min="1" required>
+      <!-- Título Principal -->
+      <h1 class="text-warning text-center mb-4">Solicitação de Produtos</h1>
 
-            <label for="tipo_produto">Tipo de Produto:</label>
-            <select id="tipo_produto" name="tipo_produto" required>
-                <option value="" disabled selected>Selecione o tipo de produto</option>
-                <option value="insumos">Insumos</option>
-                <option value="material_consumo">Material de Consumo</option>
-                <option value="produto_acabado">Produto Acabado</option>
-                <option value="produto_semiacabado">Produto Semiacabado</option>
-            </select>
-
-            <button type="button" onclick="adicionarProduto()">Adicionar Produto</button>
-        </form>
-
-        <div class="item-list" id="item-list">
-            <h2>Produtos Solicitados</h2>
-            <table id="produtos-table">
-                <thead>
-                    <tr>
-                        <th>Nome do Produto</th>
-                        <th>Quantidade</th>
-                        <th>Tipo</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Os itens serão adicionados aqui -->
-                </tbody>
-            </table>
+      <!-- Seção de Adicionar Produto -->
+      <div class="row justify-content-center">
+        <div class="col-8">
+          <div class="card p-4 mb-4" style="background-color: transparent; border: none;">
+            <h2 class="text-warning text-center"><i class="fas fa-plus-circle"></i> Adicionar Produto</h2>
+            <form method="post" action="">
+              <div class="form-group">
+                <label for="nome_produto"><i class="fas fa-box"></i> Nome do Produto</label>
+                <input type="text" id="nome_produto" name="nome_produto" class="form-control" required style="border-color: #ff9900;">
+              </div>
+              <div class="form-group">
+                <label for="quantidade"><i class="fas fa-sort-numeric-up"></i> Quantidade Necessária</label>
+                <input type="number" id="quantidade" name="quantidade" class="form-control" min="1" required style="border-color: #ff9900;">
+              </div>
+              <div class="form-group">
+                <label for="tipo_produto"><i class="fas fa-tags"></i> Tipo de Produto</label>
+                <select id="tipo_produto" name="tipo_produto" class="form-control" required style="border-color: #ff9900;">
+                  <option value="" disabled selected>Selecione o tipo de produto</option>
+                  <option value="insumos">Insumos</option>
+                  <option value="material_consumo">Material de Consumo</option>
+                  <option value="produto_acabado">Produto Acabado</option>
+                  <option value="produto_semiacabado">Produto Semiacabado</option>
+                </select>
+              </div>
+              <button type="submit" name="add" class="btn btn-warning btn-block" style="background-color: #ff9900; border-color: #cc7a00;">
+                <i class="fas fa-paper-plane"></i> Enviar Solicitação
+              </button>
+            </form>
+          </div>
         </div>
+      </div>
 
-        <button type="button" onclick="enviarSolicitacao()">Enviar Solicitação</button>
-    </div>
+      <!-- Tabela de Produtos Solicitados -->
+      <div class="row justify-content-center">
+        <div class="col-12">
+          <h2 class="text-warning text-center"><i class="fas fa-boxes"></i> Produtos Solicitados</h2>
+          <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+              <thead class="thead-light">
+                <tr>
+                  <th>Nome do Produto</th>
+                  <th>Quantidade</th>
+                  <th>Tipo</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Produto A</td>
+                  <td>10</td>
+                  <td>Insumos</td>
+                </tr>
+                <tr>
+                  <td>Produto B</td>
+                  <td>5</td>
+                  <td>Material de Consumo</td>
+                </tr>
+                <tr>
+                  <td>Produto C</td>
+                  <td>3</td>
+                  <td>Produto Acabado</td>
+                </tr>
+                <tr>
+                  <td>Produto D</td>
+                  <td>2</td>
+                  <td>Produto Semiacabado</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
 
-    <script>
-        let produtos = [];
+          <!-- Botão Voltar -->
+          <div class="text-center mt-4">
+            <a href="index.php" class="btn btn-secondary" style="background-color: #ff9900; border-color: #cc7a00; color: white;">
+              <i class="fas fa-arrow-left"></i> Voltar
+            </a>
+          </div>
+        </div>
+      </div>
 
-        function adicionarProduto() {
-            const nomeProduto = document.getElementById('nome_produto').value;
-            const quantidade = document.getElementById('quantidade').value;
-            const tipoProduto = document.getElementById('tipo_produto').value;
+    </div> <!-- Fim do container -->
+  </main>
 
-            if (nomeProduto && quantidade && tipoProduto) {
-                produtos.push({ nome: nomeProduto, quantidade: quantidade, tipo: tipoProduto });
-                atualizarLista();
-                document.getElementById('solicitacao-form').reset();
-            } else {
-                alert('Por favor, preencha todos os campos.');
-            }
-        }
+  <script src="https://kit.fontawesome.com/74ecb76a40.js" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
-        function removerProduto(index) {
-            produtos.splice(index, 1);
-            atualizarLista();
-        }
-
-        function atualizarLista() {
-            const tbody = document.getElementById('produtos-table').querySelector('tbody');
-            tbody.innerHTML = '';
-
-            produtos.forEach((produto, index) => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${produto.nome}</td>
-                    <td>${produto.quantidade}</td>
-                    <td>${produto.tipo}</td>
-                    <td><button type="button" onclick="removerProduto(${index})">Remover</button></td>
-                `;
-                tbody.appendChild(row);
-            });
-        }
-
-        function enviarSolicitacao() {
-            if (produtos.length === 0) {
-                alert('Adicione pelo menos um produto à lista.');
-                return;
-            }
-
-            // Aqui você pode adicionar a lógica para enviar a solicitação ao servidor
-            console.log('Produtos solicitados:', produtos);
-            alert('Solicitação enviada com sucesso!');
-        }
-    </script>
 </body>
+
 </html>
