@@ -1,160 +1,108 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Estoque da Fazenda - Sucos</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #fffbe6;
-            color: #333;
-        }
-        h1 {
-            color: #ff9900;
-        }
-        .tabs {
-            display: flex;
-            cursor: pointer;
-            margin-bottom: 20px;
-        }
-        .tabs div {
-            padding: 10px;
-            border: 1px solid #ffcc66;
-            margin-right: 5px;
-            background-color: #fff;
-        }
-        .tabs div.active {
-            background-color: #f1f1f1;
-            border-bottom: none;
-        }
-        .tab-content {
-            display: none;
-        }
-        .tab-content.active {
-            display: block;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-        input[type="text"],
-        input[type="number"],
-        textarea,
-        input[type="date"],
-        select {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ffcc66;
-            border-radius: 4px;
-        }
-        input[type="submit"] {
-            padding: 10px 20px;
-            background-color: #ff9900;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        input[type="submit"]:hover {
-            background-color: #cc7a00;
-        }
-        .back-button {
-            display: block;
-            width: 100%;
-            padding: 10px;
-            text-align: center;
-            background-color: #ff9900;
-            color: white;
-            text-decoration: none;
-            border-radius: 4px;
-            margin-top: 20px;
-        }
-        .back-button:hover {
-            background-color: #cc7a00;
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="/pi_gandara/css/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.css" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+  <title>Estoque de Produtos</title>
 </head>
+
 <body>
-    <h1>Estoque da Fazenda - Sucos</h1>
-    <div class="tabs">
-        <div class="tab-link active" data-tab="cadastro">Cadastro de Produtos</div>
-        <div class="tab-link" data-tab="consulta">Consulta de Produtos</div>
-    </div>
+  
+  <header>
+    <?php include_once('../utils/menu.php'); ?>
+  </header>
+  
+  <main>
+    <div class="container mt-4">
 
-    <div id="cadastro" class="tab-content active">
-        <h2>Cadastro de Produtos</h2>
-        <form action="processa_cadastro.php" method="post">
-            <label for="nome">Nome do Produto:</label>
-            <input type="text" id="nome" name="nome" required>
+      <!-- Título Principal -->
+      <h1 class="text-warning text-center mb-4">Estoque de Produtos</h1>
 
-            <label for="descricao">Descrição:</label>
-            <textarea id="descricao" name="descricao" required></textarea>
+      <!-- Seção de Adicionar Produto -->
+      <div class="row justify-content-center">
+        <div class="col-8">
+          <div class="card p-4 mb-4" style="background-color: transparent; border: none;">
+            <h2 class="text-warning text-center"><i class="fas fa-plus-circle"></i> Adicionar Produto</h2>
+            <form method="post" action="">
+              <div class="form-group">
+                <label for="nome"><i class="fas fa-cube"></i> Nome do Produto</label>
+                <input type="text" id="nome" name="nome" class="form-control" required style="border-color: #ff9900;">
+              </div>
+              <div class="form-group">
+                <label for="quantidade"><i class="fas fa-sort-numeric-up"></i> Quantidade</label>
+                <input type="number" id="quantidade" name="quantidade" class="form-control" required style="border-color: #ff9900;">
+              </div>
+              <div class="form-group">
+                <label for="unidade"><i class="fas fa-balance-scale"></i> Unidade</label>
+                <input type="text" id="unidade" name="unidade" class="form-control" required style="border-color: #ff9900;">
+              </div>
+              <button type="submit" name="add" class="btn btn-warning btn-block" style="background-color: #ff9900; border-color: #cc7a00;">
+                <i class="fas fa-save"></i> Salvar Produto
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
 
-            <label for="preco">Preço:</label>
-            <input type="number" id="preco" name="preco" step="0.01" required>
+      <!-- Tabela de Produtos -->
+      <div class="row justify-content-center">
+        <div class="col-12">
+          <h2 class="text-warning text-center"><i class="fas fa-boxes"></i> Produtos no Estoque</h2>
+          <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+              <thead class="thead-light">
+                <tr>
+                  <th>Nome do Produto</th>
+                  <th>Quantidade</th>
+                  <th>Unidade</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Produto A</td>
+                  <td>50</td>
+                  <td>kg</td>
+                </tr>
+                <tr>
+                  <td>Produto B</td>
+                  <td>200</td>
+                  <td>unidades</td>
+                </tr>
+                <tr>
+                  <td>Produto C</td>
+                  <td>30</td>
+                  <td>litros</td>
+                </tr>
+                <tr>
+                  <td>Produto D</td>
+                  <td>100</td>
+                  <td>kg</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
 
-            <label for="quantidade">Quantidade (kg):</label>
-            <input type="number" id="quantidade" name="quantidade" required>
+          <!-- Botão Voltar -->
+          <div class="text-center mt-4">
+            <a href="index.php" class="btn btn-secondary" style="background-color: #ff9900; border-color: #cc7a00; color: white;">
+              <i class="fas fa-arrow-left"></i> Voltar
+            </a>
+          </div>
+        </div>
+      </div>
 
-            <label for="data_recebimento">Data de Recebimento:</label>
-            <input type="date" id="data_recebimento" name="data_recebimento" required>
+    </div> <!-- Fim do container -->
+  </main>
 
-            <label for="numero_nota">Número da Nota:</label>
-            <input type="text" id="numero_nota" name="numero_nota" required>
+  <script src="https://kit.fontawesome.com/74ecb76a40.js" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
-            <label for="bardbox">Tipo de Produto:</label>
-            <select id="bardbox" name="tipo_produto">
-                <option value="material_consumo">Material de Consumo</option>
-                <option value="produto_acabado">Produto Acabado</option>
-                <option value="produto_semi_acabado">Produto Semi-Acabado</option>
-            </select>
-
-            <input type="submit" value="Cadastrar Produto">
-        </form>
-    </div>
-
-    <div id="consulta" class="tab-content">
-        <h2>Consulta de Produtos</h2>
-        <form action="busca_produto.php" method="get">
-            <label for="busca_nome">Nome do Produto:</label>
-            <input type="text" id="busca_nome" name="busca_nome">
-
-            <label for="busca_tipo_produto">Tipo de Produto:</label>
-            <select id="busca_tipo_produto" name="busca_tipo_produto">
-                <option value="">Selecione</option>
-                <option value="material_consumo">Material de Consumo</option>
-                <option value="produto_acabado">Produto Acabado</option>
-                <option value="produto_semi_acabado">Produto Semi-Acabado</option>
-            </select>
-
-            <label for="busca_preco">Preço:</label>
-            <input type="number" id="busca_preco" name="busca_preco" step="0.01">
-
-            <label for="busca_quantidade">Quantidade (kg):</label>
-            <input type="number" id="busca_quantidade" name="busca_quantidade">
-
-            <label for="busca_data_recebimento">Data de Recebimento:</label>
-            <input type="date" id="busca_data_recebimento" name="busca_data_recebimento">
-
-            <input type="submit" value="Buscar Produto">
-        </form>
-    </div>
-
-    <button class="back-button" onclick="window.location.href='index.php'">Voltar para Página Inicial</button>
-
-    <script>
-        document.querySelectorAll('.tab-link').forEach(tab => {
-            tab.addEventListener('click', () => {
-                document.querySelectorAll('.tab-link').forEach(link => link.classList.remove('active'));
-                document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-
-                tab.classList.add('active');
-                document.getElementById(tab.getAttribute('data-tab')).classList.add('active');
-            });
-        });
-    </script>
 </body>
+
 </html>
