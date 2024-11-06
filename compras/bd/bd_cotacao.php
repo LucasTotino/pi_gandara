@@ -32,14 +32,14 @@ if ($acao == "INCLUIR") {
     // i = inteiro, d = flutuante (casas decaimais), s = texto(com tudo que não é numero)
     $stmt->bind_param(
         "isdssid",
-        $idSolCompra,
+        $idCotacao,
         $estado,
         $quantidade,
-        $qtd,
         $dataEntrega,
-        $dataCriacao,
-        $finalidade,
-        $origem
+        $uniMedida,
+        $valor,
+        $idSolCompra,
+        $idFornecedor
     );
 
     // A função execute envia o script SQL todo arrumado para o BD, com as variaveis 
@@ -48,10 +48,10 @@ if ($acao == "INCLUIR") {
     try {
         if ($stmt->execute()) {
             // Pega o numero do ID que foi inserido no BD
-            $idCadSolCompra = $conn->insert_id;
-            echo $idCadSolCompra;
+            $idCotacao = $conn->insert_id;
+            echo $idCotacao;
 
-            header('Location: /pi_gandara/compras/solicitacaoCompra.php');
+            header('Location: /pi_gandara/compras/cotacao.php');
         } else {
             echo $stmt->error;
         }
@@ -74,32 +74,30 @@ if ($acao == "INCLUIR") {
     print_r($_POST);
     echo "</pre>";
 } else if ($acao == "ALTERAR") {
-    $sql = "UPDATE sol_compra SET
-        id_produto = ?,
-        id_usuario = ?,
-        observacao = ?,
+    $sql = "UPDATE cotacao SET
+        id_sol_compra = ?,
+        estado = ?,
         qtd = ?,
         data_entrega = ?,
-        data_criacao = ?,
-        finalidade = ?,
-        origem = ?
+        u_medida= ?,
+        id_fornecedor = ?,
+        valor = ?
         WHERE id = ?;";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param(
-        "iisdssssi",
-        $idProduto,
-        $idCriador,
-        $observacao,
-        $qtd,
+        "isdssid",
+        $idCotacao,
+        $estado,
+        $quantidade,
         $dataEntrega,
-        $dataCriacao,
-        $finalidade,
-        $origem,
-        $idSolCompra
+        $uniMedida,
+        $valor,
+        $idSolCompra,
+        $idFornecedor
     );
     try {
         if ($stmt->execute()) {
-            header('Location: /pi_gandara/compras/solicitacaoCompra.php');
+            header('Location: /pi_gandara/compras/cotacao.php');
         } else {
             echo $stmt->error;
         }
