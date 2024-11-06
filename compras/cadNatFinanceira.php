@@ -28,7 +28,7 @@ if ($id) {
 }
 
 // Seleciona apenas os campos que serão usados
-$sql = " SELECT * FROM cad_nat_financeira;";
+$sql = "SELECT * FROM cad_nat_financeira;";
 
 // Envia o SQL para o Prepare Statement:
 $stmt = $conn->prepare($sql);
@@ -40,11 +40,13 @@ $stmt->execute();
 $dados = $stmt->get_result();
 
 $nivel = array(
+    '',
     'Sintética', // Posição 0
     'Analítica' //Posição 1
 );
 
 $uso = array(
+    '',
     'Contas a Receber',
     'Livre',
     'Contas a Pagar'
@@ -79,7 +81,9 @@ $mov = array(
 
         <div class="container">
             <div class="card card-cds">
-                <form action="/pi_gandara/compras/bd/bd_natFinanceira.php" method="POST"><!-- Inicio Formulário -->
+                <form action="/pi_gandara/compras/bd/bd_cadNatFinanceira.php" method="POST"><!-- Inicio Formulário -->
+                    <input type="hidden" id="id" name="id" value="<?= isset($_GET['id']) ? $_GET['id'] : null ?>">
+                    <input type="hidden" name="acao" id="acao" value="<?= isset($_GET['id']) ? "ALTERAR" : "INCLUIR" ?>">
                     <div class="form-group">
                         <!-- Código, Descrição e Código Pai -->
                         <div class="form-row justify-content-center mt-2">
@@ -108,10 +112,10 @@ $mov = array(
                                 <label for="tipo_nat">Tipo de Natureza:</label>
                                 <select class="form-control" id="tipo_nat" name="tipo_nat">
                                     <option value=""> -- ESCOLHA -- </option>
+                                    <option <?= (isset($_GET['id']) && $natFin['tipo_nat'] == 2) ? "selected" : null ?>
+                                        value="2">Analítica</option>
                                     <option <?= (isset($_GET['id']) && $natFin['tipo_nat'] == 1) ? "selected" : null ?>
-                                        value="1">Analítica</option>
-                                    <option <?= (isset($_GET['id']) && $natFin['tipo_nat'] == 0) ? "selected" : null ?>
-                                        value="0">Sintética</option>
+                                        value="1">Sintética</option>
                                 </select>
                             </div>
                             <!-- Uso Natureza: O conteúdo deste campo é definido por meio da seleção entre as opções:
@@ -123,12 +127,12 @@ $mov = array(
                                 <label for="uso_nat">Uso da Natureza:</label>
                                 <select class="form-control" id="uso_nat" name="uso_nat">
                                     <option value=""> -- ESCOLHA -- </option>
+                                    <option <?= (isset($_GET['id']) && $natFin['uso_nat'] == 2) ? "selected" : null ?>
+                                        value="2">Livre</option>
                                     <option <?= (isset($_GET['id']) && $natFin['uso_nat'] == 1) ? "selected" : null ?>
-                                        value="1">Livre</option>
-                                    <option <?= (isset($_GET['id']) && $natFin['uso_nat'] == 0) ? "selected" : null ?>
-                                        value="0">Contas a Receber</option>
-                                    <option <?= (isset($_GET['id']) && $natFin['uso_nat'] == 0) ? "selected" : null ?>
-                                        value="2">Contas a Pagar</option>
+                                        value="1">Contas a Receber</option>
+                                    <option <?= (isset($_GET['id']) && $natFin['uso_nat'] == 3) ? "selected" : null ?>
+                                        value="3">Contas a Pagar</option>
                                 </select>
                             </div>
                             <div class="form-group col-sm-2">
@@ -140,9 +144,9 @@ $mov = array(
                                 <label for="mov_bancaria">Permite Mov, Bancária:</label>
                                 <select class="form-control" id="mov_bancaria" name="mov_bancaria">
                                     <option value=""> -- ESCOLHA -- </option>
-                                    <option <?= (isset($_GET['id']) && $user['mov_bancaria'] == 1) ? "selected" : null ?>
+                                    <option <?= (isset($_GET['id']) && $natFin['mov_bancaria'] == 1) ? "selected" : null ?>
                                         value="1">Sim</option>
-                                    <option <?= (isset($_GET['id']) && $user['mov_bancaria'] == 0) ? "selected" : null ?>
+                                    <option <?= (isset($_GET['id']) && $natFin['mov_bancaria'] == 0) ? "selected" : null ?>
                                         value="0">Não</option>
                                 </select>
                             </div>
@@ -169,12 +173,11 @@ $mov = array(
                 <table class="table table-hover table-striped">
                     <thead>
                         <th>Código</th>
-                        <th>Código Pai</th>
                         <th>Descrição</th>
                         <th>Tipo de Natureza</th>
                         <th>Uso</th>
                         <th>Data da Inclusão</th>
-                        <th>Movimentação Bancária</th>
+                        <th>Mov Bancária</th>
                         <th>AÇÕES</th>
                     </thead>
                     <tbody>
@@ -186,16 +189,26 @@ $mov = array(
                         ?>
                             <tr>
                                 <td><?= $linha['cod_nat'] ?></td>
-                                <td><?= $linha['cod_pai'] ?></td>
                                 <td><?= $linha['descricao'] ?></td>
-                                <td><?= $linha['tipo_nat'] ?></td>
-                                <td><?= $linha['uso_nat'] ?></td>
+                                <td>
+                                    <span>
+                                        <?= $nivel[$linha['tipo_nat']] ?>
+                                    </span>
+                                <td>
+                                    <span>
+                                        <?= $uso[$linha['uso_nat']] ?>
+                                    </span>
+                                </td>
                                 <td><?= $linha['data_inclusao'] ?></td>
-                                <td><?= $linha['mov_bancaria'] ?></td>
+                                <td>
+                                    <span>
+                                        <?= $mov[$linha['mov_bancaria']] ?>
+                                    </span>
+                                </td>
                                 <td>
                                     <!-- Chamo a página do formulario e envio o Id do Produto que será alterado-->
                                     <a href="cadNatFinanceira.php?id=<?= $linha['id'] ?>" class="btn btn-warning">Editar</a>
-                                    <button class="btn btn-danger btn-excluir" data-table="cad_produtos" data-id="<?= $linha['id'] ?>">Excluir</button>
+                                    <button class="btn btn-danger btn-excluir" onclick="excluirRegistro('<?= $linha['id'] ?>', 'cadNatFinanceira')">Excluir</button>
                                 </td>
                             </tr>
                         <?php
@@ -208,6 +221,8 @@ $mov = array(
     </main>
 
     <script src="https://kit.fontawesome.com/74ecb76a40.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
+    <script src="../js/script.js"></script>
 </body>
 
 </html>

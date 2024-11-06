@@ -321,7 +321,7 @@ $corNivel = array(
                                 <button type="reset" class="btn btn-warning">Cancelar</button>
                             </div>
                             <div class="col-sm-3 mt-3">
-                                <a href="/pi_gandara/compras/index.php"><button type="button" class="btn btn-danger">Voltar</button></a>
+                                <a href="/pi_gandara/compras/index.php"><button onclick="excluirRegistro('<?= $linha['id'] ?>', '###')">Voltar</button></a>
                             </div>
                         </div>
                     </div>
@@ -333,6 +333,7 @@ $corNivel = array(
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+    <script src="../js/script.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
             // Exibir o conteúdo da primeira aba por padrão

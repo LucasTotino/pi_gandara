@@ -243,7 +243,7 @@ $corNivel = array(
                                 <td>
                                     <!-- Chamo a página do formulario e envio o Id do Fornecedor que será alterado-->
                                     <a href="cadFornecedor.php?id=<?= $linha['id'] ?>" class="btn btn-warning">Editar</a>
-                                    <button class="btn btn-danger btn-excluir" data-table="cad_fornecedor" data-id="<?= $linha['id'] ?>">Excluir</button>
+                                    <button class="btn btn-danger btn-excluir" onclick="excluirRegistro('<?= $linha['id'] ?>', 'fornecedor')">Excluir</button>
                                 </td>
                             </tr>
                         <?php
@@ -257,41 +257,7 @@ $corNivel = array(
     <script src="https://kit.fontawesome.com/74ecb76a40.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
-    <script>
-        $(document).ready(function() {
-            $('.btn-excluir').click(function() {
-                var agenteId = $(this).data('id');
-                var tabela = $(this).data('table');
-                
-                var confirma = confirm(`Você tem certeza que 
-                deseja excluir o Agente [ ${agenteId} ] ?`);
-
-                if (confirma) {
-                    $.ajax({
-                        url: `../bd/bd-${tabela}.php`,
-                        type: 'POST',
-                        data: {
-                            acao: "DELETAR",
-                            id_agente: agenteId
-                        },
-                        success: function(response) {
-                            var result = JSON.parse(response);
-                            if (result.status === "sucesso") {
-                                alert(result.message);
-                                location.reload();
-                            } else {
-                                alert(result.message);
-                            }
-                        },
-                        error: function(xhr, status, error) {
-                            console.error(xhr);
-                            alert("Ocorreu um erro: " + error);
-                        }
-                    });
-                }
-            });
-        });
-    </script>
+    <script src="/pi_gandara/js/script.js"></script>
 </body>
 
 </html>

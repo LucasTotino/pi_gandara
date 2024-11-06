@@ -142,7 +142,7 @@ $dados = $stmt->get_result();
                                 <td>
                                     <!-- Chamo a página do formulario e envio o Id do Produto que será alterado-->
                                     <a href="cadProduto.php?id=<?= $linha['id'] ?>" class="btn btn-warning">Editar</a>
-                                    <button class="btn btn-danger btn-excluir" data-table="cad_produtos" data-id="<?= $linha['id'] ?>">Excluir</button>
+                                    <button class="btn btn-danger btn-excluir" onclick="excluirRegistro('<?= $linha['id'] ?>', 'produto')">Excluir</button>
                                 </td>
                             </tr>
                         <?php
@@ -155,6 +155,7 @@ $dados = $stmt->get_result();
     </main>
 
     <script src="https://kit.fontawesome.com/74ecb76a40.js" crossorigin="anonymous"></script>
+    <script src="/pi_gandara/js/script.js"></script>
 </body>
 
 </html>
