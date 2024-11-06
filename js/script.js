@@ -22,7 +22,7 @@ function carregarDescricao(produtoId) {
     } else {
         document.getElementById('descricao').value = '';
     }
-}
+};
 
 function carregaProduto(solCompraId) {
     if (solCompraId) {
@@ -44,5 +44,53 @@ function carregaProduto(solCompraId) {
         document.getElementById('descricao').value = '';
         document.getElementById('id_produto').value = '';
     }
-}
+};
 
+function excluirRegistro(registroId, tabela){    
+            var confirma = confirm(`Você tem certeza que deseja excluir o Registro [ ${registroId} ] ?`);
+    
+            if (confirma) {
+                $.ajax({
+                    url: `/pi_gandara/compras/bd/bd_${tabela}.php`,
+                    type: 'POST',
+                    data: {
+                        acao: "DELETAR",
+                        id: registroId
+                    },
+                    success: function(response) {
+                        var result = JSON.parse(response);
+                        if (result.status === "sucesso") {
+                            alert(result.message);
+                            location.reload();
+                        } else {
+                            alert(result.message);
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(xhr);
+                        alert("Ocorreu um erro: " + error);
+                    }
+                });
+            }
+};
+
+function mascara(mascara, elemento) {
+    const valor = elemento.value.replace(/\D/g, ''); // Remove caracteres não numéricos
+        let resultado = '';
+        let i = 0;
+
+        for (let char of mascara) {
+            if (char === '#') {
+                if (i < valor.length) {
+                    resultado += valor[i];
+                    i++;
+                } else {
+                    break;
+                }
+            } else {
+                resultado += char;
+            }
+        }
+
+        elemento.value = resultado;
+    }

@@ -271,7 +271,7 @@ $corNivel = array(
                                 <td>
                                     <!-- Chamo a página do formulario e envio o Id do usuario que será alterado-->
                                     <a href="cadUsuario.php?id=<?= $linha['id_usuario'] ?>" class="btn btn-warning">Editar</a>
-                                    <button class="btn btn-danger btn-excluir" data-table="usuarios" data-id="<?= $linha['id_usuario'] ?>">Excluir</button>
+                                    <button class="btn btn-danger btn-excluir" onclick="excluirRegistro('<?= $linha['id'] ?>', 'usuario')">Excluir</button>
                                 </td>
                             </tr>
                         <?php
@@ -284,41 +284,7 @@ $corNivel = array(
     </main>
 
     <script src="https://kit.fontawesome.com/74ecb76a40.js" crossorigin="anonymous"></script>
-    <script>
-        $(document).ready(function() {
-            $('.btn-excluir').click(function() {
-                var agenteId = $(this).data('id');
-                var tabela = $(this).data('table');
-                
-                var confirma = confirm(`Você tem certeza que 
-                deseja excluir o Agente [ ${agenteId} ] ?`);
-
-                if (confirma) {
-                    $.ajax({
-                        url: `../bd/bd-${tabela}.php`,
-                        type: 'POST',
-                        data: {
-                            acao: "DELETAR",
-                            id_agente: agenteId
-                        },
-                        success: function(response) {
-                            var result = JSON.parse(response);
-                            if (result.status === "sucesso") {
-                                alert(result.message);
-                                location.reload();
-                            } else {
-                                alert(result.message);
-                            }
-                        },
-                        error: function(xhr, status, error) {
-                            console.error(xhr);
-                            alert("Ocorreu um erro: " + error);
-                        }
-                    });
-                }
-            });
-        });
-    </script>
+    <script src="../js/script.js"></script>
 </body>
 
 </html>

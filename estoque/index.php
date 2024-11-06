@@ -22,11 +22,7 @@
     <div class="container mt-4">
 
       <div class="row p-3 justify-content-center d-flex align-items-center">
-<<<<<<< HEAD
         <a href="insumos.php" class="btn">
-=======
-        <a href="produtosPlantio.php" class="btn">
->>>>>>> b3e485d6a4c06aabc443dcca6c3d15f076fcb00e
           <div class="col-2 p-2 m-1">
             <div style="width: 10rem;">
               <span class="fa fa-seedling fa-5x" aria-hidden="true"></span>
@@ -37,11 +33,7 @@
           </div>
         </a>
 
-<<<<<<< HEAD
         <a href="manutenção.php" class="btn">
-=======
-        <a href="produtosManutencao.php" class="btn">
->>>>>>> b3e485d6a4c06aabc443dcca6c3d15f076fcb00e
           <div class="col-2 p-2 m-1">
             <div style="width: 10rem;">
               <span class="fa fa-tools fa-5x" aria-hidden="true"></span>
@@ -52,11 +44,7 @@
           </div>
         </a>
 
-<<<<<<< HEAD
         <a href="produtos.php" class="btn">
-=======
-        <a href="produtosAlmoxarifado.php" class="btn">
->>>>>>> b3e485d6a4c06aabc443dcca6c3d15f076fcb00e
           <div class="col-2 p-2 m-1">
             <div style="width: 10rem;">
               <span class="fa fa-box fa-5x" aria-hidden="true"></span>
@@ -67,20 +55,28 @@
           </div>
         </a>
 
-<<<<<<< HEAD
         <a href="estoqueAtual.php" class="btn">
-=======
-        <a href="produtosEquipamentos.php" class="btn">
->>>>>>> b3e485d6a4c06aabc443dcca6c3d15f076fcb00e
           <div class="col-2 p-2 m-1">
             <div style="width: 10rem;">
-              <span class="fa fa-tools fa-5x" aria-hidden="true"></span>
+              <span class="fa fa-warehouse fa-5x" aria-hidden="true"></span>
               <div class="card-body">
                 <h3>Estoque Atual</h3>
               </div>
             </div>
           </div>
         </a>
+
+        <a href="solicitação.php" class="btn">
+          <div class="col-2 p-2 m-1">
+            <div style="width: 10rem;">
+              <span class="fa fa-exclamation-circle fa-5x" aria-hidden="true"></span>
+              <div class="card-body">
+                <h3>Solicitação de produtos</h3>
+              </div>
+            </div>
+          </div>
+        </a>
+
       </div> <!-- Fim da row -->
     </div> <!-- Fim do container -->
   </main>

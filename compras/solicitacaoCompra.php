@@ -241,7 +241,7 @@ $nivel = array(
                                 <td>
                                     <!-- Chamo o id da Solicitação para a página do formulario-->
                                     <a href="solicitacaoCompra.php?id=<?= $linha['id'] ?>" class="btn btn-warning">Editar</a>
-                                    <button class="btn btn-danger btn-excluir" data-table="sol_compra" data-id="<?= $linha['id'] ?>">Excluir</button>
+                                    <button class="btn btn-danger btn-excluir" onclick="excluirRegistro('<?= $linha['id'] ?>', 'solicitacao')">Excluir</button>
                                 </td>
                             </tr>
                         <?php
