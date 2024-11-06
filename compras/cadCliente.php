@@ -31,9 +31,6 @@ if ($id) {
 // Prepara a consulta SQL
 $sql = "SELECT * FROM cad_cliente;";
 
-// Seleciona apenas os campos que serão usados
-$sql_eficiente = " SELECT id, nome, email, cpf_cnpj, celular, tipo_cliente FROM cad_cliente;";
-
 // Envia o SQL para o Prepare Statement:
 $stmt = $conn->prepare($sql);
 
@@ -50,7 +47,10 @@ $nivel = array(
 $corNivel = array(
     'badge-danger', // Posição 0
     'badge-primary' // Posição 1
-)
+);
+
+$tipo = isset($_GET['tipo_cliente']) && !empty($_GET['tipo_cliente']) ? $_GET['tipo_cliente'] : 1;
+
 ?>
 <!doctype html>
 <html lang="pt-br">
@@ -79,9 +79,9 @@ $corNivel = array(
         <div class="container">
             <div class="card card-cds">
                 <form class="mt-3 mb-3 ml-3 mr-3" action="/pi_gandara/compras/bd/bd_cliente.php" method="POST"><!-- Inicio Formulário -->
-                <input type="hidden" id="id" name="id" value="<?= isset($_GET['id']) ? $_GET['id'] : null ?>">
-                    <input type="hidden" name="acao" id="acao" value="<?= isset($_GET['id']) ? "ALTERAR" : "INCLUIR" ?>">    
-                <div class="form-group ">
+                    <input type="hidden" id="id" name="id" value="<?= isset($_GET['id']) ? $_GET['id'] : null ?>">
+                    <input type="hidden" name="acao" id="acao" value="<?= isset($_GET['id']) ? "ALTERAR" : "INCLUIR" ?>">
+                    <div class="form-group ">
                         <!-- Nome, CPF -->
                         <div class="form-row justify-content-center mt-2">
                             <div class="col-sm-8">
@@ -100,7 +100,7 @@ $corNivel = array(
                         <div class="form-row justify-content-center mt-2">
                             <div class="form-group col-sm-3">
                                 <label for="tipo_cliente" class="text-danger font-weight-bold">Tipo de Cliente:</label>
-                                <select class="form-control" id="tipo_cliente" name="tipo_cliente">
+                                <select class="form-control" id="tipo_cliente" name="tipo_cliente" onchange="aplicaMascara()">
                                     <option value=""> -- ESCOLHA -- </option>
                                     <option <?= (isset($_GET['id']) && $cliente['tipo_cliente'] == 1) ? "selected" : null ?>
                                         value="1">Pessoa Física</option>
@@ -108,6 +108,7 @@ $corNivel = array(
                                         value="0">Pessoa Jurídica</option>
                                 </select>
                             </div>
+
                             <div class="col-sm-6">
                                 <label for="email">Email</label>
                                 <input type="email" class="form-control" id="email" name="email" autocomplete="on"
@@ -116,7 +117,7 @@ $corNivel = array(
                             <div class="col-sm-3">
                                 <label for="celular">Celular</label>
                                 <input type="celular" class="form-control" id="celular" name="celular" maxlength="15"
-                                    value="<?= ($id) ? $cliente['celular'] : null ?>">
+                                    value="<?= ($id) ? $cliente['celular'] : null ?>" onkeypress="mascara('(##) #####-####', this)">
                             </div>
                         </div>
 
@@ -190,7 +191,7 @@ $corNivel = array(
                             <div class="form-group col-sm-2">
                                 <label for="cep">CEP:</label>
                                 <input type="text" class="form-control" id="cep" name="cep"
-                                    value="<?= ($id) ? $cliente['cep'] : null ?>">
+                                    value="<?= ($id) ? $cliente['cep'] : null ?>" maxlength="9" onkeypress="mascara('#####-###', this)">
                             </div>
                         </div>
 
@@ -240,7 +241,7 @@ $corNivel = array(
                                 <td>
                                     <!-- Chamo a página do formulario e envio o Id do usuario que será alterado-->
                                     <a href="cadCliente.php?id=<?= $linha['id'] ?>" class="btn btn-warning">Editar</a>
-                                    <button class="btn btn-danger btn-excluir" data-table="cad_cliente" data-id="<?= $linha['id'] ?>">Excluir</button>
+                                    <button class="btn btn-danger btn-excluir" onclick="excluirRegistro('<?= $linha['id'] ?>', 'cliente')">Excluir</button>
                                 </td>
                             </tr>
                         <?php
@@ -251,43 +252,26 @@ $corNivel = array(
             </div>
         </div>
     </main>
+    <script src="../js/script.js"></script>
     <script src="https://kit.fontawesome.com/74ecb76a40.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
     <script>
-        $(document).ready(function() {
-            $('.btn-excluir').click(function() {
-                var agenteId = $(this).data('id');
-                var tabela = $(this).data('table');
-                
-                var confirma = confirm(`Você tem certeza que 
-                deseja excluir o Agente [ ${agenteId} ] ?`);
+        function aplicarMascara() {
+            const tipoCliente = document.getElementById('tipo_cliente').value;
+            const cpfCnpjInput = document.getElementById('cpf_cnpj');
 
-                if (confirma) {
-                    $.ajax({
-                        url: `../bd/bd-${tabela}.php`,
-                        type: 'POST',
-                        data: {
-                            acao: "DELETAR",
-                            id_agente: agenteId
-                        },
-                        success: function(response) {
-                            var result = JSON.parse(response);
-                            if (result.status === "sucesso") {
-                                alert(result.message);
-                                location.reload();
-                            } else {
-                                alert(result.message);
-                            }
-                        },
-                        error: function(xhr, status, error) {
-                            console.error(xhr);
-                            alert("Ocorreu um erro: " + error);
-                        }
-                    });
-                }
-            });
-        });
+            // Define a máscara com base na seleção
+            if (tipoCliente == '1') { // Pessoa Física
+                cpfCnpjInput.setAttribute('maxlength', '14');
+                cpfCnpjInput.setAttribute('oninput', "mascara('###.###.###-##', this)");
+            } else if (tipoCliente == '0') { // Pessoa Jurídica
+                cpfCnpjInput.setAttribute('maxlength', '18');
+                cpfCnpjInput.setAttribute('oninput', "mascara('##.###.###/####-##', this)");
+            } else {
+                cpfCnpjInput.removeAttribute('oninput');
+            }
+        }
     </script>
 </body>
 

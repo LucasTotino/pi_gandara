@@ -4,38 +4,38 @@ require "../../utils/conexao.php";
 // Ex: colocar o valor do POST se ele existir, se não deixar em branco.
 
 // variavel = condição ? se VERDADEIRO : se FALSE;
+$codNat = isset($_POST['cod_nat']) && !empty($_POST['cod_nat']) ? $_POST['cod_nat'] : null;
 $codPai = isset($_POST['cod_pai']) && !empty($_POST['cod_pai']) ? $_POST['cod_pai'] : null;
 $descricao = isset($_POST['descricao']) && !empty($_POST['descricao']) ? $_POST['descricao'] : null;
-$codNat = isset($_POST['cod_nat']) && !empty($_POST['cod_nat']) ? $_POST['cod_nat'] : null;
-$tipoNat = isset($_POST['tipo_nat']) && !empty($_POST['tipo_nat']) ? $_POST['tipo_nat'] : null;
 $dataInclusao = isset($_POST['data_inclusao']) && !empty($_POST['data_inclusao']) ? $_POST['data_inclusao'] : null;
+$tipoNat = isset($_POST['tipo_nat']) && !empty($_POST['tipo_nat']) ? $_POST['tipo_nat'] : null;
 $movBancaria = isset($_POST['mov_bancaria']) && !empty($_POST['mov_bancaria']) ? $_POST['mov_bancaria'] : null;
 $usoNat = isset($_POST['uso_nat']) && !empty($_POST['uso_nat']) ? $_POST['uso_nat'] : null;
 $idNatFinanceira = isset($_POST['id']) && !empty($_POST['id']) ? $_POST['id'] : null;
 $acao = isset($_POST['acao']) && !empty($_POST['acao']) ? $_POST['acao'] : null;
 
-// Verificamos qual operaçaõ está sendo feita .
+// Verificamos qual operaçaõ está sendo feita.
 
 if ($acao == "INCLUIR") {
 
-    $sql = "INSERT INTO cad_nat_financeira (cod_nat, descricao, cod_pai, tipo_nat, data_inclusao, mov_bancaria, uso_nat) 
+    $sql = "INSERT INTO cad_nat_financeira (cod_nat, cod_pai, descricao, data_inclusao, tipo_nat, mov_bancaria, uso_nat) 
     VALUE (?, ?, ?, ?, ?, ?, ?);";
 
     $stmt = $conn->prepare($sql);
 
     $stmt->bind_param(
-        "sssisii",
+        "ssssiii",
+        $codNat,
         $codPai,
         $descricao,
-        $codNat,
-        $tipoNat,
         $dataInclusao,
+        $tipoNat,
         $movBancaria,
         $usoNat
     );
 
     try {
-        if ($stmt->execute()) { 
+        if ($stmt->execute()) {
             // Pega o numero do ID que foi inserido no BD
             $idCadNatFin = $conn->insert_id;
             echo $idCadNatFin;
@@ -48,10 +48,10 @@ if ($acao == "INCLUIR") {
         echo "Erro ao cadastrar!";
         // Vamos utilizar JS para poder recuperar os dados digitados 
 ?>
-    <script>
-      history.back();
-    </script>
-<?php
+        <script>
+            history.back();
+        </script>
+    <?php
     }
     //Fecha o Prepared Statement
     $stmt->close();
@@ -63,27 +63,27 @@ if ($acao == "INCLUIR") {
     print_r($_POST);
     echo "</pre>";
 } else if ($acao == "ALTERAR") {
-        $sql = "UPDATE cad_nat_financeiras SET
+    $sql = "UPDATE cad_nat_financeira SET
         cod_nat = ?,
+        cod_pai = ?,
         descricao = ?, 
-        cod_pai = ?, 
-        tipo_nat = ?, 
-        data_inclusao = ?, 
+        data_inclusao = ?,
+        tipo_nat = ?,
         mov_bancaria = ?, 
         uso_nat = ?
         WHERE id = ?;";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param(
-            "sssisiii",
-            $codPai,
-            $descricao,
-            $codNat,
-            $tipoNat,
-            $dataInclusao,
-            $movBancaria,
-            $usoNat,
-            $idNatFinanceira
-        );
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param(
+        "ssssiiii",
+        $codNat,
+        $codPai,
+        $descricao,
+        $dataInclusao,
+        $tipoNat,
+        $movBancaria,
+        $usoNat,
+        $idNatFinanceira
+    );
     try {
         if ($stmt->execute()) {
             header('Location: /pi_gandara/compras/cadNatFinanceira.php');
@@ -103,12 +103,9 @@ if ($acao == "INCLUIR") {
     $stmt->close();
     //Fecha a conexão 
     $conn->close();
-
-
-
 } else if ($acao == "DELETAR") {
     // Neste bloco será excluido um registro que já existe no BD.
-    
+
     $sql = "DELETE FROM cad_nat_financeira WHERE id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $idNatFinanceira);
