@@ -1,3 +1,19 @@
+<?php
+if (isset($_POST['submit'])) {
+
+    // Iniciando conexao
+    include_once('../funcoes/conexao.php');
+
+    // Variaveis principais
+    $nomePlantio = $_POST['nomePlantio'];
+    $areaPlantio = $_POST['areaPlantio'];
+    $dataPlantio = $_POST['dataPlantio'];
+    $dataColheita = $_POST['dataColheita'];
+    $espacamentoMudas = $_POST['espacamentoMudas'];
+    $fruto = $_POST['fruto'];
+}
+?>
+
 <!doctype html>
 <html lang="pt-br">
 
@@ -19,7 +35,7 @@
 <body>
 
     <div class="container mt-5">
-        <form action="" method="POST"><!-- Inicio Formulário -->
+        <form action="../pcp/agendamentoPlantacao.php" method="POST"><!-- Inicio Formulário -->
             <div class="row">
                 <div class="col-8">
                     <h2>Agendamento de um novo Plantio</h2>
@@ -32,15 +48,19 @@
                 <!-- Nome, CPF e Data Nascimento -->
                 <div class="form-row justify-content-center mt-2">
                     <div class="col-sm-4">
+                        <label for="nomePlantio">Nome da área de plantio</label>
+                        <input type="text" class="form-control" id="nomePlantio" name="nomePlantio">
+                    </div>
+                    <div class="col-sm-2">
                         <label for="areaPlantio">Área de plantio (m²)</label>
                         <input type="number" class="form-control" id="areaPlantio" name="areaPlantio">
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-sm-3">
                         <label for="dataPlantio">Data stimada para plantio</label>
                         <input type="date" class="form-control" id="dataPlantio" name="dataPlantio">
                     </div>
 
-                    <div class="col-sm-4">
+                    <div class="col-sm-3">
                         <label for="dataColheita">Data stimada para Colheita</label>
                         <input type="date" class="form-control" id="dataColheita" name="dataColheita">
                     </div>

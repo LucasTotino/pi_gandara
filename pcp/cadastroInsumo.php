@@ -1,3 +1,18 @@
+<?php
+if (isset($_POST['submit'])) {
+
+    // Iniciando conexao
+    include_once('../funcoes/conexao.php');
+
+    // Variaveis principais
+    $nomeInsumo = $_POST['nomeInsumo'];
+    $codRef = $_POST['codRef'];
+    $qtdeUtilizada = $_POST['qtdeUtilizada'];
+    $unidade = $_POST['unidade'];
+    $prazoUtil = $_POST['prazoUtil'];
+}
+?>
+
 <!doctype html>
 <html lang="pt-br">
 
@@ -24,10 +39,10 @@
 
     <main>
         <div class="container-1">
-            <h1 style="text-align:center;">Cadastro de Insumos</h1>
+            <h1 style="text-align:center;">Solicitação de cadastro de Insumos</h1>
 
 
-            <form action="" method="POST"><!-- Inicio Formulário -->
+            <form action="../pcp/cadastroInsumo.php" method="POST"><!-- Inicio Formulário -->
                 <div class="form-group">
                     <!-- Nome, CPF e Data Nascimento -->
                     <div class="form-row justify-content-center mt-2">
@@ -36,8 +51,8 @@
                             <input type="text" class="form-control" id="nomeInsumo" name="nomeInsumo">
                         </div>
                         <div class="col-sm-6">
-                            <label for="codigoReferencia">Código de Referência</label>
-                            <input type="text" class="form-control" id="codigoReferencia" name="codigoReferencia">
+                            <label for="codRef">Código de Referência</label>
+                            <input type="text" class="form-control" id="codRef" name="codRef">
                         </div>
                     </div>
 
@@ -45,8 +60,8 @@
 
                     <div class="form-row justify-content-center mt-2">
                         <div class="col-sm-4">
-                            <label for="quantidadeInsumo">Quantidade utilizada</label>
-                            <input type="text" class="form-control" id="quantidadeInsumo" name="quantidadeInsumo">
+                            <label for="qtdeInsumo">Quantidade utilizada</label>
+                            <input type="text" class="form-control" id="qtdeInsumo" name="qtdeInsumo">
                         </div>
 
                         <div class="col-sm-4">
@@ -61,11 +76,10 @@
                             </div>
                         </div>
 
-
                         <div class="col-sm-4">
-                            <label for="tempoUtilizacao">Prazo de utilização:</label>
+                            <label for="prazoUtil">Prazo de utilização:</label>
                             <div class="input-group">
-                                <select class="custom-select" id="tempoUtilizacao" name="tempoUtilizacao">
+                                <select class="custom-select" id="prazoUtil" name="prazoUtil">
                                     <option>Selecione</option>
                                     <option>Dia</option>
                                     <option>Semana</option>

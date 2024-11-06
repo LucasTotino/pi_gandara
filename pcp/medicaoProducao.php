@@ -1,3 +1,19 @@
+<?php
+if (isset($_POST['submit'])) {
+
+    // Iniciando conexao
+    include_once('../funcoes/conexao.php');
+
+    // Variaveis principais
+    $nomePlantio = $_POST['nomePlantio'];
+    $dataMedição = $_POST['dataMedição'];
+    $diametroFruto = $_POST['diametroFruto'];
+    $praga = $_POST['praga'];
+    $obsMedicao = $_POST['obsMedicao'];
+}
+?>
+
+
 <!doctype html>
 <html lang="pt-br">
 
@@ -19,7 +35,7 @@
 <body>
 
     <div class="container mt-5">
-        <form action="" method="POST"><!-- Inicio Formulário -->
+        <form action="../pcp/medicaoProducao.php" method="POST"><!-- Inicio Formulário -->
             <div class="row">
                 <div class="col-8">
                     <h2>Medição da Produção</h2>
@@ -32,8 +48,8 @@
                 <!-- Nome, CPF e Data Nascimento -->
                 <div class="form-row justify-content-center mt-2">
                     <div class="col-sm-6">
-                        <label for="areaRef">Área de Referência</label>
-                        <input type="number" class="form-control" id="areaRef" name="areaRef">
+                        <label for="nomePlantio">Nome do Plantio medido</label>
+                        <input type="number" class="form-control" id="nomePlantio" name="nomePlantio">
                     </div>
                     <div class="col-sm-6">
                         <label for="dataMedicao">Data da medição</label>
@@ -47,25 +63,15 @@
 
                 <div class="form-row justify-content-center mt-2">
                     <div class="col-sm-4">
-                        <label for="diametroMed">Diâmetro da Fruta (cm)</label>
-                        <input type="number" class="form-control" id="diametroMed" name="diametroMed">
+                        <label for="diametroFruto">Diâmetro da Fruta (cm)</label>
+                        <input type="number" class="form-control" id="diametroFruto" name="diametroFruto">
                     </div>
 
 
-                    <div class="col-sm-4">
-                        <label for="temPraga">Foi observado praga:</label>
-                        <div class="input-group">
-                            <select class="custom-select" id="temPraga" name="temPraga">
-                                <option>Selecione</option>
-                                <option>Sim</option>
-                                <option>Não</option>
-                            </select>
-                        </div>
-                    </div>
 
                     <div class="col-sm-4">
-                        <label for="qualPraga">Se sim, qual foi observada?</label>
-                        <input type="text" class="form-control" id="qualPraga" name="qualPraga">
+                        <label for="praga">Qual praga foi observada?</label>
+                        <input type="text" class="form-control" id="praga" name="praga">
                     </div>
 
 
@@ -74,8 +80,8 @@
                 </div>
                 <div class="form-row justify-content-center mt-2">
                     <div class="col-6">
-                        <label for="comentario">Observação:</label>
-                        <input type="text" class="form-control" id="comentario" name="comentario">
+                        <label for="obsMedicao">Observação:</label>
+                        <input type="text" class="form-control" id="obsMedicao" name="obsMedicao">
                     </div>
                 </div>
 
@@ -83,16 +89,16 @@
 
             <!-- Botões -->
             <div class="form-row justify-content-center">
-                            <div class="col-sm-3 mt-3">
-                                <button type="submit" name="submit" class="btn btn-success">Cadastrar</button>
-                            </div>
-                            <div class="col-sm-3 mt-3">
-                                <button type="reset" class="btn btn-warning">Cancelar</button>
-                            </div>
-                            <div class="col-sm-3 mt-3">
-                                <a href="/pi_gandara/compras/index.php"><button type="button" class="btn btn-danger">Voltar</button></a>
-                            </div>
-                        </div>
+                <div class="col-sm-3 mt-3">
+                    <button type="submit" name="submit" class="btn btn-success">Cadastrar</button>
+                </div>
+                <div class="col-sm-3 mt-3">
+                    <button type="reset" class="btn btn-warning">Cancelar</button>
+                </div>
+                <div class="col-sm-3 mt-3">
+                    <a href="/pi_gandara/compras/index.php"><button type="button" class="btn btn-danger">Voltar</button></a>
+                </div>
+            </div>
 
         </form>
 
