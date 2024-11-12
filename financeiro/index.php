@@ -27,7 +27,7 @@
                 <a href="contasPagar.php" class="btn">
                     <div class="col-2 p-2 m-1">
                         <div style="width: 14rem;">
-                            <span class="fa-solid fa-money-bill-transfer fa-5x" aria-hidden="true"></span>
+                            <span class="fa-solid fa-money-bill-transfer fa-5x fa-spin" style="--fa-animation-duration: 5s;" aria-hidden="true"></span>
                             <div class="card-body d-flex justify-content-center">
                                 <h4>
                                     <b>Contas a<br> Pagar</nobr></b>
@@ -40,7 +40,7 @@
                 <a href="contasReceber.php" class="btn">
                     <div class="col-2 p-2 m-1">
                         <div style="width: 14rem;">
-                            <span class="fa-solid fa-money-bill-transfer fa-5x" aria-hidden="true"></span>
+                            <span class="fa-solid fa-money-bill-transfer fa-5x fa-flip" style="--fa-animation-duration: 5s;" aria-hidden="true"></span>
                             <div class="card-body justify-content-center">
                                 <h4><b>Contas a Receber</b></h3>
                             </div>
@@ -48,17 +48,17 @@
                     </div>
                 </a>
 
-
-                <a href="movFiscal.php" class="btn">
+                <a href="aprovacao.php" class="btn">
                     <div class="col-2 p-2 m-1">
                         <div style="width: 14rem;">
-                            <span class="fa-solid fa-cash-register fa-5x" aria-hidden="true"></span>
+                            <span class="fa-solid fa-clipboard-check fa-5x" aria-hidden="true"></span>
                             <div class="card-body justify-content-center">
-                                <h4><b>Movimentações Fiscais</b></h4>
+                                <h4><b>Aprovação de Cotação</b></h3>
                             </div>
                         </div>
                     </div>
                 </a>
+
 
             </div> <!--Fim da row -->
 
@@ -76,17 +76,6 @@
                     </div>
                 </a>-->
 
-                <a href="gerBancario.php" class="btn">
-                    <div class="col-2 p-2 m-1">
-                        <div style="width: 14rem;">
-                            <span class="fa-solid fa-landmark fa-5x" aria-hidden="true"></span>
-                            <div class="card-body justify-content-center">
-                                <h4><b>Gerenciamento Bancário</b></h4>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-
                 <a href="fluxoCaixa.php" class="btn">
                     <div class="col-2 p-2 m-1">
                         <div style="width: 14rem;">
@@ -98,18 +87,28 @@
                     </div>
                 </a>
 
-                <a href="relatoriosAnalises.php" class="btn">
+                <a href="movFiscal.php" class="btn">
                     <div class="col-2 p-2 m-1">
                         <div style="width: 14rem;">
-                            <span class="fa fa-pie-chart fa-5x" aria-hidden="true"></span>
+                            <span class="fa-solid fa-cash-register fa-5x" aria-hidden="true"></span>
                             <div class="card-body justify-content-center">
-                                <h4>
-                                    <b>Relatórios<br> e Análises</b>
-                                </h4>
+                                <h4><b>Movimentações Fiscais</b></h4>
                             </div>
                         </div>
                     </div>
                 </a>
+
+                <a href="gerBancario.php" class="btn">
+                    <div class="col-2 p-2 m-1">
+                        <div style="width: 14rem;">
+                            <span class="fa-solid fa-landmark fa-5x" aria-hidden="true"></span>
+                            <div class="card-body justify-content-center">
+                                <h4><b>Gerenciamento Bancário</b></h4>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
             </div> <!--Fim da row -->
 
 
