@@ -5,7 +5,7 @@ $id = isset($_GET['id']) ? $_GET['id'] : false;
 $cor = ($id) ? "btn-warning" : "btn-success";
 // Caso tenha um ID faz A busca do Produto no BD
 if ($id) {
-    $sql = "SELECT * FROM cad_produtos WHERE id=?;";
+    $sql = "SELECT * FROM cad_novobanco WHERE id=?;";
     $stmt = $conn->prepare($sql);
     // Troca o ? pelo ID que veio na URL
     $stmt->bind_param("i", $id);
@@ -29,10 +29,10 @@ if ($id) {
 }
 
 // Prepara a consulta SQL
-$sql = "SELECT * FROM cad_produtos;";
+$sql = "SELECT * FROM cad_novobanco;";
 
 // Seleciona apenas os campos que serão usados
-$sql_eficiente = " SELECT id, produto, descricao, cod_produto, unidade FROM cad_produtos;";
+$sql_eficiente = " SELECT id, instituicao, numeroConta, codBanco, tipoConta, moeda, anotacoes FROM cad_novobanco;";
 
 // Envia o SQL para o Prepare Statement:
 $stmt = $conn->prepare($sql);
