@@ -5,11 +5,11 @@ if (isset($_POST['submit'])) {
     include_once('../funcoes/conexao.php');
 
     // Variaveis principais
-    $nomeInsumo = $_POST['nomeInsumo'];
-    $codRef = $_POST['codRef'];
-    $qtdeUtilizada = $_POST['qtdeUtilizada'];
+    $nomeInsumo = $_POST['nome_insumo'];
+    $codRef = $_POST['cod_ref'];
+    $qtdeUtilizada = $_POST['qtde_utilizada'];
     $unidade = $_POST['unidade'];
-    $prazoUtil = $_POST['prazoUtil'];
+    $prazoUtil = $_POST['prazo_util'];
 }
 ?>
 

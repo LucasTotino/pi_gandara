@@ -5,11 +5,11 @@ if (isset($_POST['submit'])) {
     include_once('../funcoes/conexao.php');
 
     // Variaveis principais
-    $nomePlantio = $_POST['nomePlantio'];
-    $areaPlantio = $_POST['areaPlantio'];
-    $dataPlantio = $_POST['dataPlantio'];
-    $dataColheita = $_POST['dataColheita'];
-    $espacamentoMudas = $_POST['espacamentoMudas'];
+    $nomePlantio = $_POST['nome_plantio'];
+    $areaPlantio = $_POST['area_plantio'];
+    $dataPlantio = $_POST['data_plantio'];
+    $dataColheita = $_POST['data_colheita'];
+    $espacamentoMudas = $_POST['espacamento_mudas'];
     $fruto = $_POST['fruto'];
 }
 ?>
@@ -79,9 +79,9 @@ if (isset($_POST['submit'])) {
                         <label for="fruto">Fruto:</label>
                         <div class="input-group">
                             <select class="custom-select" id="fruto" name="fruto">
-                                <option>Selecione</option>
-                                <option>Laranja</option>
-                                <option>Limão</option>
+                                <option value="">Selecione</option>
+                                <option value="Laranja">Laranja</option>
+                                <option value="Limão">Limão</option>
                             </select>
                         </div>
                     </div>
