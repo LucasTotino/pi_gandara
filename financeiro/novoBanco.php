@@ -16,7 +16,7 @@ if ($id) {
     // Verifica se encontrou o Produto ou se ele existe no BD
     if ($dados->num_rows > 0) {
         // Coloca os dados do usuário em uma variavel como array
-        $produto = $dados->fetch_assoc();
+        $instituicao = $dados->fetch_assoc();
     } else {
         // Se não encontrou um Produto retorna para a página anterior.
 ?>
@@ -30,9 +30,6 @@ if ($id) {
 
 // Prepara a consulta SQL
 $sql = "SELECT * FROM cad_novobanco;";
-
-// Seleciona apenas os campos que serão usados
-$sql_eficiente = " SELECT id, instituicao, numeroConta, codBanco, tipoConta, moeda, anotacoes FROM cad_novobanco;";
 
 // Envia o SQL para o Prepare Statement:
 $stmt = $conn->prepare($sql);
@@ -76,12 +73,12 @@ $dados = $stmt->get_result();
 
                         <div class="form-row justify-content-center mt-2">
                             <div class="col-sm-6">
-                                <label for="instituicao">Nome do Instituição Financeira</label>
-                                <input type="text" class="form-control" id="instituicao" name="instituicao"
-                                    value="<?= ($id) ? $instituicao['instituicao'] : null ?>">
+                                <label for="nomeInstituicao">Nome do Instituição Financeira</label>
+                                <input type="text" class="form-control" id="nomeInstituicao" name="nomeInstituicao"
+                                    value="<?= ($id) ? $nomeInstituicao['nomeInstituicao'] : null ?>">
                             </div>
                             <div class="col-sm-4">
-                                <label for="numeroConta">Número da Conta</label>
+                                <label for="numeroConta">Número da Conta + Digito verificador</label>
                                 <input type="numeroConta" class="form-control" id="numeroConta" name="numeroConta"
                                     value="<?= ($id) ? $numeroConta['numeroConta'] : null ?>">
                             </div>
@@ -91,7 +88,7 @@ $dados = $stmt->get_result();
                                 <input type="text" class="form-control" id="codBanco" name="codBanco"
                                     value="<?= ($id) ? $codBanco['codBanco'] : null ?>">
                             </div>
-                            
+
                         </div>
 
                         <br>
@@ -99,27 +96,34 @@ $dados = $stmt->get_result();
                         <div class="form-row justify-content-center mt-2">
                             <div class="col-sm-3">
                                 <label for="tipoConta">Tipo da Conta:</label>
-                                <select type="tipoConta" class="form-control" id="tipoConta" name="tipoConta">
-                                    <option value="corrente" selected>Corrente</option>
-                                    <option value="poupanca">Poupança</option>
-                                    <option value="salario">Salário</option>
-                                    value="<?= ($id) ? $tipoConta['tipoConta'] : null ?>">
+                                <select class="form-control" id="tipoConta" name="tipoConta">
+                                    <option value=""> -- ESCOLHA -- </option>
+                                    <option <?= (isset($_GET['id']) && $user['tipoConta'] == "corrente") ? "selected" : null ?>
+                                        value="corrente">CORRENTE</option>
+                                    <option <?= (isset($_GET['id']) && $user['tipoConta'] == "poupanca") ? "selected" : null ?>
+                                        value="poupanca">POUPANÇA</option>
+                                    <option <?= (isset($_GET['id']) && $user['tipoConta'] == "salario") ? "selected" : null ?>
+                                        value="salario">SALÁRIO</option>
                                 </select>
                             </div>
 
                             <div class="col-sm-3">
                                 <label for="tipoConta">Selecione a Moeda:</label>
-                                <select type="moeda" class="form-control" id="moeda" name="moeda">
-                                    <option value="BRL" selected>BRL</option>
-                                    <option value="USD">USD</option>
-                                    <option value="EUR">EUR</option>
-                                    value="<?= ($id) ? $moeda['moeda'] : null ?>">
+                                <select class="form-control" id="moeda" name="moeda">
+                                <option value=""> -- ESCOLHA -- </option>
+                                    <option <?= (isset($_GET['id']) && $user['moeda'] == "BRL") ? "selected" : null ?>
+                                        value="BRL">BRL</option>
+                                    <option <?= (isset($_GET['id']) && $user['moeda'] == "USD") ? "selected" : null ?>
+                                        value="USD">USD</option>
+                                    <option <?= (isset($_GET['id']) && $user['moeda'] == "EUR") ? "selected" : null ?>
+                                        value="EUR">EUR</option>
                                 </select>
                             </div>
 
+
                             <div class="form-group col-md-6">
                                 <label for="anotacoes">Anotações:</label>
-                                <textarea class="form-control" id="anotacoes" placeholder="Insira anotações"></textarea>
+                                <textarea class="text" id="anotacoes" placeholder="Insira anotações"></textarea>
                             </div>
                         </div>
 
@@ -148,7 +152,7 @@ $dados = $stmt->get_result();
 
 </html>
 
-                <!-- 
+<!-- 
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <label for="dataDaTransacao">Data da Transação:</label>

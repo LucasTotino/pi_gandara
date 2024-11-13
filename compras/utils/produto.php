@@ -5,7 +5,7 @@ require '../../utils/conexao.php';
 $id = isset($_GET['id']) ? $_GET['id'] : null;
 
 if ($id) {
-    $sql = "SELECT s.observacao, p.produto, p.descricao 
+    $sql = "SELECT s.observacao, s.data_criacao, p.produto, p.descricao 
             FROM sol_compra s
             JOIN cad_produtos p ON s.id_produto = p.id
             WHERE s.id = ?";

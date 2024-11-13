@@ -101,7 +101,7 @@ $corNivel = array(
                 }
                 ?>
 
-                <form id="userForm" action="/pi_gandara/compras/bd/bd_usuario.php" method="POST">
+                <form id="userForm" action="/pi_gandara/compras/bd/bd_cadUsuario.php" method="POST">
                     <input type="hidden" id="id_usuario" name="id_usuario" value="<?= isset($_GET['id']) ? $_GET['id'] : null ?>">
                     <input type="hidden" name="acao" id="acao" value="<?= isset($_GET['id']) ? "ALTERAR" : "INCLUIR" ?>">
                     <div class="form-row justify-content-center mt-2">
@@ -271,7 +271,7 @@ $corNivel = array(
                                 <td>
                                     <!-- Chamo a página do formulario e envio o Id do usuario que será alterado-->
                                     <a href="cadUsuario.php?id=<?= $linha['id_usuario'] ?>" class="btn btn-warning">Editar</a>
-                                    <button class="btn btn-danger btn-excluir" onclick="excluirRegistro('<?= $linha['id'] ?>', 'usuario')">Excluir</button>
+                                    <button class="btn btn-danger btn-excluir" onclick="excluirRegistro('<?= $linha['id'] ?>', 'cadUsuario')">Excluir</button>
                                 </td>
                             </tr>
                         <?php
@@ -284,6 +284,7 @@ $corNivel = array(
     </main>
 
     <script src="https://kit.fontawesome.com/74ecb76a40.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
     <script src="../js/script.js"></script>
 </body>
 

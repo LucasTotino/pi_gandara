@@ -53,6 +53,7 @@ $uso = array(
 );
 
 $mov = array(
+    '',
     'Sim',
     'Não'
 );
@@ -146,8 +147,8 @@ $mov = array(
                                     <option value=""> -- ESCOLHA -- </option>
                                     <option <?= (isset($_GET['id']) && $natFin['mov_bancaria'] == 1) ? "selected" : null ?>
                                         value="1">Sim</option>
-                                    <option <?= (isset($_GET['id']) && $natFin['mov_bancaria'] == 0) ? "selected" : null ?>
-                                        value="0">Não</option>
+                                    <option <?= (isset($_GET['id']) && $natFin['mov_bancaria'] == 2) ? "selected" : null ?>
+                                        value="2">Não</option>
                                 </select>
                             </div>
                         </div>

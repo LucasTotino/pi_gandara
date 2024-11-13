@@ -4,27 +4,27 @@ require "../../utils/conexao.php";
 // Ex: colocar o valor do POST se ele existir, se não deixar em branco.
 
 // variavel = condição ? se VERDADEIRO : se FALSE;
-$instituicao = isset($_POST['instituicao']) && !empty($_POST['instituicao']) ? $_POST['instituicao'] : null;
+$nomeInstituicao = isset($_POST['nomeInstituicao']) && !empty($_POST['nomeInstituicao']) ? $_POST['nomeInstituicao'] : null;
 $numeroConta = isset($_POST['numeroConta']) && !empty($_POST['numeroConta']) ? $_POST['numeroConta'] : null;
 $codBanco = isset($_POST['codBanco']) && !empty($_POST['codBanco']) ? $_POST['codBanco'] : null;
 $tipoConta = isset($_POST['tipoConta']) && !empty($_POST['tipoConta']) ? $_POST['tipoConta'] : null;
 $moeda = isset($_POST['moeda']) && !empty($_POST['moeda']) ? $_POST['moeda'] : null;
 $anotacoes = isset($_POST['anotacoes']) && !empty($_POST['anotacoes']) ? $_POST['anotacoes'] : null;
-$idNovoBanco = isset($_POST['id']) && !empty($_POST['id']) ? $_POST['id'] : null;
+$instituicao = isset($_POST['id']) && !empty($_POST['id']) ? $_POST['id'] : null;
 $acao = isset($_POST['acao']) && !empty($_POST['acao']) ? $_POST['acao'] : null;
 
-// Verificamos qual operaçaõ está sendo feita .
+// Verificamos qual operação está sendo feita .
 
 if ($acao == "INCLUIR") {
 
-    $sql = "INSERT INTO cad_novobanco (instituicao, numeroConta, codBanco, tipoConta, moeda, anotacoes) 
+    $sql = "INSERT INTO cad_novobanco (nomeInstituicao, numeroConta, codBanco, tipoConta, moeda, anotacoes) 
     VALUE (?, ?, ?, ?, ?, ?);";
 
     $stmt = $conn->prepare($sql);
 
     $stmt->bind_param(
-        "ssssss",
-        $instituicao,
+        "siisss",
+        $nomeInstituicao,
         $numeroConta,
         $codBanco,
         $tipoConta,
@@ -35,8 +35,8 @@ if ($acao == "INCLUIR") {
     try {
         if ($stmt->execute()) { 
             // Pega o numero do ID que foi inserido no BD
-            $idNovoBanco = $conn->insert_id;
-            echo $idNovoBanco;
+            $instituicao = $conn->insert_id;
+            echo $instituicao;
 
             header('Location: /pi_gandara/financeiro/novoBanco.php');
         } else {
@@ -62,7 +62,7 @@ if ($acao == "INCLUIR") {
     echo "</pre>";
 } else if ($acao == "ALTERAR") {
         $sql = "UPDATE cad_novobanco SET 
-        instituicao = ?,
+        nomeInstituicao = ?,
         numeroConta = ?,
         codBanco = ?,
         tipoConta = ?,
@@ -71,8 +71,8 @@ if ($acao == "INCLUIR") {
         WHERE id = ?;";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param(
-            "ssssssi",
-            $instituicao,
+            "siisssi",
+            $nomeInstituicao,
             $numeroConta,
             $codBanco,
             $tipoConta,
@@ -106,7 +106,7 @@ if ($acao == "INCLUIR") {
     
     $sql = "DELETE FROM cad_novobanco WHERE id = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $idNovoBanco);
+    $stmt->bind_param("i", $instituicao);
     if ($stmt->execute()) {
         echo json_encode(array(
             "status" => "sucesso",
