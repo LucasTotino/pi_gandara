@@ -28,7 +28,7 @@
                 <div style="width: 18rem;">
                     <span class="fa fa-book fa-5x" aria-hidden="true"></span>
                     <div class="card-body">
-                        <h3>Cadastro de Insumos</h3>
+                        <h3>Solicitação de cadastro de Insumos</h3>
                     </div>
                 </div>
             </div>
