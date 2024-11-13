@@ -314,14 +314,14 @@ $corNivel = array(
                         </div>
                         <!-- Botões -->
                         <div class="form-row justify-content-center">
-                            <div class="col-sm-3 mt-3">
+                        <div class="col-sm-3 mt-3">
                                 <button type="submit" name="submit" class="btn btn-success">Cadastrar</button>
                             </div>
                             <div class="col-sm-3 mt-3">
                                 <button type="reset" class="btn btn-warning">Cancelar</button>
                             </div>
                             <div class="col-sm-3 mt-3">
-                                <a href="/pi_gandara/compras/index.php"><button onclick="excluirRegistro('<?= $linha['id'] ?>', '###')">Voltar</button></a>
+                                <a href="/pi_gandara/compras/index.php"><button type="button" class="btn btn-danger">Voltar</button></a>
                             </div>
                         </div>
                     </div>

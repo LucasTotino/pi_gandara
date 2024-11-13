@@ -28,7 +28,9 @@ if ($id) {
     }
 }
 
-$sql = "SELECT * FROM cotacao";
+$sql = "SELECT c.id, p.cod_produto, p.produto, c.qtd, c.data_entrega, c.valor, s.observacao FROM cotacao c
+                INNER JOIN sol_compra s ON c.id_sol_compra = s.id
+                INNER JOIN cad_produtos p ON s.id_produto = p.id ";
 $stmt = $conn->prepare($sql);
 $stmt->execute();
 $dados = $stmt->get_result();
@@ -113,7 +115,7 @@ $result_fornecedores = $stmt_fornecedores->get_result();
                         </div>
                         <div class="row justify-content-center mt-2">
                             <div class="form-group col-sm-3">
-                                <label for="id_produto" class="font-weight-bold">Código do Produto:</label>
+                                <label for="id_produto" class="font-weight-bold">Produto:</label>
                                 <input type="text" id="id_produto" name="id_produto" class="form-control" readonly>
                             </div>
                             <div class="col-sm-2">
@@ -171,12 +173,54 @@ $result_fornecedores = $stmt_fornecedores->get_result();
 
             </div>
         </div>
+        
+        <div class="container">
+            <div class="card">
+
+                <!-- Cabeçalho da Tabela -->
+                <table class="table table-hover table-striped">
+                    <thead>
+                        <th>Código</th>
+                        <th>Produto</th>
+                        <th>Quantidade</th>
+                        <th>D. Entrega</th>
+                        <th>Valor</th>
+                        <th>Observação</th>
+                        <th>AÇÕES</th>
+                    </thead>
+
+                    <!-- Corpo da Tabela -->
+                    <tbody>
+                        <?php
+                        // Laço de repetição para exibir os registros do bd
+                        while ($linha = $dados->fetch_assoc()) {
+                        ?>
+                            <tr>
+                                <td><?= $linha['cod_produto'] ?></td>
+                                <td><?= $linha['produto'] ?></td>
+                                <td><?= $linha['qtd'] ?></td>
+                                <td><?= $linha['data_entrega'] ?></td>
+                                <td><?= $linha['valor'] ?></td>
+                                <td><?= $linha['observacao'] ?></td>
+                                <td>
+                                    <!-- Chamo o id da Solicitação para a página do formulario-->
+                                    <a href="cotacao.php?id=<?= $linha['id'] ?>" class="btn btn-warning">Editar</a>
+                                    <button class="btn btn-danger btn-excluir" onclick="excluirRegistro('<?= $linha['id'] ?>', 'solicitacao')">Excluir</button>
+                                </td>
+                            </tr>
+                        <?php
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </main>
 
     <script src="https://kit.fontawesome.com/74ecb76a40.js" crossorigin="anonymous"></script>
     <script src="/pi_gandara/js/script.js"></script>
     <script>
-        document.getElementById('id_sol_compra').addEventListener('change', function() {
+        document.getElementById('id_sol_compra').addEventListener('change', function carregaProduto() {
             const solCompraId = this.value;
 
             if (solCompraId) {
@@ -187,6 +231,7 @@ $result_fornecedores = $stmt_fornecedores->get_result();
                             document.getElementById('observacao').value = data.observacao || '';
                             document.getElementById('descricao').value = data.descricao || '';
                             document.getElementById('id_produto').value = data.produto || '';
+                            document.getElementById('data_abertura').value = data.data_criacao || '';
                         } else {
                             console.error(data.error);
                             alert('Nenhum dado encontrado.');
@@ -197,7 +242,19 @@ $result_fornecedores = $stmt_fornecedores->get_result();
                 document.getElementById('observacao').value = '';
                 document.getElementById('descricao').value = '';
                 document.getElementById('id_produto').value = '';
+                document.getElementById('data_abertura').value = '';
             }
+        });
+
+        window.addEventListener('DOMContentLoaded', function() {
+            const solCompraD = document.getElementById('descricao').value;
+            const solCompraP = document.getElementById('produto').value;
+            const solCompraO = document.getElementById('observacao').value;
+            const solCompraDc = document.getElementById('data_criacao').value;
+            carregaProduto(solCompraD);
+            carregaProduto(solCompraP);
+            carregaProduto(solCompraO);
+            carregaProduto(solCompraDc); // Preenche a descrição com base no valor inicial
         });
     </script>
 

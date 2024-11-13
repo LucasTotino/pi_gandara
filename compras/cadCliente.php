@@ -232,7 +232,7 @@ $tipo = isset($_GET['tipo_cliente']) && !empty($_GET['tipo_cliente']) ? $_GET['t
                             <tr>
                                 <td><?= $linha['nome'] ?></td>
                                 <td><?= $linha['email'] ?></td>
-                                <td><?= $linha['cpf'] ?></td>
+                                <td><?= $linha['celular'] ?></td>
                                 <td>
                                     <span class="badge <?= $corNivel[$linha['tipo_cliente']] ?>">
                                         <?= $nivel[$linha['tipo_cliente']] ?>

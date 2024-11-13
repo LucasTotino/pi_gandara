@@ -18,7 +18,7 @@
     ?>
   </header>
   <main>
-
+  <h1 class="text-center">COMPRAS</h1>
     <div class="container">
 
       <div class="row p-3 justify-content-center d-flex align-items-center">

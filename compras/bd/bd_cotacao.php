@@ -7,7 +7,7 @@ require "../../utils/conexao.php";
 $idCotacao = isset($_POST['id']) && !empty($_POST['id']) ? $_POST['id'] : null;
 $estado = isset($_POST['status']) && !empty($_POST['status']) ? $_POST['status'] : null;
 $quantidade = isset($_POST['qtd']) && !empty($_POST['qtd']) ? $_POST['qtd'] : null;
-$dataEntrega = isset($_POST['dataentrega']) && !empty($_POST['dataentrega']) ? $_POST['dataentrega'] : null;
+$dataEntrega = isset($_POST['data_entrega']) && !empty($_POST['data_entrega']) ? $_POST['data_entrega'] : null;
 $uniMedida = isset($_POST['u_medida']) && !empty($_POST['u_medida']) ? $_POST['u_medida'] : null;
 $valor = isset($_POST['valor']) && !empty($_POST['valor']) ? $_POST['valor'] : null;
 $idSolCompra = isset($_POST['id_sol_compra']) && !empty($_POST['id_sol_compra']) ? $_POST['id_sol_compra'] : null;
@@ -18,8 +18,8 @@ $acao = isset($_POST['acao']) && !empty($_POST['acao']) ? $_POST['acao'] : null;
 
 if ($acao == "INCLUIR") {
 
-    $sql = "INSERT INTO cotacao (id, id_sol_compra, estado, qtd, data_entrega, u_medida, id_fornecedor, valor) 
-    VALUE (?, ?, ?, ?, ?, ?, ?, ?);";
+    $sql = "INSERT INTO cotacao (id_sol_compra, estado, qtd, data_entrega, u_medida, id_fornecedor, valor) 
+    VALUE (?, ?, ?, ?, ?, ?, ?);";
 
     // Utilizaremos o Prepare Statement para manipular os dados no BD 
     // Esse recurso já possui proteção contra alguns ataques, como SQL INJECTION 
@@ -32,14 +32,13 @@ if ($acao == "INCLUIR") {
     // i = inteiro, d = flutuante (casas decaimais), s = texto(com tudo que não é numero)
     $stmt->bind_param(
         "isdssid",
-        $idCotacao,
+        $idSolCompra,
         $estado,
         $quantidade,
         $dataEntrega,
         $uniMedida,
-        $valor,
-        $idSolCompra,
-        $idFornecedor
+        $idFornecedor,
+        $valor
     );
 
     // A função execute envia o script SQL todo arrumado para o BD, com as variaveis 
@@ -48,8 +47,8 @@ if ($acao == "INCLUIR") {
     try {
         if ($stmt->execute()) {
             // Pega o numero do ID que foi inserido no BD
-            $idCotacao = $conn->insert_id;
-            echo $idCotacao;
+            $idCadCotacao = $conn->insert_id;
+            echo $idCadCotacao;
 
             header('Location: /pi_gandara/compras/cotacao.php');
         } else {
@@ -85,15 +84,15 @@ if ($acao == "INCLUIR") {
         WHERE id = ?;";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param(
-        "isdssid",
-        $idCotacao,
+        "isdssidi",
+        $idSolCompra,
         $estado,
         $quantidade,
         $dataEntrega,
         $uniMedida,
+        $idFornecedor,
         $valor,
-        $idSolCompra,
-        $idFornecedor
+        $idCotacao
     );
     try {
         if ($stmt->execute()) {
