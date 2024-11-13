@@ -23,39 +23,19 @@
       <h1 style="text-align: center;" class="col-11 display-4">Contas a Pagar</h1>
     </div>
 
-    <section class="button-section">
-      <div class="row justify-content-center">
-        <div class="col-md-3">
-          <a href="#" class="btn btn-primary ">
-            <span class="fa-solid fa-money-bill-transfer fa-4x " aria-hidden="true"></span>
-            <div class="card-body">
-              <h3>Novo Pagamento</h3>
-            </div>
-          </a>
-        </div>
-        <div class="col-md-3">
-          <a href="#" class="btn btn-primary">
-            <span class="fa-solid fa-file-invoice fa-4x" aria-hidden="true"></span>
-            <div class="card-body">
-              <h3>Ver Faturas</h3>
-            </div>
-          </a>
-        </div>
-        <div class="col-md-3">
-          <a href="#" class="btn btn-primary">
-            <span class="fa-solid fa-clock fa-4x" aria-hidden="true"></span>
-            <div class="card-body">
-              <h3>Histórico de Pagamento</h3>
-            </div>
-          </a>
-        </div>
-      </div>
-    </section>
+    <div class="d-flex justify-content-center">
+      <form class="form-inline">
+        <input class="form-control mr-sm-2" type="text" placeholder="Pesquisar faturas...">
+        <button class="btn btn-primary my-2 my-sm-0" type="submit">Buscar</button>
+      </form>
+    </div>
+
+    </div>
 
     <section class="data-grid-section">
       <div class="row justify-content-center">
         <div class="col-md-12">
-          <input type="search" id="pesquisar-faturas" placeholder="Pesquisar faturas...">
+          
           <table class="table table-striped table-bordered">
             <thead>
               <tr>
@@ -79,6 +59,8 @@
               <li class="page-item"><a class="page-link" href="#">Próximo</a></li>
             </ul>
           </div>
+
+
         </div>
       </div>
     </section>

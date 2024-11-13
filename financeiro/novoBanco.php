@@ -1,15 +1,60 @@
+<?php
+require '../utils/conexao.php';
+// Verifica se veio um id na URL
+$id = isset($_GET['id']) ? $_GET['id'] : false;
+$cor = ($id) ? "btn-warning" : "btn-success";
+// Caso tenha um ID faz A busca do Produto no BD
+if ($id) {
+    $sql = "SELECT * FROM cad_novobanco WHERE id=?;";
+    $stmt = $conn->prepare($sql);
+    // Troca o ? pelo ID que veio na URL
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+
+    $dados = $stmt->get_result();
+
+    // Verifica se encontrou o Produto ou se ele existe no BD
+    if ($dados->num_rows > 0) {
+        // Coloca os dados do usuário em uma variavel como array
+        $produto = $dados->fetch_assoc();
+    } else {
+        // Se não encontrou um Produto retorna para a página anterior.
+?>
+
+        <script>
+            history.back();
+        </script>
+<?php
+    }
+}
+
+// Prepara a consulta SQL
+$sql = "SELECT * FROM cad_novobanco;";
+
+// Seleciona apenas os campos que serão usados
+$sql_eficiente = " SELECT id, instituicao, numeroConta, codBanco, tipoConta, moeda, anotacoes FROM cad_novobanco;";
+
+// Envia o SQL para o Prepare Statement:
+$stmt = $conn->prepare($sql);
+
+//Executa a consulta SQL
+$stmt->execute();
+
+//Pega o resultado e adiciona em uma variavel
+$dados = $stmt->get_result();
+
+?>
 <!doctype html>
 <html lang="pt-br">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" href="/pi_gandara/css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.css" crossorigin="anonymous">
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/pi_gandara/css/style.css">
-    <title>Cadastrar novo Banco</title>
+
+    <title>Cadastrar Novo Banco</title>
 </head>
 
 <body>
@@ -18,58 +63,92 @@
         include_once('../utils/menu.php');
         ?>
     </header>
-
-
     <main>
-        <form>
-            <div class="container">
-                <h2>Cadastrar nova conta bancária</h2>
-                <hr>
+        <h1 style="text-align: center;" class="col-11 display-4">Cadastrar nova conta bancária</h1>
+        <!-- Confirmação Email e Senha -->
 
-                <!-- Informações do Banco -->
-                <div class="form-row">
-                    <div class="form-group col-md-4">
-                        <label for="nomeBanco">Nome do Banco:</label>
-                        <input type="text" class="form-control" id="nomeBanco" placeholder="Insira o nome do banco">
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="codigoBanco">Código do Banco:</label>
-                        <input type="text" class="form-control" id="codigoBanco" placeholder="Insira o código do banco">
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="enderecoBanco">Endereço do Banco:</label>
-                        <input type="text" class="form-control" id="enderecoBanco" placeholder="Insira o endereço do banco">
-                    </div>
-                </div>
+        <div class="container">
+            <div class="card card-cds">
+                <form class="mt-3 mb-3 ml-3 mr-3" action="/pi_gandara/compras/bd/bd_produto.php" method="POST">
+                    <input type="hidden" id="id" name="id" value="<?= isset($_GET['id']) ? $_GET['id'] : null ?>">
+                    <input type="hidden" name="acao" id="acao" value="<?= isset($_GET['id']) ? "ALTERAR" : "INCLUIR" ?>">
+                    <div class="form-group">
 
-                <!-- Informações da Conta -->
-                <div class="form-row">
-                    <div class="form-group col-md-4">
-                        <label for="numeroConta">Número da Conta:</label>
-                        <input type="text" class="form-control" id="numeroConta" placeholder="Insira o número da conta">
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="tipoConta">Tipo de Conta:</label>
-                        <select class="form-control" id="tipoConta">
-                            <option value="" selected >Selecione o tipo da conta</option>
-                            <option value="corrente">Corrente</option>
-                            <option value="poupanca">Poupança</option>
-                            <option value="salario">Salário</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="moeda">Moeda:</label>
-                        <select class="form-control" id="moeda">
-                            <option value="">Selecione a moeda</option>
-                            <option value="BRL" selected>BRL</option>
-                            <option value="USD">USD</option>
-                            <option value="EUR">EUR</option>
-                        </select>
-                    </div>
-                </div>
+                        <div class="form-row justify-content-center mt-2">
+                            <div class="col-sm-6">
+                                <label for="instituicao">Nome do Instituição Financeira</label>
+                                <input type="text" class="form-control" id="instituicao" name="instituicao"
+                                    value="<?= ($id) ? $instituicao['instituicao'] : null ?>">
+                            </div>
+                            <div class="col-sm-4">
+                                <label for="numeroConta">Número da Conta</label>
+                                <input type="numeroConta" class="form-control" id="numeroConta" name="numeroConta"
+                                    value="<?= ($id) ? $numeroConta['numeroConta'] : null ?>">
+                            </div>
+                            <div class="col-sm-2">
+                                <label for="codBanco">Código do Banco</label>
+                                <span href="https://proplad.furg.br/images/Lista_Cdigo_de_Bancos.pdf" class="fa-solid fa-circle-question fa-beat" style="--fa-animation-duration: 5s;" aria-hidden="true"></span>
+                                <input type="text" class="form-control" id="codBanco" name="codBanco"
+                                    value="<?= ($id) ? $codBanco['codBanco'] : null ?>">
+                            </div>
+                            
+                        </div>
 
+                        <br>
 
-<!-- 
+                        <div class="form-row justify-content-center mt-2">
+                            <div class="col-sm-3">
+                                <label for="tipoConta">Tipo da Conta:</label>
+                                <select type="tipoConta" class="form-control" id="tipoConta" name="tipoConta">
+                                    <option value="corrente" selected>Corrente</option>
+                                    <option value="poupanca">Poupança</option>
+                                    <option value="salario">Salário</option>
+                                    value="<?= ($id) ? $tipoConta['tipoConta'] : null ?>">
+                                </select>
+                            </div>
+
+                            <div class="col-sm-3">
+                                <label for="tipoConta">Selecione a Moeda:</label>
+                                <select type="moeda" class="form-control" id="moeda" name="moeda">
+                                    <option value="BRL" selected>BRL</option>
+                                    <option value="USD">USD</option>
+                                    <option value="EUR">EUR</option>
+                                    value="<?= ($id) ? $moeda['moeda'] : null ?>">
+                                </select>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label for="anotacoes">Anotações:</label>
+                                <textarea class="form-control" id="anotacoes" placeholder="Insira anotações"></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Botões -->
+                        <div class="form-row justify-content-center">
+                            <div class="col-sm-3 mt-3">
+                                <button type="submit" name="submit" class="btn btn-success">Cadastrar</button>
+                            </div>
+                            <div class="col-sm-3 mt-3">
+                                <button type="reset" class="btn btn-warning">Cancelar</button>
+                            </div>
+                            <div class="col-sm-3 mt-3">
+                                <a href="/pi_gandara/financeiro/gerBancario.php"><button type="button" class="btn btn-danger">Voltar</button></a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="https://kit.fontawesome.com/74ecb76a40.js" crossorigin="anonymous"></script>
+    <script src="/pi_gandara/js/script.js"></script>
+</body>
+
+</html>
+
+                <!-- 
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <label for="dataDaTransacao">Data da Transação:</label>
@@ -120,21 +199,3 @@
                     </div>
 
                 </div> -->
-
-                <div class="form-group col-md-4">
-                        <label for="anotacoes">Anotações:</label>
-                        <textarea class="form-control" id="anotacoes" placeholder="Insira anotações"></textarea>
-                </div>
-
-                    <a type="button" style="text-align: center;" class="col-2 btn btn-success justify-content-center d-flex" href="/pi_gandara/financeiro/gerBancario.php">SALVAR</a>
-            </div>
-        </form>
-    </main>
-
-
-
-
-    <script src="https://kit.fontawesome.com/74ecb76a40.js" crossorigin="anonymous"></script>
-</body>
-
-</html>
