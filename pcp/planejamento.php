@@ -20,7 +20,30 @@
 <body>
 
 <div class="container">
-  <h4>Colocar um calendário com as datas de plantio, onde é exibido, de acordo com as datas previstas e espaçamentos de tempos(se possível maracar automaticamente, no calendário, as datas de plantio, adubação, colheita e tudo mais)</h4>
+  <h3 class="m-4">Planejamento das plantações</h3>
+  <div class="row m-5">
+    <div class="col-3 card">
+      
+      <h5>Nome da Plantação</h5>
+      <div class="row">
+        <div class="col-12">
+          Área plantada
+        </div>
+      </div>
+    </div>
+
+    <div class="col-3 card">
+    <h5>Nome da Plantação</h5>
+    </div>
+
+    <div class="col-3 card">
+    <h5>Nome da Plantação</h5>
+    </div>
+    
+    <div class="col-3 card">
+    <h5>Nome da Plantação</h5>
+    </div>
+  </div> <!--Fim da row-->
 </div>
 
 
