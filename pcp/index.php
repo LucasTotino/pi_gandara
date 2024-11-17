@@ -18,10 +18,11 @@
     ?>
     </header>
   <main>
+    <h1 class="justify-content-center d-flex align-items-center m-5">Planejamento e Controle da Produção </h1>
     <div class="container">
-      <div class="row p-5 justify-content-center d-flex align-items-center">
+      <div class="row  justify-content-center d-flex align-items-center">
         <a href="/pi_gandara/pcp/planejamento.php" class="btn">
-          <div class="col-6 p-5 m-1">
+          <div class="col-4 m-2">
             <div style="width: 18rem;">
               <span class="fa fa-columns fa-5x" aria-hidden="true"></span>
               <div class="card-body">
@@ -31,22 +32,34 @@
           </div>
         </a>
 
-        <a href="/pi_gandara/pcp/controleProd.php" class="btn">
-          <div class="col-6 p-5 m-1">
-            <div style="width: 18rem;">
-              <span class="fa fa-industry fa-5x" aria-hidden="true"></span>
-              <div class="card-body">
-                <h3>Controle de Produção</h3>
-              </div>
+        <a href="/pi_gandara/pcp/planPlantacao.php" class="btn">
+            <div class="col-4 m-2">
+                <div style="width: 18rem;">
+                    <span class="fa fa-book fa-5x" aria-hidden="true"></span>
+                    <div class="card-body">
+                        <h3>Planejamento de Plantação</h3>
+                    </div>
+                </div>
             </div>
-          </div>
+        </a>
+
+        <a href="/pi_gandara/pcp/acompProducao.php" class="btn">
+            <div class="col-4 m-2">
+                <div style="width: 18rem;">
+                    <span class="fa fa-inbox fa-5x" aria-hidden="true"></span>
+                    <div class="card-body">
+                        <h3>Acompanhamento da Produção</h3>
+                    </div>
+                </div>
+            </div>
         </a>
 
       </div> <!--Fim da row -->
 
-      <div class="row p-5 justify-content-center d-flex align-items-center">
+      <div class="row justify-content-center d-flex align-items-center">
         <a href="/pi_gandara/pcp/qualidade.php" class="btn">
-          <div class="col-6 p-5 m-1">
+
+          <div class="col-4  m-2">
             <div style="width: 18rem;">
               <span class="fa fa-check-circle fa-5x" aria-hidden="true"></span>
               <div class="card-body">
@@ -55,15 +68,26 @@
             </div>
           </div>
         </a>
-        <a href="/pi_gandara/pcp/insumos.php" class="btn">
-          <div class="col-6 p-5 m-1">
-            <div style="width: 18rem;">
-              <span class="fa fa fa-truck fa-5x" aria-hidden="true"></span>
-              <div class="card-body">
-                <h3>Insumos</h3>
-              </div>
+        <a href="/pi_gandara/pcp/cadastroInsumo.php" class="btn">
+            <div class="col-4  m-2">
+                <div style="width: 18rem;">
+                    <span class="fa fa-book fa-5x" aria-hidden="true"></span>
+                    <div class="card-body">
+                        <h3>Solicitação de cadastro de Insumos</h3>
+                    </div>
+                </div>
             </div>
-          </div>
+        </a>
+
+        <a href="/pi_gandara/pcp/reqMat.php" class="btn">
+            <div class="col-4  m-2">
+                <div style="width: 18rem;">
+                    <span class="fa fa-inbox fa-5x" aria-hidden="true"></span>
+                    <div class="card-body">
+                        <h3>Solicitação de Materiais</h3>
+                    </div>
+                </div>
+            </div>
         </a>
       </div> <!--Fim da row -->
 
