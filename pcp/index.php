@@ -35,7 +35,7 @@
         <a href="/pi_gandara/pcp/planPlantacao.php" class="btn">
             <div class="col-4 m-2">
                 <div style="width: 18rem;">
-                    <span class="fa fa-book fa-5x" aria-hidden="true"></span>
+                    <span class="fa-solid fa-seedling fa-5x" aria-hidden="true"></span>
                     <div class="card-body">
                         <h3>Planejamento de Plantação</h3>
                     </div>
@@ -46,7 +46,7 @@
         <a href="/pi_gandara/pcp/acompProducao.php" class="btn">
             <div class="col-4 m-2">
                 <div style="width: 18rem;">
-                    <span class="fa fa-inbox fa-5x" aria-hidden="true"></span>
+                    <span class="fa-solid fa-file-pen fa-5x" aria-hidden="true"></span>
                     <div class="card-body">
                         <h3>Acompanhamento da Produção</h3>
                     </div>
@@ -82,7 +82,7 @@
         <a href="/pi_gandara/pcp/reqMat.php" class="btn">
             <div class="col-4  m-2">
                 <div style="width: 18rem;">
-                    <span class="fa fa-inbox fa-5x" aria-hidden="true"></span>
+                    <span class="fa-solid fa-truck-fast fa-5x" aria-hidden="true"></span>
                     <div class="card-body">
                         <h3>Solicitação de Materiais</h3>
                     </div>
