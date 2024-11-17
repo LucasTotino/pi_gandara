@@ -3,7 +3,7 @@
 --
 
 CREATE TABLE 'agendamento_plantacao'(
-    `id` int(11) NOT NULL,
+    `id` int(11) NOT NULL,  --(primaria)
     `nome_plantio` varchar(100),
     `area_plantio` float,
     `data_plantio` date,
@@ -17,8 +17,8 @@ CREATE TABLE 'agendamento_plantacao'(
 --
 
 CREATE TABLE 'medicao_producao'(
-    `id` int(11) NOT NULL,
-    `nome_plantio` varchar(100),--Mesmo que o da tabela acima
+    `id` int(11) NOT NULL, -- (primaria)
+    `nome_plantio` varchar(100),--Mesmo que o da tabela acima (estrangeira)
     `diametro_fruto` float,
     `praga` date,
     `obs_medicao` varchar(200),
@@ -31,9 +31,9 @@ CREATE TABLE 'medicao_producao'(
 --
 
 CREATE TABLE 'cadastro_insumo'(
-    `id` int(11) NOT NULL,
-    `nome_insumo` varchar(100),--Mesmo que o da tabela acima
-    `cod_ref` float,
+    `id` int(11) NOT NULL, --(primaria)
+    `nome_insumo` varchar(100),
+    `cod_ref` float, --(estrangeira)
     `qtde_utilizada` date,
     `unidade` varchar(20),
     `prazo_util` float,
