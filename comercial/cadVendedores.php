@@ -19,7 +19,7 @@
   <main>
     <h1 class="text-center">COMERCIAL E FATURAMENTO</h1>
     <div class="container">
-      <h3 class="text-center">Cadastro de Vendedores Internos</h3>
+      <h3 class="text-center">Cadastro de Vendedores</h3>
       <div class="card card-cds">
         <form class="mt-3 mb-3 ml-3 mr-3" id="userform" action="" method="POST">
 
@@ -73,13 +73,21 @@
           <h4 class="text-start">Outros:</h4>
 
           <div class="form-row">
-            <div class="form-group col-md-4 text-white">
+            <div class="form-group col-md-2 text-white">
               <label class="text-dark" for=""><b>% Comissão:</b></label>
               <input type="text" class="form-control" id="" name="">
             </div>
-            <div class="form-group col-md-4 text-white">
-              <label class="text-dark" for=""><b>% Máximo de desconto</b></label>
+            <div class="form-group col-md-3 text-white">
+              <label class="text-dark" for=""><b>% Máximo de desconto:</b></label>
               <input type="text" class="form-control" id="" name="">
+            </div>
+            <div class="form-group col-md-3 text-white">
+              <label class="text-dark" for=""><b>Tipo de Vendedor:</b></label>
+              <select id="" name="" class="form-control">
+                <option value="" selected>-- ESCOLHA --</option>
+                <option value="">Interno</option>
+                <option value="">Externo</option>
+              </select>
             </div>
             <div class="form-group col-md-4 text-white">
               <label class="text-dark" for=""><b>Status:</b></label>
@@ -106,6 +114,33 @@
           </div> <!-- BOTÕES -->
 
         </form> <!-- End Form -->
+      </div>
+
+      <hr>
+      
+      <div class="card">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Nº</th>
+              <th scope="col">Nome</th>
+              <th scope="col">CPF/CNPJ</th>
+              <th scope="col">%Comissão</th>
+              <th scope="col">Tipo</th>
+              <th scope="col">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>Guilherme Alves</td>
+              <td>46855531269</td>
+              <td>%5</td>
+              <td>Interno</td>
+              <td>Ativo</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </main>
