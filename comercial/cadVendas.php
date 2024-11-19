@@ -24,18 +24,20 @@
         <form class="mt-3 mb-3 ml-3 mr-3" id="userform" action="" method="POST">
 
           <div class="form-row">
-            <div class="form-group col-md-8 text-white">
-              <label class="text-dark" for=""><b>Razão Social:</b></label>
+            <div class="form-group col-md-2 text-white">
+              <label class="text-dark" for=""><b>Cod. Vendedor:</b></label>
+              <input type="tel" class="form-control" id="" name="">
+            </div>
+            <div class="form-group col-md-6 text-white">
+              <label class="text-dark" for=""><b>Nome/Razão Social:</b></label>
               <input type="text" class="form-control" id="" name="">
             </div>
             <div class="form-group col-md-2 text-white">
               <label class="text-dark" for=""><b>Tipo da Venda:</b></label>
               <select id="" name="" class="form-control">
                 <option value="" selected>-- ESCOLHA --</option>
-                <option value="">1</option>
-                <option value="">2</option>
-                <option value="">3 </option>
-                <option value="">4</option>
+                <option value="">Presencial</option>
+                <option value="">Digital</option>
               </select>
             </div>
             <div class="form-group col-md-2 text-white">
