@@ -20,7 +20,8 @@ CREATE TABLE 'medicao_producao'(
     `id` int(11) NOT NULL, -- (primaria)
     `nome_plantio` varchar(100),--Mesmo que o da tabela acima (estrangeira)
     `diametro_fruto` float,
-    `praga` date,
+    `praga` boolean,
+    `adubo` boolean,
     `obs_medicao` varchar(200),
     `espacamento_mudas` float,
     `fruto` varchar(20)

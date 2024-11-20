@@ -26,7 +26,7 @@
             <div style="width: 18rem;">
               <span class="fa fa-columns fa-5x" aria-hidden="true"></span>
               <div class="card-body">
-                <h3>Planejamento</h3>
+                <h3>Relatório</h3>
               </div>
             </div>
           </div>

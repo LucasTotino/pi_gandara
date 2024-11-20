@@ -49,8 +49,6 @@
 
         </div>
 
-
-
         <div class="form-row justify-content-center mt-2">
           <div class="col-sm-4">
             <label for="diametroMed">Diâmetro da Fruta (cm)</label>

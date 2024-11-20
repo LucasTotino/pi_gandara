@@ -20,7 +20,7 @@
 <body>
 
 <div class="container">
-  <h3 class="m-4">Planejamento das plantações</h3>
+  <h3 class="m-4">Relatório das plantações</h3>
   <div class="row m-5">
     <div class="col-3 card">
       
