@@ -67,15 +67,15 @@ if (isset($_POST['submit'])) {
                         <input type="number" class="form-control" id="diametroFruto" name="diametroFruto">
                     </div>
 
-
+                    <div class="col-sm-4">
+                        <label for="praga">Necessário adubação ?</label>
+                        <input type="text" class="form-control" id="praga" name="praga">
+                    </div>
 
                     <div class="col-sm-4">
                         <label for="praga">Qual praga foi observada?</label>
                         <input type="text" class="form-control" id="praga" name="praga">
                     </div>
-
-
-
 
                 </div>
                 <div class="form-row justify-content-center mt-2">
