@@ -52,7 +52,7 @@ if (isset($_POST['submit'])) {
                         <input type="text" class="form-control" id="nomePlantio" name="nomePlantio">
                     </div>
                     <div class="col-sm-2">
-                        <label for="areaPlantio">Área de plantio (m²)</label>
+                        <label for="areaPlantio">Área de plantio (ha)</label>
                         <input type="number" class="form-control" id="areaPlantio" name="areaPlantio">
                     </div>
                     <div class="col-sm-3">
