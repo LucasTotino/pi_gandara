@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Tempo de geração: 25/10/2024 às 12:34
+-- Tempo de geração: 20/11/2024 às 00:13
 -- Versão do servidor: 10.4.28-MariaDB
 -- Versão do PHP: 8.2.4
 
@@ -20,6 +20,22 @@ SET time_zone = "+00:00";
 --
 -- Banco de dados: `bd_ceres`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `agendamento_plantacao`
+--
+
+CREATE TABLE `agendamento_plantacao` (
+  `id` int(11) NOT NULL,
+  `nome_plantio` varchar(100) DEFAULT NULL,
+  `area_plantio` float DEFAULT NULL,
+  `data_plantio` date DEFAULT NULL,
+  `data_colheita` date DEFAULT NULL,
+  `espacamento_mudas` float DEFAULT NULL,
+  `fruto` varchar(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -70,6 +86,21 @@ CREATE TABLE `cadastro_funcionarios` (
   `fpChavePix` varchar(50) DEFAULT NULL,
   `fpAgenciaConta` varchar(20) DEFAULT NULL,
   `fpObservacoes` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `cadastro_insumo`
+--
+
+CREATE TABLE `cadastro_insumo` (
+  `id` int(11) NOT NULL,
+  `nome_insumo` varchar(100) DEFAULT NULL,
+  `cod_ref` float DEFAULT NULL,
+  `qtde_utilizada` int(11) DEFAULT NULL,
+  `unidade` varchar(20) DEFAULT NULL,
+  `prazo_util` float DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -177,7 +208,7 @@ CREATE TABLE `cad_cliente` (
   `cpf_cnpj` varchar(18) DEFAULT NULL,
   `tipo_cliente` int(11) DEFAULT NULL,
   `email` varchar(150) DEFAULT NULL,
-  `celular` varchar(14) DEFAULT NULL,
+  `celular` varchar(15) DEFAULT NULL,
   `logradouro` varchar(150) DEFAULT NULL,
   `numero` int(11) DEFAULT NULL,
   `complemento` varchar(20) DEFAULT NULL,
@@ -237,7 +268,8 @@ CREATE TABLE `cad_nat_financeira` (
   `cod_pai` varchar(6) DEFAULT NULL,
   `tipo_nat` int(11) DEFAULT NULL,
   `data_inclusao` date DEFAULT NULL,
-  `mov_bancaria` tinyint(1) DEFAULT NULL
+  `mov_bancaria` int(11) DEFAULT NULL,
+  `uso_nat` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -255,6 +287,22 @@ CREATE TABLE `cad_nfs` (
   `estado` varchar(2) DEFAULT NULL,
   `bairro` varchar(50) DEFAULT NULL,
   `cidade` varchar(150) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `cad_novobanco`
+--
+
+CREATE TABLE `cad_novobanco` (
+  `id` int(11) NOT NULL,
+  `nomeInstituicao` varchar(100) DEFAULT NULL,
+  `numeroConta` varchar(20) DEFAULT NULL,
+  `codBanco` char(3) DEFAULT NULL,
+  `tipoConta` varchar(15) DEFAULT NULL,
+  `moeda` varchar(3) DEFAULT NULL,
+  `anotacoes` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -296,14 +344,28 @@ CREATE TABLE `cotacao` (
   `id` int(11) NOT NULL,
   `id_sol_compra` int(11) DEFAULT NULL,
   `estado` int(11) DEFAULT NULL,
-  `descricao` varchar(200) DEFAULT NULL,
-  `data_abertura` date DEFAULT NULL,
-  `id_produto` int(11) DEFAULT NULL,
+  `valor` float DEFAULT NULL,
   `qtd` float DEFAULT NULL,
   `data_entrega` date DEFAULT NULL,
   `u_medida` varchar(10) DEFAULT NULL,
   `id_fornecedor` int(11) DEFAULT NULL,
   `observacoes` varchar(200) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `medicao_producao`
+--
+
+CREATE TABLE `medicao_producao` (
+  `id` int(11) NOT NULL,
+  `id_nome_plantio` int(11) NOT NULL,
+  `diametro_fruto` float DEFAULT NULL,
+  `praga` date DEFAULT NULL,
+  `obs_medicao` varchar(200) DEFAULT NULL,
+  `espacamento_mudas` float DEFAULT NULL,
+  `fruto` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -374,6 +436,12 @@ CREATE TABLE `usuarios` (
 --
 
 --
+-- Índices de tabela `agendamento_plantacao`
+--
+ALTER TABLE `agendamento_plantacao`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Índices de tabela `cadastro_descontos`
 --
 ALTER TABLE `cadastro_descontos`
@@ -384,6 +452,12 @@ ALTER TABLE `cadastro_descontos`
 --
 ALTER TABLE `cadastro_funcionarios`
   ADD PRIMARY KEY (`id_cad_funcionario`);
+
+--
+-- Índices de tabela `cadastro_insumo`
+--
+ALTER TABLE `cadastro_insumo`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Índices de tabela `cadastro_nota_saida`
@@ -449,6 +523,12 @@ ALTER TABLE `cad_nfs`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Índices de tabela `cad_novobanco`
+--
+ALTER TABLE `cad_novobanco`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Índices de tabela `cad_produtos`
 --
 ALTER TABLE `cad_produtos`
@@ -466,8 +546,14 @@ ALTER TABLE `cad_venda`
 ALTER TABLE `cotacao`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_fk_sol_compra` (`id_sol_compra`),
-  ADD KEY `id_fk_produto_cotacao` (`id_produto`),
   ADD KEY `id_fk_fornecedor_cotacao` (`id_fornecedor`);
+
+--
+-- Índices de tabela `medicao_producao`
+--
+ALTER TABLE `medicao_producao`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_nome_plantio` (`id_nome_plantio`);
 
 --
 -- Índices de tabela `pedido_compra`
@@ -496,6 +582,12 @@ ALTER TABLE `usuarios`
 --
 
 --
+-- AUTO_INCREMENT de tabela `agendamento_plantacao`
+--
+ALTER TABLE `agendamento_plantacao`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de tabela `cadastro_descontos`
 --
 ALTER TABLE `cadastro_descontos`
@@ -506,6 +598,12 @@ ALTER TABLE `cadastro_descontos`
 --
 ALTER TABLE `cadastro_funcionarios`
   MODIFY `id_cad_funcionario` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `cadastro_insumo`
+--
+ALTER TABLE `cadastro_insumo`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `cadastro_nota_saida`
@@ -568,6 +666,12 @@ ALTER TABLE `cad_nfs`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de tabela `cad_novobanco`
+--
+ALTER TABLE `cad_novobanco`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de tabela `cad_produtos`
 --
 ALTER TABLE `cad_produtos`
@@ -583,6 +687,12 @@ ALTER TABLE `cad_venda`
 -- AUTO_INCREMENT de tabela `cotacao`
 --
 ALTER TABLE `cotacao`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `medicao_producao`
+--
+ALTER TABLE `medicao_producao`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -612,8 +722,13 @@ ALTER TABLE `usuarios`
 --
 ALTER TABLE `cotacao`
   ADD CONSTRAINT `id_fk_fornecedor_cotacao` FOREIGN KEY (`id_fornecedor`) REFERENCES `cad_fornecedor` (`id`),
-  ADD CONSTRAINT `id_fk_produto_cotacao` FOREIGN KEY (`id_produto`) REFERENCES `cad_produtos` (`id`),
   ADD CONSTRAINT `id_fk_sol_compra` FOREIGN KEY (`id_sol_compra`) REFERENCES `sol_compra` (`id`);
+
+--
+-- Restrições para tabelas `medicao_producao`
+--
+ALTER TABLE `medicao_producao`
+  ADD CONSTRAINT `medicao_producao_ibfk_1` FOREIGN KEY (`id_nome_plantio`) REFERENCES `agendamento_plantacao` (`id`);
 
 --
 -- Restrições para tabelas `pedido_compra`
