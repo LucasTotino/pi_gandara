@@ -55,12 +55,13 @@ $result_usuarios = $stmt_usuarios->get_result();
 
 // Substitui o valor INT no banco de dados pelo nome do setor que fez a solicitação
 $nivel = array(
-    'Comercial',
+    '',
     'Folha de Pagamento',
     'Financeiro',
     'PCP',
     'Compras',
-    'Estoque'
+    'Estoque',
+    'Comercial'
 );
 ?>
 
@@ -170,18 +171,18 @@ $nivel = array(
                                 <label for="origem" class="text-danger font-weight-bold">Origem:</label>
                                 <select class="form-control" id="origem" name="origem">
                                     <option value=""> -- ESCOLHA -- </option>
-                                    <option <?= (isset($_GET['id']) && $solCompra['origem'] == 1) ? "selected" : null ?>
+                                    <option <?= (isset($_GET['id']) && $solCompra['origem'] == 5) ? "selected" : null ?>
                                         value="5">Estoque</option>
-                                    <option <?= (isset($_GET['id']) && $solCompra['origem'] == 0) ? "selected" : null ?>
+                                    <option <?= (isset($_GET['id']) && $solCompra['origem'] == 4) ? "selected" : null ?>
                                         value="4">Compras</option>
-                                    <option <?= (isset($_GET['id']) && $solCompra['origem'] == 0) ? "selected" : null ?>
+                                    <option <?= (isset($_GET['id']) && $solCompra['origem'] == 3) ? "selected" : null ?>
                                         value="3">PCP</option>
-                                    <option <?= (isset($_GET['id']) && $solCompra['origem'] == 0) ? "selected" : null ?>
+                                    <option <?= (isset($_GET['id']) && $solCompra['origem'] == 2) ? "selected" : null ?>
                                         value="2">Financeiro</option>
-                                    <option <?= (isset($_GET['id']) && $solCompra['origem'] == 0) ? "selected" : null ?>
+                                    <option <?= (isset($_GET['id']) && $solCompra['origem'] == 1) ? "selected" : null ?>
                                         value="1">Folha de Pagamento</option>
-                                    <option <?= (isset($_GET['id']) && $solCompra['origem'] == 0) ? "selected" : null ?>
-                                        value="0">Comercial</option>
+                                    <option <?= (isset($_GET['id']) && $solCompra['origem'] == 6) ? "selected" : null ?>
+                                        value="6">Comercial</option>
                                 </select>
                             </div>
                         </div>
@@ -231,7 +232,7 @@ $nivel = array(
                                 <td><?= $linha['produto'] ?></td>
                                 <td><?= $linha['nome'] ?></td>
                                 <td>
-                                    <span">
+                                    <span>
                                         <?= $nivel[$linha['origem']] ?>
                                         </span>
                                 </td>

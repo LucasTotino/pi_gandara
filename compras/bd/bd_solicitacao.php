@@ -33,7 +33,7 @@ if ($acao == "INCLUIR") {
     // O primeiro parametro é o tipo do dado, os demais são apenas as variaveis com os dados.
     // i = inteiro, d = flutuante (casas decaimais), s = texto(com tudo que não é numero)
     $stmt->bind_param(
-        "iisdssss",
+        "iisdsssi",
         $idProduto,
         $idCriador,
         $observacao,
@@ -88,7 +88,7 @@ if ($acao == "INCLUIR") {
         WHERE id = ?;";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param(
-        "iisdssssi",
+        "iisdsssii",
         $idProduto,
         $idCriador,
         $observacao,
