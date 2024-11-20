@@ -105,7 +105,7 @@ if (isset($_POST['submit'])) {
                         <button type="reset" class="btn btn-warning">Cancelar</button>
                     </div>
                     <div class="col-sm-3 mt-3">
-                        <a href="/pi_gandara/compras/index.php"><button type="button" class="btn btn-danger">Voltar</button></a>
+                        <a href="index.php"><button type="button" class="btn btn-danger">Voltar</button></a>
                     </div>
                 </div>
             </form>
