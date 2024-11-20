@@ -24,18 +24,21 @@
         <form class="mt-3 mb-3 ml-3 mr-3" id="userform" action="" method="POST">
 
           <div class="form-row">
-            <div class="form-group col-md-8 text-white">
-              <label class="text-dark" for=""><b>Razão Social:</b></label>
+            <div class="form-group col-md-2 text-white">
+              <label class="text-dark" for=""><b>Nº Pedido:</b></label>
+              <input type="tel" class="form-control" id="" name="">
+            </div>
+            <div class="form-group col-md-6 text-white">
+              <label class="text-dark" for=""><b>Nome/Razão Social:</b></label>
               <input type="text" class="form-control" id="" name="">
             </div>
             <div class="form-group col-md-2 text-white">
               <label class="text-dark" for=""><b>Tipo da Venda:</b></label>
               <select id="" name="" class="form-control">
                 <option value="" selected>-- ESCOLHA --</option>
-                <option value="">1</option>
-                <option value="">2</option>
-                <option value="">3 </option>
-                <option value="">4</option>
+                <option value="">Atacado</option>
+                <option value="">Varejo</option>
+                <option value="">Exportação</option>
               </select>
             </div>
             <div class="form-group col-md-2 text-white">
@@ -44,9 +47,38 @@
             </div>
           </div> <!--  -->
 
+          <div class="form-row">
+            <div class="form-group col-md-2 text-white">
+              <label class="text-dark" for=""><b>Origem da Venda:</b></label>
+              <select id="" name="" class="form-control">
+                <option value="" selected>-- ESCOLHA --</option>
+                <option value="">Verbal</option>
+                <option value="">Telefone</option>
+                <option value="">Correio</option>
+                <option value="">Interligação micro/micro</option>
+              </select>
+            </div>
+            <div class="form-group col-md-4 text-white">
+              <label class="text-dark" for=""><b>Desconto:</b></label>
+              <select id="" name="" class="form-control">
+                <option value="" selected>-- ESCOLHA --</option>
+                <option value="">Nenhum</option>
+                <option value=""></option>
+              </select>
+            </div>
+            <div class="form-group col-md-4 text-white">
+              <label class="text-dark" for=""><b>Transportadora Responsável:</b></label>
+              <select id="" name="" class="form-control">
+                <option value="" selected>-- ESCOLHA --</option>
+                <option value=""></option>
+              </select>
+            </div>
+            
+          </div> <!--  -->
+
           <hr>
 
-          <h4>Informações da Venda:</h4>
+          <h4>Informações da Venda</h4>
           <div class="form-row">
             <div class="form-group col-md-1 text-white">
               <label class="text-dark" for=""><b>Código:</b></label>

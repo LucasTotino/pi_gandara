@@ -26,18 +26,7 @@
             <div style="width: 12rem;">
               <span class="fa fa-solid fa-address-card fa-5x" aria-hidden="true"></span>
               <div class="card-body">
-                <h3>Cadastro de Vendedores Internos</h3>
-              </div>
-            </div>
-          </div>
-        </a>
-
-        <a href="cadRepresentantes.php" class="btn">
-          <div class="col-2 p-2 m-1">
-            <div style="width: 12rem;">
-              <span class="fa fa-solid fa-user-plus fa-5x" aria-hidden="true"></span>
-              <div class="card-body">
-                <h3>Cadastro de Representantes Externos</h3>
+                <h3>Cadastro de Vendedores</h3>
               </div>
             </div>
           </div>
@@ -97,17 +86,6 @@
               <span class="fa fa-solid fa-inbox fa-5x" aria-hidden="true"></span>
               <div class="card-body">
                 <h3>Faturar</h3>
-              </div>
-            </div>
-          </div>
-        </a>
-
-        <a href="relatorio.php" class="btn">
-          <div class="col-2 p-2 m-1">
-            <div style="width: 12rem;">
-              <span class="fa fa-solid fa-book fa-5x" aria-hidden="true"></span>
-              <div class="card-body">
-                <h3>Relatórios</h3>
               </div>
             </div>
           </div>
