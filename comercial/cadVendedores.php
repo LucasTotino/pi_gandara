@@ -25,47 +25,47 @@
 
           <div class="form-row">
             <div class="form-group col-md-7 text-white">
-              <label class="text-dark" for=""><b>Nome/Razão Social:</b></label>
-              <input type="text" class="form-control" id="" name="">
+              <label class="text-dark" for="nomevendedor"><b>Nome/Razão Social:</b></label>
+              <input type="text" class="form-control" id="nomevendedor" name="nomevendedor">
             </div>
             <div class="form-group col-md-3 text-white">
-              <label class="text-dark" for=""><b>CPF/CNPJ:</b></label>
-              <input type="text" class="form-control" id="" name="">
+              <label class="text-dark" for="cpfcnpj"><b>CPF/CNPJ:</b></label>
+              <input type="text" class="form-control" id="cpfcnpj" name="cpfcnpj">
             </div>
             <div class="form-group col-md-2 text-white">
-              <label class="text-dark" for=""><b>Data de Nascimento:</b></label>
-              <input type="date" class="form-control" id="" name="">
+              <label class="text-dark" for="datanasc"><b>Data de Nascimento:</b></label>
+              <input type="date" class="form-control" id="datanasc" name="datanasc">
             </div>
           </div> <!-- Linha 1: Nome dos Vendedores, CPF/CNPJ e Data de Nascimento -->
 
           <div class="form-row">
             <div class="form-group col-md-2 text-white">
-              <label class="text-dark" for=""><b>Cidade:</b></label>
-              <input type="text" class="form-control" id="" name="">
+              <label class="text-dark" for="cidade"><b>Cidade:</b></label>
+              <input type="text" class="form-control" id="cidade" name="cidade">
             </div>
             <div class="form-group col-md-3 text-white">
-              <label class="text-dark" for=""><b>Bairro:</b></label>
-              <input type="text" class="form-control" id="" name="">
+              <label class="text-dark" for="bairro"><b>Bairro:</b></label>
+              <input type="text" class="form-control" id="bairro" name="bairro">
             </div>
             <div class="form-group col-md-6 text-white">
-              <label class="text-dark" for=""><b>Rua:</b></label>
-              <input type="text" class="form-control" id="" name="">
+              <label class="text-dark" for="rua"><b>Rua:</b></label>
+              <input type="text" class="form-control" id="rua" name="rua">
             </div>
             <div class="form-group col-md-1 text-white">
-              <label class="text-dark" for=""><b>Número:</b></label>
-              <input type="text" class="form-control" id="" name="">
+              <label class="text-dark" for="numero"><b>Número:</b></label>
+              <input type="text" class="form-control" id="numero" name="numero">
             </div>
 
           </div> <!-- Linha 2: Cidade,Bairro, Rua e Número -->
 
           <div class="form-row">
             <div class="form-group col-md-9 text-white">
-              <label class="text-dark" for=""><b>Complemento:</b></label>
-              <input type="text" class="form-control" id="" name="">
+              <label class="text-dark" for="complemento"><b>Complemento:</b></label>
+              <input type="text" class="form-control" id="complemento" name="complemento">
             </div>
             <div class="form-group col-md-3 text-white">
-              <label class="text-dark" for=""><b>CEP:</b></label>
-              <input type="text" class="form-control" id="" name="">
+              <label class="text-dark" for="cep"><b>CEP:</b></label>
+              <input type="text" class="form-control" id="cep" name="cep">
             </div>
           </div> <!-- Linha 3: Complemento e CEP -->
 
@@ -74,27 +74,27 @@
 
           <div class="form-row">
             <div class="form-group col-md-2 text-white">
-              <label class="text-dark" for=""><b>% Comissão:</b></label>
-              <input type="text" class="form-control" id="" name="">
+              <label class="text-dark" for="porcentagem_comissao"><b>% Comissão:</b></label>
+              <input type="tel" class="form-control" id="porcentagem_comissao" name="porcentagem_comissao">
             </div>
             <div class="form-group col-md-3 text-white">
-              <label class="text-dark" for=""><b>% Máximo de desconto:</b></label>
-              <input type="text" class="form-control" id="" name="">
+              <label class="text-dark" for="desconto_possivel"><b>% Máximo de desconto:</b></label>
+              <input type="tel" class="form-control" id="desconto_possivel" name="desconto_possivel">
             </div>
             <div class="form-group col-md-3 text-white">
-              <label class="text-dark" for=""><b>Tipo de Vendedor:</b></label>
-              <select id="" name="" class="form-control">
+              <label class="text-dark" for="tipo_vendedor"><b>Tipo de Vendedor:</b></label>
+              <select type="text" id="tipo_vendedor" name="tipo_vendedor" class="form-control">
                 <option value="" selected>-- ESCOLHA --</option>
-                <option value="">Interno</option>
-                <option value="">Externo</option>
+                <option value="int">Interno</option>
+                <option value="ext">Externo</option>
               </select>
             </div>
             <div class="form-group col-md-4 text-white">
-              <label class="text-dark" for=""><b>Status:</b></label>
-              <select id="" name="" class="form-control">
+              <label class="text-dark" for="status_vendedor"><b>Status:</b></label>
+              <select type="text" id="status_vendedor" name="status_vendedor" class="form-control">
                 <option value="" selected>-- ESCOLHA --</option>
-                <option value="">Ativo</option>
-                <option value="">Inativo</option>
+                <option value="ativo">Ativo</option>
+                <option value="inati">Inativo</option>
               </select>
             </div>
           </div> <!-- Linha 4: Comissão, Máximo de desconto e Status -->
