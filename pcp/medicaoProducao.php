@@ -2,7 +2,7 @@
 if (isset($_POST['submit'])) {
 
     // Iniciando conexao
-    include_once('../funcoes/conexao.php');
+    include_once('../utils/conexao.php');
 
     // Variaveis principais
     $nomePlantio = $_POST['nomePlantio'];

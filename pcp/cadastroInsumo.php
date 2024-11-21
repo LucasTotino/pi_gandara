@@ -2,7 +2,7 @@
 if (isset($_POST['submit'])) {
 
     // Iniciando conexao
-    include_once('../funcoes/conexao.php');
+    include_once('../utils/conexao.php');
 
     // Variaveis principais
     $nomeInsumo = $_POST['nome_insumo'];
@@ -48,11 +48,11 @@ if (isset($_POST['submit'])) {
                     <div class="form-row justify-content-center mt-2">
                         <div class="col-sm-6">
                             <label for="nomeInsumo">Nome do Insumo</label>
-                            <input type="text" class="form-control" id="nomeInsumo" name="nomeInsumo">
+                            <input type="text" class="form-control" id="nomeInsumo" name="nome_insumo">
                         </div>
                         <div class="col-sm-6">
                             <label for="codRef">Código de Referência</label>
-                            <input type="text" class="form-control" id="codRef" name="codRef">
+                            <input type="text" class="form-control" id="codRef" name="cod_ref">
                         </div>
                     </div>
 
@@ -61,7 +61,7 @@ if (isset($_POST['submit'])) {
                     <div class="form-row justify-content-center mt-2">
                         <div class="col-sm-4">
                             <label for="qtdeInsumo">Quantidade utilizada</label>
-                            <input type="text" class="form-control" id="qtdeInsumo" name="qtdeInsumo">
+                            <input type="text" class="form-control" id="qtdeInsumo" name="qtde_utilizada">
                         </div>
 
                         <div class="col-sm-4">
@@ -79,7 +79,7 @@ if (isset($_POST['submit'])) {
                         <div class="col-sm-4">
                             <label for="prazoUtil">Prazo de utilização:</label>
                             <div class="input-group">
-                                <select class="custom-select" id="prazoUtil" name="prazoUtil">
+                                <select class="custom-select" id="prazoUtil" name="prazo_util">
                                     <option>Selecione</option>
                                     <option>Dia</option>
                                     <option>Semana</option>
