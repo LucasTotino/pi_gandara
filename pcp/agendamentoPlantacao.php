@@ -56,12 +56,12 @@ if (isset($_POST['submit'])) {
                         <input type="number" class="form-control" id="areaPlantio" name="areaPlantio">
                     </div>
                     <div class="col-sm-3">
-                        <label for="dataPlantio">Data stimada para plantio</label>
+                        <label for="dataPlantio">Data estimada para plantio</label>
                         <input type="date" class="form-control" id="dataPlantio" name="dataPlantio">
                     </div>
 
                     <div class="col-sm-3">
-                        <label for="dataColheita">Data stimada para Colheita</label>
+                        <label for="dataColheita">Data estimada para Colheita</label>
                         <input type="date" class="form-control" id="dataColheita" name="dataColheita">
                     </div>
                 </div>
