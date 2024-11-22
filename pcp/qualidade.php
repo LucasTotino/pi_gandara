@@ -17,21 +17,26 @@
 </header>
 
 <body>
-  <div class="container">
-    <h4>Adicionar os números para que esteja dentro do conforme e analisar junto às medições já realizadas:
-      Comparativo do já medido com a expectativa de produção
-    </h4>
-  </div>
 
 
   <div class="container mt-5">
     <form action="" method="POST"><!-- Inicio Formulário -->
-      <div class="row">
-        <div class="col-8">
-          <h2>Registro de conformidade:</h2>
-        </div>
+    <div class="row">
 
-      </div>
+<a href="../pcp/index.php" class="btn">
+  <div class="col-2">
+    <div style="width: 18rem;">
+      <span class="fa fa-chevron-left fa-2x p-3" aria-hidden=" true"></span>
+    </div>
+  </div>
+</a>
+
+
+<div class="col-6 m-5">
+  <h3>Resgistro de Qualidade</h3>
+</div>
+
+</div>
 
 
       <div class="form-group">
@@ -39,7 +44,7 @@
         <div class="form-row justify-content-center mt-2">
           <div class="col-sm-6">
             <label for="areaRef">Área de Referência</label>
-            <input type="number" class="form-control" id="areaRef" name="areaRef">
+            <input type="number" class="form-control" id="areaRef" name="areaRef" placeholder="Puxar um select do banco">
           </div>
           <div class="col-sm-6">
             <label for="dataMedicao">Data da medição</label>
@@ -57,26 +62,15 @@
 
 
           <div class="col-sm-4">
-            <label for="temPraga">Foi observado praga:</label>
+            <label for="conformidadeVenda">Está em conformidade para Venda?</label>
             <div class="input-group">
-              <select class="custom-select" id="temPraga" name="temPraga">
+              <select class="custom-select" id="conformidadeVenda" name="conformidadeVenda">
                 <option>Selecione</option>
                 <option>Sim</option>
                 <option>Não</option>
               </select>
             </div>
           </div>
-
-          <div class="col-sm-4">
-            <label for="qualPraga">Se sim, qual foi observada?</label>
-            <input type="text" class="form-control" id="qualPraga" name="qualPraga">
-          </div>
-
-
-
-
-        </div>
-
 
       </div>
       <!-- Botões -->

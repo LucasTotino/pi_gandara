@@ -21,7 +21,7 @@
     <h1 class="justify-content-center d-flex align-items-center m-5">Planejamento e Controle da Produção </h1>
     <div class="container">
       <div class="row  justify-content-center d-flex align-items-center">
-        <a href="/pi_gandara/pcp/planejamento.php" class="btn">
+        <a href="/pi_gandara/pcp/relatorios.php" class="btn">
           <div class="col-4 m-2">
             <div style="width: 18rem;">
               <span class="fa fa-columns fa-5x" aria-hidden="true"></span>

@@ -18,20 +18,32 @@
 
 <body>
 
+
     <div class="container mt-5">
         <form action="" method="POST"><!-- Inicio Formulário -->
             <div class="row">
-                <div class="col-8">
-                    <h2>Planejamento da Plantação</h2>
+
+                <a href="../pcp/index.php" class="btn">
+                    <div class="col-2">
+                        <div style="width: 18rem;">
+                            <span class="fa fa-chevron-left fa-2x p-3" aria-hidden=" true"></span>
+                        </div>
+                    </div>
+                </a>
+                <div class="col-5">
+
                 </div>
-                <div class="col-4">
-                    <a href="../pcp/agendamentoPlantacao.php" class="btn btn-success">Agendar nova plantação</a>
+                <div class="col-3 m-3">
+                    <a href="../pcp/agendamentoPlantacao.php" class="btn btn-success">Agendar plantação</a>
                 </div>
             </div>
 
+            <h2 class="d-flex justify-content-center">Planejamento da Plantação</h2>
+
+
             <br>
             <div class="container">
-                <H2> Aqui ficará os agendamentos que serão puxados do banco</H2>
+                <h2> Aqui ficará os agendamentos que serão puxados do banco</h2>
             </div>
     </div>
     <script src="https://kit.fontawesome.com/74ecb76a40.js" crossorigin="anonymous"></script>

@@ -100,7 +100,7 @@ CREATE TABLE `cadastro_insumo` (
   `cod_ref` float DEFAULT NULL,
   `qtde_utilizada` int(11) DEFAULT NULL,
   `unidade` varchar(20) DEFAULT NULL,
-  `prazo_util` float DEFAULT NULL
+  `prazo_util` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------

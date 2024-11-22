@@ -32,14 +32,24 @@ if (isset($_POST['submit'])) {
 </header>
 
 <body>
-
-    <div class="container">
-        <h4>Formulário onde será solicitado o cadastro do Insumo informando Nome código de Ref. Quantidade que será utilizada e medida de tempo</h4>
-    </div>
-
     <main>
         <div class="container-1">
-            <h1 style="text-align:center;">Solicitação de cadastro de Insumos</h1>
+        <div class="row">
+
+<a href="../pcp/index.php" class="btn">
+  <div class="col-2">
+    <div style="width: 18rem;">
+      <span class="fa fa-chevron-left fa-2x p-3" aria-hidden=" true"></span>
+    </div>
+  </div>
+</a>
+
+
+<div class="col-6 m-5">
+  <h3>Solicitação de cadastro de Insumos</h3>
+</div>
+
+</div>
 
 
             <form action="../pcp/cadastroInsumo.php" method="POST"><!-- Inicio Formulário -->
@@ -76,17 +86,9 @@ if (isset($_POST['submit'])) {
                             </div>
                         </div>
 
-                        <div class="col-sm-4">
-                            <label for="prazoUtil">Prazo de utilização:</label>
-                            <div class="input-group">
-                                <select class="custom-select" id="prazoUtil" name="prazo_util">
-                                    <option>Selecione</option>
-                                    <option>Dia</option>
-                                    <option>Semana</option>
-                                    <option>Mês</option>
-                                    <option>Ano</option>
-                                </select>
-                            </div>
+                        <div class="col-sm-4">    
+                        <label for="dataUtilizacao">Data de Utilização</label>
+                        <input type="date" class="form-control" id="dataUtilizacao" name="dataUtilizacao">
                         </div>
 
 
