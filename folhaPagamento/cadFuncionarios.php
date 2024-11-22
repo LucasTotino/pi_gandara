@@ -8,224 +8,395 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.css" crossorigin="anonymous">
   <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
   <link rel="stylesheet" href="/pi_gandara/css/style.css">
-  
+
   <title>Cadastro de funcionários</title>
 </head>
 
 <body>
-<header>
-<?php
+  <header>
+    <?php
 
-include_once('../utils/menu.php');
+    include_once('../utils/menu.php');
 
-// Verifica de veio ID na URL
-$id = isset($_GET['id']) ? $_GET['id'] : false;
-$cor = ($id) ? "btn-warning" : "btn-success";
+    // Verifica de veio ID na URL
+    $id = isset($_GET['id']) ? $_GET['id'] : false;
+    $cor = ($id) ? "btn-warning" : "btn-success";
 
-// Caso tenha umm ID, faz a busca do usuário no BD
-if ($id) {
+    // Caso tenha umm ID, faz a busca do usuário no BD
+    if ($id) {
 
-  $sql = 'SELECT * FROM usuarios WHERE id_usuario=?;';
-  $stmt = $conn->prepare($sql);
-  //troca o ? pelo ID que veio na URL
-  $stmt->bind_param("i", $id);
-  $stmt->execute();
+      $sql = 'SELECT * FROM usuarios WHERE id_usuario=?;';
+      $stmt = $conn->prepare($sql);
+      //troca o ? pelo ID que veio na URL
+      $stmt->bind_param("i", $id);
+      $stmt->execute();
 
-  $dados = $stmt->get_result();
+      $dados = $stmt->get_result();
 
-  // Verifica se encontrou o usuário ou se ele existe no BD
-  if ($dados->num_rows > 0) {
-    // Coloca os dados do usuário em uma variavel como array
-    $user = $dados->fetch_assoc();
-  } else {
-    // Se não encontrou um usuário, retorna para a página enterior
+      // Verifica se encontrou o usuário ou se ele existe no BD
+      if ($dados->num_rows > 0) {
+        // Coloca os dados do usuário em uma variavel como array
+        $user = $dados->fetch_assoc();
+      } else {
+        // Se não encontrou um usuário, retorna para a página enterior
 
-?>
-    <script>
-      history.back();
-    </script>
+    ?>
+        <script>
+          history.back();
+        </script>
 
-<?php
-  }
+    <?php
+      }
 
-  // Como converter data do JP para PT-BR
-  // <?= date("d/m/Y", strtotime("datanascimento"))
+      // Como converter data do JP para PT-BR
+      // <?= date("d/m/Y", strtotime("datanascimento"))
 
-}
+    }
 
-?>
+    ?>
   </header>
   <main>
 
-  <div class="container">
-    <h2><?= ($id) ? "Alteração de Usuário" : "Cadastro de Funcionários"  ?></h2>
-    <form action="/site-pi/bd/bd-usuario.php" method="POST">
-      <input type="hidden" id="id_usuario" name="id_usuario" value="<?= isset($_GET['id']) ? ($_GET['id']) : null ?>">
-      <input type="hidden" id="acao" name="acao" value="<?= isset($_GET['id']) ? "ALTERAR" : "INCLUIR" ?>">
-      <div class="form-row">
-        <div class="form-group col-md-9">
-          <label for="nome">Nome:</label>
-          <input type="text" id="nome" class="form-control" name="nome" placeholder="nome" required value="<?= ($id) ? $user['nome'] : null ?>">
-        </div>
-        <div class="form-group col-md-3">
-          <label for="cpf">CPF:</label>
-          <input type="text" class="form-control" name="cpf" id="cpf" placeholder="cpf" value="<?= ($id) ? $user['cpf'] : null ?>">
-        </div>
-        <div class="form-group col-md-3">
-          <label for="datanascimento">Data de Nascimento:</label> 
-          <input type="date" class="form-control" id="datanascimento" name="datanascimento" placeholder="data de nascimento" required value="<?= ($id) ? $user['datanascimento'] : null ?>">
-        </div>
-        <div class="form-group col-md-3">
-          <label for="email">Email:</label>
-          <input type="email" class="form-control" id="email" name="email" placeholder="exemplo@email.com" required value="<?= ($id) ? $user['email'] : null ?>">
-        </div>
-        <div class="form-group col-md-3">
-          <label for="telefone">Telefone residencial:</label>
-          <input type="tel" class="form-control" id="telefone" name="telefone" placeholder="(14)-99999-9999" required value="<?= ($id) ? $user['telefone'] : null ?>">
-        </div>
-        <div class="form-group col-md-3">
-          <label for="telefone">Telefone celular:</label>
-          <input type="tel" class="form-control" id="telefone" name="telefone" placeholder="(14)-99999-9999" required value="<?= ($id) ? $user['telefone'] : null ?>">
-        </div>
-        <div class="form-group col-md-10">
-          <label for="endereco">Endereço:</label>
-          <input type="text" class="form-control" name="endereco" id="endereco" placeholder="Av Vinicius de Morais, 25" value="<?= ($id) ? $user['endereco'] : null ?>">
-        </div>
-        <div class="form-group col-md-2">
-          <label for="numerocasa">Número da residência:</label>
-          <input type="text" class="form-control" name="numerocasa" id="numerocasa" placeholder="número" value="<?= ($id) ? $user['numerocasa'] : null ?>">
-        </div>
-        <div class="form-group col-md-3">
-          <label for="cidade">Cidade:</label>
-          <input type="text" class="form-control" name="cidade" id="cidade" placeholder="cidade" value="<?= ($id) ? $user['cidade'] : null ?>">
-        </div>
-        <div class="form-group col-md-3">
-          <label for="cep">Cep:</label>
-          <input type="text" class="form-control" name="cep" id="cep" placeholder="cep" value="<?= ($id) ? $user['cep'] : null ?>">
-        </div>
-        <div class="form-group col-md-3">
-          <label for="estadocivil">Gênero:</label>
-          <select type="text" id="genero" name="genero" class="form-control" required value="<?= ($id) ? $user['genero'] : null ?>">
-            <option selected hidden>Escolha...</option>
-            <option  value="">Selecione..</option>
-            <option <?= isset($_GET['id']) && ($user['genero'] =="1") ? "selected" : null ?> value="1">Masculino</option>
-            <option <?= isset($_GET['id']) && ($user['genero'] =="2") ? "selected" : null ?> value="2">Feminino</option>
-            <option <?= isset($_GET['id']) && ($user['genero'] =="3") ? "selected" : null ?> value="3">Bicha</option>
-          </select>
-      </div>
-        <div class="form-group col-md-3">
-          <label for="estadocivil">Estado Civil:</label>
-          <select type="text" id="estadocivil" name="estadocivil" class="form-control" required value="<?= ($id) ? $user['estadocivil'] : null ?>">
-            <option selected hidden>Escolha...</option>
-            <option  value="">Selecione..</option>
-            <option <?= isset($_GET['id']) && ($user['estadocivil'] =="1") ? "selected" : null ?> value="1">Solteiro</option>
-            <option <?= isset($_GET['id']) && ($user['estadocivil'] =="2") ? "selected" : null ?> value="2">Casado</option>
-            <option <?= isset($_GET['id']) && ($user['estadocivil'] =="3") ? "selected" : null ?> value="3">União Estável</option>
-            <option <?= isset($_GET['id']) && ($user['estadocivil'] =="3") ? "selected" : null ?> value="3">Amasiado</option>
-            <option <?= isset($_GET['id']) && ($user['estadocivil'] =="4") ? "selected" : null ?> value="4">Separado</option>
-            <option <?= isset($_GET['id']) && ($user['estadocivil'] =="5") ? "selected" : null ?> value="5">Divorciado</option>
-          </select>
-      </div>
-        <div class="form-group col-md-3">
-          <label for="estado">Estado:</label>
-          <select type="text" id="estado" name="estado" class="form-control" required value="<?= ($id) ? $user['estado'] : null ?>">
-            <option selected hidden>Escolha...</option>
-            <option  value="">Selecione..</option>
-            <option <?= isset($_GET['id']) && ($user['estado'] =="AC") ? "selected" : null ?> value="AC">Acre</option>
-            <option <?= isset($_GET['id']) && ($user['estado'] =="AL") ? "selected" : null ?> value="AL">Alagoas</option>
-            <option <?= isset($_GET['id']) && ($user['estado'] =="AP") ? "selected" : null ?> value="AP">Amapá</option>
-            <option <?= isset($_GET['id']) && ($user['estado'] =="AM") ? "selected" : null ?> value="AM">Amazonas</option>
-            <option <?= isset($_GET['id']) && ($user['estado'] =="BA") ? "selected" : null ?> value="BA">Bahia</option>
-            <option <?= isset($_GET['id']) && ($user['estado'] =="CE") ? "selected" : null ?> value="CE">Ceará</option>
-            <option <?= isset($_GET['id']) && ($user['estado'] =="DF") ? "selected" : null ?> value="DF">Distrito Federal</option>
-            <option <?= isset($_GET['id']) && ($user['estado'] =="ES") ? "selected" : null ?> value="ES">Espírito Santo</option>
-            <option <?= isset($_GET['id']) && ($user['estado'] =="GO") ? "selected" : null ?> value="GO">Goiás</option>
-            <option <?= isset($_GET['id']) && ($user['estado'] =="MA") ? "selected" : null ?> value="MA">Maranhão</option>
-            <option <?= isset($_GET['id']) && ($user['estado'] =="MT") ? "selected" : null ?> value="MT">Mato Grosso</option>
-            <option <?= isset($_GET['id']) && ($user['estado'] =="MS") ? "selected" : null ?> value="MS">Mato Grosso do Sul</option>
-            <option <?= isset($_GET['id']) && ($user['estado'] =="MG") ? "selected" : null ?> value="MG">Minas Gerais</option>
-            <option <?= isset($_GET['id']) && ($user['estado'] =="PA") ? "selected" : null ?> value="PA">Pará</option>
-            <option <?= isset($_GET['id']) && ($user['estado'] =="PB") ? "selected" : null ?> value="PB">Paraíba</option>
-            <option <?= isset($_GET['id']) && ($user['estado'] =="PR") ? "selected" : null ?> value="PR">Paraná</option>
-            <option <?= isset($_GET['id']) && ($user['estado'] =="PE") ? "selected" : null ?> value="PE">Pernambuco</option>
-            <option <?= isset($_GET['id']) && ($user['estado'] =="PI") ? "selected" : null ?> value="PI">Piauí</option>
-            <option <?= isset($_GET['id']) && ($user['estado'] =="RJ") ? "selected" : null ?> value="RJ">Rio de Janeiro</option>
-            <option <?= isset($_GET['id']) && ($user['estado'] =="RN") ? "selected" : null ?> value="RN">Rio Grande do Norte</option>
-            <option <?= isset($_GET['id']) && ($user['estado'] =="RS") ? "selected" : null ?> value="RS">Rio Grande do Sul</option>
-            <option <?= isset($_GET['id']) && ($user['estado'] =="RO") ? "selected" : null ?> value="RO">Rondônia</option>
-            <option <?= isset($_GET['id']) && ($user['estado'] =="RR") ? "selected" : null ?> value="RR">Roraima</option>
-            <option <?= isset($_GET['id']) && ($user['estado'] =="SC") ? "selected" : null ?> value="SC">Santa Catarina</option>
-            <option <?= isset($_GET['id']) && ($user['estado'] =="SP") ? "selected" : null ?> value="SP">São Paulo</option>
-            <option <?= isset($_GET['id']) && ($user['estado'] =="SE") ? "selected" : null ?> value="SE">Sergipe</option>
-            <option <?= isset($_GET['id']) && ($user['estado'] =="TO") ? "selected" : null ?> value="TO">Tocantins</option>
-          </select>
-        </div>
-        <div class="form-group col-md-3">
-          <label for="cargo">Cargo:</label>
-          <select type="text" id="cargo" name="cargo" class="form-control" required value="<?= ($id) ? $user['cargo'] : null ?>">
-            <option selected hidden>Escolha...</option>
-            <option  value="">Selecione..</option>
-            <option <?= isset($_GET['id']) && ($user['cargo'] =="1") ? "selected" : null ?> value="1">cargo 1</option>
-            <option <?= isset($_GET['id']) && ($user['cargo'] =="2") ? "selected" : null ?> value="2">cargo 2</option>
-            <option <?= isset($_GET['id']) && ($user['cargo'] =="3") ? "selected" : null ?> value="3">cargo 3</option>
-            <option <?= isset($_GET['id']) && ($user['cargo'] =="4") ? "selected" : null ?> value="4">cargo 4</option>
-            <option <?= isset($_GET['id']) && ($user['cargo'] =="5") ? "selected" : null ?> value="5">cargo 5</option>
-            <option <?= isset($_GET['id']) && ($user['cargo'] =="6") ? "selected" : null ?> value="6">cargo 6</option>
-            <option <?= isset($_GET['id']) && ($user['cargo'] =="7") ? "selected" : null ?> value="7">cargo 7</option>
-          </select>
-      </div>
-      <div class="form-group col-md-3">
-          <label for="setor">Setor:</label>
-          <select type="text" id="setor" name="setor" class="form-control" required value="<?= ($id) ? $user['setor'] : null ?>">
-            <option selected hidden>Escolha...</option>
-            <option  value="">Selecione..</option>
-            <option <?= isset($_GET['id']) && ($user['setor'] =="1") ? "selected" : null ?> value="1">setor 1</option>
-            <option <?= isset($_GET['id']) && ($user['setor'] =="2") ? "selected" : null ?> value="2">setor 2</option>
-            <option <?= isset($_GET['id']) && ($user['setor'] =="3") ? "selected" : null ?> value="3">setor 3</option>
-            <option <?= isset($_GET['id']) && ($user['setor'] =="4") ? "selected" : null ?> value="4">setor 4</option>
-            <option <?= isset($_GET['id']) && ($user['setor'] =="5") ? "selected" : null ?> value="5">setor 5</option>
-            <option <?= isset($_GET['id']) && ($user['setor'] =="6") ? "selected" : null ?> value="6">setor 6</option>
-            <option <?= isset($_GET['id']) && ($user['setor'] =="7") ? "selected" : null ?> value="7">setor 7</option>
-          </select>
-      </div>
-      <div class="form-group col-md-3">
-          <label for="datanascimento">Data de Admissão:</label> 
-          <input type="date" class="form-control" id="datanascimento" name="datanascimento" placeholder="data de nascimento" required value="<?= ($id) ? $user['datanascimento'] : null ?>">
-        </div>
-        <div class="form-group col-md-3">
-          <label for="datanascimento">Data de Demissão:</label> 
-          <input type="date" class="form-control" id="datanascimento" name="datanascimento" placeholder="data de nascimento" required value="<?= ($id) ? $user['datanascimento'] : null ?>">
-        </div>
-      <div class="form-group col-md-3">
-          <label for="salariobruto">Salário bruto:</label>
-          <input type="text" class="form-control" name="salariobruto" id="salariobruto" placeholder="salário bruto" value="<?= ($id) ? $user['salariobruto'] : null ?>">
-        </div>
-        <div class="form-group col-md-3">
-          <label for="setor">Método de pagamento:</label>
-          <select type="text" id="metodo" name="metodo" class="form-control" required value="<?= ($id) ? $user['metodo'] : null ?>">
-            <option selected hidden>Escolha...</option>
-            <option  value="">Selecione..</option>
-            <option <?= isset($_GET['id']) && ($user['metodo'] =="Dinheiro") ? "selected" : null ?> value="1">Dinheiro</option>
-            <option <?= isset($_GET['id']) && ($user['metodo'] =="Pix") ? "selected" : null ?> value="2">Pix</option>
-            <option <?= isset($_GET['id']) && ($user['metodo'] =="Cheque") ? "selected" : null ?> value="3">Cheque</option>
-          </select>
-      </div>
-      <br>
-      <div class="container text-center">
-        <button type="submit" class="btn <?= $cor ?> align-content-center">Enviar</button>
-      </div>
-      <br>
-    </form>
-  </div>
+    <div class="container mt-5">
+      <h2 style="text-align:center">
+        <?= ($id) ? "Alteração de Funcionário" : "Cadastro de Funcionário"  ?>
+      </h2>
+      <form action="/pi_gandara/folhaPagamento/bd-funcionarios.php" method="POST">
+        <input type="hidden" id="idFuncionario" name="idFuncionario"
+          value="<?= isset($_GET['id']) ? ($_GET['id']) : null ?>">
+        <input type="hidden" id="acao" name="acao" value="<?= isset($_GET['id']) ? " ALTERAR" : "INCLUIR" ?>">
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="fpNome">Nome:</label>
+            <input type="text" id="fpNome" class="form-control" name="fpNome" required placeholder="Nome..."
+              value="<?= ($id) ? $user['fpNome'] : null ?>">
+          </div>
+          <div class="form-group col-md-3">
+            <label for="fpRg">RG:</label>
+            <input type="text" class="form-control" id="fpRg" name="fpRg" required placeholder="12345...."
+              value="<?= ($id) ? $user['fpRg'] : null ?>">
+          </div>
+          <div class="form-group col-md-3">
+            <label for="fpCpf">CPF:</label>
+            <input type="text" class="form-control" id="fpCpf" name="fpCpf" placeholder="123.456.789-00"
+              value="<?= ($id) ? $user['fpCpf'] : null ?>">
+          </div>
+          <div class="form-group col-md-10">
+            <label for="fpEndereco">Endereço:</label>
+            <input type="text" class="form-control" id="fpEndereco" name="fpEndereco" placeholder="Rua..."
+              value="<?= ($id) ? $user['fpEndereco'] : null ?>">
+          </div>
+          <div class="form-group col-md-2">
+            <label for="fpNumeroCasa">N°:</label>
+            <input type="text" class="form-control" id="fpNumeroCasa" name="fpNumeroCasa" placeholder="n° casa"
+              value="<?= ($id) ? $user['fpNumeroCasa'] : null ?>">
+          </div>
+          <div class="form-group col-md-4">
+            <label for="fpEstado">Estado:</label>
+            <select type="text" id="fpEstado" name="fpEstado" class="form-control"
+              value="<?= ($id) ? $user['fpEstado'] : null ?>">
+              <option selected hidden>Escolha...</option>
+              <option value="">Selecione..</option>
+              <option <?= isset($_GET['id']) && ($user['fpEstado'] == "AC") ? "selected" : null ?> value="AC">Acre
+              </option>
+              <option <?= isset($_GET['id']) && ($user['fpEstado'] == "AL") ? "selected" : null ?> value="AL">Alagoas
+              </option>
+              <option <?= isset($_GET['id']) && ($user['fpEstado'] == "AP") ? "selected" : null ?> value="AP">Amapá
+              </option>
+              <option <?= isset($_GET['id']) && ($user['fpEstado'] == "AM") ? "selected" : null ?> value="AM">Amazonas
+              </option>
+              <option <?= isset($_GET['id']) && ($user['fpEstado'] == "BA") ? "selected" : null ?> value="BA">Bahia
+              </option>
+              <option <?= isset($_GET['id']) && ($user['fpEstado'] == "CE") ? "selected" : null ?> value="CE">Ceará
+              </option>
+              <option <?= isset($_GET['id']) && ($user['fpEstado'] == "DF") ? "selected" : null ?> value="DF">Distrito
+                Federal</option>
+              <option <?= isset($_GET['id']) && ($user['fpEstado'] == "ES") ? "selected" : null ?> value="ES">Espírito
+                Santo</option>
+              <option <?= isset($_GET['id']) && ($user['fpEstado'] == "GO") ? "selected" : null ?> value="GO">Goiás
+              </option>
+              <option <?= isset($_GET['id']) && ($user['fpEstado'] == "MA") ? "selected" : null ?> value="MA">Maranhão
+              </option>
+              <option <?= isset($_GET['id']) && ($user['fpEstado'] == "MT") ? "selected" : null ?> value="MT">Mato
+                Grosso
+              </option>
+              <option <?= isset($_GET['id']) && ($user['fpEstado'] == "MS") ? "selected" : null ?> value="MS">Mato
+                Grosso
+                do Sul</option>
+              <option <?= isset($_GET['id']) && ($user['fpEstado'] == "MG") ? "selected" : null ?> value="MG">Minas
+                Gerais
+              </option>
+              <option <?= isset($_GET['id']) && ($user['fpEstado'] == "PA") ? "selected" : null ?> value="PA">Pará
+              </option>
+              <option <?= isset($_GET['id']) && ($user['fpEstado'] == "PB") ? "selected" : null ?> value="PB">Paraíba
+              </option>
+              <option <?= isset($_GET['id']) && ($user['fpEstado'] == "PR") ? "selected" : null ?> value="PR">Paraná
+              </option>
+              <option <?= isset($_GET['id']) && ($user['fpEstado'] == "PE") ? "selected" : null ?> value="PE">Pernambuco
+              </option>
+              <option <?= isset($_GET['id']) && ($user['fpEstado'] == "PI") ? "selected" : null ?> value="PI">Piauí
+              </option>
+              <option <?= isset($_GET['id']) && ($user['fpEstado'] == "RJ") ? "selected" : null ?> value="RJ">Rio de
+                Janeiro</option>
+              <option <?= isset($_GET['id']) && ($user['fpEstado'] == "RN") ? "selected" : null ?> value="RN">Rio Grande
+                do Norte</option>
+              <option <?= isset($_GET['id']) && ($user['fpEstado'] == "RS") ? "selected" : null ?> value="RS">Rio Grande
+                do Sul</option>
+              <option <?= isset($_GET['id']) && ($user['fpEstado'] == "RO") ? "selected" : null ?> value="RO">Rondônia
+              </option>
+              <option <?= isset($_GET['id']) && ($user['fpEstado'] == "RR") ? "selected" : null ?> value="RR">Roraima
+              </option>
+              <option <?= isset($_GET['id']) && ($user['fpEstado'] == "SC") ? "selected" : null ?> value="SC">Santa
+                Catarina</option>
+              <option <?= isset($_GET['id']) && ($user['fpEstado'] == "SP") ? "selected" : null ?> value="SP">São Paulo
+              </option>
+              <option <?= isset($_GET['id']) && ($user['fpEstado'] == "SE") ? "selected" : null ?> value="SE">Sergipe
+              </option>
+              <option <?= isset($_GET['id']) && ($user['fpEstado'] == "TO") ? "selected" : null ?> value="TO">Tocantins
+              </option>
+            </select>
+          </div>
+          <div class="form-group col-md-4">
+            <label for="fpCidade">Cidade:</label>
+            <input type="text" class="form-control" name="fpCidade" id="fpCidade" placeholder="cidade"
+              value="<?= ($id) ? $user['fpCidade'] : null ?>">
+          </div>
+          <div class="form-group col-md-4">
+            <label for="fpCep">CEP:</label>
+            <input type="text" class="form-control" name="fpCep" id="fpCep" placeholder="cep"
+              value="<?= ($id) ? $user['fpCep'] : null ?>">
+          </div>
+          <div class="form-group col-md-4">
+            <label for="fpEtnia">Etnia:</label>
+            <select type="text" id="fpEtnia" name="fpEtnia" class="form-control"
+              value="<?= ($id) ? $user['fpEtnia'] : null ?>">
+              <option selected hidden>Escolha...</option>
+              <option value="">Selecione..</option>
+              <option <?= isset($_GET['id']) && ($user['fpEtnia'] == "0") ? "selected" : null ?>>Branco
+              </option>
+              <option <?= isset($_GET['id']) && ($user['fpEtnia'] == "1") ? "selected" : null ?>>Amarelo
+              </option>
+              <option <?= isset($_GET['id']) && ($user['fpEtnia'] == "2") ? "selected" : null ?>>Pardo
+              </option>
+              <option <?= isset($_GET['id']) && ($user['fpEtnia'] == "3") ? "selected" : null ?>>Negro
+              </option>
+              <option <?= isset($_GET['id']) && ($user['fpEtnia'] == "4") ? "selected" : null ?>>Indígena
+              </option>
+            </select>
+          </div>
+          <div class="form-group col-md-4">
+            <label for="fpGenero">Gênero:</label>
+            <select type="text" id="fpGenero" name="fpGenero" class="form-control"
+              value="<?= ($id) ? $user['fpGenero'] : null ?>">
+              <option selected hidden>Escolha...</option>
+              <option value="">Selecione..</option>
+              <option <?= isset($_GET['id']) && ($user['fpGenero'] == "0") ? "selected" : null ?>>Masculino
+              </option>
+              <option <?= isset($_GET['id']) && ($user['fpGenero'] == "1") ? "selected" : null ?>>Feminino
+              </option>
+            </select>
+          </div>
+          <div class="form-group col-md-4">
+            <label for="fpDataNascimento">Data de Nascimento:</label>
+            <input type="date" class="form-control" id="fpDataNascimento" name="fpDataNascimento"
+              placeholder="data de nascimento" value="<?= ($id) ? $user['fpDataNascimento'] : null ?>">
+          </div>
+          <div class="form-group col-md-4">
+            <label for="fpEmail">E-mail:</label>
+            <input type="text" class="form-control" name="fpEmail" id="fpEmail" placeholder="e-mail"
+              value="<?= ($id) ? $user['fpEmail'] : null ?>">
+          </div>
+          <div class="form-group col-md-4">
+            <label for="fpTelefone">Telefone Fixo:</label>
+            <input type="tel" class="form-control" id="fpTelefone" name="fpTelefone" placeholder="(14)-9999-9999"
+              value="<?= ($id) ? $user['fpTelefone'] : null ?>">
+          </div>
+          <div class="form-group col-md-4">
+            <label for="fpCelular">Celular:</label>
+            <input type="tel" class="form-control" id="fpCelular" name="fpCelular" placeholder="(14)-99999-9999"
+              value="<?= ($id) ? $user['fpCelular'] : null ?>">
+          </div>
+          <div class="form-group col-md-4">
+            <label for="fpDependentes">Dependentes:</label>
+            <input type="text" class="form-control" id="fpDependentes" name="fpDependentes" placeholder="dependentes"
+              value="<?= ($id) ? $user['fpDependentes'] : null ?>">
+          </div>
+          <div class="form-group col-md-4">
+            <label for="fpIdadeDependentes">Idade Dependentes:</label>
+            <input type="text" class="form-control" id="fpIdadeDependentes" name="fpIdadeDependentes"
+              placeholder="idade dependentes" value="<?= ($id) ? $user['fpIdadeDependentes'] : null ?>">
+          </div>
+          <div class="form-group col-md-4">
+            <label for="fpEstadoCivil">Estado Civil:</label>
+            <select type="text" id="fpEstadoCivil" name="fpEstadoCivil" class="form-control"
+              value="<?= ($id) ? $user['fpEstadoCivil'] : null ?>">
+              <option selected hidden>Escolha...</option>
+              <option value="">Selecione..</option>
+              <option <?= isset($_GET['id']) && ($user['fpEstadoCivil'] == "0") ? "selected" : null ?>
+                value="0">Solteiro
+              </option>
+              <option <?= isset($_GET['id']) && ($user['fpEstadoCivil'] == "1") ? "selected" : null ?> value="1">Casado
+              </option>
+              <option <?= isset($_GET['id']) && ($user['fpEstadoCivil'] == "2") ? "selected" : null ?> value="2">União
+                Estável</option>
+              <option <?= isset($_GET['id']) && ($user['fpEstadoCivil'] == "3") ? "selected" : null ?>
+                value="3">Amasiado
+              </option>
+              <option <?= isset($_GET['id']) && ($user['fpEstadoCivil'] == "4") ? "selected" : null ?>
+                value="4">Separado
+              </option>
+              <option <?= isset($_GET['id']) && ($user['fpEstadoCivil'] == "5") ? "selected" : null ?>
+                value="5">Divorciado
+              </option>
+            </select>
+          </div>
+          <div class="form-group col-md-3">
+            <label for="fpCargo">Cargo:</label>
+            <select type="text" id="fpCargo" name="fpCargo" class="form-control"
+              value="<?= ($id) ? $user['fpCargo'] : null ?>">
+              <option selected hidden>Escolha...</option>
+              <option value="">Selecione..</option>
+              <option <?= isset($_GET['id']) && ($user['fpCargo'] == "0") ? "selected" : null ?> value="0">Auxiliar de
+                lavoura</option>
+              <option <?= isset($_GET['id']) && ($user['fpCargo'] == "1") ? "selected" : null ?> value="1">Técnico de
+                lavoura</option>
+              <option <?= isset($_GET['id']) && ($user['fpCargo'] == "2") ? "selected" : null ?> value="2">Gerente de
+                lavoura</option>
+              <option <?= isset($_GET['id']) && ($user['fpCargo'] == "3") ? "selected" : null ?> value="3">Auxiliar
+                comercial</option>
+              <option <?= isset($_GET['id']) && ($user['fpCargo'] == "4") ? "selected" : null ?> value="4">Técnico
+                comercial
+              </option>
+              <option <?= isset($_GET['id']) && ($user['fpCargo'] == "5") ? "selected" : null ?> value="5">Gerente
+                comercial
+              </option>
+              <option <?= isset($_GET['id']) && ($user['fpCargo'] == "6") ? "selected" : null ?> value="6">Auxiliar de
+                compras</option>
+              <option <?= isset($_GET['id']) && ($user['fpCargo'] == "7") ? "selected" : null ?> value="7">Técnico de
+                compras</option>
+              <option <?= isset($_GET['id']) && ($user['fpCargo'] == "8") ? "selected" : null ?> value="8">Gerente de
+                compras</option>
+              <option <?= isset($_GET['id']) && ($user['fpCargo'] == "9") ? "selected" : null ?> value="9">Auxiliar de
+                estoque</option>
+              <option <?= isset($_GET['id']) && ($user['fpCargo'] == "10") ? "selected" : null ?> value="10">Técnico de
+                estoque</option>
+              <option <?= isset($_GET['id']) && ($user['fpCargo'] == "11") ? "selected" : null ?> value="11">Gerente de
+                estoque</option>
+              <option <?= isset($_GET['id']) && ($user['fpCargo'] == "12") ? "selected" : null ?> value="12">Auxiliar
+                financeiro</option>
+              <option <?= isset($_GET['id']) && ($user['fpCargo'] == "13") ? "selected" : null ?> value="13">Técnico
+                financeiro</option>
+              <option <?= isset($_GET['id']) && ($user['fpCargo'] == "14") ? "selected" : null ?> value="14">Gerente
+                financeiro</option>
+              <option <?= isset($_GET['id']) && ($user['fpCargo'] == "15") ? "selected" : null ?> value="15">Auxiliar de
+                Recursos Humanos</option>
+              <option <?= isset($_GET['id']) && ($user['fpCargo'] == "16") ? "selected" : null ?> value="16">Técnico de
+                Recursos Humanos</option>
+              <option <?= isset($_GET['id']) && ($user['fpCargo'] == "17") ? "selected" : null ?> value="17">Gerente de
+                Recursos Humanos</option>
+              <option <?= isset($_GET['id']) && ($user['fpCargo'] == "18") ? "selected" : null ?> value="18">Auxiliar
+                geral
+              </option>
+              <option <?= isset($_GET['id']) && ($user['fpCargo'] == "19") ? "selected" : null ?> value="19">Limpeza
+              </option>
+              <option <?= isset($_GET['id']) && ($user['fpCargo'] == "20") ? "selected" : null ?> value="20">Motorista
+              </option>
+              <option <?= isset($_GET['id']) && ($user['fpCargo'] == "21") ? "selected" : null ?> value="21">Diretor
+              </option>
+            </select>
+          </div>
+          <div class="form-group col-md-3">
+            <label for="fpSetor">Setor:</label>
+            <select type="text" id="fpSetor" name="fpSetor" class="form-control"
+              value="<?= ($id) ? $user['fpSetor'] : null ?>">
+              <option selected hidden>Escolha...</option>
+              <option value="">Selecione..</option>
+              <option <?= isset($_GET['id']) && ($user['fpSetor'] == "0") ? "selected" : null ?> value="0">Lavoura
+              </option>
+              <option <?= isset($_GET['id']) && ($user['fpSetor'] == "1") ? "selected" : null ?> value="1">Comercial
+              </option>
+              <option <?= isset($_GET['id']) && ($user['fpSetor'] == "2") ? "selected" : null ?> value="2">Compras
+              </option>
+              <option <?= isset($_GET['id']) && ($user['fpSetor'] == "3") ? "selected" : null ?> value="3">Estoque
+              </option>
+              <option <?= isset($_GET['id']) && ($user['fpSetor'] == "4") ? "selected" : null ?> value="4">Financeiro
+              </option>
+              <option <?= isset($_GET['id']) && ($user['fpSetor'] == "5") ? "selected" : null ?> value="5">Recursos
+                Humanos
+              </option>
+              <option <?= isset($_GET['id']) && ($user['fpSetor'] == "6") ? "selected" : null ?> value="6">Frota</option>
+              <option <?= isset($_GET['id']) && ($user['fpSetor'] == "7") ? "selected" : null ?> value="7">Limpeza
+              </option>
+            </select>
+          </div>
+          <div class="form-group col-md-3">
+            <label for="fpDataAdimissao">Data de Admissão:</label>
+            <input type="date" class="form-control" id="fpDataAdimissao" name="fpDataAdimissao"
+              placeholder="data de admissão" value="<?= ($id) ? $user['fpDataAdimissao'] : null ?>">
+          </div>
+          <div class="form-group col-md-3">
+            <label for="fpDataDemissao">Data de Demissão:</label>
+            <input type="date" class="form-control" id="fpDataDemissao" name="fpDataDemissao"
+              placeholder="data de demissão" value="<?= ($id) ? $user['fpDataDemissao'] : null ?>">
+          </div>
+          <div class="form-group col-md-3">
+            <label for="fpSalarioBruto">Salário bruto:</label>
+            <input type="text" class="form-control" name="fpSalarioBruto" id="fpSalarioBruto"
+              placeholder="salário bruto" value="<?= ($id) ? $user['fpSalarioBruto'] : null ?>">
+          </div>
+          <div class="form-group col-md-3">
+            <label for="fpMetodoPagamento">Método de pagamento:</label>
+            <select type="text" id="fpMetodoPagamento" name="fpMetodoPagamento" class="form-control"
+              value="<?= ($id) ? $user['fpMetodoPagamento'] : null ?>">
+              <option selected hidden>Escolha...</option>
+              <option value="0">Selecione..</option>
+              <option <?= isset($_GET['id']) && ($user['fpMetodoPagamento'] == "Dinheiro") ? "selected" : null ?>
+                value="1">Dinheiro</option>
+              <option <?= isset($_GET['id']) && ($user['fpMetodoPagamento'] == "Pix") ? "selected" : null ?>
+                value="2">Pix
+              </option>
+              <option <?= isset($_GET['id']) && ($user['fpMetodoPagamento'] == "Cheque") ? "selected" : null ?>
+                value="3">Depósito</option>
+            </select>
+          </div>
+          <div class="form-group col-md-3">
+            <label for="fpChavePix">Chave Pix:</label>
+            <input type="text" class="form-control" name="fpChavePix" id="fpChavePix" placeholder="chave pix"
+              value="<?= ($id) ? $user['fpChavePix'] : null ?>">
+          </div>
+          <div class="form-group col-md-3">
+            <label for="fpAgenciaConta">Agência e Conta:</label>
+            <input type="text" class="form-control" name="fpAgenciaConta" id="fpAgenciaConta"
+              placeholder="agencia/conta" value="<?= ($id) ? $user['fpAgenciaConta'] : null ?>">
+          </div>
+          <div class="form-group col-md-12">
+            <label for="fpObservacoes">Observações:</label>
+            <textarea class="form-control" id="fpObservacoes" rows="5"></textarea>
+          </div>
+          <br>
+          <div class="form-row justify-content-center">
+            <div class="col-5 mt-2">
+              <button type="submit" name="submit" class="btn btn-success">Cadastrar</button>
+            </div>
+            <div class="col-5 mt-2">
+              <button type="reset" class="btn btn-warning">Cancelar</button>
+            </div>
+            <div class="col-2 mt-2">
+              <a href="/pi_gandara/compras/index.php"><button type="button" class="btn btn-danger">Voltar</button></a>
+            </div>
+          </div>
+          <br>
+      </form>
+    </div>
 
-  <script src="/plugins/jquery/jquery.min.js"></script>
-  <script src="/plugins/bootstrap/js/bootstrap.min.js"></script>
-  <script src="/dist/js/adminlte.min.js"></script>
+    <script src="/plugins/jquery/jquery.min.js"></script>
+    <script src="/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/dist/js/adminlte.min.js"></script>
 
 
 
 
-  <script src="https://kit.fontawesome.com/74ecb76a40.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/74ecb76a40.js" crossorigin="anonymous"></script>
 </body>
 
 </html>
