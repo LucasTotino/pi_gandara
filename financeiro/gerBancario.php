@@ -1,3 +1,47 @@
+<?php
+require '../utils/conexao.php';
+// Verifica se veio um id na URL
+$id = isset($_GET['id']) ? $_GET['id'] : false;
+$cor = ($id) ? "btn-warning" : "btn-success";
+// Caso tenha um ID faz A busca do Produto no BD
+if ($id) {
+  $sql = "SELECT * FROM cad_novobanco WHERE id=?;";
+  $stmt = $conn->prepare($sql);
+  // Troca o ? pelo ID que veio na URL
+  $stmt->bind_param("i", $id);
+  $stmt->execute();
+
+  $dados = $stmt->get_result();
+
+  // Verifica se encontrou o Produto ou se ele existe no BD
+  if ($dados->num_rows > 0) {
+    // Coloca os dados do usuário em uma variavel como array
+    $instituicao = $dados->fetch_assoc();
+  } else {
+    // Se não encontrou um Produto retorna para a página anterior.
+?>
+
+    <script>
+      history.back();
+    </script>
+<?php
+  }
+}
+
+// Prepara a consulta SQL
+$sql = "SELECT * FROM cad_novobanco;";
+
+// Envia o SQL para o Prepare Statement:
+$stmt = $conn->prepare($sql);
+
+//Executa a consulta SQL
+$stmt->execute();
+
+//Pega o resultado e adiciona em uma variavel
+$dados = $stmt->get_result();
+
+?>
+
 <!doctype html>
 <html lang="pt-br">
 
@@ -8,6 +52,7 @@
   <link rel="stylesheet" type="text/css" href="styles.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.css" crossorigin="anonymous">
   <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/pi_gandara/css/styleFinanceiro.css">
   <link rel="stylesheet" href="/pi_gandara/css/style.css">
   <title>Gerenciamento Bancário</title>
 </head>
@@ -20,102 +65,114 @@
   </header>
 
 
-  <main>
-    <div class="container">
-      <div class="row p-3 justify-content-center d-flex align-items-center">
-        <a type="button" style="text-align: left;" class="col-1 btn btn-primary justify-content-center d-flex" href="/pi_gandara/financeiro/">Voltar</a>
-        <h1 style="text-align: center;" class="col-11 display-4">Gerenciamento Bancário</h1>
-      </div>
+  <main class="container">
+    <div class="row p-3 justify-content-center d-flex align-items-center">
+      <a type="button" style="text-align: left;" class="col-1 btn btn-primary justify-content-center d-flex" href="/pi_gandara/financeiro/">Voltar</a>
+      <h1 style="text-align: center;" class="col-11 display-4">Gerenciamento Bancário</h1>
+    </div>
 
 
-      <div class="row p-3 justify-content-center d-flex align-items-center">
-        <div class="col-6">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Contas Bancárias</h5>
-              <ul class="list-group">
-                <li class="list-group-item">
-                  <span class="fa fa-bank" aria-hidden="true"></span>
-                  <span>Conta Corrente - Banco do Brasil</span>
-                  <span class="badge badge-primary">R$ 10.000,00</span>
-                </li>
-                <li class="list-group-item">
-                  <span class="fa fa-bank" aria-hidden="true"></span>
-                  <span>Conta Poupança - Caixa Econômica</span>
-                  <span class="badge badge-primary">R$ 5.000,00</span>
-                </li>
-                <li class="list-group-item">
-                  <span class="fa fa-bank" aria-hidden="true"></span>
-                  <span>Conta Investimento - Banco Santander</span>
-                  <span class="badge badge-primary">R$ 20.000,00</span>
-                </li>
-              </ul>
+    <div class="row p-3 justify-content-center d-flex align-items-center">
+      <div class="col-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Contas Bancárias</h5>
+            <ul class="list-group">
+              <li class="list-group-item">
 
-              <br>
-              <a type="button" style="text-align: justify;" class="btn btn-primary justify-content-center d-flex" href="/pi_gandara/financeiro/novoBanco.php">Adicionar nova conta</a>
+                <table class="table table-hover table-striped">
+                  <thead>
+                    <th> <span class="fa fa-bank" aria-hidden="true"></span> Instituições</th>
+                    <th>Tipo da Conta</th>
+                    <th>Moeda</th>
+                    <th style="text-align:center;">AÇÃO</th>
+                  </thead>
+                  <tbody>
+                    <?php
+                    while ($linha = $dados->fetch_assoc()) {
+                    ?>
+                      <tr style="text-align:center;">
+                        <td><?= $linha['nomeInstituicao'] ?></td>
+                        <td><?= $linha['tipoConta'] ?></td>
+                        <td><?= $linha['moeda'] ?></td>
+                        <td>
+                          <!-- Chamo a página do formulario e envio o Id do Produto que será alterado-->
+                          <a href="novoBanco.php?id=<?= $linha['id'] ?>" class="btn btn-success">Visualizar</a>
+                        </td>
+                      </tr>
+                    <?php
+                    }
+                    ?>
+                  </tbody>
+                </table>
 
-            </div>
+              </li>
+            </ul>
+
+            <br>
+            <a type="button" style="text-align: justify;" class="btn btn-primary justify-content-center d-flex" href="/pi_gandara/financeiro/novoBanco.php">Adicionar nova conta</a>
 
           </div>
+
         </div>
-        <div class="col-6">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Movimentações Bancárias</h5>
-              <table class="table table-striped">
-                <thead>
-                  <tr>
-                    <th>Data</th>
-                    <th>Tipo</th>
-                    <th>Valor</th>
-                    <th>Conta</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>2023-02-20</td>
-                    <td>Depósito</td>
-                    <td>R$ 1.000,00</td>
-                    <td>Conta Corrente - Banco do Brasil</td>
-                  </tr>
-                  <tr>
-                    <td>2023-02-19</td>
-                    <td>Saque</td>
-                    <td>R$ 500,00</td>
-                    <td>Conta Poupança - Caixa Econômica</td>
-                  </tr>
-                  <tr>
-                    <td>2023-02-18</td>
-                    <td>Transferência</td>
-                    <td>R$ 2.000,00</td>
-                    <td>Conta Investimento - Banco Santander</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+      </div>
+      <div class="col-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Movimentações Bancárias</h5>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Data</th>
+                  <th>Tipo</th>
+                  <th>Valor</th>
+                  <th>Conta</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>2023-02-20</td>
+                  <td>Depósito</td>
+                  <td>R$ 1.000,00</td>
+                  <td>Conta Corrente - Banco do Brasil</td>
+                </tr>
+                <tr>
+                  <td>2023-02-19</td>
+                  <td>Saque</td>
+                  <td>R$ 500,00</td>
+                  <td>Conta Poupança - Caixa Econômica</td>
+                </tr>
+                <tr>
+                  <td>2023-02-18</td>
+                  <td>Transferência</td>
+                  <td>R$ 2.000,00</td>
+                  <td>Conta Investimento - Banco Santander</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
-      <div class="row p-3 justify-content-center d-flex align-items-center">
-        <div class="col-12">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Relatórios Bancários</h5>
-              <ul class="list-group">
-                <li class="list-group-item">
-                  <span class="fa fa-file" aria-hidden="true"></span>
-                  <span>Relatório de Movimentações Bancárias</span>
-                </li>
-                <li class="list-group-item">
-                  <span class="fa fa-file" aria-hidden="true"></span>
-                  <span>Relatório de Saldo Bancário</span>
-                </li>
-                <li class="list-group-item">
-                  <span class="fa fa-file" aria-hidden="true"></span>
-                  <span>Relatório de Investimentos Bancários</span>
-                </li>
-              </ul>
-            </div>
+    </div>
+    <div class="row p-3 justify-content-center d-flex align-items-center">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Relatórios Bancários</h5>
+            <ul class="list-group">
+              <li class="list-group-item">
+                <span class="fa fa-file" aria-hidden="true"></span>
+                <span>Relatório de Movimentações Bancárias</span>
+              </li>
+              <li class="list-group-item">
+                <span class="fa fa-file" aria-hidden="true"></span>
+                <span>Relatório de Saldo Bancário</span>
+              </li>
+              <li class="list-group-item">
+                <span class="fa fa-file" aria-hidden="true"></span>
+                <span>Relatório de Investimentos Bancários</span>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
