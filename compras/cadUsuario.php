@@ -271,7 +271,7 @@ $corNivel = array(
                                 <td>
                                     <!-- Chamo a página do formulario e envio o Id do usuario que será alterado-->
                                     <a href="cadUsuario.php?id=<?= $linha['id_usuario'] ?>" class="btn btn-warning">Editar</a>
-                                    <button class="btn btn-danger btn-excluir" onclick="excluirRegistro('<?= $linha['id'] ?>', 'cadUsuario')">Excluir</button>
+                                    <button class="btn btn-danger btn-excluir">Excluir</button>
                                 </td>
                             </tr>
                         <?php

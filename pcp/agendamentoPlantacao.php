@@ -2,7 +2,7 @@
 if (isset($_POST['submit'])) {
 
     // Iniciando conexao
-    include_once('../funcoes/conexao.php');
+    include_once('../utils/conexao.php');
 
     // Variaveis principais
     $nomePlantio = $_POST['nome_plantio'];
@@ -49,20 +49,20 @@ if (isset($_POST['submit'])) {
                 <div class="form-row justify-content-center mt-2">
                     <div class="col-sm-4">
                         <label for="nomePlantio">Nome da área de plantio</label>
-                        <input type="text" class="form-control" id="nomePlantio" name="nomePlantio">
+                        <input type="text" class="form-control" id="nomePlantio" name="nome_plantio">
                     </div>
                     <div class="col-sm-2">
-                        <label for="areaPlantio">Área de plantio (m²)</label>
-                        <input type="number" class="form-control" id="areaPlantio" name="areaPlantio">
+                        <label for="areaPlantio">Área de plantio (ha)</label>
+                        <input type="number" class="form-control" id="areaPlantio" name="area_plantio">
                     </div>
                     <div class="col-sm-3">
-                        <label for="dataPlantio">Data stimada para plantio</label>
-                        <input type="date" class="form-control" id="dataPlantio" name="dataPlantio">
+                        <label for="dataPlantio">Data estimada para plantio</label>
+                        <input type="date" class="form-control" id="dataPlantio" name="data_plantio">
                     </div>
 
                     <div class="col-sm-3">
-                        <label for="dataColheita">Data stimada para Colheita</label>
-                        <input type="date" class="form-control" id="dataColheita" name="dataColheita">
+                        <label for="dataColheita">Data estimada para Colheita</label>
+                        <input type="date" class="form-control" id="dataColheita" name="data_colheita">
                     </div>
                 </div>
 
@@ -71,7 +71,7 @@ if (isset($_POST['submit'])) {
                 <div class="form-row justify-content-center mt-2">
                     <div class="col-sm-4">
                         <label for="espacoMuda">Espaçamento entre Mudas (m)</label>
-                        <input type="number" class="form-control" id="espacoMuda" name="espacoMuda">
+                        <input type="number" class="form-control" id="espacoMuda" name="espacamento_mudas">
                     </div>
 
 

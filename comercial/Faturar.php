@@ -23,18 +23,15 @@
       <div class="card card-cds">
         <form class="mt-3 mb-3 ml-3 mr-3" id="userform" action="" method="POST">
 
+          <div class="alert alert-success" role="alert">
+            Nenhuma ficha pra faturar!
+          </div>
 
           <hr>
 
           <div class="form-row mt-3">
             <div class="col-md-4 text-left">
               <a class="btn btn-warning" href="../comercial/index.php">Voltar</a>
-            </div>
-            <div class="col-md-4 text-center">
-              <button type="reset" class="btn btn-outline-secondary">Limpar</button>
-            </div>
-            <div class="col-md-4 text-right">
-              <button type="submit" class="btn btn-success">Cadastrar</button>
             </div>
           </div> <!-- BOTÕES -->
 

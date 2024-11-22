@@ -45,21 +45,21 @@ if (isset($_POST['submit'])) {
 
         <div class="container">
             <div class="card card-cds">
-                <form action="/onstudies/usuarios/iu_usuario.php" method="POST"><!-- Inicio Formulário -->
+                <form action="/pi_gandara/compras/bd/bd_pedido.php" method="POST"><!-- Inicio Formulário -->
                     <div class="form-group">
 
                         <div class="form-row justify-content-center mt-3">
                             <div class="col-sm-2">
-                                <label for="codigo">Codigo</label>
-                                <input type="text" class="form-control" id="codigo" name="codigo">
+                                <label for="id_solicitacao">Codigo</label>
+                                <input type="text" class="form-control" id="id_solicitacao" name="id_solicitacao">
                             </div>
                             <div class="col-sm-2">
-                                <label for="fornecedor">Fornecedor</label>
-                                <input type="text" class="form-control" id="fornecedor" name="fornecedor">
+                                <label for="id_fornecedor">Fornecedor</label>
+                                <input type="text" class="form-control" id="id_fornecedor" name="id_fornecedor">
                             </div>
                             <div class="col-sm-2">
-                            <label for="datapedido">Data do Pedido</label>
-                            <input type="date" class="form-control" id="datapedido" name="datapedido" maxlength="15" onkeypress="mascara('(##) #####-####', this)">
+                            <label for="data_pedido">Data do Pedido</label>
+                            <input type="date" class="form-control" id="data_pedido" name="data_pedido" maxlength="15" onkeypress="mascara('(##) #####-####', this)">
                         </div>
                             <div class="col-sm-2">
                             <label for="valor">Valor</label>
@@ -73,16 +73,16 @@ if (isset($_POST['submit'])) {
                     <!-- Endereço -->
                     <div class="row justify-content-center mt-2">
                         <div class="col-sm-2">
-                            <label for="quantidade">Quantidade</label>
-                            <input type="number" class="form-control" id="quantidade" name="quantidade" maxlength="9" onkeypress="mascara('#####-###', this)">
+                            <label for="qtd">Quantidade</label>
+                            <input type="number" class="form-control" id="qtd" name="qtd" maxlength="9" onkeypress="mascara('#####-###', this)">
                         </div>
                         <div class="col-sm-2">
-                            <label for="previsaocompra">Previsão de Compra</label>
-                            <input type="date" class="form-control" id="previsaocompra" name="previsaocompra" maxlength="15" onkeypress="mascara('(##) #####-####', this)">
+                            <label for="pre_compra">Previsão de Compra</label>
+                            <input type="date" class="form-control" id="pre_compra" name="pre_compra" maxlength="15" onkeypress="mascara('(##) #####-####', this)">
                         </div>
                         <div class="col-sm-2">
-                            <label for="dataultima">Data Ultima Compra</label>
-                            <input type="date" class="form-control" id="dataultima" name="dataultima" autocomplete="on">
+                            <label for="data_u_compra">Data Ultima Compra</label>
+                            <input type="date" class="form-control" id="data_u_compra" name="data_u_compra" autocomplete="on">
                         </div>
 
                         <div class="col-sm-2">
@@ -92,21 +92,21 @@ if (isset($_POST['submit'])) {
                     </div>
                     <div class="row justify-content-center mt-2">
                         <div class="col-sm-2">
-                            <label for="quantidadebaixada">Quantidade Baixada</label>
-                            <input type="number" class="form-control" id="quantidadebaixada" name="quantidadebaixada" maxlength="9" onkeypress="mascara('#####-###', this)">
+                            <label for="qtd_baixada">Quantidade Baixada</label>
+                            <input type="number" class="form-control" id="qtd_baixada" name="qtd_baixada" maxlength="9" onkeypress="mascara('#####-###', this)">
                         </div>
                         <div class="col-sm-2">
-                            <label for="valorbaixado">Valor Baixado</label>
-                            <input type="number" class="form-control" id="valorbaixado" name="valorbaixado" maxlength="9" onkeypress="mascara('#####-###', this)">
+                            <label for="valor_baixado">Valor Baixado</label>
+                            <input type="number" class="form-control" id="valor_baixado" name="valor_baixado" maxlength="9" onkeypress="mascara('#####-###', this)">
                         </div>
                         <div class="col-sm-2">
-                            <label for="saldoquantidade">Saldo Quantidade</label>
-                            <input type="number" class="form-control" id="saldoquantidade" name="saldoquantidade" maxlength="9" onkeypress="mascara('#####-###', this)">
+                            <label for="saldo_qtd">Saldo Quantidade</label>
+                            <input type="number" class="form-control" id="saldo_qtd" name="saldo_qtd" maxlength="9" onkeypress="mascara('#####-###', this)">
                         </div>
 
                         <div class="col-sm-2">
-                            <label for="saldocomprado">Saldo Comprado</label>
-                            <input type="number" class="form-control" id="saldocomprado" name="saldocomprado">
+                            <label for="saldo_comprado">Saldo Comprado</label>
+                            <input type="number" class="form-control" id="saldo_comprado" name="saldo_comprado">
                         </div>
                     </div>
 
