@@ -40,6 +40,12 @@
                 <h2>Últimas medições:</h2>
                 
             </div>
+        </form>
+        <div class="row">
+            <div class="col-12 d-flex justify-content-center">
+                <a class="btn btn-danger">Voltar</a>
+            </div>
+        </div>
     </div>
     <script src="https://kit.fontawesome.com/74ecb76a40.js" crossorigin="anonymous"></script>
 
