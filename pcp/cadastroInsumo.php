@@ -46,7 +46,7 @@ if (isset($_POST['submit'])) {
 
 
 <div class="col-6 m-5">
-  <h3>Solicitação de cadastro de Insumos</h3>
+  <h3>Solicitação de cadastro de Materiais</h3>
 </div>
 
 </div>
