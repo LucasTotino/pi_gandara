@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
     <link rel="stylesheet" type="text/css" href="styles.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.css" crossorigin="anonymous">
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
@@ -23,7 +24,7 @@
             <h1 style="text-align: center;" class="col-11 display-4">Contas a Receber</h1>
         </div>
 
-        <div class="container mt-5">
+        <div class="container">
 
             <div class="mb-4">
                 <button class="btn btn-primary" data-toggle="modal" data-target="#addAccountModal">Adicionar Conta</button>

@@ -77,7 +77,8 @@ if ($acao == "INCLUIR") {
             $codBanco,
             $tipoConta,
             $moeda,
-            $anotacoes
+            $anotacoes,
+            $instituicao
         );
     try {
         if ($stmt->execute()) {
