@@ -45,7 +45,7 @@ if (isset($_POST['submit'])) {
 </a>
 
 
-<div class="col-6 m-5">
+<div class="col-6 m-5 d-flex justify-content-center">
   <h3>Solicitação de cadastro de Materiais</h3>
 </div>
 

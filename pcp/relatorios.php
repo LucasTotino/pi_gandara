@@ -31,7 +31,7 @@
       </a>
 
 
-      <div class="col-6 m-5">
+      <div class="col-6 m-5 d-flex justify-content-center">
         <h3>Relatório das plantações</h3>
       </div>
 
