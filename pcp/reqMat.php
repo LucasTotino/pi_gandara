@@ -19,10 +19,22 @@
 
 <body>
 
-  <div class="container">
-    <h4>Formulário para requisição de materiais onde será exibido o banco do estoque com uma box, onde os selecionados
-      serão solicitados.</h4>
+<div class="row">
+
+<a href="../pcp/index.php" class="btn">
+  <div class="col-2">
+    <div style="width: 18rem;">
+      <span class="fa fa-chevron-left fa-2x p-3" aria-hidden=" true"></span>
+    </div>
   </div>
+</a>
+
+
+<div class="col-6 m-5">
+  <h3>Requisição de Materiais</h3>
+</div>
+
+</div>
 
   <script>
 

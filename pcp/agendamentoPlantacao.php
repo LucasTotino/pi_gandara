@@ -11,6 +11,7 @@ if (isset($_POST['submit'])) {
     $dataColheita = $_POST['data_colheita'];
     $espacamentoMudas = $_POST['espacamento_mudas'];
     $fruto = $_POST['fruto'];
+
 }
 ?>
 
