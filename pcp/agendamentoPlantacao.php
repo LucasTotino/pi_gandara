@@ -11,7 +11,6 @@ if (isset($_POST['submit'])) {
     $dataColheita = $_POST['data_colheita'];
     $espacamentoMudas = $_POST['espacamento_mudas'];
     $fruto = $_POST['fruto'];
-
 }
 ?>
 
@@ -37,12 +36,25 @@ if (isset($_POST['submit'])) {
 
     <div class="container mt-5">
         <form action="../pcp/testebanco.php" method="POST"><!-- Inicio Formulário -->
+            <input type="hidden" id="id" name="id" value="<?= isset($_GET['id']) ? $_GET['id'] : null ?>">
+            <input type="hidden" name="acao" id="acao" value="<?= isset($_GET['id']) ? "ALTERAR" : "INCLUIR" ?>">
+            
             <div class="row">
-                <div class="col-8">
-                    <h2>Agendamento de um novo Plantio</h2>
-                </div>
 
-            </div>
+      <a href="../pcp/index.php" class="btn">
+        <div class="col-2">
+          <div style="width: 18rem;">
+            <span class="fa fa-chevron-left fa-2x p-3" aria-hidden=" true"></span>
+          </div>
+        </div>
+      </a>
+
+
+      <div class="col-6 m-5 d-flex justify-content-center">
+        <h3>Agendamento de um novo Plantio</h3>
+      </div>
+
+    </div>
 
 
             <div class="form-group">

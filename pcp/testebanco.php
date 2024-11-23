@@ -6,7 +6,7 @@ require '../utils/conexao.php';
 $sql = "SELECT * FROM agendamento_plantacao;";
 
 //Seleciona apenas os campos que serão usados
-$sql_eficiente = "SELECT id_produtos, nomeInsumo, codRef, qtdeUtilizada, unidade, prazoUtil FROM agendamento_plantacao;";
+$sql_eficiente = "SELECT id, nome_plantio, area_plantio, data_plantio, data_colheita, espacamento_mudas, fruto FROM agendamento_plantacao;";
 
 //Envia o SQL para o prepare Statement
 $stmt = $conn->prepare($sql);
@@ -117,7 +117,7 @@ Liga os resultados a variaveis para serem utilizados no HTML
         <div class="row">
             <h1 class="col-md-6">Listagem de produtos</h1>
             <div class="col-md-6 d-flex justify-content-end">
-                <a href="/site-pi/produtos/iu_produtos.php"><button type="submit"
+                <a href="../pcp/agendamentoPlantacao.php"><button type="submit"
                         class="btn btn-success my-3">Adicionar</button></a>
             </div>
         </div>

@@ -21,18 +21,21 @@
 
 <div class="row">
 
-<a href="../pcp/index.php" class="btn">
-  <div class="col-2">
-    <div style="width: 18rem;">
-      <span class="fa fa-chevron-left fa-2x p-3" aria-hidden=" true"></span>
-    </div>
-  </div>
-</a>
+      <a href="../pcp/index.php" class="btn">
+        <div class="col-2">
+          <div style="width: 18rem;">
+            <span class="fa fa-chevron-left fa-2x p-3" aria-hidden=" true"></span>
+          </div>
+        </div>
+      </a>
 
 
-<div class="col-6 m-5 d-flex justify-content-center">
+      <div class="col-6 m-5 d-flex justify-content-center">
   <h3>Requisição de Materiais</h3>
 </div>
+
+    </div>
+
 
 </div>
 
