@@ -66,116 +66,115 @@ if ($stmt) {
 </header>
 
 <body>
-    <main>
-        <div class="container">
-            <div class="row">
-                <div class="col m-5 d-flex justify-content-center">
-                    <h3>Solicitação de cadastro de Materiais</h3>
-                </div>
-
+    <div class="container">
+        <div class="row">
+            <div class="col m-5 d-flex justify-content-center">
+                <h3>Solicitação de cadastro de Materiais</h3>
             </div>
 
-
-            <form action="../pcp/cadastroInsumo.php" method="POST"><!-- Inicio Formulário -->
-                <div class="form-group">
-                    <!-- Nome, CPF e Data Nascimento -->
-                    <div class="form-row justify-content-center mt-2">
-                        <div class="col-sm-6">
-                            <label for="nomeInsumo">Nome do Insumo</label>
-                            <input type="text" class="form-control" id="nomeInsumo" name="nome_insumo"
-                                value="<?= $id ? $user['nome_insumo'] : '' ?>">
-                        </div>
-                        <div class="col-sm-6">
-                            <label for="codRef">Código de Referência</label>
-                            <input type="text" class="form-control" id="codRef" name="cod_ref"
-                                value="<?= $id ? $user['cod_ref'] : '' ?>">
-                        </div>
-                    </div>
-
-                    <!-- Celular e Email -->
-
-                    <div class="form-row justify-content-center mt-2">
-                        <div class="col-sm-4">
-                            <label for="qtdeInsumo">Quantidade utilizada</label>
-                            <input type="text" class="form-control" id="qtdeInsumo" name="qtde_utilizada"
-                                value="<?= $id ? $user['qtde_utilizada'] : '' ?>">
-                        </div>
-
-                        <div class="col-sm-4">
-                            <label for="unidade">Unidade:</label>
-                            <div class="input-group">
-                                <select class="custom-select" id="unidade" name="unidade">
-                                    <option value="">Selecione</option>
-                                    <option <?= ($id && $user["unidade"] == "Litro") ? "selected" : '' ?> value="Litro">
-                                        Litro</option>
-                                    <option <?= ($id && $user["unidade"] == "Quilo") ? "selected" : '' ?> value="Quilo">
-                                    </option>
-                                    <option <?= ($id && $user["unidade"] == "Tonelada") ? "selected" : '' ?>
-                                        value="Tonelada"></option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-4">
-                            <label for="dataUtilizacao">Data de Utilização</label>
-                            <input type="date" class="form-control" id="prazo_util" name="dataUtilizacao"
-                                value="<?= $id ? $user['prazo_util'] : '' ?>">
-
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Botões -->
-                <div class="form-row justify-content-center">
-                    <div class="col-sm-3 mt-3">
-                        <button type="submit" name="submit" class="btn btn-success">Cadastrar</button>
-                    </div>
-                    <div class="col-sm-3 mt-3">
-                        <button type="reset" class="btn btn-warning">Cancelar</button>
-                    </div>
-                    <div class="col-sm-3 mt-3">
-                        <a href="index.php"><button type="button" class="btn btn-danger">Voltar</button></a>
-                    </div>
-                </div>
-            </form>
-    </main>
-
-    <div class="container mt-5">
-        <h2 class="d-flex justify-content-center">Cadastros solicitados</h2>
-        <div class="card p-3">
-            <table class="table table-striped table-light">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nome do Insumo</th>
-                        <th>Código Referência</th>
-                        <th>Quantidade utilizada</th>
-                        <th>Unidade de medida</th>
-                        <th>Data de utilização</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php while ($linha = $dados->fetch_assoc()): ?>
-                        <tr>
-                            <td><?= $linha['id'] ?></td>
-                            <td><?= $linha['nome_insumo'] ?></td>
-                            <td><?= $linha['cod_ref'] ?></td>
-                            <td><?= $linha['qtde_utilizada'] ?></td>
-                            <td><?= $linha['unidade'] ?></td>
-                            <td><?= $linha['prazo_util'] ?></td>
-                            <a href="medicaoProducao.php?id=<?= $linha['id'] ?>" class="btn btn-warning btn-sm">Editar</a>
-                            <button type="button" class="btn btn-danger btn-sm"
-                                data-id="<?= $linha['id'] ?>">Excluir</button>
-                            </td>
-                        </tr>
-                    <?php endwhile; ?>
-                </tbody>
-            </table>
         </div>
-    </div>
 
-    <script src="https://kit.fontawesome.com/74ecb76a40.js" crossorigin="anonymous"></script>
+
+        <form action="../pcp/cadastroInsumo.php" method="POST"><!-- Inicio Formulário -->
+            <div class="form-group">
+                <!-- Nome, CPF e Data Nascimento -->
+                <div class="form-row justify-content-center mt-2">
+                    <div class="col-sm-6">
+                        <label for="nomeInsumo">Nome do Insumo</label>
+                        <input type="text" class="form-control" id="nomeInsumo" name="nome_insumo"
+                            value="<?= $id ? $user['nome_insumo'] : '' ?>">
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="codRef">Código de Referência</label>
+                        <input type="text" class="form-control" id="codRef" name="cod_ref"
+                            value="<?= $id ? $user['cod_ref'] : '' ?>">
+                    </div>
+                </div>
+
+                <!-- Celular e Email -->
+
+                <div class="form-row justify-content-center mt-2">
+                    <div class="col-sm-4">
+                        <label for="qtdeInsumo">Quantidade utilizada</label>
+                        <input type="text" class="form-control" id="qtdeInsumo" name="qtde_utilizada"
+                            value="<?= $id ? $user['qtde_utilizada'] : '' ?>">
+                    </div>
+
+                    <div class="col-sm-4">
+                        <label for="unidade">Unidade:</label>
+                        <div class="input-group">
+                            <select class="custom-select" id="unidade" name="unidade">
+                                <option value="">Selecione</option>
+                                <option <?= ($id && $user["unidade"] == "Litro") ? "selected" : '' ?> value="Litro">
+                                    Litro</option>
+                                <option <?= ($id && $user["unidade"] == "Quilo") ? "selected" : '' ?> value="Quilo">
+                                </option>
+                                <option <?= ($id && $user["unidade"] == "Tonelada") ? "selected" : '' ?> value="Tonelada">
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <label for="dataUtilizacao">Data de Utilização</label>
+                        <input type="date" class="form-control" id="prazo_util" name="dataUtilizacao"
+                            value="<?= $id ? $user['prazo_util'] : '' ?>">
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botões -->
+            <div class="form-row justify-content-center">
+                <div class="col-sm-3 mt-3">
+                    <button type="submit" name="submit" class="btn btn-success">Cadastrar</button>
+                </div>
+                <div class="col-sm-3 mt-3">
+                    <button type="reset" class="btn btn-warning">Cancelar</button>
+                </div>
+                <div class="col-sm-3 mt-3">
+                    <a href="index.php"><button type="button" class="btn btn-danger">Voltar</button></a>
+                </div>
+            </div>
+        </form>
+
+        <div class="container mt-5">
+            <h2 class="d-flex justify-content-center">Cadastros solicitados</h2>
+            <div class="card p-3">
+                <table class="table table-striped table-light">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome do Insumo</th>
+                            <th>Código Referência</th>
+                            <th>Quantidade utilizada</th>
+                            <th>Unidade de medida</th>
+                            <th>Data de utilização</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php while ($linha = $dados->fetch_assoc()): ?>
+                            <tr>
+                                <td><?= $linha['id'] ?></td>
+                                <td><?= $linha['nome_insumo'] ?></td>
+                                <td><?= $linha['cod_ref'] ?></td>
+                                <td><?= $linha['qtde_utilizada'] ?></td>
+                                <td><?= $linha['unidade'] ?></td>
+                                <td><?= $linha['prazo_util'] ?></td>
+                                <a href="medicaoProducao.php?id=<?= $linha['id'] ?>"
+                                    class="btn btn-warning btn-sm">Editar</a>
+                                <button type="button" class="btn btn-danger btn-sm"
+                                    data-id="<?= $linha['id'] ?>">Excluir</button>
+                                </td>
+                            </tr>
+                        <?php endwhile; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <script src="https://kit.fontawesome.com/74ecb76a40.js" crossorigin="anonymous"></script>
 
 </body>
 
