@@ -54,16 +54,27 @@
           </div>
         </a>
 
-      </div> <!-- ROW end -->
-
-      <div class="row p-3 justify-content-center d-flex align-items-center">
-
         <a href="cadVendas.php" class="btn">
           <div class="col-2 p-2 m-1">
             <div style="width: 12rem;">
               <span class="fa fa-solid fa-money fa-5x" aria-hidden="true"></span>
               <div class="card-body">
                 <h3>Vendas</h3>
+              </div>
+            </div>
+          </div>
+        </a>
+
+      </div> <!-- ROW end -->
+
+      <div class="row p-3 justify-content-center d-flex align-items-center">
+
+        <a href="Expedicao.php" class="btn">
+          <div class="col-2 p-2 m-1">
+            <div style="width: 12rem;">
+              <span class="fa fa-solid fa-arrow-up fa-5x" aria-hidden="true"></span>
+              <div class="card-body">
+                <h3>Expedição</h3>
               </div>
             </div>
           </div>
