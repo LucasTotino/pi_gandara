@@ -30,7 +30,7 @@
       </a>
 
 
-      <div class="col-6 m-5">
+      <div class="col-6 m-5 d-flex justify-content-center">
         <h1>Planejamento e Controle da Produção</h1>
       </div>
 

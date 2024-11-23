@@ -36,7 +36,7 @@ if (isset($_POST['submit'])) {
 <body>
 
     <div class="container mt-5">
-        <form action="../pcp/agendamentoPlantacao.php" method="POST"><!-- Inicio Formulário -->
+        <form action="../pcp/testebanco.php" method="POST"><!-- Inicio Formulário -->
             <div class="row">
                 <div class="col-8">
                     <h2>Agendamento de um novo Plantio</h2>

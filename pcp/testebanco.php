@@ -3,10 +3,10 @@
 require '../utils/conexao.php';
 
 //prepara a consulta SQL
-$sql = "SELECT * FROM produtos;";
+$sql = "SELECT * FROM agendamento_plantacao;";
 
 //Seleciona apenas os campos que serão usados
-$sql_eficiente = "SELECT id_produtos, nomeProduto, tamanho, marca, cor, preco, imagem FROM produtos;";
+$sql_eficiente = "SELECT id_produtos, nomeInsumo, codRef, qtdeUtilizada, unidade, prazoUtil FROM agendamento_plantacao;";
 
 //Envia o SQL para o prepare Statement
 $stmt = $conn->prepare($sql);
