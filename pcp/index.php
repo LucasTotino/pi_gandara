@@ -49,7 +49,7 @@
           </div>
         </a>
 
-        <a href="/pi_gandara/pcp/planPlantacao.php" class="btn">
+        <a href="/pi_gandara/pcp/agendamentoPlantacao.php" class="btn">
           <div class="col-4 m-2">
             <div style="width: 18rem;">
               <span class="fa-solid fa-seedling fa-5x" aria-hidden="true"></span>
@@ -60,7 +60,7 @@
           </div>
         </a>
 
-        <a href="/pi_gandara/pcp/acompProducao.php" class="btn">
+        <a href="/pi_gandara/pcp/medicaoProducao.php" class="btn">
           <div class="col-4 m-2">
             <div style="width: 18rem;">
               <span class="fa-solid fa-file-pen fa-5x" aria-hidden="true"></span>

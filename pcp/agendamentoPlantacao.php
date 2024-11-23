@@ -1,16 +1,40 @@
 <?php
-if (isset($_POST['submit'])) {
+require '../utils/conexao.php'; // Inclui o arquivo de conexão com o banco de dados
 
-    // Iniciando conexao
-    include_once('../utils/conexao.php');
+// Verifica se veio um ID na URL e valida se é um inteiro
+$id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+$cor = ($id) ? "btn-warning" : "btn-success";
 
-    // Variaveis principais
-    $nomePlantio = $_POST['nome_plantio'];
-    $areaPlantio = $_POST['area_plantio'];
-    $dataPlantio = $_POST['data_plantio'];
-    $dataColheita = $_POST['data_colheita'];
-    $espacamentoMudas = $_POST['espacamento_mudas'];
-    $fruto = $_POST['fruto'];
+// Caso tenha um ID, busca o registro correspondente no banco de dados
+if ($id) {
+    $sql = "SELECT * FROM agendamento_plantacao WHERE id = ?;";
+    $stmt = $conn->prepare($sql);
+
+    if ($stmt) {
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $dados = $stmt->get_result();
+
+        if ($dados->num_rows > 0) {
+            $user = $dados->fetch_assoc();
+        } else {
+            header("Location: ../pcp/index.php"); // Redireciona caso o ID não seja encontrado
+            exit;
+        }
+    } else {
+        die("Erro ao preparar a consulta: " . $conn->error);
+    }
+}
+
+// Consulta geral para listar os registros no banco
+$sql = "SELECT id, nome_plantio, area_plantio, data_plantio, data_colheita, espacamento_mudas, fruto FROM agendamento_plantacao;";
+$stmt = $conn->prepare($sql);
+
+if ($stmt) {
+    $stmt->execute();
+    $dados = $stmt->get_result();
+} else {
+    die("Erro ao preparar a consulta: " . $conn->error);
 }
 ?>
 
@@ -21,94 +45,71 @@ if (isset($_POST['submit'])) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="/pi_gandara/css/style.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.css" crossorigin="anonymous">
-    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.css"
+        crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/74ecb76a40.js" crossorigin="anonymous"></script>
     <title>Trabalho Gandara!</title>
 </head>
+
 <header>
-    <?php
-    include_once('../utils/menu.php');
-    ?>
+    <?php include_once('../utils/menu.php'); ?>
 </header>
 
 <body>
-
     <div class="container mt-5">
-        <form action="../pcp/testebanco.php" method="POST"><!-- Inicio Formulário -->
-            <input type="hidden" id="id" name="id" value="<?= isset($_GET['id']) ? $_GET['id'] : null ?>">
-            <input type="hidden" name="acao" id="acao" value="<?= isset($_GET['id']) ? "ALTERAR" : "INCLUIR" ?>">
-            
+        <form action="../pcp/agendamentoPlantacao.php" method="POST">
+            <input type="hidden" id="id" name="id" value="<?= $id ?? null ?>">
+            <input type="hidden" name="acao" id="acao" value="<?= $id ? "ALTERAR" : "INCLUIR" ?>">
+
             <div class="row">
-
-      <a href="../pcp/index.php" class="btn">
-        <div class="col-2">
-          <div style="width: 18rem;">
-            <span class="fa fa-chevron-left fa-2x p-3" aria-hidden=" true"></span>
-          </div>
-        </div>
-      </a>
-
-
-      <div class="col-6 m-5 d-flex justify-content-center">
-        <h3>Agendamento de um novo Plantio</h3>
-      </div>
-
-    </div>
-
+                <div class="col m-5 d-flex justify-content-center">
+                    <h1>Agendamento de um novo Plantio</h1>
+                </div>
+            </div>
 
             <div class="form-group">
-                <!-- Nome, CPF e Data Nascimento -->
                 <div class="form-row justify-content-center mt-2">
                     <div class="col-sm-4">
                         <label for="nomePlantio">Nome da área de plantio</label>
-                        <input type="text" class="form-control" id="nomePlantio" name="nome_plantio">
+                        <input type="text" name="nome_plantio" id="nomePlantio" class="form-control"
+                            value="<?= $id ? $user['nome_plantio'] : '' ?>">
                     </div>
                     <div class="col-sm-2">
                         <label for="areaPlantio">Área de plantio (ha)</label>
-                        <input type="number" class="form-control" id="areaPlantio" name="area_plantio">
+                        <input type="number" class="form-control" id="areaPlantio" name="area_plantio"
+                            value="<?= $id ? $user['area_plantio'] : '' ?>">
                     </div>
                     <div class="col-sm-3">
                         <label for="dataPlantio">Data estimada para plantio</label>
-                        <input type="date" class="form-control" id="dataPlantio" name="data_plantio">
+                        <input type="date" class="form-control" id="dataPlantio" name="data_plantio"
+                            value="<?= $id ? $user['data_plantio'] : '' ?>">
                     </div>
-
                     <div class="col-sm-3">
                         <label for="dataColheita">Data estimada para Colheita</label>
-                        <input type="date" class="form-control" id="dataColheita" name="data_colheita">
+                        <input type="date" class="form-control" id="dataColheita" name="data_colheita"
+                            value="<?= $id ? $user['data_colheita'] : '' ?>">
                     </div>
                 </div>
-
-                <!-- Celular e Email -->
 
                 <div class="form-row justify-content-center mt-2">
                     <div class="col-sm-4">
                         <label for="espacoMuda">Espaçamento entre Mudas (m)</label>
-                        <input type="number" class="form-control" id="espacoMuda" name="espacamento_mudas">
+                        <input type="number" class="form-control" id="espacoMuda" name="espacamento_mudas"
+                            value="<?= $id ? $user['espacamento_mudas'] : '' ?>">
                     </div>
-
-
                     <div class="col-sm-4">
                         <label for="fruto">Fruto:</label>
-                        <div class="input-group">
-                            <select class="custom-select" id="fruto" name="fruto">
-                                <option value="">Selecione</option>
-                                <option value="Laranja">Laranja</option>
-                                <option value="Limão">Limão</option>
-                            </select>
-                        </div>
+                        <select class="custom-select" id="fruto" name="fruto" required>
+                            <option value="">Selecione</option>
+                            <option <?= ($id && $user["fruto"] == "Laranja") ? "selected" : '' ?> value="Laranja">Laranja
+                            </option>
+                            <option <?= ($id && $user["fruto"] == "Limão") ? "selected" : '' ?> value="Limão">Limão
+                            </option>
+                        </select>
                     </div>
-
-
-
-
                 </div>
-
-
             </div>
 
-
-            <!-- Botões -->
             <div class="form-row justify-content-center">
                 <div class="col-sm-3 mt-3">
                     <button type="submit" name="submit" class="btn btn-success">Cadastrar</button>
@@ -117,16 +118,49 @@ if (isset($_POST['submit'])) {
                     <button type="reset" class="btn btn-warning">Cancelar</button>
                 </div>
                 <div class="col-sm-3 mt-3">
-                    <a href="planPlantacao.php"><button type="button" class="btn btn-danger">Voltar</button></a>
+                    <a href="index.php"><button type="button" class="btn btn-danger">Voltar</button></a>
                 </div>
             </div>
-
-
         </form>
-
     </div>
-    <script src="https://kit.fontawesome.com/74ecb76a40.js" crossorigin="anonymous"></script>
 
+    <div class="container mt-5">
+        <h2 class="d-flex justify-content-center">Plantações agendadas</h2>
+        <div class="card p-3">
+            <table class="table table-striped table-light">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome Plantação</th>
+                        <th>Área (ha)</th>
+                        <th>Data Plantio</th>
+                        <th>Data Colheita</th>
+                        <th>Espaçamento</th>
+                        <th>Fruto</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php while ($linha = $dados->fetch_assoc()): ?>
+                        <tr>
+                            <td><?= $linha['id'] ?></td>
+                            <td><?= $linha['nome_plantio'] ?></td>
+                            <td><?= $linha['area_plantio'] ?></td>
+                            <td><?= $linha['data_plantio'] ?></td>
+                            <td><?= $linha['data_colheita'] ?></td>
+                            <td><?= $linha['espacamento_mudas'] ?></td>
+                            <td><?= $linha['fruto'] ?></td>
+                            <td>
+                                <a href="planPlantacao.php?id=<?= $linha['id'] ?>" class="btn btn-warning btn-sm">Editar</a>
+                                <button type="button" class="btn btn-danger btn-sm"
+                                    data-id="<?= $linha['id'] ?>">Excluir</button>
+                            </td>
+                        </tr>
+                    <?php endwhile; ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </body>
 
 </html>

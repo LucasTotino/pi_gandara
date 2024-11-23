@@ -1,15 +1,40 @@
 <?php
-if (isset($_POST['submit'])) {
+require '../utils/conexao.php'; // Inclui o arquivo de conexão com o banco de dados
 
-    // Iniciando conexao
-    include_once('../utils/conexao.php');
+// Verifica se veio um ID na URL e valida se é um inteiro
+$id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+$cor = ($id) ? "btn-warning" : "btn-success";
 
-    // Variaveis principais
-    $nomePlantio = $_POST['nomePlantio'];
-    $dataMedição = $_POST['dataMedição'];
-    $diametroFruto = $_POST['diametroFruto'];
-    $praga = $_POST['praga'];
-    $obsMedicao = $_POST['obsMedicao'];
+// Caso tenha um ID, busca o registro correspondente no banco de dados
+if ($id) {
+    $sql = "SELECT * FROM medicao_producao WHERE id = ?;";
+    $stmt = $conn->prepare($sql);
+
+    if ($stmt) {
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $dados = $stmt->get_result();
+
+        if ($dados->num_rows > 0) {
+            $user = $dados->fetch_assoc();
+        } else {
+            header("Location: ../pcp/index.php"); // Redireciona caso o ID não seja encontrado
+            exit;
+        }
+    } else {
+        die("Erro ao preparar a consulta: " . $conn->error);
+    }
+}
+
+// Consulta geral para listar os registros no banco
+$sql = "SELECT id, data_medicao, diametro_fruto, adubacao, praga, obs_medicao FROM medicao_producao;";
+$stmt = $conn->prepare($sql);
+
+if ($stmt) {
+    $stmt->execute();
+    $dados = $stmt->get_result();
+} else {
+    die("Erro ao preparar a consulta: " . $conn->error);
 }
 ?>
 
@@ -21,7 +46,8 @@ if (isset($_POST['submit'])) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="/pi_gandara/css/style.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.css"
+        crossorigin="anonymous">
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
 
     <title>Trabalho Gandara!</title>
@@ -35,74 +61,114 @@ if (isset($_POST['submit'])) {
 <body>
 
     <div class="container mt-5">
-        <form action="../pcp/medicaoProducao.php" method="POST"><!-- Inicio Formulário -->
-            <div class="row">
-                <div class="col-8">
-                    <h2>Medição da Produção</h2>
+        <div class="form-group">
+            <form action="../pcp/medicaoProducao.php" method="POST"><!-- Inicio Formulário -->
+                <div class="row">
+                    <div class="col justify-content-center">
+                        <h1>Medição da Produção</h1>
+                    </div>
+
                 </div>
-
-            </div>
-
-
-            <div class="form-group">
                 <!-- Nome, CPF e Data Nascimento -->
                 <div class="form-row justify-content-center mt-2">
                     <div class="col-sm-6">
                         <label for="nomePlantio">Nome do Plantio medido</label>
-                        <input type="number" class="form-control" id="nomePlantio" name="nomePlantio">
+                        <input type="number" class="form-control" id="nomePlantio" name="nomePlantio"
+                            value="<?= $id ? $user['nome_plantio'] : '' ?>">
                     </div>
                     <div class="col-sm-6">
                         <label for="dataMedicao">Data da medição</label>
-                        <input type="date" class="form-control" id="dataMedicao" name="dataMedicao">
+                        <input type="date" class="form-control" id="dataMedicao" name="dataMedicao"
+                            value="<?= $id ? $user['data_medicao'] : '' ?>">
                     </div>
 
-
                 </div>
-
-
 
                 <div class="form-row justify-content-center mt-2">
                     <div class="col-sm-4">
                         <label for="diametroFruto">Diâmetro da Fruta (cm)</label>
-                        <input type="number" class="form-control" id="diametroFruto" name="diametroFruto">
+                        <input type="number" class="form-control" id="diametroFruto" name="diametroFruto"
+                            value="<?= $id ? $user['diametro_fruto'] : '' ?>">
                     </div>
 
                     <div class="col-sm-4">
-                        <label for="praga">Necessário adubação ?</label>
-                        <input type="text" class="form-control" id="praga" name="praga">
+                        <label for="adubacao">Necessário adubação ?</label>
+                        <input type="text" class="form-control" id="adubacao" name="adubacao"
+                            value="<?= $id ? $user['adubacao'] : '' ?>">
                     </div>
 
                     <div class="col-sm-4">
                         <label for="praga">Qual praga foi observada?</label>
-                        <input type="text" class="form-control" id="praga" name="praga">
+                        <input type="text" class="form-control" id="praga" name="praga"
+                            value="<?= $id ? $user['praga'] : '' ?>">
                     </div>
 
                 </div>
                 <div class="form-row justify-content-center mt-2">
                     <div class="col-6">
                         <label for="obsMedicao">Observação:</label>
-                        <input type="text" class="form-control" id="obsMedicao" name="obsMedicao">
+                        <input type="text" class="form-control" id="obsMedicao" name="obsMedicao"
+                            value="<?= $id ? $user['obs_medicao'] : '' ?>">
                     </div>
                 </div>
+        </div>
 
+        <!-- Botões -->
+        <div class="form-row justify-content-center">
+            <div class="col-sm-3 mt-3">
+                <button type="submit" name="submit" class="btn btn-success">Cadastrar</button>
             </div>
-
-            <!-- Botões -->
-            <div class="form-row justify-content-center">
-                <div class="col-sm-3 mt-3">
-                    <button type="submit" name="submit" class="btn btn-success">Cadastrar</button>
-                </div>
-                <div class="col-sm-3 mt-3">
-                    <button type="reset" class="btn btn-warning">Cancelar</button>
-                </div>
-                <div class="col-sm-3 mt-3">
-                    <a href="acompProducao.php"><button type="button" class="btn btn-danger">Voltar</button></a>
-                </div>
+            <div class="col-sm-3 mt-3">
+                <button type="reset" class="btn btn-warning">Cancelar</button>
             </div>
+            <div class="col-sm-3 mt-3">
+                <a href="index.php"><button type="button" class="btn btn-danger">Voltar</button></a>
+            </div>
+        </div>
 
         </form>
 
     </div>
+
+    <div class="container mt-5">
+        <h2 class="d-flex justify-content-center">Medições realizadas</h2>
+        <div class="card p-3">
+            <table class="table table-striped table-light">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome Plantação</th>
+                        <th>Data medição</th>
+                        <th>Diametro do fruto</th>
+                        <th>Necessário abudação?</th>
+                        <th>Necessário Herbicida ou inseticida ?</th>
+                        <th>Observação</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php while ($linha = $dados->fetch_assoc()): ?>
+                        <tr>
+                            <td><?= $linha['id'] ?></td>
+                            <td><?= $linha['nome_plantio'] ?></td>
+                            <td><?= $linha['data_medicao'] ?></td>
+                            <td><?= $linha['diametro_fruto'] ?></td>
+                            <td><?= $linha['adubacao'] ?></td>
+                            <td><?= $linha['praga'] ?></td>
+                            <td><?= $linha['obs_medicao'] ?></td>
+                            <td>
+                                <a href="medicaoProducao.php?id=<?= $linha['id'] ?>"
+                                    class="btn btn-warning btn-sm">Editar</a>
+                                <button type="button" class="btn btn-danger btn-sm"
+                                    data-id="<?= $linha['id'] ?>">Excluir</button>
+                            </td>
+                        </tr>
+                    <?php endwhile; ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
     <script src="https://kit.fontawesome.com/74ecb76a40.js" crossorigin="anonymous"></script>
 
 </body>

@@ -1,15 +1,48 @@
 <?php
-if (isset($_POST['submit'])) {
+require '../utils/conexao.php'; // Inclui o arquivo de conexão com o banco de dados
 
-    // Iniciando conexao
-    include_once('../utils/conexao.php');
+// Verifica se veio um ID na URL e valida se é um inteiro
+$id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+$cor = ($id) ? "btn-warning" : "btn-success";
 
-    // Variaveis principais
-    $nomeInsumo = $_POST['nome_insumo'];
-    $codRef = $_POST['cod_ref'];
-    $qtdeUtilizada = $_POST['qtde_utilizada'];
-    $unidade = $_POST['unidade'];
-    $prazoUtil = $_POST['prazo_util'];
+// Caso tenha um ID, busca o registro correspondente no banco de dados
+if ($id) {
+    $sql = "SELECT * FROM cadastro_insumo WHERE id = ?;";
+    $stmt = $conn->prepare($sql);
+
+    if ($stmt) {
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $dados = $stmt->get_result();
+
+        if ($dados->num_rows > 0) {
+            $user = $dados->fetch_assoc();
+        } else {
+            header("Location: ../pcp/index.php"); // Redireciona caso o ID não seja encontrado
+            exit;
+        }
+    } else {
+        die("Erro ao preparar a consulta: " . $conn->error);
+    }
+}
+
+// Consulta geral para listar os registros no banco
+$sql = "SELECT id, nome_insumo, cod_ref, qtde_utilizada, unidade, prazo_util FROM cadastro_insumo;";
+$stmt = $conn->prepare($sql);
+
+/* `id` int(11) NOT NULL,
+  `nome_insumo` varchar(100) DEFAULT NULL,
+  `cod_ref` float DEFAULT NULL,
+  `qtde_utilizada` int(11) DEFAULT NULL,
+  `unidade` varchar(20) DEFAULT NULL,
+  `prazo_util` date DEFAULT NULL
+*/
+
+if ($stmt) {
+    $stmt->execute();
+    $dados = $stmt->get_result();
+} else {
+    die("Erro ao preparar a consulta: " . $conn->error);
 }
 ?>
 
@@ -20,7 +53,8 @@ if (isset($_POST['submit'])) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="/pi_gandara/css/style.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.css"
+        crossorigin="anonymous">
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
 
     <title>Trabalho Gandara!</title>
@@ -33,23 +67,13 @@ if (isset($_POST['submit'])) {
 
 <body>
     <main>
-        <div class="container-1">
-        <div class="row">
+        <div class="container">
+            <div class="row">
+                <div class="col m-5 d-flex justify-content-center">
+                    <h3>Solicitação de cadastro de Materiais</h3>
+                </div>
 
-<a href="../pcp/index.php" class="btn">
-  <div class="col-2">
-    <div style="width: 18rem;">
-      <span class="fa fa-chevron-left fa-2x p-3" aria-hidden=" true"></span>
-    </div>
-  </div>
-</a>
-
-
-<div class="col-6 m-5 d-flex justify-content-center">
-  <h3>Solicitação de cadastro de Materiais</h3>
-</div>
-
-</div>
+            </div>
 
 
             <form action="../pcp/cadastroInsumo.php" method="POST"><!-- Inicio Formulário -->
@@ -58,11 +82,13 @@ if (isset($_POST['submit'])) {
                     <div class="form-row justify-content-center mt-2">
                         <div class="col-sm-6">
                             <label for="nomeInsumo">Nome do Insumo</label>
-                            <input type="text" class="form-control" id="nomeInsumo" name="nome_insumo">
+                            <input type="text" class="form-control" id="nomeInsumo" name="nome_insumo"
+                                value="<?= $id ? $user['nome_insumo'] : '' ?>">
                         </div>
                         <div class="col-sm-6">
                             <label for="codRef">Código de Referência</label>
-                            <input type="text" class="form-control" id="codRef" name="cod_ref">
+                            <input type="text" class="form-control" id="codRef" name="cod_ref"
+                                value="<?= $id ? $user['cod_ref'] : '' ?>">
                         </div>
                     </div>
 
@@ -71,31 +97,32 @@ if (isset($_POST['submit'])) {
                     <div class="form-row justify-content-center mt-2">
                         <div class="col-sm-4">
                             <label for="qtdeInsumo">Quantidade utilizada</label>
-                            <input type="text" class="form-control" id="qtdeInsumo" name="qtde_utilizada">
+                            <input type="text" class="form-control" id="qtdeInsumo" name="qtde_utilizada"
+                                value="<?= $id ? $user['qtde_utilizada'] : '' ?>">
                         </div>
 
                         <div class="col-sm-4">
                             <label for="unidade">Unidade:</label>
                             <div class="input-group">
                                 <select class="custom-select" id="unidade" name="unidade">
-                                    <option>Selecione</option>
-                                    <option>Litro</option>
-                                    <option>Quilo</option>
-                                    <option>Tonelada</option>
+                                    <option value="">Selecione</option>
+                                    <option <?= ($id && $user["unidade"] == "Litro") ? "selected" : '' ?> value="Litro">
+                                        Litro</option>
+                                    <option <?= ($id && $user["unidade"] == "Quilo") ? "selected" : '' ?> value="Quilo">
+                                    </option>
+                                    <option <?= ($id && $user["unidade"] == "Tonelada") ? "selected" : '' ?>
+                                        value="Tonelada"></option>
                                 </select>
                             </div>
                         </div>
 
-                        <div class="col-sm-4">    
-                        <label for="dataUtilizacao">Data de Utilização</label>
-                        <input type="date" class="form-control" id="dataUtilizacao" name="dataUtilizacao">
+                        <div class="col-sm-4">
+                            <label for="dataUtilizacao">Data de Utilização</label>
+                            <input type="date" class="form-control" id="prazo_util" name="dataUtilizacao"
+                                value="<?= $id ? $user['prazo_util'] : '' ?>">
+
                         </div>
-
-
-
                     </div>
-
-
                 </div>
 
                 <!-- Botões -->
@@ -112,6 +139,41 @@ if (isset($_POST['submit'])) {
                 </div>
             </form>
     </main>
+
+    <div class="container mt-5">
+        <h2 class="d-flex justify-content-center">Cadastros solicitados</h2>
+        <div class="card p-3">
+            <table class="table table-striped table-light">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome do Insumo</th>
+                        <th>Código Referência</th>
+                        <th>Quantidade utilizada</th>
+                        <th>Unidade de medida</th>
+                        <th>Data de utilização</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php while ($linha = $dados->fetch_assoc()): ?>
+                        <tr>
+                            <td><?= $linha['id'] ?></td>
+                            <td><?= $linha['nome_insumo'] ?></td>
+                            <td><?= $linha['cod_ref'] ?></td>
+                            <td><?= $linha['qtde_utilizada'] ?></td>
+                            <td><?= $linha['unidade'] ?></td>
+                            <td><?= $linha['prazo_util'] ?></td>
+                            <a href="medicaoProducao.php?id=<?= $linha['id'] ?>" class="btn btn-warning btn-sm">Editar</a>
+                            <button type="button" class="btn btn-danger btn-sm"
+                                data-id="<?= $linha['id'] ?>">Excluir</button>
+                            </td>
+                        </tr>
+                    <?php endwhile; ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
 
     <script src="https://kit.fontawesome.com/74ecb76a40.js" crossorigin="anonymous"></script>
 

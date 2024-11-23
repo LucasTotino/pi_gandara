@@ -355,11 +355,13 @@ CREATE TABLE `insumos` (
 CREATE TABLE `medicao_producao` (
   `id` int(11) NOT NULL,
   `id_nome_plantio` int(11) NOT NULL,
+  `data_medicao` date DEFAULT NULL,
   `diametro_fruto` float DEFAULT NULL,
-  `praga` date DEFAULT NULL,
+  `adubacao` varchar(20) DEFAULT NULL,
+  `praga` varchar(20) DEFAULT NULL,
   `obs_medicao` varchar(200) DEFAULT NULL,
   `espacamento_mudas` float DEFAULT NULL,
-  `fruto` varchar(20) DEFAULT NULL
+  `fruto` varchar(20) DEFAULT NULL,
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
