@@ -477,7 +477,7 @@ CREATE TABLE `usuarios` (
 -- Índices para tabela `agendamento_plantacao`
 --
 ALTER TABLE `agendamento_plantacao`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id_agendamento`);
 
 --
 -- Índices para tabela `cadastro_funcionarios`
