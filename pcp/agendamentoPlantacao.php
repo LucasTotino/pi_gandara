@@ -57,7 +57,7 @@ if ($stmt) {
 
 <body>
     <div class="container mt-5">
-        <form action="../pcp/agendamentoPlantacao.php" method="POST">
+        <form action="../pcp/bd_pcp.php" method="POST">
             <input type="hidden" id="id" name="id" value="<?= $id ?? null ?>">
             <input type="hidden" name="acao" id="acao" value="<?= $id ? "ALTERAR" : "INCLUIR" ?>">
 
@@ -151,7 +151,7 @@ if ($stmt) {
                             <td><?= $linha['espacamento_mudas'] ?></td>
                             <td><?= $linha['fruto'] ?></td>
                             <td>
-                                <a href="planPlantacao.php?id=<?= $linha['id'] ?>" class="btn btn-warning btn-sm">Editar</a>
+                                <a href="agendamentoPlantacao.php?id=<?= $linha['id'] ?>" class="btn btn-warning btn-sm">Editar</a>
                                 <button type="button" class="btn btn-danger btn-sm"
                                     data-id="<?= $linha['id'] ?>">Excluir</button>
                             </td>
