@@ -1,23 +1,18 @@
 <?php
 require "../../utils/conexao.php";
 
-$nomecliente = isset($_POST['nome']) && !empty($_POST['nome']) ? $_POST['nome'] : null;
-$tipovenda = isset($_POST['tipovenda']) && !empty($_POST['tipovenda']) ? $_POST['tipovenda'] : null;
-$origemvenda = isset($_POST['origemvenda']) && !empty($_POST['origemvenda']) ? $_POST['origemvenda'] : null;
-$nomepromocao = isset($_POST['nomepromocao']) && !empty($_POST['nomepromocao']) ? $_POST['nomepromocao'] : null;
-$dia_venda = isset($_POST['dia_venda']) && !empty($_POST['dia_venda']) ? $_POST['dia_venda'] : null;
-$produto = isset($_POST['produto']) && !empty($_POST['produto']) ? $_POST['produto'] : null;
-$quantidade = isset($_POST['quantidade']) && !empty($_POST['quantidade']) ? $_POST['quantidade'] : null;
-$valor = isset($_POST['valor']) && !empty($_POST['valor']) ? $_POST['valor'] : null;
 $id_venda = isset($_POST['id_venda']) && !empty($_POST['id_venda']) ? $_POST['id_venda'] : null;
+$nome = isset($_POST['nome']) && !empty($_POST['nome']) ? $_POST['nome'] : null;
+$nometransportador = isset($_POST['nometransportador']) && !empty($_POST['nometransportador']) ? $_POST['nometransportador'] : null;
+$dataenvio = isset($_POST['dataenvio']) && !empty($_POST['dataenvio']) ? $_POST['dataenvio'] : null;
+$idExpedicao = isset($_POST['id_expedicao']) && !empty($_POST['id_expedicao']) ? $_POST['id_expedicao'] : null;
 
 $acao = isset($_POST['acao']) && !empty($_POST['acao']) ? $_POST['acao'] : null;
 
 if ($acao == "INCLUIR") {
 
-    $sql = "INSERT INTO cad_vendas (nome, tipovenda, origemvenda, nomepromocao, 
-    dia_venda, produto, quantidade, valor) 
-    VALUE (?, ?, ?, ?, ?, ?, ?, ?);";
+    $sql = "INSERT INTO cad_expedicao (id_venda, nome, nometransportador, dataenvio) 
+    VALUE (?, ?, ?, ?);";
 
     // Utilizaremos o Prepare Statement para manipular os dados no BD 
     // Esse recurso já possui proteção contra alguns ataques, como SQL INJECTION 
@@ -29,15 +24,11 @@ if ($acao == "INCLUIR") {
     // O primeiro parametro é o tipo do dado, os demais são apenas as variaveis com os dados.
     // i = inteiro, d = flutuante (casas decaimais), s = texto(com tudo que não é numero)
     $stmt->bind_param(
-        "ssssssid",
-        $nomecliente,
-        $tipovenda,
-        $origemvenda,
-        $nomepromocao,
-        $dia_venda,
-        $produto,
-        $quantidade,
-        $valor
+        "isss",
+        $id_venda,
+        $nome,
+        $nometransportador,
+        $dataenvio
     );
     try {
         if ($stmt->execute()) {
@@ -45,7 +36,7 @@ if ($acao == "INCLUIR") {
             $idCadCliente = $conn->insert_id;
             echo $idCadCliente;
 
-            header('Location: /pi_gandara/comercial/cadVendas.php');
+            header('Location: /pi_gandara/comercial/Expedicao.php');
         } else {
             echo $stmt->error;
         }
@@ -67,36 +58,28 @@ if ($acao == "INCLUIR") {
     print_r($_POST);
     echo "</pre>";
 } else if ($acao == "ALTERAR") {
-    $sql = "UPDATE cad_vendas SET
+    $sql = "UPDATE cad_expedicao SET
+        id_venda = ?,
         nome = ?,
-        tipovenda = ?,
-        origemvenda = ?,
-        nomepromocao = ?,
-        dia_venda = ?,
-        produto = ?,
-        quantidade = ?,
-        valor = ?
-        WHERE id_venda = ?;";
+        nometransportador = ?,
+        dataenvio = ?
+        WHERE id_expedicao = ?;";
 
     $stmt = $conn->prepare($sql);
 
     $stmt->bind_param(
-        "ssssssidi",
-        $nomecliente,
-        $tipovenda,
-        $origemvenda,
-        $nomepromocao,
-        $dia_venda,
-        $produto,
-        $quantidade,
-        $valor,
-        $id_venda
+        "isssi",
+        $id_venda,
+        $nome,
+        $nometransportador,
+        $dataenvio,
+        $idExpedicao
 
     );
 
     try {
         if ($stmt->execute()) {
-            header('Location: /pi_gandara/comercial/cadVendas.php');
+            header('Location: /pi_gandara/comercial/Expedicao.php');
         } else {
             echo $stmt->error;
         }
