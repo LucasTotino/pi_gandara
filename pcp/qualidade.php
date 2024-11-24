@@ -47,6 +47,27 @@
             <label for="areaRef">Área de Referência</label>
             <input type="number" class="form-control" id="areaRef" name="areaRef" placeholder="Puxar um select do banco"
               value="<?= $id ? $user['areaRef'] : '' ?>">
+
+            <!--
+            <label for="nome_plantio">Item</label>
+            <select name="nome_plantio" id="nome_plantio" class="form-control">
+              <option value="">Selecione um item</option>
+              <?php
+              /*
+              $sql = "SELECT id_agendamento, nome_plantio FROM agendamento_plantacao";
+              $result = $conn->query($sql);
+
+              if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                  echo "<option value='" . $row['id_agendamento'] . "'>" . $row['nome_plantio'] . "</option>";
+                }
+              } else {
+                echo "<option value=''>Nenhum item encontrado</option>";
+              }*/
+              ?>
+            </select>
+            -->
+
           </div>
           <div class="col-sm-6">
             <label for="dataMedicao">Data da medição</label>

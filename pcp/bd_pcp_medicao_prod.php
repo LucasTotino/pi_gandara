@@ -49,8 +49,8 @@ if ($acao == "INCLUIR") {
     try {
         if ($stmt->execute()) {
             // Pega o numero do ID que foi inserido no BD
-            $idCadastro = $conn->insert_id;
-            echo $idCadastro;
+            $idMedicao = $conn->insert_id;
+            echo $idMedicao;
 
             header('Location: /pi_gandara/pcp');
         } else {
@@ -89,13 +89,15 @@ if ($acao == "INCLUIR") {
         $stmt = $conn->prepare($sql);
 
         $stmt->bind_param(
-            "ssssss",
+            "sssssss",
             $nomePlantio,
             $dataMedicao,
             $diametroFruto,
             $adubacao,
             $praga,
-            $obsMedicao
+            $obsMedicao,
+            $id_medicao
+
         );
     }
 

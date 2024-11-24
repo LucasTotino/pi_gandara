@@ -27,7 +27,7 @@ if ($id) {
 }
 
 // Consulta geral para listar os registros no banco
-$sql = "SELECT id_medicao, data_medicao, diametro_fruto, adubacao, praga, obs_medicao FROM medicao_producao;";
+$sql = "SELECT id_medicao, id_nome_plantio, data_medicao, diametro_fruto, adubacao, praga, obs_medicao FROM medicao_producao;";
 $stmt = $conn->prepare($sql);
 
 if ($stmt) {
@@ -61,20 +61,31 @@ if ($stmt) {
 <body>
 
     <div class="container mt-5">
+        <div class="row justify-content-center">
+            <h1>Medição da Produção</h1>
+        </div>
         <div class="form-group">
             <form action="../pcp/bd_pcp_medicao_prod.php" method="POST"><!-- Inicio Formulário -->
-                <div class="row">
-                    <div class="col justify-content-center">
-                        <h1>Medição da Produção</h1>
-                    </div>
 
-                </div>
                 <!-- Nome, CPF e Data Nascimento -->
                 <div class="form-row justify-content-center mt-2">
                     <div class="col-sm-6">
-                        <label for="nomePlantio">Nome do Plantio medido</label>
-                        <input type="number" class="form-control" id="nomePlantio" name="nomePlantio"
-                            value="<?= $id ? $user['nome_plantio'] : '' ?>">
+                        <label for="nome_plantio">Item</label>
+                        <select name="nome_plantio" id="nome_plantio" class="form-control">
+                            <option value="">Selecione um item</option>
+                            <?php
+                            $sql = "SELECT id_agendamento, nome_plantio FROM agendamento_plantacao";
+                            $result = $conn->query($sql);
+
+                            if ($result->num_rows > 0) {
+                                while ($row = $result->fetch_assoc()) {
+                                    echo "<option value='" . $row['id_agendamento'] . "'>" . $row['nome_plantio'] . "</option>";
+                                }
+                            } else {
+                                echo "<option value=''>Nenhum item encontrado</option>";
+                            }
+                            ?>
+                        </select>
                     </div>
                     <div class="col-sm-6">
                         <label for="dataMedicao">Data da medição</label>
@@ -106,9 +117,9 @@ if ($stmt) {
                         <label for="praga">Alguma praga observada ?</label>
                         <select class="custom-select" id="praga" name="praga" required>
                             <option value="">Selecione</option>
-                            <option <?= ($id && $user["adubacao"] == "Sim") ? "selected" : '' ?> value="Sim">Sim
+                            <option <?= ($id && $user["praga"] == "Sim") ? "selected" : '' ?> value="Sim">Sim
                             </option>
-                            <option <?= ($id && $user["adubacao"] == "Não") ? "selected" : '' ?> value="Não">Não
+                            <option <?= ($id && $user["praga"] == "Não") ? "selected" : '' ?> value="Não">Não
                             </option>
                         </select>
                     </div>
@@ -117,7 +128,8 @@ if ($stmt) {
                 <div class="form-row justify-content-center mt-2">
                     <div class="col-6">
                         <label for="obsMedicao">Observação:</label>
-                        <input type="text" class="form-control" id="obsMedicao" name="obsMedicao" placeholder="Informar qual ciclo de adubação ou controle de pragas aplicar"
+                        <input type="text" class="form-control" id="obsMedicao" name="obsMedicao"
+                            placeholder="Informar qual ciclo de adubação ou controle de pragas aplicar"
                             value="<?= $id ? $user['obs_medicao'] : '' ?>">
                     </div>
                 </div>

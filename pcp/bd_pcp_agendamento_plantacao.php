@@ -49,8 +49,8 @@ if ($acao == "INCLUIR") {
     try {
         if ($stmt->execute()) {
             // Pega o numero do ID que foi inserido no BD
-            $idCadastro = $conn->insert_id;
-            echo $idCadastro;
+            $idAgendamento = $conn->insert_id;
+            echo $idAgendamento;
 
             header('Location: /pi_gandara/pcp');
         } else {
@@ -89,7 +89,7 @@ if ($acao == "INCLUIR") {
         $stmt = $conn->prepare($sql);
 
         $stmt->bind_param(
-            "ssssss",
+            "sssssss",
             $nomePlantio,
             $areaPlantio,
             $dataPlantio,
@@ -126,7 +126,7 @@ if ($acao == "INCLUIR") {
 
     $sql = "DELETE FROM agendamento_plantacao WHERE id_agendamento = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $id);
+    $stmt->bind_param("i", $idAgendamento);
 
     if ($stmt->execute()) {
          echo json_encode(
