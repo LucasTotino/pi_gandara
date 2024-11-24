@@ -84,7 +84,7 @@ if ($acao == "INCLUIR") {
        data_colheita = ?, 
        espacamento_mudas = ?, 
        fruto = ?, 
-       WHERE id = ?;";
+       WHERE id_agendamento = ?;";
 
         $stmt = $conn->prepare($sql);
 
@@ -95,7 +95,8 @@ if ($acao == "INCLUIR") {
             $dataPlantio,
             $dataColheita,
             $espacoMuda,
-            $fruto
+            $fruto,
+            $idAgendamento
         );
     }
 
@@ -123,7 +124,7 @@ if ($acao == "INCLUIR") {
 } else if ($acao == "DELETAR") {
     // Neste bloco será excluido um registro que já existe no BD.
 
-    $sql = "DELETE FROM agendamento_plantacao WHERE id = ?";
+    $sql = "DELETE FROM agendamento_plantacao WHERE id_agendamento = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $id);
 

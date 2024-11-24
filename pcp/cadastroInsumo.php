@@ -7,7 +7,7 @@ $cor = ($id) ? "btn-warning" : "btn-success";
 
 // Caso tenha um ID, busca o registro correspondente no banco de dados
 if ($id) {
-    $sql = "SELECT * FROM cadastro_insumo WHERE id = ?;";
+    $sql = "SELECT * FROM cadastro_insumo WHERE id_solicitacao_cad = ?;";
     $stmt = $conn->prepare($sql);
 
     if ($stmt) {
@@ -27,7 +27,7 @@ if ($id) {
 }
 
 // Consulta geral para listar os registros no banco
-$sql = "SELECT id, nome_insumo, cod_ref, qtde_utilizada, unidade, prazo_util FROM cadastro_insumo;";
+$sql = "SELECT id_solicitacao_cad, nome_insumo, cod_ref, qtde_utilizada, unidade, prazo_util FROM cadastro_insumo;";
 $stmt = $conn->prepare($sql);
 
 /* `id` int(11) NOT NULL,
@@ -156,16 +156,16 @@ if ($stmt) {
                     <tbody>
                         <?php while ($linha = $dados->fetch_assoc()): ?>
                             <tr>
-                                <td><?= $linha['id'] ?></td>
+                                <td><?= $linha['id_solicitacao_cad'] ?></td>
                                 <td><?= $linha['nome_insumo'] ?></td>
                                 <td><?= $linha['cod_ref'] ?></td>
                                 <td><?= $linha['qtde_utilizada'] ?></td>
                                 <td><?= $linha['unidade'] ?></td>
                                 <td><?= $linha['prazo_util'] ?></td>
-                                <a href="medicaoProducao.php?id=<?= $linha['id'] ?>"
+                                <a href="medicaoProducao.php?id=<?= $linha['id_solicitacao_cad'] ?>"
                                     class="btn btn-warning btn-sm">Editar</a>
                                 <button type="button" class="btn btn-danger btn-sm"
-                                    data-id="<?= $linha['id'] ?>">Excluir</button>
+                                    data-id="<?= $linha['id_solicitacao_cad'] ?>">Excluir</button>
                                 </td>
                             </tr>
                         <?php endwhile; ?>

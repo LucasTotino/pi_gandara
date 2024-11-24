@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `agendamento_plantacao` (
-  `id` int(11) NOT NULL,
+  `id_agendamento` int(11) NOT NULL,
   `nome_plantio` varchar(100) DEFAULT NULL,
   `area_plantio` float DEFAULT NULL,
   `data_plantio` date DEFAULT NULL,

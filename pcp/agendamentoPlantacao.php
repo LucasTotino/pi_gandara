@@ -7,7 +7,7 @@ $cor = ($id) ? "btn-warning" : "btn-success";
 
 // Caso tenha um ID, busca o registro correspondente no banco de dados
 if ($id) {
-    $sql = "SELECT * FROM agendamento_plantacao WHERE id = ?;";
+    $sql = "SELECT * FROM agendamento_plantacao WHERE id_agendamento = ?;";
     $stmt = $conn->prepare($sql);
 
     if ($stmt) {
@@ -27,7 +27,7 @@ if ($id) {
 }
 
 // Consulta geral para listar os registros no banco
-$sql = "SELECT id, nome_plantio, area_plantio, data_plantio, data_colheita, espacamento_mudas, fruto FROM agendamento_plantacao;";
+$sql = "SELECT id_agendamento, nome_plantio, area_plantio, data_plantio, data_colheita, espacamento_mudas, fruto FROM agendamento_plantacao;";
 $stmt = $conn->prepare($sql);
 
 if ($stmt) {
@@ -58,7 +58,7 @@ if ($stmt) {
 <body>
     <div class="container mt-5">
         <form action="../pcp/bd_pcp.php" method="POST">
-            <input type="hidden" id="id" name="id" value="<?= $id ?? null ?>">
+            <input type="hidden" id="id_agendamento" name="id_agendamento" value="<?= $id ?? null ?>">
             <input type="hidden" name="acao" id="acao" value="<?= $id ? "ALTERAR" : "INCLUIR" ?>">
 
             <div class="row">
@@ -143,7 +143,7 @@ if ($stmt) {
                 <tbody>
                     <?php while ($linha = $dados->fetch_assoc()): ?>
                         <tr>
-                            <td><?= $linha['id'] ?></td>
+                            <td><?= $linha['id_agendamento'] ?></td>
                             <td><?= $linha['nome_plantio'] ?></td>
                             <td><?= $linha['area_plantio'] ?></td>
                             <td><?= $linha['data_plantio'] ?></td>
@@ -151,9 +151,9 @@ if ($stmt) {
                             <td><?= $linha['espacamento_mudas'] ?></td>
                             <td><?= $linha['fruto'] ?></td>
                             <td>
-                                <a href="agendamentoPlantacao.php?id=<?= $linha['id'] ?>" class="btn btn-warning btn-sm">Editar</a>
+                                <a href="agendamentoPlantacao.php?id=<?= $linha['id_agendamento'] ?>" class="btn btn-warning btn-sm">Editar</a>
                                 <button type="button" class="btn btn-danger btn-sm"
-                                    data-id="<?= $linha['id'] ?>">Excluir</button>
+                                    data-id="<?= $linha['id_agendamento'] ?>">Excluir</button>
                             </td>
                         </tr>
                     <?php endwhile; ?>
