@@ -27,7 +27,7 @@ if ($id) {
 }
 
 // Consulta geral para listar os registros no banco
-$sql = "SELECT id, data_medicao, diametro_fruto, adubacao, praga, obs_medicao FROM medicao_producao;";
+$sql = "SELECT id_medicao, data_medicao, diametro_fruto, adubacao, praga, obs_medicao FROM medicao_producao;";
 $stmt = $conn->prepare($sql);
 
 if ($stmt) {
@@ -62,7 +62,7 @@ if ($stmt) {
 
     <div class="container mt-5">
         <div class="form-group">
-            <form action="../pcp/medicaoProducao.php" method="POST"><!-- Inicio Formulário -->
+            <form action="../pcp/bd_pcp_medicao_prod.php" method="POST"><!-- Inicio Formulário -->
                 <div class="row">
                     <div class="col justify-content-center">
                         <h1>Medição da Produção</h1>
@@ -93,21 +93,31 @@ if ($stmt) {
 
                     <div class="col-sm-4">
                         <label for="adubacao">Necessário adubação ?</label>
-                        <input type="text" class="form-control" id="adubacao" name="adubacao"
-                            value="<?= $id ? $user['adubacao'] : '' ?>">
+                        <select class="custom-select" id="adubacao" name="adubacao" required>
+                            <option value="">Selecione</option>
+                            <option <?= ($id && $user["adubacao"] == "Sim") ? "selected" : '' ?> value="Sim">Sim
+                            </option>
+                            <option <?= ($id && $user["adubacao"] == "Não") ? "selected" : '' ?> value="Não">Não
+                            </option>
+                        </select>
                     </div>
 
                     <div class="col-sm-4">
-                        <label for="praga">Qual praga foi observada?</label>
-                        <input type="text" class="form-control" id="praga" name="praga"
-                            value="<?= $id ? $user['praga'] : '' ?>">
+                        <label for="praga">Alguma praga observada ?</label>
+                        <select class="custom-select" id="praga" name="praga" required>
+                            <option value="">Selecione</option>
+                            <option <?= ($id && $user["adubacao"] == "Sim") ? "selected" : '' ?> value="Sim">Sim
+                            </option>
+                            <option <?= ($id && $user["adubacao"] == "Não") ? "selected" : '' ?> value="Não">Não
+                            </option>
+                        </select>
                     </div>
 
                 </div>
                 <div class="form-row justify-content-center mt-2">
                     <div class="col-6">
                         <label for="obsMedicao">Observação:</label>
-                        <input type="text" class="form-control" id="obsMedicao" name="obsMedicao"
+                        <input type="text" class="form-control" id="obsMedicao" name="obsMedicao" placeholder="Informar qual ciclo de adubação ou controle de pragas aplicar"
                             value="<?= $id ? $user['obs_medicao'] : '' ?>">
                     </div>
                 </div>
@@ -149,7 +159,7 @@ if ($stmt) {
                 <tbody>
                     <?php while ($linha = $dados->fetch_assoc()): ?>
                         <tr>
-                            <td><?= $linha['id'] ?></td>
+                            <td><?= $linha['id_medicao'] ?></td>
                             <td><?= $linha['nome_plantio'] ?></td>
                             <td><?= $linha['data_medicao'] ?></td>
                             <td><?= $linha['diametro_fruto'] ?></td>
@@ -157,10 +167,10 @@ if ($stmt) {
                             <td><?= $linha['praga'] ?></td>
                             <td><?= $linha['obs_medicao'] ?></td>
                             <td>
-                                <a href="medicaoProducao.php?id=<?= $linha['id'] ?>"
+                                <a href="medicaoProducao.php?id=<?= $linha['id_medicao'] ?>"
                                     class="btn btn-warning btn-sm">Editar</a>
                                 <button type="button" class="btn btn-danger btn-sm"
-                                    data-id="<?= $linha['id'] ?>">Excluir</button>
+                                    data-id="<?= $linha['id_medicao'] ?>">Excluir</button>
                             </td>
                         </tr>
                     <?php endwhile; ?>
