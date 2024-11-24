@@ -32,7 +32,6 @@
           </div>
         </a>
 
-
         <div class="col-6 m-5">
           <h3>Resgistro de Qualidade</h3>
         </div>
@@ -40,38 +39,33 @@
       </div>
 
       <div class="form-group">
-        <form action="../pcp/bd_pcp_qualidade_prod.php" method="POST"><!-- Inicio Formulário -->
+        <form action="../pcp/bd_pcp_qualidade.php" method="POST"><!-- Inicio Formulário -->
 
-
-          <input type="hidden" id="id_agendamento" name="id_agendamento" value="<?= $idAgendamento ?? null ?>">
+          <input type="hidden" id="id_qualidade" name="id_qualidade" value="<?= $idQualidade ?? null ?>">
           <input type="hidden" name="acao" id="acao" value="<?= $id ? "ALTERAR" : "INCLUIR" ?>">
 
           <!-- Nome, CPF e Data Nascimento -->
           <div class="form-row justify-content-center mt-2">
             <div class="col-sm-6">
-              <label for="area_ref">Área de Referência</label>
-              <input type="number" class="form-control" id="area_ref" name="area_ref"
-                placeholder="Puxar um select do banco" value="<?= $id ? $user['area_ref'] : '' ?>">
 
-              <!--
-            <label for="nome_plantio">Item</label>
-            <select name="nome_plantio" id="nome_plantio" class="form-control">
-              <option value="">Selecione um item</option>
-              <?php
-              /*
-              $sql = "SELECT id_agendamento, nome_plantio FROM agendamento_plantacao";
-              $result = $conn->query($sql);
+              <label for="nome_plantio">Item</label>
+              <select name="nome_plantio" id="nome_plantio" class="form-control">
+                <option value="">Selecione um item</option>
+                <?php
 
-              if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                  echo "<option value='" . $row['id_agendamento'] . "'>" . $row['nome_plantio'] . "</option>";
+                $sql = "SELECT id_agendamento, nome_plantio FROM agendamento_plantacao";
+                $result = $conn->query($sql);
+
+                if ($result->num_rows > 0) {
+                  while ($row = $result->fetch_assoc()) {
+                    echo "<option value='" . $row['nome_plantio'] . "'>" . $row['nome_plantio'] . "</option>";
+                  }
+                } else {
+                  echo "<option value=''>Nenhum item encontrado</option>";
                 }
-              } else {
-                echo "<option value=''>Nenhum item encontrado</option>";
-              }*/
-              ?>
-            </select>
-            -->
+
+                ?>
+              </select>
 
             </div>
             <div class="col-sm-6">
@@ -96,8 +90,10 @@
               <div class="input-group">
                 <select class="custom-select" id="conformidade_venda" name="conformidade_venda">
                   <option value="">Selecione</option>
-                  <option <?= ($id_qualidade && $user["conformidade_venda"] == "Sim") ? "selected" : '' ?> value="Sim">Sim</option>
-                  <option <?= ($id_qualidade && $user["conformidade_venda"] == "Não") ? "selected" : '' ?> value="Não">Não</option>
+                  <option <?= ($id_qualidade && $user["conformidade_venda"] == "Sim") ? "selected" : '' ?> value="Sim">Sim
+                  </option>
+                  <option <?= ($id_qualidade && $user["conformidade_venda"] == "Não") ? "selected" : '' ?> value="Não">Não
+                  </option>
                 </select>
               </div>
             </div>
@@ -135,7 +131,7 @@
             <tbody>
               <?php while ($linha = $dados->fetch_assoc()): ?>
                 <tr>
-                  <td><?= $linha['area_ref'] ?></td>
+                  <td><?= $linha['nome_plantio'] ?></td>
                   <td><?= $linha['data_medicao'] ?></td>
                   <td><?= $linha['diametro_med'] ?></td>
                   <td><?= $linha['conformidade_venda'] ?></td>

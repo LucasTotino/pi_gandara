@@ -152,7 +152,7 @@ if ($acao == "INCLUIR") {
     // Se nenhuma das operações for solicitada, volta para o inicio do site.
     // A função header modifica o cabeçalho do navegador
     // Ao passar a propriedade location, definimos para qual URL o navegador deve ir.
-    header("Location: /pi_gandara/");
+    header("Location: /pi_gandara/pcp/agendamentoPlantacao.php");
     exit;
 }
 ?>
