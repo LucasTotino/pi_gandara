@@ -67,11 +67,14 @@ if ($stmt) {
         <div class="form-group">
             <form action="../pcp/bd_pcp_medicao_prod.php" method="POST"><!-- Inicio Formulário -->
 
+                <input type="hidden" id="id_agendamento" name="id_agendamento" value="<?= $idAgendamento ?? null ?>">
+                <input type="hidden" name="acao" id="acao" value="<?= $id ? "ALTERAR" : "INCLUIR" ?>">
+
                 <!-- Nome, CPF e Data Nascimento -->
                 <div class="form-row justify-content-center mt-2">
                     <div class="col-sm-6">
-                        <label for="nome_plantio">Item</label>
-                        <select name="nome_plantio" id="nome_plantio" class="form-control">
+                        <label for="id_nome_plantio">Item</label>
+                        <select name="id_nome_plantio" id="id_nome_plantio" class="form-control">
                             <option value="">Selecione um item</option>
                             <?php
                             $sql = "SELECT id_agendamento, nome_plantio FROM agendamento_plantacao";
@@ -172,7 +175,7 @@ if ($stmt) {
                     <?php while ($linha = $dados->fetch_assoc()): ?>
                         <tr>
                             <td><?= $linha['id_medicao'] ?></td>
-                            <td><?= $linha['nome_plantio'] ?></td>
+                            <td><?= $linha['id_nome_plantio'] ?></td>
                             <td><?= $linha['data_medicao'] ?></td>
                             <td><?= $linha['diametro_fruto'] ?></td>
                             <td><?= $linha['adubacao'] ?></td>

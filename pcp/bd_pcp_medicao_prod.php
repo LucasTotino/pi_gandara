@@ -2,8 +2,8 @@
 require "../utils/conexao.php";
 
 // IF normal
-if (isset($_POST['nome_plantio']) && !empty($_POST['nome_plantio'])) {
-    $nomePlantio = $_POST['nome_plantio'];
+if (isset($_POST['id_nome_plantio']) && !empty($_POST['id_nome_plantio'])) {
+    $nomePlantio = $_POST['id_nome_plantio'];
 } else {
     $nomePlantio = null;
 }
@@ -22,7 +22,7 @@ $acao = isset($_POST['acao']) && !empty($_POST['acao']) ? $_POST['acao'] : null;
 
 if ($acao == "INCLUIR") {
     // As ? serão trocadas pelos valores dos campos pelo PHP
-    $sql = "INSERT INTO medicao_producao (nome_plantio, data_medicao, diametro_fruto, adubacao, praga, obs_medicao) 
+    $sql = "INSERT INTO medicao_producao (id_nome_plantio, data_medicao, diametro_fruto, adubacao, praga, obs_medicao) 
     VALUE (?, ?, ?, ?, ?, ?);";
 
     // Utilizaremos o Prepare Statement para manipular os dados no BD
@@ -78,7 +78,7 @@ if ($acao == "INCLUIR") {
 
 } else if ($acao == "ALTERAR") {{
         $sql = "UPDATE medicao_producao SET 
-       nome_plantio = ?, 
+       id_nome_plantio = ?, 
        data_medicao = ?, 
        diametro_fruto = ?, 
        adubacao = ?, 
