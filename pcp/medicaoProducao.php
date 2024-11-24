@@ -7,7 +7,7 @@ $cor = ($id) ? "btn-warning" : "btn-success";
 
 // Caso tenha um ID, busca o registro correspondente no banco de dados
 if ($id) {
-    $sql = "SELECT * FROM medicao_producao WHERE id = ?;";
+    $sql = "SELECT * FROM medicao_producao WHERE id_medicao = ?;";
     $stmt = $conn->prepare($sql);
 
     if ($stmt) {

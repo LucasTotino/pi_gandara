@@ -39,16 +39,17 @@
 
       </div>
 
-
       <div class="form-group">
-        <!-- Nome, CPF e Data Nascimento -->
-        <div class="form-row justify-content-center mt-2">
-          <div class="col-sm-6">
-            <label for="areaRef">Área de Referência</label>
-            <input type="number" class="form-control" id="areaRef" name="areaRef" placeholder="Puxar um select do banco"
-              value="<?= $id ? $user['areaRef'] : '' ?>">
+        <form action="../pcp/bd_pcp_qualidade_prod.php" method="POST"><!-- Inicio Formulário -->
 
-            <!--
+          <!-- Nome, CPF e Data Nascimento -->
+          <div class="form-row justify-content-center mt-2">
+            <div class="col-sm-6">
+              <label for="areaRef">Área de Referência</label>
+              <input type="number" class="form-control" id="areaRef" name="areaRef"
+                placeholder="Puxar um select do banco" value="<?= $id ? $user['areaRef'] : '' ?>">
+
+              <!--
             <label for="nome_plantio">Item</label>
             <select name="nome_plantio" id="nome_plantio" class="form-control">
               <option value="">Selecione um item</option>
@@ -68,84 +69,84 @@
             </select>
             -->
 
-          </div>
-          <div class="col-sm-6">
-            <label for="dataMedicao">Data da medição</label>
-            <input type="date" class="form-control" id="dataMedicao" name="dataMedicao"
-              value="<?= $id ? $user['dataMedicao'] : '' ?>">
-          </div>
+            </div>
+            <div class="col-sm-6">
+              <label for="dataMedicao">Data da medição</label>
+              <input type="date" class="form-control" id="dataMedicao" name="dataMedicao"
+                value="<?= $id ? $user['dataMedicao'] : '' ?>">
+            </div>
 
 
-        </div>
-
-        <div class="form-row justify-content-center mt-2">
-          <div class="col-sm-4">
-            <label for="diametroMed">Diâmetro da Fruta (cm)</label>
-            <input type="number" class="form-control" id="diametroMed" name="diametroMed"
-              value="<?= $id ? $user['diametroMed'] : '' ?>">
           </div>
 
+          <div class="form-row justify-content-center mt-2">
+            <div class="col-sm-4">
+              <label for="diametroMed">Diâmetro da Fruta (cm)</label>
+              <input type="number" class="form-control" id="diametroMed" name="diametroMed"
+                value="<?= $id ? $user['diametroMed'] : '' ?>">
+            </div>
 
-          <div class="col-sm-4">
-            <label for="conformidadeVenda">Está em conformidade para Venda?</label>
-            <div class="input-group">
-              <select class="custom-select" id="conformidadeVenda" name="conformidadeVenda">
-                <option value="">Selecione</option>
-                <option <?= ($id && $user["conformidadeVenda"] == "Sim") ? "selected" : '' ?> value="Sim">Sim</option>
-                <option <?= ($id && $user["conformidadeVenda"] == "Não") ? "selected" : '' ?> value="Não">Não</option>
-              </select>
+
+            <div class="col-sm-4">
+              <label for="conformidadeVenda">Está em conformidade para Venda?</label>
+              <div class="input-group">
+                <select class="custom-select" id="conformidadeVenda" name="conformidadeVenda">
+                  <option value="">Selecione</option>
+                  <option <?= ($id && $user["conformidadeVenda"] == "Sim") ? "selected" : '' ?> value="Sim">Sim</option>
+                  <option <?= ($id && $user["conformidadeVenda"] == "Não") ? "selected" : '' ?> value="Não">Não</option>
+                </select>
+              </div>
+            </div>
+
+          </div>
+          <!-- Botões -->
+          <div class="form-row justify-content-center">
+            <div class="col-sm-3 mt-3">
+              <button type="submit" name="submit" class="btn btn-success">Cadastrar</button>
+            </div>
+            <div class="col-sm-3 mt-3">
+              <button type="reset" class="btn btn-warning">Cancelar</button>
+            </div>
+            <div class="col-sm-3 mt-3">
+              <a href="index.php"><button type="button" class="btn btn-danger">Voltar</button></a>
             </div>
           </div>
+        </form>
 
+      </div>
+
+      <div class="container mt-5">
+        <h2 class="d-flex justify-content-center">Medições realizadas</h2>
+        <div class="card p-3">
+          <table class="table table-striped table-light">
+            <thead>
+              <tr>
+                <th>Área Referência</th>
+                <th>Data inspeção</th>
+                <th>Diametro Fruto</th>
+                <th>Apropriado para venda ?</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php while ($linha = $dados->fetch_assoc()): ?>
+                <tr>
+                  <td><?= $linha['areaRef'] ?></td>
+                  <td><?= $linha['dataMedicao'] ?></td>
+                  <td><?= $linha['diametroMed'] ?></td>
+                  <td><?= $linha['conformidadeVenda'] ?></td>
+                  <td>
+                    <a href=".php?id=<?= $linha['id'] ?>" class="btn btn-warning btn-sm">Editar</a>
+                    <button type="button" class="btn btn-danger btn-sm" data-id="<?= $linha['id'] ?>">Excluir</button>
+                  </td>
+                </tr>
+              <?php endwhile; ?>
+            </tbody>
+          </table>
         </div>
-        <!-- Botões -->
-        <div class="form-row justify-content-center">
-          <div class="col-sm-3 mt-3">
-            <button type="submit" name="submit" class="btn btn-success">Cadastrar</button>
-          </div>
-          <div class="col-sm-3 mt-3">
-            <button type="reset" class="btn btn-warning">Cancelar</button>
-          </div>
-          <div class="col-sm-3 mt-3">
-            <a href="index.php"><button type="button" class="btn btn-danger">Voltar</button></a>
-          </div>
-        </div>
-    </form>
+      </div>
 
-  </div>
-
-  <div class="container mt-5">
-    <h2 class="d-flex justify-content-center">Medições realizadas</h2>
-    <div class="card p-3">
-      <table class="table table-striped table-light">
-        <thead>
-          <tr>
-            <th>Área Referência</th>
-            <th>Data inspeção</th>
-            <th>Diametro Fruto</th>
-            <th>Apropriado para venda ?</th>
-            <th>Ações</th>
-          </tr>
-        </thead>
-        <tbody>
-          <?php while ($linha = $dados->fetch_assoc()): ?>
-            <tr>
-              <td><?= $linha['areaRef'] ?></td>
-              <td><?= $linha['dataMedicao'] ?></td>
-              <td><?= $linha['diametroMed'] ?></td>
-              <td><?= $linha['conformidadeVenda'] ?></td>
-              <td>
-                <a href=".php?id=<?= $linha['id'] ?>" class="btn btn-warning btn-sm">Editar</a>
-                <button type="button" class="btn btn-danger btn-sm" data-id="<?= $linha['id'] ?>">Excluir</button>
-              </td>
-            </tr>
-          <?php endwhile; ?>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-  <script src="https://kit.fontawesome.com/74ecb76a40.js" crossorigin="anonymous"></script>
+      <script src="https://kit.fontawesome.com/74ecb76a40.js" crossorigin="anonymous"></script>
 
 </body>
 

@@ -361,7 +361,7 @@ CREATE TABLE `medicao_producao` (
   `praga` varchar(20) DEFAULT NULL,
   `obs_medicao` varchar(200) DEFAULT NULL,
   `espacamento_mudas` float DEFAULT NULL,
-  `fruto` varchar(20) DEFAULT NULL,
+  `fruto` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
