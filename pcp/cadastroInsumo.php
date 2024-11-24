@@ -100,8 +100,8 @@ if ($stmt) {
 
                 <div class="form-row justify-content-center mt-2">
                     <div class="col-sm-4">
-                        <label for="qtdeInsumo">Quantidade utilizada</label>
-                        <input type="text" class="form-control" id="qtdeInsumo" name="qtde_utilizada"
+                        <label for="qtde_utilizada">Quantidade utilizada</label>
+                        <input type="text" class="form-control" id="qtde_utilizada" name="qtde_utilizada"
                             value="<?= $id ? $user['qtde_utilizada'] : '' ?>">
                     </div>
 

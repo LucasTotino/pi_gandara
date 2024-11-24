@@ -3,17 +3,17 @@ require "../utils/conexao.php";
 
 // IF normal
 if (isset($_POST['nome_insumo']) && !empty($_POST['nome_insumo'])) {
-    $nomeInsumo = $_POST['nome_insumo'];
+    $nome_insumo = $_POST['nome_insumo'];
 } else {
-    $nomeInsumo = null;
+    $nome_insumo = null;
 }
 // IF TERNÁRIO
 // Usado quando há uma condição para preenchimento de uma variavel.
 // Ex: colocar o valor do POST se ele existir, se não deixar em branco.
 
 // variavel = condição ? se VERDADEIRO : se FALSE;
-$codRef = isset($_POST['cod_ref']) && !empty($_POST['cod_ref']) ? $_POST['cod_ref'] : null;
-$qtdeInsumo = isset($_POST['qtde_utilizada']) && !empty($_POST['qtde_utilizada']) ? $_POST['qtde_utilizada'] : null;
+$cod_ref = isset($_POST['cod_ref']) && !empty($_POST['cod_ref']) ? $_POST['cod_ref'] : null;
+$qtde_utilizada = isset($_POST['qtde_utilizada']) && !empty($_POST['qtde_utilizada']) ? $_POST['qtde_utilizada'] : null;
 $unidade = isset($_POST['unidade']) && !empty($_POST['unidade']) ? $_POST['unidade'] : null;
 $prazo_util = isset($_POST['prazo_util']) && !empty($_POST['prazo_util']) ? $_POST['prazo_util'] : null;
 
