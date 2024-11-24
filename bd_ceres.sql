@@ -489,7 +489,7 @@ ALTER TABLE `cadastro_funcionarios`
 -- Índices para tabela `cadastro_insumo`
 --
 ALTER TABLE `cadastro_insumo`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id_solicitacao_cad`);
 
 --
 -- Índices para tabela `cadastro_nota_saida`
@@ -588,7 +588,7 @@ ALTER TABLE `insumos`
 -- Índices para tabela `medicao_producao`
 --
 ALTER TABLE `medicao_producao`
-  ADD PRIMARY KEY (`id`),
+  ADD PRIMARY KEY (`id_medicao`),
   ADD KEY `id_nome_plantio` (`id_nome_plantio`);
 
 --
