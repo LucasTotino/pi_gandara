@@ -3,7 +3,7 @@ require "../utils/conexao.php";
 
 // IF normal
 if (isset($_POST['nome_plantio']) && !empty($_POST['nome_plantio'])) {
-    $nome = $_POST['nome_plantio'];
+    $nomePlantio = $_POST['nome_plantio'];
 } else {
     $nomePlantio = null;
 }
@@ -34,7 +34,7 @@ if ($acao == "INCLUIR") {
     // O primeiro parametro é o tipo do dado, os demais são as variaveis com os dados.
     // i = inteiro, d = flutuante (casas decimais), s = texto (tudo que não é numero)
     $stmt->bind_param(
-        "sssssi",
+        "ssssss",
         $nomePlantio,
         $areaPlantio,
         $dataPlantio,
@@ -83,13 +83,13 @@ if ($acao == "INCLUIR") {
        data_plantio = ?, 
        data_colheita = ?, 
        espacamento_mudas = ?, 
-       fruto = ?, 
+       fruto = ?
        WHERE id_agendamento = ?;";
 
         $stmt = $conn->prepare($sql);
 
         $stmt->bind_param(
-            "sssssi",
+            "ssssss",
             $nomePlantio,
             $areaPlantio,
             $dataPlantio,
