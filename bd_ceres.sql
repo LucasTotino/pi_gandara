@@ -354,7 +354,7 @@ CREATE TABLE `insumos` (
 
 CREATE TABLE `medicao_producao` (
   `id_medicao` int(11) NOT NULL,
-  `id_nome_plantio` int(11) NOT NULL,
+  `id_nome_plantio` varchar(20) DEFAULT NULL,
   `data_medicao` date DEFAULT NULL,
   `diametro_fruto` float DEFAULT NULL,
   `adubacao` varchar(20) DEFAULT NULL,
