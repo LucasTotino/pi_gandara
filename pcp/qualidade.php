@@ -42,12 +42,16 @@
       <div class="form-group">
         <form action="../pcp/bd_pcp_qualidade_prod.php" method="POST"><!-- Inicio Formulário -->
 
+
+          <input type="hidden" id="id_agendamento" name="id_agendamento" value="<?= $idAgendamento ?? null ?>">
+          <input type="hidden" name="acao" id="acao" value="<?= $id ? "ALTERAR" : "INCLUIR" ?>">
+
           <!-- Nome, CPF e Data Nascimento -->
           <div class="form-row justify-content-center mt-2">
             <div class="col-sm-6">
-              <label for="areaRef">Área de Referência</label>
-              <input type="number" class="form-control" id="areaRef" name="areaRef"
-                placeholder="Puxar um select do banco" value="<?= $id ? $user['areaRef'] : '' ?>">
+              <label for="area_ref">Área de Referência</label>
+              <input type="number" class="form-control" id="area_ref" name="area_ref"
+                placeholder="Puxar um select do banco" value="<?= $id ? $user['area_ref'] : '' ?>">
 
               <!--
             <label for="nome_plantio">Item</label>
@@ -71,9 +75,9 @@
 
             </div>
             <div class="col-sm-6">
-              <label for="dataMedicao">Data da medição</label>
-              <input type="date" class="form-control" id="dataMedicao" name="dataMedicao"
-                value="<?= $id ? $user['dataMedicao'] : '' ?>">
+              <label for="data_medicao">Data da medição</label>
+              <input type="date" class="form-control" id="data_medicao" name="data_medicao"
+                value="<?= $id ? $user['data_medicao'] : '' ?>">
             </div>
 
 
@@ -81,19 +85,19 @@
 
           <div class="form-row justify-content-center mt-2">
             <div class="col-sm-4">
-              <label for="diametroMed">Diâmetro da Fruta (cm)</label>
-              <input type="number" class="form-control" id="diametroMed" name="diametroMed"
-                value="<?= $id ? $user['diametroMed'] : '' ?>">
+              <label for="diametro_med">Diâmetro da Fruta (cm)</label>
+              <input type="number" class="form-control" id="diametro_med" name="diametro_med"
+                value="<?= $id ? $user['diametro_med'] : '' ?>">
             </div>
 
 
             <div class="col-sm-4">
-              <label for="conformidadeVenda">Está em conformidade para Venda?</label>
+              <label for="conformidade_venda">Está em conformidade para Venda?</label>
               <div class="input-group">
-                <select class="custom-select" id="conformidadeVenda" name="conformidadeVenda">
+                <select class="custom-select" id="conformidade_venda" name="conformidade_venda">
                   <option value="">Selecione</option>
-                  <option <?= ($id && $user["conformidadeVenda"] == "Sim") ? "selected" : '' ?> value="Sim">Sim</option>
-                  <option <?= ($id && $user["conformidadeVenda"] == "Não") ? "selected" : '' ?> value="Não">Não</option>
+                  <option <?= ($id_qualidade && $user["conformidade_venda"] == "Sim") ? "selected" : '' ?> value="Sim">Sim</option>
+                  <option <?= ($id_qualidade && $user["conformidade_venda"] == "Não") ? "selected" : '' ?> value="Não">Não</option>
                 </select>
               </div>
             </div>
@@ -131,10 +135,10 @@
             <tbody>
               <?php while ($linha = $dados->fetch_assoc()): ?>
                 <tr>
-                  <td><?= $linha['areaRef'] ?></td>
-                  <td><?= $linha['dataMedicao'] ?></td>
-                  <td><?= $linha['diametroMed'] ?></td>
-                  <td><?= $linha['conformidadeVenda'] ?></td>
+                  <td><?= $linha['area_ref'] ?></td>
+                  <td><?= $linha['data_medicao'] ?></td>
+                  <td><?= $linha['diametro_med'] ?></td>
+                  <td><?= $linha['conformidade_venda'] ?></td>
                   <td>
                     <a href=".php?id=<?= $linha['id'] ?>" class="btn btn-warning btn-sm">Editar</a>
                     <button type="button" class="btn btn-danger btn-sm" data-id="<?= $linha['id'] ?>">Excluir</button>

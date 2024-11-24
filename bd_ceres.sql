@@ -415,6 +415,18 @@ CREATE TABLE `produtos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
+--
+-- Estrutura da tabela `qualidade`
+--
+
+CREATE TABLE `qualidade` (
+  `id_qualidade` int(11) NOT NULL,
+  `data_medicao` date NOT NULL,
+  `diametro_med` float NOT NULL,
+  `conformidade_venda` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
 
 --
 -- Estrutura da tabela `solicitacao_produtos`
