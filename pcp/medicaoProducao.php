@@ -82,7 +82,7 @@ if ($stmt) {
 
                             if ($result->num_rows > 0) {
                                 while ($row = $result->fetch_assoc()) {
-                                    echo "<option value='" . $row['id_agendamento'] . "'>" . $row['nome_plantio'] . "</option>";
+                                    echo "<option value='" . $row['nome_plantio'] . "'>" . $row['nome_plantio'] . "</option>";
                                 }
                             } else {
                                 echo "<option value=''>Nenhum item encontrado</option>";
