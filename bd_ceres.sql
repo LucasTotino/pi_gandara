@@ -361,7 +361,7 @@ CREATE TABLE `medicao_producao` (
   `praga` varchar(20) DEFAULT NULL,
   `obs_medicao` varchar(200) DEFAULT NULL,
   `espacamento_mudas` float DEFAULT NULL,
-  `fruto` varchar(20) DEFAULT NULL,
+  `fruto` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -477,7 +477,7 @@ CREATE TABLE `usuarios` (
 -- Índices para tabela `agendamento_plantacao`
 --
 ALTER TABLE `agendamento_plantacao`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id_agendamento`);
 
 --
 -- Índices para tabela `cadastro_funcionarios`
