@@ -105,12 +105,9 @@ if ($stmt) {
                         <div class="input-group">
                             <select class="custom-select" id="unidade" name="unidade">
                                 <option value="">Selecione</option>
-                                <option <?= ($id && $user["unidade"] == "Litro") ? "selected" : '' ?> value="Litro">
-                                    Litro</option>
-                                <option <?= ($id && $user["unidade"] == "Quilo") ? "selected" : '' ?> value="Quilo">
-                                </option>
-                                <option <?= ($id && $user["unidade"] == "Tonelada") ? "selected" : '' ?> value="Tonelada">
-                                </option>
+                                <option <?= ($id && $user["unidade"] == "Litro") ? "selected" : '' ?> value="Litro">Litro</option>
+                                <option <?= ($id && $user["unidade"] == "Quilo") ? "selected" : '' ?> value="Quilo">Quilo</option>
+                                <option <?= ($id && $user["unidade"] == "Tonelada") ? "selected" : '' ?> value="Tonelada">Tonelada</option>
                             </select>
                         </div>
                     </div>
