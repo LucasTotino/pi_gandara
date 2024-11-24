@@ -85,18 +85,7 @@
             <div style="width: 12rem;">
               <span class="fa fa-solid fa-receipt fa-5x" aria-hidden="true"></span>
               <div class="card-body">
-                <h3>Cadastro de NFS</h3>
-              </div>
-            </div>
-          </div>
-        </a>
-
-        <a href="Faturar.php" class="btn">
-          <div class="col-2 p-2 m-1">
-            <div style="width: 12rem;">
-              <span class="fa fa-solid fa-inbox fa-5x" aria-hidden="true"></span>
-              <div class="card-body">
-                <h3>Faturar</h3>
+                <h3>Cadastro e Faturamento de NFS-e</h3>
               </div>
             </div>
           </div>
