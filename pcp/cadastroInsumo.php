@@ -164,7 +164,7 @@ if ($stmt) {
                                 <td><?= $linha['qtde_utilizada'] ?></td>
                                 <td><?= $linha['unidade'] ?></td>
                                 <td><?= $linha['prazo_util'] ?></td>
-                                <a href="cadastroInsumo.php?id=<?= $linha['id_solicitacao_cad'] ?>"
+                                <td><a href="cadastroInsumo.php?id=<?= $linha['id_solicitacao_cad'] ?>"
                                     class="btn btn-warning btn-sm">Editar</a>
                                 <button type="button" class="btn btn-danger btn-sm"
                                     data-id="<?= $linha['id_solicitacao_cad'] ?>">Excluir</button>
