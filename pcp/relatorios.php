@@ -30,36 +30,10 @@
           </div>
         </div>
       </a>
-
-
+      
       <div class="col-6 m-5 d-flex justify-content-center">
         <h3>Relatório das plantações</h3>
       </div>
-
-    </div>
-    <div class="row m-5">
-      <div class="col-3 card">
-
-        <h5>Nome da Plantação</h5>
-        <div class="row">
-          <div class="col-12">
-            Área plantada
-          </div>
-        </div>
-      </div>
-
-      <div class="col-3 card">
-        <h5>Nome da Plantação</h5>
-      </div>
-
-      <div class="col-3 card">
-        <h5>Nome da Plantação</h5>
-      </div>
-
-      <div class="col-3 card">
-        <h5>Nome da Plantação</h5>
-      </div>
-    </div> <!--Fim da row-->
 
       <div class="container mt-5">
         <h2 class="text-center">Planejamento de Atividades</h2>
