@@ -46,8 +46,8 @@ if ($acao == "INCLUIR") {
     try {
         if ($stmt->execute()) {
             // Pega o numero do ID que foi inserido no BD
-            $idMedicao = $conn->insert_id;
-            echo $idMedicao;
+            $idCadastro_insumo = $conn->insert_id;
+            echo $idCadastro_insumo;
 
             header('Location: /pi_gandara/pcp');
         } else {
