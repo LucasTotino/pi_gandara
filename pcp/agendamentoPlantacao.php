@@ -57,7 +57,7 @@ if ($stmt) {
 
 <body>
     <div class="container mt-5">
-        <form action="../pcp/bd_pcp.php" method="POST">
+        <form action="../pcp/bd_pcp_agendamento_plantacao.php" method="POST">
             <input type="hidden" id="id_agendamento" name="id_agendamento" value="<?= $id ?? null ?>">
             <input type="hidden" name="acao" id="acao" value="<?= $id ? "ALTERAR" : "INCLUIR" ?>">
 
