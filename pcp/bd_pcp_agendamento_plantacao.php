@@ -52,7 +52,7 @@ if ($acao == "INCLUIR") {
             $idAgendamento = $conn->insert_id;
             echo $idAgendamento;
 
-            header('Location: /pi_gandara/pcp');
+            header('Location: /pi_gandara/pcp/agendamentoPlantacao.php');
         } else {
             echo $stmt->error;
         }
@@ -102,7 +102,7 @@ if ($acao == "INCLUIR") {
 
     try {
         if ($stmt->execute()) {
-            header('Location: /pi_gandara/pcp');
+            header('Location: /pi_gandara/pcp/agendamentoPlantacao.php');
         } else {
             echo $stmt->error;
         }

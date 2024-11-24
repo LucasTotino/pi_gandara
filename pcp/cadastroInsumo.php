@@ -76,17 +76,22 @@ if ($stmt) {
 
 
         <form action="../pcp/bd_pcp_solicitacao_cad.php" method="POST"><!-- Inicio Formulário -->
+
+
+            <input type="hidden" id="id_agendamento" name="id_agendamento" value="<?= $idAgendamento ?? null ?>">
+            <input type="hidden" name="acao" id="acao" value="<?= $id ? "ALTERAR" : "INCLUIR" ?>">
+
             <div class="form-group">
                 <!-- Nome, CPF e Data Nascimento -->
                 <div class="form-row justify-content-center mt-2">
                     <div class="col-sm-6">
-                        <label for="nomeInsumo">Nome do Insumo</label>
-                        <input type="text" class="form-control" id="nomeInsumo" name="nome_insumo"
+                        <label for="nome_insumo">Nome do Insumo</label>
+                        <input type="text" class="form-control" id="nome_insumo" name="nome_insumo"
                             value="<?= $id ? $user['nome_insumo'] : '' ?>">
                     </div>
                     <div class="col-sm-6">
-                        <label for="codRef">Código de Referência</label>
-                        <input type="text" class="form-control" id="codRef" name="cod_ref"
+                        <label for="cod_ref">Código de Referência</label>
+                        <input type="text" class="form-control" id="cod_ref" name="cod_ref"
                             value="<?= $id ? $user['cod_ref'] : '' ?>">
                     </div>
                 </div>
@@ -113,8 +118,8 @@ if ($stmt) {
                     </div>
 
                     <div class="col-sm-4">
-                        <label for="dataUtilizacao">Data de Utilização</label>
-                        <input type="date" class="form-control" id="prazo_util" name="dataUtilizacao"
+                        <label for="prazo_util">Data de Utilização</label>
+                        <input type="date" class="form-control" id="prazo_util" name="prazo_util"
                             value="<?= $id ? $user['prazo_util'] : '' ?>">
 
                     </div>
@@ -159,7 +164,7 @@ if ($stmt) {
                                 <td><?= $linha['qtde_utilizada'] ?></td>
                                 <td><?= $linha['unidade'] ?></td>
                                 <td><?= $linha['prazo_util'] ?></td>
-                                <a href="medicaoProducao.php?id=<?= $linha['id_solicitacao_cad'] ?>"
+                                <a href="cadastroInsumo.php?id=<?= $linha['id_solicitacao_cad'] ?>"
                                     class="btn btn-warning btn-sm">Editar</a>
                                 <button type="button" class="btn btn-danger btn-sm"
                                     data-id="<?= $linha['id_solicitacao_cad'] ?>">Excluir</button>

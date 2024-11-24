@@ -15,13 +15,13 @@ if (isset($_POST['nome_insumo']) && !empty($_POST['nome_insumo'])) {
 $codRef = isset($_POST['cod_ref']) && !empty($_POST['cod_ref']) ? $_POST['cod_ref'] : null;
 $qtdeInsumo = isset($_POST['qtde_utilizada']) && !empty($_POST['qtde_utilizada']) ? $_POST['qtde_utilizada'] : null;
 $unidade = isset($_POST['unidade']) && !empty($_POST['unidade']) ? $_POST['unidade'] : null;
-$prazo_util = isset($_POST['dataUtilizacao']) && !empty($_POST['dataUtilizacao']) ? $_POST['dataUtilizacao'] : null;
+$prazo_util = isset($_POST['prazo_util']) && !empty($_POST['prazo_util']) ? $_POST['prazo_util'] : null;
 
 $acao = isset($_POST['acao']) && !empty($_POST['acao']) ? $_POST['acao'] : null;
 
 if ($acao == "INCLUIR") {
     // As ? serão trocadas pelos valores dos campos pelo PHP
-    $sql = "INSERT INTO cadastro_insumo (nomeInsumo, codRef, qtde_utilizada, unidade, prazo_util) 
+    $sql = "INSERT INTO cadastro_insumo (nome_insumo, cod_ref, qtde_utilizada, unidade, prazo_util) 
     VALUE (?, ?, ?, ?, ?);";
 
     // Utilizaremos o Prepare Statement para manipular os dados no BD
@@ -34,8 +34,8 @@ if ($acao == "INCLUIR") {
     // i = inteiro, d = flutuante (casas decimais), s = texto (tudo que não é numero)
     $stmt->bind_param(
         "sssss",
-        $nomeInsumo,
-        $codRef,
+        $nome_insumo,
+        $cod_ref,
         $qtde_utilizada,
         $unidade,
         $prazo_util
@@ -49,7 +49,7 @@ if ($acao == "INCLUIR") {
             $idCadastro_insumo = $conn->insert_id;
             echo $idCadastro_insumo;
 
-            header('Location: /pi_gandara/pcp');
+            header('Location: /pi_gandara/pcp/cadastroInsumo.php');
         } else {
             echo $stmt->error;
         }
@@ -75,8 +75,8 @@ if ($acao == "INCLUIR") {
 
 } else if ($acao == "ALTERAR") {{
         $sql = "UPDATE cadastro_insumo SET 
-       nomeInsumo = ?, 
-       codRef = ?, 
+       nome_insumo = ?, 
+       cod_ref = ?, 
        qtde_utilizada = ?, 
        unidade = ?, 
        prazo_util = ?,
@@ -86,8 +86,8 @@ if ($acao == "INCLUIR") {
 
         $stmt->bind_param(
             "ssssss",
-            $nomeInsumo,
-            $codRef,
+            $nome_insumo,
+            $cod_ref,
             $qtde_utilizada,
             $unidade,
             $prazo_util,
@@ -97,7 +97,7 @@ if ($acao == "INCLUIR") {
 
     try {
         if ($stmt->execute()) {
-            header('Location: /pi_gandara/pcp');
+            header('Location: /pi_gandara/pcp/cadastroInsumo.php');
         } else {
             echo $stmt->error;
         }
