@@ -12,11 +12,11 @@ if (isset($_POST['id_nome_plantio']) && !empty($_POST['id_nome_plantio'])) {
 // Ex: colocar o valor do POST se ele existir, se não deixar em branco.
 
 // variavel = condição ? se VERDADEIRO : se FALSE;
-$dataMedicao = isset($_POST['data_medicao']) && !empty($_POST['data_medicao']) ? $_POST['data_medicao'] : null;
-$diametroFruto = isset($_POST['diametro_fruto']) && !empty($_POST['diametro_fruto']) ? $_POST['diametro_fruto'] : null;
+$dataMedicao = isset($_POST['dataMedicao']) && !empty($_POST['dataMedicao']) ? $_POST['dataMedicao'] : null;
+$diametroFruto = isset($_POST['diametroFruto']) && !empty($_POST['diametroFruto']) ? $_POST['diametroFruto'] : null;
 $adubacao = isset($_POST['adubacao']) && !empty($_POST['adubacao']) ? $_POST['adubacao'] : null;
 $praga = isset($_POST['praga']) && !empty($_POST['praga']) ? $_POST['praga'] : null;
-$obsMedicao = isset($_POST['obs_medicao']) && !empty($_POST['obs_medicao']) ? $_POST['obs_medicao'] : null;
+$obsMedicao = isset($_POST['obsMedicao']) && !empty($_POST['obsMedicao']) ? $_POST['obsMedicao'] : null;
 
 $acao = isset($_POST['acao']) && !empty($_POST['acao']) ? $_POST['acao'] : null;
 
