@@ -80,7 +80,7 @@ CREATE TABLE `cadastro_funcionarios` (
 --
 
 CREATE TABLE `cadastro_insumo` (
-  `id` int(11) NOT NULL,
+  `id_solicitacao_cad` int(11) NOT NULL,
   `nome_insumo` varchar(100) DEFAULT NULL,
   `cod_ref` float DEFAULT NULL,
   `qtde_utilizada` int(11) DEFAULT NULL,
