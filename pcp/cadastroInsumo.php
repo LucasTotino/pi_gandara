@@ -75,7 +75,7 @@ if ($stmt) {
         </div>
 
 
-        <form action="../pcp/cadastroInsumo.php" method="POST"><!-- Inicio Formulário -->
+        <form action="../pcp/bd_pcp_solicitacao_cad.php" method="POST"><!-- Inicio Formulário -->
             <div class="form-group">
                 <!-- Nome, CPF e Data Nascimento -->
                 <div class="form-row justify-content-center mt-2">
