@@ -57,15 +57,14 @@ if ($stmt) {
 
 <body>
     <div class="container mt-5">
+        <div class="row">
+            <div class="col m-5 d-flex justify-content-center">
+                <h1>Agendamento de um novo Plantio</h1>
+            </div>
+        </div>
         <form action="../pcp/bd_pcp_agendamento_plantacao.php" method="POST">
             <input type="hidden" id="id_agendamento" name="id_agendamento" value="<?= $idAgendamento ?? null ?>">
-            <input type="hidden" name="acao" id="acao" value="<?= $id ? "ALTERAR" : "INCLUIR"?>">
-
-            <div class="row">
-                <div class="col m-5 d-flex justify-content-center">
-                    <h1>Agendamento de um novo Plantio</h1>
-                </div>
-            </div>
+            <input type="hidden" name="acao" id="acao" value="<?= $id ? "ALTERAR" : "INCLUIR" ?>">
 
             <div class="form-group">
                 <div class="form-row justify-content-center mt-2">
@@ -151,7 +150,8 @@ if ($stmt) {
                             <td><?= $linha['espacamento_mudas'] ?></td>
                             <td><?= $linha['fruto'] ?></td>
                             <td>
-                                <a href="agendamentoPlantacao.php?id=<?= $linha['id_agendamento'] ?>" class="btn btn-warning btn-sm">Editar</a>
+                                <a href="agendamentoPlantacao.php?id=<?= $linha['id_agendamento'] ?>"
+                                    class="btn btn-warning btn-sm">Editar</a>
                                 <button type="button" class="btn btn-danger btn-sm"
                                     data-id="<?= $linha['id_agendamento'] ?>">Excluir</button>
                             </td>
