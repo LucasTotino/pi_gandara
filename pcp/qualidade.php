@@ -68,6 +68,7 @@
               </select>
 
             </div>
+            
             <div class="col-sm-6">
               <label for="data_medicao">Data da medição</label>
               <input type="date" class="form-control" id="data_medicao" name="data_medicao"
