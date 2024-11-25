@@ -421,7 +421,7 @@ CREATE TABLE `produtos` (
 
 CREATE TABLE `qualidade` (
   `id_qualidade` int(11) NOT NULL,
-  'nome_plantio' varchar(100) NOT NULL,  
+  `nome_plantio` varchar(100) NOT NULL,  
   `data_medicao` date NOT NULL,
   `diametro_med` float NOT NULL,
   `conformidade_venda` varchar(20) NOT NULL
