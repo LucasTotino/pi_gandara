@@ -118,7 +118,7 @@ if ($acao == "INCLUIR") {
 
     $sql = "DELETE FROM qualidade WHERE id_qualidade = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $idqualidade);
+    $stmt->bind_param("i", $idQualidade);
 
     if ($stmt->execute()) {
          echo json_encode(
