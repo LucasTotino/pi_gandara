@@ -1,3 +1,44 @@
+<?php
+require '../utils/conexao.php'; // Inclui o arquivo de conexão com o banco de dados
+
+// Verifica se veio um ID na URL e valida se é um inteiro
+$id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+$cor = ($id) ? "btn-warning" : "btn-success";
+$id_qualidade = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+// Caso tenha um ID, busca o registro correspondente no banco de dados
+if ($id) {
+    $sql = "SELECT * FROM qualidade WHERE id_qualidade = ?;";
+    $stmt = $conn->prepare($sql);
+
+    if ($stmt) {
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $dados = $stmt->get_result();
+
+        if ($dados->num_rows > 0) {
+            $user = $dados->fetch_assoc();
+        } else {
+            header("Location: ../pcp/index.php"); // Redireciona caso o ID não seja encontrado
+            exit;
+        }
+    } else {
+        die("Erro ao preparar a consulta: " . $conn->error);
+    }
+}
+
+// Consulta geral para listar os registros no banco
+$sql = "SELECT id_qualidade, nome_plantio, data_medicao, diametro_med, conformidade_venda FROM qualidade;";
+$stmt = $conn->prepare($sql);
+
+if ($stmt) {
+    $stmt->execute();
+    $dados = $stmt->get_result();
+} else {
+    die("Erro ao preparar a consulta: " . $conn->error);
+}
+?>
+
+
 <!doctype html>
 <html lang="pt-br">
 
@@ -115,6 +156,8 @@
         </form>
 
       </div>
+
+
 
       <div class="container mt-5">
         <h2 class="d-flex justify-content-center">Medições realizadas</h2>
