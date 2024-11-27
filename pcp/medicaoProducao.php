@@ -67,7 +67,7 @@ if ($stmt) {
         <div class="form-group">
             <form action="../pcp/bd_pcp_medicao_prod.php" method="POST"><!-- Inicio Formulário -->
 
-                <input type="hidden" id="id_medicao" name="id_medicao" value="<?= $idMedicao ?? null ?>">
+                <input type="hidden" id="id_medicao" name="id_medicao" value="<?= $user['id_medicao'] ?? null ?>">
                 <input type="hidden" name="acao" id="acao" value="<?= $id ? "ALTERAR" : "INCLUIR" ?>">
 
                 <!-- Nome, CPF e Data Nascimento -->
@@ -75,20 +75,17 @@ if ($stmt) {
                     <div class="col-sm-6">
                         <label for="id_nome_plantio">Item</label>
                         <select name="id_nome_plantio" id="id_nome_plantio" class="form-control">
-                            <option value="">Selecione um item</option>
-                            <?php
-                            $sql = "SELECT id_agendamento, nome_plantio FROM agendamento_plantacao";
-                            $result = $conn->query($sql);
+                        <option value="">Selecione um item</option>
+                        <?php
+                        $sql = "SELECT id_agendamento, nome_plantio FROM agendamento_plantacao";
+                        $result = $conn->query($sql);
 
-                            if ($result->num_rows > 0) {
-                                while ($row = $result->fetch_assoc()) {
-                                    echo "<option value='" . $row['nome_plantio'] . "'>" . $row['nome_plantio'] . "</option>";
-                                }
-                            } else {
-                                echo "<option value=''>Nenhum item encontrado</option>";
-                            }
-                            ?>
-                        </select>
+                        while ($row = $result->fetch_assoc()) {
+                            $selected = ($id && $row['nome_plantio'] == $user['id_nome_plantio']) ? 'selected' : '';
+                            echo "<option value='{$row['nome_plantio']}' $selected>{$row['nome_plantio']}</option>";
+                        }
+                        ?>
+                    </select>
                     </div>
                     <div class="col-sm-6">
                         <label for="dataMedicao">Data da medição</label>
