@@ -84,6 +84,9 @@ if ($stmt) {
                             $selected = ($id && $row['nome_plantio'] == $user['id_nome_plantio']) ? 'selected' : '';
                             echo "<option value='{$row['nome_plantio']}' $selected>{$row['nome_plantio']}</option>";
                         }
+
+                        //teste
+                        
                         ?>
                     </select>
                     </div>
