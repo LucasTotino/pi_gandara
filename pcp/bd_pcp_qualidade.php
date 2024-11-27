@@ -15,7 +15,7 @@ if (isset($_POST['nome_plantio']) && !empty($_POST['nome_plantio'])) {
 $dataMedicao = isset($_POST['data_medicao']) && !empty($_POST['data_medicao']) ? $_POST['data_medicao'] : null;
 $diametroMed = isset($_POST['diametro_med']) && !empty($_POST['diametro_med']) ? $_POST['diametro_med'] : null;
 $conformidadeVenda = isset($_POST['conformidade_venda']) && !empty($_POST['conformidade_venda']) ? $_POST['conformidade_venda'] : null;
-
+$idQualidade = $_POST['id_qualidade'] ?? null;
 $acao = isset($_POST['acao']) && !empty($_POST['acao']) ? $_POST['acao'] : null;
 
 if ($acao == "INCLUIR") {
@@ -72,7 +72,7 @@ if ($acao == "INCLUIR") {
     print_r($_POST);
     echo "</pre>";
 
-} else if ($acao == "ALTERAR") {{
+} else if ($acao == "ALTERAR" && $idQualidade) {{
         $sql = "UPDATE qualidade SET 
        nome_plantio = ?, 
        data_medicao = ?, 
@@ -95,16 +95,14 @@ if ($acao == "INCLUIR") {
     try {
         if ($stmt->execute()) {
             header('Location: /pi_gandara/pcp/qualidade.php');
+            exit;
         } else {
-            echo $stmt->error;
+            echo "Erro ao atualizar: " . $stmt->error;
         }
     } catch (Exception $e) {
-        echo "Erro ao ATUALIZAR!";
-        // Vamos utilizar JS para poder recuperar os dados digitados
+        echo "Erro ao atualizar: " . $e->getMessage();
         ?>
-            <script>
-                history.back();
-            </script>
+        <script>history.back();</script>
         <?php
     }
 

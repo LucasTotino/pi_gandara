@@ -2,16 +2,16 @@
 require '../utils/conexao.php'; // Inclui o arquivo de conexão com o banco de dados
 
 // Verifica se veio um ID na URL para edição
-$id_qualidade = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
-$cor = ($id_qualidade) ? "btn-warning" : "btn-success";
+$id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+$cor = ($id) ? "btn-warning" : "btn-success";
 
 // Caso tenha um ID, busca o registro correspondente no banco de dados
-if ($id_qualidade) {
+if ($id) {
   $sql = "SELECT * FROM qualidade WHERE id_qualidade = ?;";
   $stmt = $conn->prepare($sql);
 
   if ($stmt) {
-    $stmt->bind_param("i", $id_qualidade);
+    $stmt->bind_param("i", $id);
     $stmt->execute();
     $dados = $stmt->get_result();
 
@@ -58,6 +58,9 @@ if ($stmt) {
 <body>
   <div class="container mt-5">
     <form action="../pcp/bd_pcp_qualidade.php" method="POST">
+<input type="hidden" id="id_qualidade" name="id_qualidade" value="<?= $id ?? null ?>">
+      <input type="hidden" name="acao" id="acao" value="<?= $id ? "ALTERAR" : "INCLUIR" ?>">
+
       <div class="row">
         <a href="../pcp/index.php" class="btn">
           <div class="col-2">
@@ -72,10 +75,11 @@ if ($stmt) {
         </div>
       </div>
 
-      <input type="hidden" id="id_qualidade" name="id_qualidade" value="<?= $id_qualidade ?? null ?>">
-      <input type="hidden" name="acao" id="acao" value="<?= $id_qualidade ? "ALTERAR" : "INCLUIR" ?>">
+      
 
       <div class="form-group">
+
+
         <div class="form-row justify-content-center mt-2">
           <div class="col-sm-6">
             <label for="nome_plantio">Item</label>
@@ -85,14 +89,11 @@ if ($stmt) {
               $sql = "SELECT id_agendamento, nome_plantio FROM agendamento_plantacao";
               $result = $conn->query($sql);
 
-              if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                  $selected = ($id_qualidade && $row['nome_plantio'] == $user['nome_plantio']) ? "selected" : '';
-                  echo "<option value='" . $row['nome_plantio'] . "' $selected>" . $row['nome_plantio'] . "</option>";
-                }
-              } else {
-                echo "<option value=''>Nenhum item encontrado</option>";
-              }
+              while ($row = $result->fetch_assoc()) {
+                $selected = ($id && $row['nome_plantio'] == $user['nome_plantio']) ? 'selected' : '';
+                echo "<option value='{$row['nome_plantio']}' $selected>{$row['nome_plantio']}</option>";
+            }
+
               ?>
             </select>
           </div>
@@ -100,7 +101,7 @@ if ($stmt) {
           <div class="col-sm-6">
             <label for="data_medicao">Data da medição</label>
             <input type="date" class="form-control" id="data_medicao" name="data_medicao"
-              value="<?= $id_qualidade ? $user['data_medicao'] : '' ?>">
+              value="<?= $id ? $user['data_medicao'] : '' ?>">
           </div>
         </div>
 
@@ -108,16 +109,16 @@ if ($stmt) {
           <div class="col-sm-4">
             <label for="diametro_med">Diâmetro da Fruta (cm)</label>
             <input type="number" class="form-control" id="diametro_med" name="diametro_med"
-              value="<?= $id_qualidade ? $user['diametro_med'] : '' ?>">
+              value="<?= $id ? $user['diametro_med'] : '' ?>">
           </div>
 
           <div class="col-sm-4">
             <label for="conformidade_venda">Está em conformidade para Venda?</label>
             <select class="custom-select" id="conformidade_venda" name="conformidade_venda">
               <option value="">Selecione</option>
-              <option value="Sim" <?= ($id_qualidade && $user['conformidade_venda'] == "Sim") ? "selected" : '' ?>>Sim
+              <option value="Sim" <?= ($id && $user['conformidade_venda'] == "Sim") ? "selected" : '' ?>>Sim
               </option>
-              <option value="Não" <?= ($id_qualidade && $user['conformidade_venda'] == "Não") ? "selected" : '' ?>>Não
+              <option value="Não" <?= ($id && $user['conformidade_venda'] == "Não") ? "selected" : '' ?>>Não
               </option>
             </select>
           </div>
