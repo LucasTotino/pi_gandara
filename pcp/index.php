@@ -96,7 +96,7 @@
           </div>
         </a>
 
-        <a href="/pi_gandara/pcp/reqMat.php" class="btn">
+        <a href="../estoque/solicitação.php" class="btn">
           <div class="col-4  m-2">
             <div style="width: 18rem;">
               <span class="fa-solid fa-truck-fast fa-5x" aria-hidden="true"></span>
