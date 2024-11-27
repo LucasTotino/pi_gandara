@@ -78,7 +78,7 @@ if ($stmt) {
         <form action="../pcp/bd_pcp_solicitacao_cad.php" method="POST"><!-- Inicio Formulário -->
 
 
-            <input type="hidden" id="id_agendamento" name="id_agendamento" value="<?= $idAgendamento ?? null ?>">
+            <input type="hidden" id="id_solicitacao_cad" name="id_solicitacao_cad" value="<?= $user['id_solicitacao_cad'] ?? null ?>">
             <input type="hidden" name="acao" id="acao" value="<?= $id ? "ALTERAR" : "INCLUIR" ?>">
 
             <div class="form-group">

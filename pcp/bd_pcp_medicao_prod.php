@@ -127,7 +127,7 @@ if ($acao == "INCLUIR") {
 
     $sql = "DELETE FROM medicao_producao WHERE id_medicao = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $id);
+    $stmt->bind_param("i", $idMedicao);
 
     if ($stmt->execute()) {
          echo json_encode(

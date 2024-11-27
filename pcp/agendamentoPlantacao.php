@@ -63,7 +63,7 @@ if ($stmt) {
             </div>
         </div>
         <form action="../pcp/bd_pcp_agendamento_plantacao.php" method="POST">
-            <input type="hidden" id="id_agendamento" name="id_agendamento" value="<?= $idAgendamento ?? null ?>">
+            <input type="hidden" id="id_agendamento" name="id_agendamento" value="<?= $user['id_agendamento'] ?? null ?>">
             <input type="hidden" name="acao" id="acao" value="<?= $id ? "ALTERAR" : "INCLUIR" ?>">
 
             <div class="form-group">

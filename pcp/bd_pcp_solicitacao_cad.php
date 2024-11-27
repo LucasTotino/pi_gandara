@@ -79,13 +79,13 @@ if ($acao == "INCLUIR") {
        cod_ref = ?, 
        qtde_utilizada = ?, 
        unidade = ?, 
-       prazo_util = ?,
+       prazo_util = ?
        WHERE id_solicitacao_cad = ?;";
 
         $stmt = $conn->prepare($sql);
 
         $stmt->bind_param(
-            "ssssss",
+            "sssssi",
             $nome_insumo,
             $cod_ref,
             $qtde_utilizada,

@@ -67,7 +67,7 @@ if ($stmt) {
         <div class="form-group">
             <form action="../pcp/bd_pcp_medicao_prod.php" method="POST"><!-- Inicio Formulário -->
 
-                <input type="hidden" id="id_medicao" name="id_medicao" value="<?= $idMedicao ?? null ?>">
+                <input type="hidden" id="id_medicao" name="id_medicao" value="<?= $user['id_medicao'] ?? null ?>">
                 <input type="hidden" name="acao" id="acao" value="<?= $id ? "ALTERAR" : "INCLUIR" ?>">
 
                 <!-- Nome, CPF e Data Nascimento -->
@@ -82,12 +82,12 @@ if ($stmt) {
 
                             if ($result->num_rows > 0) {
                                 while ($row = $result->fetch_assoc()) {
-                                    echo "<option value='" . $row['nome_plantio'] . "'>" . $row['nome_plantio'] . "</option>";
+                                    $selected = ($id && $row['nome_plantio'] == $user['id_nome_plantio']) ? 'selected' : '';
+                                    echo "<option value='{$row['nome_plantio']}' $selected>{$row['nome_plantio']}</option>";
                                 }
-                            } else {
-                                echo "<option value=''>Nenhum item encontrado</option>";
                             }
-                            ?>
+                                ?>
+                            </select>
                         </select>
                     </div>
                     <div class="col-sm-6">
