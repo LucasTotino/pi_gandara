@@ -89,7 +89,7 @@ if ($acao == "INCLUIR") {
         $stmt = $conn->prepare($sql);
 
         $stmt->bind_param(
-            "sssssss",
+            "ssssssi",
             $nomePlantio,
             $areaPlantio,
             $dataPlantio,
