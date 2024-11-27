@@ -32,7 +32,7 @@
             <a href="contasPagar.php" class="btn">
                 <div class="col-2 p-2 m-1">
                     <div style="width: 14rem;">
-                        <span class="fa-solid fa-money-bill-transfer fa-5x fa-spin" style="--fa-animation-duration: 5s;" aria-hidden="true"></span>
+                        <span class="fa-solid fa-money-bill-transfer fa-5x " aria-hidden="true"></span>
                         <div class="card-body d-flex justify-content-center">
                             <h4>
                                 <b>Contas a<br> Pagar</nobr></b>
@@ -45,7 +45,7 @@
             <a href="contasReceber.php" class="btn">
                 <div class="col-2 p-2 m-1">
                     <div style="width: 14rem;">
-                        <span class="fa-solid fa-money-bill-transfer fa-5x fa-flip" style="--fa-animation-duration: 5s;" aria-hidden="true"></span>
+                        <span class="fa-solid fa-money-bill-transfer fa-5x "  aria-hidden="true"></span>
                         <div class="card-body justify-content-center">
                             <h4><b>Contas a Receber</b></h3>
                         </div>

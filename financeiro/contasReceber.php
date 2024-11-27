@@ -2,106 +2,160 @@
 <html lang="pt-br">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
-    <link rel="stylesheet" type="text/css" href="styles.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.css" crossorigin="anonymous">
-    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/pi_gandara/css/styleFinanceiro.css">
-    <link rel="stylesheet" href="/pi_gandara/css/style.css">
-    <title>Contas a Receber</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" type="text/css" href="styles.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.css" crossorigin="anonymous">
+  <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/pi_gandara/css/styleFinanceiro.css">
+  <link rel="stylesheet" href="/pi_gandara/css/style.css">
+  <title>Contas a Receber</title>
 </head>
 
 <body>
-    <header>
-        <?php include_once('../utils/menu.php'); ?>
-    </header>
+  <header>
+    <?php include_once('../utils/menu.php'); ?>
+  </header>
 
-    <main class="container">
-        <div class="row p-3 justify-content-center d-flex align-items-center">
-            <a type="button" style="text-align: left;" class="col-1 btn btn-primary justify-content-center d-flex" href="/pi_gandara/financeiro/">Voltar</a>
-            <h1 style="text-align: center;" class="col-11 display-4">Contas a Receber</h1>
+  <main class="container">
+
+    <h1 class="mb-4 text-center">Contas a Receber</h1>
+
+    <div class="row mb-4">
+      <div class="col-md-4">
+        <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#novoRecebimentoModal">
+          <i class="fas fa-plus-circle mr-2"></i>Novo Recebimento
+        </button>
+      </div>
+      <div class="col-md-4">
+        <button class="btn btn-info btn-block" data-toggle="modal" data-target="#verFaturasModal">
+          <i class="fas fa-file-invoice mr-2"></i>Ver Faturas
+        </button>
+      </div>
+      <div class="col-md-4">
+        <button class="btn btn-secondary btn-block" data-toggle="modal" data-target="#historicoModal">
+          <i class="fas fa-history mr-2"></i>Histórico de Recebimento
+        </button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Contas a Receber</h5>
+        <div class="table-responsive">
+          <table style="text-align:center;" class="table table-striped table-hover">
+            <thead>
+              <tr>
+                <th>Número Pedido</th>
+                <th>Nome do Cliente</th>
+                <th>Data Venda</th>
+                <th>Valor da Venda</th> <!-- CRIAR NOVO BANCO DE DADOS RECEBENDO INFORMAÇÕES DO cadVendas.php -->
+                <th>Status</th> <!-- AGUARDAR TELA DE FATURAMENTO VINDA DO COMERCIAL -->
+                <th>Ação</th>
+              </tr>
+            </thead>
+            <tbody id="contasReceberList">
+              <!-- Dados serão carregados via JavaScript -->
+            </tbody>
+          </table>
         </div>
+      </div>
+    </div>
+  </main>
 
-        <div class="container">
-
-            <div class="mb-4">
-                <button class="btn btn-primary" data-toggle="modal" data-target="#addAccountModal">Adicionar Conta</button>
+  <!-- Modal para Novo Recebimento -->
+  <div class="modal fade" id="novoRecebimentoModal" tabindex="-1" role="dialog" aria-labelledby="novoRecebimentoModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="novoRecebimentoModalLabel">Novo Recebimento</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="novoPagamentoForm">
+            <div class="form-group">
+              <label for="numeroFatura">Número do Pedido</label>
+              <input type="text" class="form-control" id="numeroFatura" required>
             </div>
-
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Cliente</th>
-                        <th>Valor</th>
-                        <th>Data de Vencimento</th>
-                        <th>Status</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Cliente A</td>
-                        <td>R$ 1.000,00</td>
-                        <td>2023-10-15</td>
-                        <td>Pendente</td>
-                        <td>
-                            <button class="btn btn-success btn-sm">Pagar</button>
-                            <button class="btn btn-danger btn-sm">Excluir</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Cliente B</td>
-                        <td>R$ 500,00</td>
-                        <td>2023-11-01</td>
-                        <td>Pendente</td>
-                        <td>
-                            <button class="btn btn-success btn-sm">Pagar</button>
-                            <button class="btn btn-danger btn-sm">Excluir</button>
-                        </td>
-                    </tr>
-                    <!-- Adicione mais contas aqui -->
-                </tbody>
-            </table>
-        </div>
-
-        <!-- Modal para Adicionar Conta -->
-        <div class="modal fade" id="addAccountModal" tabindex="-1" role="dialog" aria-labelledby="addAccountModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="addAccountModalLabel">Adicionar Conta a Receber</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form>
-                            <div class="form-group">
-                                <label for="cliente">Cliente</label>
-                                <input type="text" class="form-control" id="cliente" placeholder="Nome do Cliente" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="valor">Valor</label>
-                                <input type="text" class="form-control" id="valor" placeholder="Valor" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="dataVencimento">Data de Vencimento</label>
-                                <input type="date" class="form-control" id="dataVencimento" required>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Adicionar</button>
-                        </form>
-                    </div>
-                </div>
+            <div class="form-group">
+              <label for="nomeCliente">Nome do Cliente</label>
+              <input type="text" class="form-control" id="nomeCliente" required>
             </div>
+            <div class="form-group">
+              <label for="dataVenda">Data da Venda</label>
+              <input type="date" class="form-control" id="dataVenda" required>
+            </div>
+            <div class="form-group">
+              <label for="valor">Valor</label>
+              <input type="number" class="form-control" id="valor" step="0.01" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Salvar</button>
+          </form>
         </div>
-    </main>
+      </div>
+    </div>
+  </div>
 
-    <script src="https://kit.fontawesome.com/74ecb76a40.js" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      // Função para carregar as contas a receber
+      function carregarContasReceber() {
+        // Simular dados (substitua por uma chamada AJAX real)
+        const contas = [{
+            numero: "001",
+            dataFatura: "2023-05-01",
+            dataRecebimento: "2023-05-15",
+            valor: 1000.00,
+            status: "Pendente"
+          },
+          {
+            numero: "002",
+            dataFatura: "2023-05-02",
+            dataRecebimento: "2023-05-16",
+            valor: 1500.00,
+            status: "Pago"
+          },
+          // Adicione mais itens conforme necessário
+        ];
+
+        let html = '';
+        contas.forEach(conta => {
+          html += `
+                        <tr>
+                            <td>${conta.numero}</td>
+                            <td>${conta.dataFatura}</td>
+                            <td>${conta.dataRecebimento}</td>
+                            <td>R$ ${conta.valor.toFixed(2)}</td>
+                            <td>${conta.status}</td>
+                            <td>
+                                <button class="btn btn-sm btn-success">Extrair relatório</button>
+                            </td>
+                        </tr>
+                    `;
+        });
+
+        $('#contasReceberList').html(html);
+      }
+
+      // Carregar contas a receber ao iniciar a página
+      carregarContasReceber();
+
+      // Lidar com o envio do formulário de novo recebimento
+      $('#novoRecebimentoForm').submit(function(e) {
+        e.preventDefault();
+        // Aqui você faria uma chamada AJAX para salvar o novo recebimento
+        alert('Novo recebimento adicionado com sucesso!');
+        $('#novoRecebimentoModal').modal('hide');
+        carregarContasReceber(); // Recarregar a lista
+      });
+    });
+  </script>
+
+  <script src="https://kit.fontawesome.com/74ecb76a40.js" crossorigin="anonymous"></script>
 </body>
 
 </html>
