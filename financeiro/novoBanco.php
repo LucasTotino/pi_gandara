@@ -203,7 +203,7 @@ $dados = $stmt->get_result();
 
                 if (confirma) {
                     $.ajax({
-                        url: `/pi_gandara/compras/bd/bd_${tabela}.php`,
+                        url: `/pi_gandara/financeiro/bd/bd_${tabela}.php`,
                         type: 'POST',
                         data: {
                             acao: "DELETAR",
