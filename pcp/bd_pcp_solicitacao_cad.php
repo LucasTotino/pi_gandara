@@ -17,6 +17,7 @@ $qtde_utilizada = isset($_POST['qtde_utilizada']) && !empty($_POST['qtde_utiliza
 $unidade = isset($_POST['unidade']) && !empty($_POST['unidade']) ? $_POST['unidade'] : null;
 $prazo_util = isset($_POST['prazo_util']) && !empty($_POST['prazo_util']) ? $_POST['prazo_util'] : null;
 
+$id_solicitacao_cad = $_POST['id_solicitacao_cad'] ?? null;
 $acao = isset($_POST['acao']) && !empty($_POST['acao']) ? $_POST['acao'] : null;
 
 if ($acao == "INCLUIR") {
@@ -73,7 +74,7 @@ if ($acao == "INCLUIR") {
     print_r($_POST);
     echo "</pre>";
 
-} else if ($acao == "ALTERAR") {{
+} else if ($acao == "ALTERAR" && $id_solicitacao_cad) {{
         $sql = "UPDATE cadastro_insumo SET 
        nome_insumo = ?, 
        cod_ref = ?, 
@@ -97,24 +98,17 @@ if ($acao == "INCLUIR") {
 
     try {
         if ($stmt->execute()) {
-            header('Location: /pi_gandara/pcp/cadastroInsumo.php');
+            header('Location: /pi_gandara/pcp/cadastroinsumo.php');
+            exit;
         } else {
-            echo $stmt->error;
+            echo "Erro ao atualizar: " . $stmt->error;
         }
     } catch (Exception $e) {
-        echo "Erro ao ATUALIZAR!";
-        // Vamos utilizar JS para poder recuperar os dados digitados
+        echo "Erro ao atualizar: " . $e->getMessage();
         ?>
-            <script>
-                history.back();
-            </script>
+        <script>history.back();</script>
         <?php
     }
-
-    // Fecha o Prepared Statament
-    $stmt->close();
-    // Fecha a conexão
-    $conn->close();
 
 } else if ($acao == "DELETAR") {
     // Neste bloco será excluido um registro que já existe no BD.
