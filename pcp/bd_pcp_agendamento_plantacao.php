@@ -17,7 +17,7 @@ $dataPlantio = isset($_POST['data_plantio']) && !empty($_POST['data_plantio']) ?
 $dataColheita = isset($_POST['data_colheita']) && !empty($_POST['data_colheita']) ? $_POST['data_colheita'] : null;
 $espacoMuda = isset($_POST['espacamento_mudas']) && !empty($_POST['espacamento_mudas']) ? $_POST['espacamento_mudas'] : null;
 $fruto = isset($_POST['fruto']) && !empty($_POST['fruto']) ? $_POST['fruto'] : null;
-
+$idAgendamento = $_POST['id_agendamento'] ?? null;
 $acao = isset($_POST['acao']) && !empty($_POST['acao']) ? $_POST['acao'] : null;
 
 if ($acao == "INCLUIR") {
@@ -76,7 +76,7 @@ if ($acao == "INCLUIR") {
     print_r($_POST);
     echo "</pre>";
 
-} else if ($acao == "ALTERAR") {{
+} else if ($acao == "ALTERAR" && $idAgendamento) {{
         $sql = "UPDATE agendamento_plantacao SET 
        nome_plantio = ?, 
        area_plantio = ?, 
@@ -103,24 +103,17 @@ if ($acao == "INCLUIR") {
     try {
         if ($stmt->execute()) {
             header('Location: /pi_gandara/pcp/agendamentoPlantacao.php');
+            exit;
         } else {
-            echo $stmt->error;
+            echo "Erro ao atualizar: " . $stmt->error;
         }
     } catch (Exception $e) {
-        echo "Erro ao ATUALIZAR!";
-        // Vamos utilizar JS para poder recuperar os dados digitados
+        echo "Erro ao atualizar: " . $e->getMessage();
         ?>
-            <script>
-                history.back();
-            </script>
+        <script>history.back();</script>
         <?php
     }
-
-    // Fecha o Prepared Statament
-    $stmt->close();
-    // Fecha a conexão
-    $conn->close();
-
+    
 } else if ($acao == "DELETAR") {
     // Neste bloco será excluido um registro que já existe no BD.
 
