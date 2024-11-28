@@ -137,7 +137,7 @@ $result_fornecedores = $stmt_fornecedores->get_result();
                             url: `/pi_gandara/compras/bd/bd_cotacao.php`,
                             type: 'POST',
                             data: {
-                                acao: "ALTERAR",
+                                acao: "ATUALIZAR",
                                 id: quoteId,
                                 status: 2
                             },
@@ -162,7 +162,7 @@ $result_fornecedores = $stmt_fornecedores->get_result();
                             url: `/pi_gandara/compras/bd/bd_cotacao.php`,
                             type: 'POST',
                             data: {
-                                acao: "ALTERAR",
+                                acao: "ATUALIZAR",
                                 id: quoteId,
                                 status: 1
                             },
