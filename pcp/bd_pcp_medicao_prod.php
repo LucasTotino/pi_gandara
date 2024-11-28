@@ -62,6 +62,8 @@ if ($acao === "INCLUIR") {
         <?php
     }
 
+
+    
 }elseif ($acao === "DELETAR" && $idMedicao) {
     // Valida o ID
     $idMedicao = filter_var($idMedicao, FILTER_VALIDATE_INT);

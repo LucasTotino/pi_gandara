@@ -75,20 +75,20 @@ if ($stmt) {
                     <div class="col-sm-6">
                         <label for="id_nome_plantio">Item</label>
                         <select name="id_nome_plantio" id="id_nome_plantio" class="form-control">
-                        <option value="">Selecione um item</option>
-                        <?php
-                        $sql = "SELECT id_agendamento, nome_plantio FROM agendamento_plantacao";
-                        $result = $conn->query($sql);
+                            <option value="">Selecione um item</option>
+                            <?php
+                            $sql = "SELECT id_agendamento, nome_plantio FROM agendamento_plantacao";
+                            $result = $conn->query($sql);
 
-                        while ($row = $result->fetch_assoc()) {
-                            $selected = ($id && $row['nome_plantio'] == $user['id_nome_plantio']) ? 'selected' : '';
-                            echo "<option value='{$row['nome_plantio']}' $selected>{$row['nome_plantio']}</option>";
-                        }
+                            while ($row = $result->fetch_assoc()) {
+                                $selected = ($id && $row['nome_plantio'] == $user['id_nome_plantio']) ? 'selected' : '';
+                                echo "<option value='{$row['nome_plantio']}' $selected>{$row['nome_plantio']}</option>";
+                            }
 
-                        //teste
-                        
-                        ?>
-                    </select>
+                            //teste
+
+                            ?>
+                        </select>
                     </div>
                     <div class="col-sm-6">
                         <label for="dataMedicao">Data da medição</label>
@@ -198,23 +198,25 @@ if ($stmt) {
 
     <script>
         document.querySelectorAll('.btn-danger').forEach(button => {
-    button.addEventListener('click', () => {
-        const id = button.getAttribute('data-id'); // Obtém o ID do botão
-        if (confirm('Tem certeza de que deseja excluir este registro?')) {
-            fetch('/pi_gandara/pcp/bd_pcp_medicao_prod.php', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: `acao=DELETAR&id_medicao=${id}` // Certifique-se de que o nome corresponde ao esperado no PHP
-            })
-            .then(response => response.json()) // Converte a resposta para JSON
-            .then(data => {
-                alert(data.message); // Exibe a mensagem do backend
-                if (data.status === 'sucesso') location.reload(); // Recarrega a página se a exclusão for bem-sucedida
-            })
-            .catch(error => console.error('Erro na requisição:', error));
-        }
-    });
-});
+            button.addEventListener('click', () => {
+                const id = button.getAttribute('data-id'); // Obtém o ID do botão
+                if (confirm('Tem certeza de que deseja excluir este registro?')) {
+                    fetch('/pi_gandara/pcp/bd_pcp_medicao_prod.php', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/x-www-form-urlencoded'
+                            },
+                            body: `acao=DELETAR&id_medicao=${id}` // Certifique-se de que o nome corresponde ao esperado no PHP
+                        })
+                        .then(response => response.json()) // Converte a resposta para JSON
+                        .then(data => {
+                            alert(data.message); // Exibe a mensagem do backend
+                            if (data.status === 'sucesso') location.reload(); // Recarrega a página se a exclusão for bem-sucedida
+                        })
+                        .catch(error => console.error('Erro na requisição:', error));
+                }
+            });
+        });
     </script>
 </body>
 

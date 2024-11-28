@@ -152,7 +152,7 @@ if ($stmt) {
                             <td>
                                 <a href="agendamentoPlantacao.php?id=<?= $linha['id_agendamento'] ?>"
                                     class="btn btn-warning btn-sm">Editar</a>
-                                <button type="button" class="btn btn-danger btn-sm"
+                                <button type="button" class="btn btn-danger btn-sm btn-excluir"
                                     data-id="<?= $linha['id_agendamento'] ?>">Excluir</button>
                             </td>
                         </tr>
@@ -161,6 +161,28 @@ if ($stmt) {
             </table>
         </div>
     </div>
+    <script>
+        document.querySelectorAll('.btn-danger').forEach(button => {
+            button.addEventListener('click', () => {
+                const id = button.getAttribute('data-id'); // Obtém o ID do botão
+                if (confirm('Tem certeza de que deseja excluir este registro?')) {
+                    fetch('/pi_gandara/pcp/bd_pcp_agendamento_plantacao.php', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/x-www-form-urlencoded'
+                            },
+                            body: `acao=DELETAR&id_agendamento=${id}` // Certifique-se de que o nome corresponde ao esperado no PHP
+                        })
+                        .then(response => response.json()) // Converte a resposta para JSON
+                        .then(data => {
+                            alert(data.message); // Exibe a mensagem do backend
+                            if (data.status === 'sucesso') location.reload(); // Recarrega a página se a exclusão for bem-sucedida
+                        })
+                        .catch(error => console.error('Erro na requisição:', error));
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

@@ -1,6 +1,13 @@
 <?php
 require "../utils/conexao.php";
 
+// Função para retornar uma resposta em JSON
+function retornarResposta($status, $mensagem)
+{
+    echo json_encode(["status" => $status, "message" => $mensagem]);
+    exit;
+}
+
 // IF normal
 if (isset($_POST['nome_plantio']) && !empty($_POST['nome_plantio'])) {
     $nomePlantio = $_POST['nome_plantio'];
@@ -59,11 +66,11 @@ if ($acao == "INCLUIR") {
     } catch (Exception $e) {
         echo "Erro ao cadastrar!";
         // Vamos utilizar JS para poder recuperar os dados digitados
-        ?>
+?>
         <script>
             history.back();
         </script>
-        <?php
+    <?php
     }
 
     // Fecha o Prepared Statament
@@ -75,8 +82,7 @@ if ($acao == "INCLUIR") {
     echo "<pre>";
     print_r($_POST);
     echo "</pre>";
-
-} else if ($acao == "ALTERAR" && $idAgendamento) {{
+} else if ($acao == "ALTERAR" && $idAgendamento) { {
         $sql = "UPDATE agendamento_plantacao SET 
        nome_plantio = ?, 
        area_plantio = ?, 
@@ -109,43 +115,36 @@ if ($acao == "INCLUIR") {
         }
     } catch (Exception $e) {
         echo "Erro ao atualizar: " . $e->getMessage();
-        ?>
-        <script>history.back();</script>
-        <?php
+    ?>
+        <script>
+            history.back();
+        </script>
+<?php
     }
-    
-} else if ($acao == "DELETAR") {
+} else if ($acao == "DELETAR" && $idAgendamento) {
+
+    $idAgendamento = filter_var($idAgendamento, FILTER_VALIDATE_INT);
+    if (!$idAgendamento) {
+        retornarResposta("erro", "ID inválido para exclusão.");
+    }
     // Neste bloco será excluido um registro que já existe no BD.
 
     $sql = "DELETE FROM agendamento_plantacao WHERE id_agendamento = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $idAgendamento);
 
-    if ($stmt->execute()) {
-         echo json_encode(
-              array(
-                   "status" => "sucesso",
-                   "message" => "Registro excluído com sucesso!"
-              )
-         );
+    if ($stmt) {
+        $stmt->bind_param("i", $idAgendamento);
+
+        if ($stmt->execute()) {
+            retornarResposta("sucesso", "Agendamneto excluída com sucesso!");
+        } else {
+            retornarResposta("erro", "Erro ao excluir agendamento: " . $stmt->error);
+        }
     } else {
-         echo json_encode(
-              array(
-                   "status" => "erro",
-                   "message" => "Erro ao excluir o registro: " . $stmt->error
-              )
-         );
+        retornarResposta("erro", "Erro na preparação da consulta: " . $conn->error);
     }
-    // Fecha o Prepared Statament
-    $stmt->close();
-    // Fecha a conexão
-    $conn->close();
-
 } else {
-    // Se nenhuma das operações for solicitada, volta para o inicio do site.
-    // A função header modifica o cabeçalho do navegador
-    // Ao passar a propriedade location, definimos para qual URL o navegador deve ir.
-    header("Location: /pi_gandara/pcp/agendamentoPlantacao.php");
-    exit;
+    retornarResposta("erro", "Ação inválida ou ID não fornecido.");
 }
+
 ?>
