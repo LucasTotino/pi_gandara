@@ -30,7 +30,8 @@ if ($id) {
 
 $sql = "SELECT c.id, p.cod_produto, p.produto, c.qtd, c.data_entrega, c.valor, s.observacao FROM cotacao c
                 INNER JOIN sol_compra s ON c.id_sol_compra = s.id
-                INNER JOIN cad_produtos p ON s.id_produto = p.id ";
+                INNER JOIN cad_produtos p ON s.id_produto = p.id 
+        WHERE c.estado IS NULL";
 $stmt = $conn->prepare($sql);
 $stmt->execute();
 $dados = $stmt->get_result();
@@ -66,7 +67,6 @@ $result_fornecedores = $stmt_fornecedores->get_result();
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.css" crossorigin="anonymous">
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="/pi_gandara/css/styleFinanceiro.css">
-    <link rel="stylesheet" href="/pi_gandara/css/style.css">
 
     <title>Aprovação de Cotação</title>
 </head>
@@ -112,9 +112,8 @@ $result_fornecedores = $stmt_fornecedores->get_result();
                         <td><?= $linha['valor'] ?></td>
                         <td><?= $linha['observacao'] ?></td>
                         <td>
-                            <!-- Chamo a página do formulario e envio o Id do Produto que será alterado-->
-                            <a href="cadProduto.php?id=<?= $linha['id'] ?>" class="btn btn-success">APROVAR</a>
-                            <button class="btn btn-danger btn-recusar" data-table="produto" data-id="<?= $linha['id'] ?>">RECUSAR</button>
+                            <button class="btn btn-success btn-aceitar" data-table="cotacao" data-id="<?= $linha['id'] ?>" >APROVAR</button>
+                            <button class="btn btn-danger btn-recusar" data-table="cotacao" data-id="<?= $linha['id'] ?>">RECUSAR</button>
                         </td>
                     </tr>
                 <?php
@@ -122,65 +121,74 @@ $result_fornecedores = $stmt_fornecedores->get_result();
                 ?>
             </tbody>
         </table>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function() {
+                // Handle the click event for the "APROVAR" button
+                $('.btn-aceitar').click(function() {
+                    var quoteId = $(this).data('id'); // Get the quote ID from the data attribute
 
-        <div class="mt-4">
-            <h5>Adicionar Comentário</h5>
-            <textarea class="form-control" rows="3" placeholder="Digite seu comentário aqui..."></textarea>
-            <button class="btn btn-primary mt-2">Enviar Comentário</button>
-        </div>
-
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-        <script>
-            $(document).ready(function() {
-                $('.btn-recusar').click(function() {
-                    var userId = $(this).data('id');
-                    var tabela = $(this).data('table');
-
-                    // Exibe a caixa de comentário
-                    $('#motivoRecusa').show();
-                    $('#btnEnviarMotivo').show();
-
-                    $('#btnEnviarMotivo').off('click').on('click', function() {
-                        var motivo = $('#motivoRecusa').val();
-
-                        if (motivo.trim() === "") {
-                            alert("Por favor, insira um motivo para a recusa.");
-                            return;
-                        }
-
-                        var confirma = confirm(`Você tem certeza que deseja recusar a cotação [ ${userId} ] com o motivo: "${motivo}"?`);
-
-                        if (confirma) {
-                            $.ajax({
-                                url: `/pi_gandara/compras/bd/bd_${tabela}.php`,
-                                type: 'POST',
-                                data: {
-                                    acao: "RECUSAR",
-                                    id_usuario: userId,
-                                    motivo: motivo
-                                },
-                                success: function(response) {
-                                    var result = JSON.parse(response);
-                                    if (result.status === "sucesso") {
-                                        alert(result.message);
-                                        location.reload();
-                                    } else {
-                                        alert(result.message);
-                                    }
-                                },
-                                error: function(xhr, status, error) {
-                                    console.error(xhr);
-                                    alert("Ocorreu um erro: " + error);
+                    // Confirm the action
+                    var confirma = confirm(`Você tem certeza que deseja aceitar a cotação [ ${quoteId} ]?`);
+                    if (confirma) {
+                        $.ajax({
+                            url: `/pi_gandara/compras/bd/bd_cotacao.php`,
+                            type: 'POST',
+                            data: {
+                                acao: "ALTERAR",
+                                id: quoteId,
+                                status: 2
+                            },
+                            success: function(response) {
+                                var result = JSON.parse(response);
+                                if (result.status === "sucesso") {
+                                    alert(result.message);
+                                    location.reload(); // Reload the page to reflect changes
+                                } else {
+                                    alert(result.message);
                                 }
-                            });
-                        }
-                    });
+                            },
+                            error: function(xhr, status, error) {
+                                console.error(xhr);
+                                alert("Ocorreu um erro: " + error);
+                            }
+                        });
+                    }
+                });
+
+                $('.btn-recusar').click(function() {
+                    var quoteId = $(this).data('id');
+
+                    var confirma = confirm(`Você tem certeza que deseja recusar a cotação [ ${quoteId} ]?`);
+                    if (confirma) {
+                        $.ajax({
+                            url: `/pi_gandara/compras/bd/bd_cotacao.php`,
+                            type: 'POST',
+                            data: {
+                                acao: "ALTERAR",
+                                id: quoteId,
+                                status: 1
+                            },
+                            success: function(response) {
+                                var result = JSON.parse(response);
+                                if (result.status === "sucesso") {
+                                    alert(result.message);
+                                    location.reload(); // Reload the page to reflect changes
+                                } else {
+                                    alert(result.message);
+                                }
+                            },
+                            error: function(xhr, status, error) {
+                                console.error(xhr);
+                                alert("Ocorreu um erro: " + error);
+                            }
+                        });
+                    }
                 });
             });
         </script>
-
 
     </main>
 
