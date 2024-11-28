@@ -119,7 +119,7 @@ $corNivel = array(
                             <div class="col-sm-3">
                                 <label for="celular">Celular</label>
                                 <input type="celular" class="form-control" id="celular" name="celular" maxlength="15"
-                                    value="<?= ($id) ? $fornecedor['celular'] : null ?>">
+                                    value="<?= ($id) ? $fornecedor['celular'] : null ?>" onkeypress="mascara('(##) #####-####', this)">
                             </div>
                         </div>
 
@@ -193,7 +193,7 @@ $corNivel = array(
                             <div class="form-group col-sm-2">
                                 <label for="cep">CEP:</label>
                                 <input type="text" class="form-control" id="cep" name="cep"
-                                    value="<?= ($id) ? $fornecedor['cep'] : null ?>">
+                                    value="<?= ($id) ? $fornecedor['cep'] : null ?>" onkeypress="mascara('#####-###', this)">
                             </div>
                         </div>
 

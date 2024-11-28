@@ -18,32 +18,10 @@
     ?>
   </header>
   <main>
-  <h1 class="text-center">COMPRAS</h1>
+    <h1 class="text-center">COMPRAS</h1>
     <div class="container">
 
       <div class="row p-3 justify-content-center d-flex align-items-center">
-
-        <a href="cadCliente.php" class="btn">
-          <div class="col-2 p-2 m-1">
-            <div style="width: 10rem;">
-              <span class="fa fa-solid fa-user-plus fa-5x" aria-hidden="true"></span>
-              <div class="card-body">
-                <h3>Cadastro de Clientes</h3>
-              </div>
-            </div>
-          </div>
-        </a>
-
-        <a href="cadUsuario.php" class="btn">
-          <div class="col-2 p-2 m-1">
-            <div style="width: 10rem;">
-              <span class="fa fa-solid fa-user-plus fa-5x" aria-hidden="true"></span>
-              <div class="card-body">
-                <h3>Cadastro de Usuários</h3>
-              </div>
-            </div>
-          </div>
-        </a>
 
         <a href="cadFornecedor.php" class="btn">
           <div class="col-2 p-2 m-1">
@@ -51,44 +29,6 @@
               <span class="fa fa-solid fa-clipboard-list fa-5x" aria-hidden="true"></span>
               <div class="card-body">
                 <h3>Cadastro de Fornecedores</h3>
-              </div>
-            </div>
-          </div>
-        </a>
-
-        <a href="cadProduto.php" class="btn">
-          <div class="col-2 p-2 m-1">
-            <div style="width: 10rem;">
-              <span class="fa fa-box-open fa-5x" aria-hidden="true"></span>
-              <div class="card-body">
-                <h3>Cadastro de Produtos</h3>
-              </div>
-            </div>
-          </div>
-        </a>
-
-        <a href="cadTipoES.php" class="btn">
-          <div class="col-2 p-2 m-1">
-            <div style="width: 10rem;">
-              <span class="fa fa-solid fa-wallet fa-5x" aria-hidden="true"></span>
-              <div class="card-body">
-                <h3>Cadastro Entradas e Saidas</h3>
-              </div>
-            </div>
-          </div>
-        </a>
-
-
-
-      </div> <!--Fim da row -->
-
-      <div class="row p-3 justify-content-center d-flex align-items-center">
-        <a href="pedidoCompra.php" class="btn">
-          <div class="col-2 p-2 m-1">
-            <div style="width: 10rem;">
-              <span class="fa fa-cart-plus fa-5x" aria-hidden="true"></span>
-              <div class="card-body">
-                <h3>Pedido de Compra</h3>
               </div>
             </div>
           </div>
@@ -105,16 +45,11 @@
           </div>
         </a>
 
-        <a href="cadNatFinanceira.php" class="btn">
-          <div class="col-2 p-2 m-1">
-            <div style="width: 10rem;">
-              <span class="fa fa-solid fa-dollar-sign fa-5x" aria-hidden="true"></span>
-              <div class="card-body">
-                <h3>Cadastro de Natureza Financeira</h3>
-              </div>
-            </div>
-          </div>
-        </a>
+      </div> <!--Fim da row -->
+
+
+
+      <div class="row p-3 justify-content-center d-flex align-items-center">
 
         <a href="cotacao.php" class="btn">
           <div class="col-2 p-2 m-1">
@@ -127,12 +62,12 @@
           </div>
         </a>
 
-        <a href="notaFiscalEn.php" class="btn">
+        <a href="pedidoCompra.php" class="btn">
           <div class="col-2 p-2 m-1">
             <div style="width: 10rem;">
-              <span class="fa fa-solid fa-receipt fa-5x" aria-hidden="true"></span>
+              <span class="fa fa-cart-plus fa-5x" aria-hidden="true"></span>
               <div class="card-body">
-                <h3>Nota Fiscal Entrada</h3>
+                <h3>Pedido de Compra</h3>
               </div>
             </div>
           </div>
