@@ -132,7 +132,7 @@ if ($stmt) {
             <button type="reset" class="btn btn-warning">Cancelar</button>
           </div>
           <div class="col-sm-3">
-            <a href="index.php" class="btn btn-danger">Voltar</a>
+            <a href="index.php" class="btn btn-secondary">Voltar</a>
           </div>
         </div>
       </div>
