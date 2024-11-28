@@ -1,6 +1,13 @@
 <?php
 require "../utils/conexao.php";
 
+// Função para retornar uma resposta em JSON
+function retornarResposta($status, $mensagem)
+{
+    echo json_encode(["status" => $status, "message" => $mensagem]);
+    exit;
+}
+
 // IF normal
 if (isset($_POST['nome_insumo']) && !empty($_POST['nome_insumo'])) {
     $nome_insumo = $_POST['nome_insumo'];
@@ -17,7 +24,7 @@ $qtde_utilizada = isset($_POST['qtde_utilizada']) && !empty($_POST['qtde_utiliza
 $unidade = isset($_POST['unidade']) && !empty($_POST['unidade']) ? $_POST['unidade'] : null;
 $prazo_util = isset($_POST['prazo_util']) && !empty($_POST['prazo_util']) ? $_POST['prazo_util'] : null;
 
-$id_solicitacao_cad = $_POST['id_solicitacao_cad'] ?? null;
+$idCadastro_insumo = $_POST['id_solicitacao_cad'] ?? null;
 $acao = isset($_POST['acao']) && !empty($_POST['acao']) ? $_POST['acao'] : null;
 
 if ($acao == "INCLUIR") {
@@ -42,6 +49,7 @@ if ($acao == "INCLUIR") {
         $prazo_util
     );
 
+
     // A função execute envia o script SQL todo arrumado para o BD, com as variaveis
     // nos lugares das ?.
     try {
@@ -57,11 +65,11 @@ if ($acao == "INCLUIR") {
     } catch (Exception $e) {
         echo "Erro ao cadastrar!";
         // Vamos utilizar JS para poder recuperar os dados digitados
-        ?>
+?>
         <script>
             history.back();
         </script>
-        <?php
+    <?php
     }
 
     // Fecha o Prepared Statament
@@ -73,8 +81,7 @@ if ($acao == "INCLUIR") {
     echo "<pre>";
     print_r($_POST);
     echo "</pre>";
-
-} else if ($acao == "ALTERAR" && $id_solicitacao_cad) {{
+} else if ($acao == "ALTERAR" && $idCadastro_insumo) { {
         $sql = "UPDATE cadastro_insumo SET 
        nome_insumo = ?, 
        cod_ref = ?, 
@@ -92,7 +99,7 @@ if ($acao == "INCLUIR") {
             $qtde_utilizada,
             $unidade,
             $prazo_util,
-            $id_solicitacao_cad
+            $idCadastro_insumo
         );
     }
 
@@ -105,43 +112,38 @@ if ($acao == "INCLUIR") {
         }
     } catch (Exception $e) {
         echo "Erro ao atualizar: " . $e->getMessage();
-        ?>
-        <script>history.back();</script>
-        <?php
+    ?>
+        <script>
+            history.back();
+        </script>
+<?php
+    }
+} else if ($acao == "DELETAR" && $idCadastro_insumo) {
+
+
+    // Valida o ID
+    $idCadastro_insumo = filter_var($idCadastro_insumo, FILTER_VALIDATE_INT);
+    if (!$idCadastro_insumo) {
+        retornarResposta("erro", "ID inválido para exclusão.");
     }
 
-} else if ($acao == "DELETAR") {
     // Neste bloco será excluido um registro que já existe no BD.
 
     $sql = "DELETE FROM cadastro_insumo WHERE id_solicitacao_cad = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $id);
 
-    if ($stmt->execute()) {
-         echo json_encode(
-              array(
-                   "status" => "sucesso",
-                   "message" => "Registro excluído com sucesso!"
-              )
-         );
+    if ($stmt) {
+        $stmt->bind_param("i", $idCadastro_insumo);
+
+        if ($stmt->execute()) {
+            retornarResposta("sucesso", "Solicitação de cadastro excluída com sucesso!");
+        } else {
+            retornarResposta("erro", "Erro ao excluir solicitação de cadastro: " . $stmt->error);
+        }
     } else {
-         echo json_encode(
-              array(
-                   "status" => "erro",
-                   "message" => "Erro ao excluir o registro: " . $stmt->error
-              )
-         );
+        retornarResposta("erro", "Erro na preparação da consulta: " . $conn->error);
     }
-    // Fecha o Prepared Statament
-    $stmt->close();
-    // Fecha a conexão
-    $conn->close();
-
 } else {
-    // Se nenhuma das operações for solicitada, volta para o inicio do site.
-    // A função header modifica o cabeçalho do navegador
-    // Ao passar a propriedade location, definimos para qual URL o navegador deve ir.
-    header("Location: /pi_gandara/");
-    exit;
+    retornarResposta("erro", "Ação inválida ou ID não fornecido.");
 }
 ?>

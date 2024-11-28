@@ -1,6 +1,8 @@
 <?php
 require '../utils/conexao.php'; // Inclui o arquivo de conexão com o banco de dados
 
+
+
 // Verifica se veio um ID na URL e valida se é um inteiro
 $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 $cor = ($id) ? "btn-warning" : "btn-success";
@@ -165,9 +167,9 @@ if ($stmt) {
                                 <td><?= $linha['unidade'] ?></td>
                                 <td><?= $linha['prazo_util'] ?></td>
                                 <td><a href="cadastroInsumo.php?id=<?= $linha['id_solicitacao_cad'] ?>"
-                                    class="btn btn-warning btn-sm">Editar</a>
-                                <button type="button" class="btn btn-danger btn-sm"
-                                    data-id="<?= $linha['id_solicitacao_cad'] ?>">Excluir</button>
+                                        class="btn btn-warning btn-sm">Editar</a>
+                                    <button type="button" class="btn btn-danger btn-sm btn-excluir"
+                                        data-id="<?= $linha['id_solicitacao_cad'] ?>">Excluir</button>
                                 </td>
                             </tr>
                         <?php endwhile; ?>
@@ -178,6 +180,30 @@ if ($stmt) {
 
         <script src="https://kit.fontawesome.com/74ecb76a40.js" crossorigin="anonymous"></script>
 
+        <script>
+            document.querySelectorAll('.btn-danger').forEach(button => {
+                button.addEventListener('click', () => {
+                    const id = button.getAttribute('data-id'); // Obtém o ID do botão
+                    if (confirm('Tem certeza de que deseja excluir este registro?')) {
+                        fetch('/pi_gandara/pcp/bd_pcp_solicitacao_cad.php', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/x-www-form-urlencoded'
+                                },
+                                body: `acao=DELETAR&id_solicitacao_cad=${id}` // Certifique-se de que o nome corresponde ao esperado no PHP
+                            })
+                            .then(response => response.json()) // Converte a resposta para JSON
+                            .then(data => {
+                                alert(data.message); // Exibe a mensagem do backend
+                                if (data.status === 'sucesso') location.reload(); // Recarrega a página se a exclusão for bem-sucedida
+                            })
+                            .catch(error => console.error('Erro na requisição:', error));
+                    }
+                });
+            });
+        </script>
+
 </body>
+
 
 </html>

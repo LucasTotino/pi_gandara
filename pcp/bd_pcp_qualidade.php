@@ -1,6 +1,13 @@
 <?php
 require "../utils/conexao.php";
 
+// Função para retornar uma resposta em JSON
+function retornarResposta($status, $mensagem) {
+    echo json_encode(["status" => $status, "message" => $mensagem]);
+    exit;
+
+}
+
 // IF normal
 if (isset($_POST['nome_plantio']) && !empty($_POST['nome_plantio'])) {
     $nomePlantio = $_POST['nome_plantio'];
@@ -39,6 +46,7 @@ if ($acao == "INCLUIR") {
         $conformidadeVenda
 
     );
+
 
     // A função execute envia o script SQL todo arrumado para o BD, com as variaveis
     // nos lugares das ?.
@@ -111,38 +119,30 @@ if ($acao == "INCLUIR") {
     // Fecha a conexão
     $conn->close();
 
-} else if ($acao == "DELETAR") {
+} else if ($acao == "DELETAR" && $idQualidade) {
     // Neste bloco será excluido um registro que já existe no BD.
+    $$idQualidade = filter_var($idQualidade, FILTER_VALIDATE_INT);
+    if (!$idQualidade) {
+        retornarResposta("erro", "ID inválido para exclusão.");
+    }
+
 
     $sql = "DELETE FROM qualidade WHERE id_qualidade = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $idQualidade);
 
-    if ($stmt->execute()) {
-         echo json_encode(
-              array(
-                   "status" => "sucesso",
-                   "message" => "Registro excluído com sucesso!"
-              )
-         );
-    } else {
-         echo json_encode(
-              array(
-                   "status" => "erro",
-                   "message" => "Erro ao excluir o registro: " . $stmt->error
-              )
-         );
-    }
-    // Fecha o Prepared Statament
-    $stmt->close();
-    // Fecha a conexão
-    $conn->close();
+    if ($stmt) {
+        $stmt->bind_param("i", $idQualidade);
 
+        if ($stmt->execute()) {
+            retornarResposta("sucesso", "Registro excluído com sucesso!");
+        } else {
+            retornarResposta("erro", "Erro ao excluir registro: " . $stmt->error);
+        }
+    } else {
+        retornarResposta("erro", "Erro na preparação da consulta: " . $conn->error);
+    }
 } else {
-    // Se nenhuma das operações for solicitada, volta para o inicio do site.
-    // A função header modifica o cabeçalho do navegador
-    // Ao passar a propriedade location, definimos para qual URL o navegador deve ir.
-    header("Location: /pi_gandara/pcp/qualidade.php");
-    exit;
+    retornarResposta("erro", "Ação inválida ou ID não fornecido.");
 }
 ?>

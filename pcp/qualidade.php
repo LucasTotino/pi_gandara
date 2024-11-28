@@ -58,7 +58,7 @@ if ($stmt) {
 <body>
   <div class="container mt-5">
     <form action="../pcp/bd_pcp_qualidade.php" method="POST">
-<input type="hidden" id="id_qualidade" name="id_qualidade" value="<?= $id ?? null ?>">
+      <input type="hidden" id="id_qualidade" name="id_qualidade" value="<?= $id ?? null ?>">
       <input type="hidden" name="acao" id="acao" value="<?= $id ? "ALTERAR" : "INCLUIR" ?>">
 
       <div class="row">
@@ -75,7 +75,7 @@ if ($stmt) {
         </div>
       </div>
 
-      
+
 
       <div class="form-group">
 
@@ -92,7 +92,7 @@ if ($stmt) {
               while ($row = $result->fetch_assoc()) {
                 $selected = ($id && $row['nome_plantio'] == $user['nome_plantio']) ? 'selected' : '';
                 echo "<option value='{$row['nome_plantio']}' $selected>{$row['nome_plantio']}</option>";
-            }
+              }
 
               ?>
             </select>
@@ -162,7 +162,7 @@ if ($stmt) {
                 <td><?= $linha['conformidade_venda'] ?></td>
                 <td>
                   <a href="qualidade.php?id=<?= $linha['id_qualidade'] ?>" class="btn btn-warning btn-sm">Editar</a>
-                  <button type="button" class="btn btn-danger btn-sm"
+                  <button type="button" class="btn btn-danger btn-sm btn-exluir"
                     data-id="<?= $linha['id_qualidade'] ?>">Excluir</button>
                 </td>
               </tr>
@@ -172,6 +172,29 @@ if ($stmt) {
       </div>
     </div>
   </div>
+
+  <script>
+    document.querySelectorAll('.btn-danger').forEach(button => {
+      button.addEventListener('click', () => {
+        const id = button.getAttribute('data-id'); // Obtém o ID do botão
+        if (confirm('Tem certeza de que deseja excluir este registro?')) {
+          fetch('/pi_gandara/pcp/bd_pcp_qualidade.php', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+              },
+              body: `acao=DELETAR&id_qualidade=${id}` // Certifique-se de que o nome corresponde ao esperado no PHP
+            })
+            .then(response => response.json()) // Converte a resposta para JSON
+            .then(data => {
+              alert(data.message); // Exibe a mensagem do backend
+              if (data.status === 'sucesso') location.reload(); // Recarrega a página se a exclusão for bem-sucedida
+            })
+            .catch(error => console.error('Erro na requisição:', error));
+        }
+      });
+    });
+  </script>
 </body>
 
 </html>
