@@ -142,13 +142,8 @@ $result_fornecedores = $stmt_fornecedores->get_result();
                                 status: 2
                             },
                             success: function(response) {
-                                var result = JSON.parse(response);
-                                if (result.status === "sucesso") {
-                                    alert(result.message);
                                     location.reload(); // Reload the page to reflect changes
-                                } else {
-                                    alert(result.message);
-                                }
+
                             },
                             error: function(xhr, status, error) {
                                 console.error(xhr);
@@ -172,13 +167,7 @@ $result_fornecedores = $stmt_fornecedores->get_result();
                                 status: 1
                             },
                             success: function(response) {
-                                var result = JSON.parse(response);
-                                if (result.status === "sucesso") {
-                                    alert(result.message);
                                     location.reload(); // Reload the page to reflect changes
-                                } else {
-                                    alert(result.message);
-                                }
                             },
                             error: function(xhr, status, error) {
                                 console.error(xhr);
