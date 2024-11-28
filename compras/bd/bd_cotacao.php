@@ -132,7 +132,35 @@ if ($acao == "INCLUIR") {
         $stmt->close();
         $conn->close();
     }
-} else {
+} else if ($acao=="ATUALIZAR"){
+    $sql = "UPDATE cotacao SET
+    estado = ?
+    WHERE id = ?;";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param(
+    "ii",
+    $estado,
+    $idCotacao
+);
+try {
+    if ($stmt->execute()) {
+        header('Location: /pi_gandara/compras/cotacao.php');
+    } else {
+        echo $stmt->error;
+    }
+} catch (Exception $e) {
+    echo "Erro ao Atualizar!";
+?>
+    <script>
+        history.back();
+    </script>
+<?php
+}
+$stmt->close();
+$conn->close();
+}
+
+else {
     // Se nenhuma das operações for solicitada,volta para o inicio do site.
     // A função header modifica o cabeçalho do navegador 
     // Ao passar a propriedade location, definimos para qual URL o navegador deve ir.
