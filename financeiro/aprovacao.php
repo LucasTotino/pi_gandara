@@ -67,6 +67,7 @@ $result_fornecedores = $stmt_fornecedores->get_result();
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.css" crossorigin="anonymous">
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="/pi_gandara/css/styleFinanceiro.css">
+    <link rel="stylesheet" href="/pi_gandara/css/style.css">
 
     <title>Aprovação de Cotação</title>
 </head>
@@ -78,7 +79,7 @@ $result_fornecedores = $stmt_fornecedores->get_result();
         ?>
     </header>
 
-    <main class="container">
+    <main class="container card">
         <div class="row p-3 justify-content-center d-flex align-items-center">
             <a type="button" style="text-align: left;" class="col-1 btn btn-primary justify-content-center d-flex" href="/pi_gandara/financeiro/">Voltar</a>
             <h1 style="text-align: center;" class="col-11 display-4">Aprovação de Cotação</h1>
