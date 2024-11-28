@@ -124,16 +124,18 @@ if ($stmt) {
           </div>
         </div>
 
-        <div class="form-row justify-content-center mt-3">
-          <div class="col-sm-3">
-            <button type="submit" class="btn btn-success">Cadastrar</button>
+        <!-- Botões -->
+        <div class="form-row d-flex justify-content-center">
+          <div class="col-sm-3 mt-3 ">
+            <button type="submit" name="submit" class="btn btn-success">Cadastrar</button>
           </div>
-          <div class="col-sm-3">
-            <button type="reset" class="btn btn-warning">Cancelar</button>
+          <div class="col-sm-3 mt-3">
           </div>
-          <div class="col-sm-3">
-            <a href="index.php" class="btn btn-secondary">Voltar</a>
+
+          <div class="col-sm-3 mt-3">
+            <button type="reset" class="btn btn-warning">Limpar</button>
           </div>
+
         </div>
       </div>
     </form>

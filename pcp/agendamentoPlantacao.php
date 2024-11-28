@@ -58,6 +58,16 @@ if ($stmt) {
 <body>
     <div class="container mt-5">
         <div class="row">
+
+            <a href="../pcp/index.php" class="btn">
+                <div class="col-2 d-flex justify-content-left">
+                    <div style="width: 18rem;">
+                        <span class="fa fa-chevron-left fa-2x p-3" aria-hidden=" true"></span>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="row">
             <div class="col m-5 d-flex justify-content-center">
                 <h1>Agendamento de um novo Plantio</h1>
             </div>
@@ -109,16 +119,18 @@ if ($stmt) {
                 </div>
             </div>
 
-            <div class="form-row justify-content-center">
-                <div class="col-sm-3 mt-3">
+           <!-- Botões -->
+           <div class="form-row d-flex justify-content-center">
+                <div class="col-sm-3 mt-3 ">
                     <button type="submit" name="submit" class="btn btn-success">Cadastrar</button>
                 </div>
                 <div class="col-sm-3 mt-3">
-                    <button type="reset" class="btn btn-warning">Cancelar</button>
                 </div>
+               
                 <div class="col-sm-3 mt-3">
-                    <a href="index.php"><button type="button" class="btn btn-secondary">Voltar</button></a>
+                    <button type="reset" class="btn btn-warning">Limpar</button>
                 </div>
+            
             </div>
         </form>
     </div>
