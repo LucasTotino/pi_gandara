@@ -1,6 +1,12 @@
 <?php
 require "../utils/conexao.php";
 
+// Função para retornar uma resposta em JSON
+function retornarResposta($status, $mensagem) {
+    echo json_encode(["status" => $status, "message" => $mensagem]);
+    exit;
+
+}
 // Recupera os campos enviados pelo formulário
 $nomePlantio = $_POST['id_nome_plantio'] ?? null;
 $dataMedicao = $_POST['dataMedicao'] ?? null;
@@ -56,32 +62,31 @@ if ($acao === "INCLUIR") {
         <?php
     }
 
-} elseif ($acao === "DELETAR" && $idMedicao) {
-    // Exclui um registro existente
-    $sql = "DELETE FROM medicao_producao WHERE id_medicao = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $idMedicao);
-
-    try {
-        if ($stmt->execute()) {
-            echo json_encode(["status" => "sucesso", "message" => "Registro excluído com sucesso!"]);
-        } else {
-            echo json_encode(["status" => "erro", "message" => "Erro ao excluir: " . $stmt->error]);
-        }
-    } catch (Exception $e) {
-        echo json_encode(["status" => "erro", "message" => "Erro ao excluir: " . $e->getMessage()]);
+}elseif ($acao === "DELETAR" && $idMedicao) {
+    // Valida o ID
+    $idMedicao = filter_var($idMedicao, FILTER_VALIDATE_INT);
+    if (!$idMedicao) {
+        retornarResposta("erro", "ID inválido para exclusão.");
     }
 
+    // Executa a exclusão no banco de dados
+    $sql = "DELETE FROM medicao_producao WHERE id_medicao = ?";
+    $stmt = $conn->prepare($sql);
+
+    if ($stmt) {
+        $stmt->bind_param("i", $idMedicao);
+
+        if ($stmt->execute()) {
+            retornarResposta("sucesso", "Medição excluída com sucesso!");
+        } else {
+            retornarResposta("erro", "Erro ao excluir medição: " . $stmt->error);
+        }
+    } else {
+        retornarResposta("erro", "Erro na preparação da consulta: " . $conn->error);
+    }
 } else {
-    // Redireciona se nenhuma ação válida for fornecida
-    header("Location: /pi_gandara/pcp/medicaoProducao.php");
-    exit;
+    retornarResposta("erro", "Ação inválida ou ID não fornecido.");
 }
 
-// Fecha o statement e a conexão
-if (isset($stmt)) {
-    $stmt->close();
-}
-$conn->close();
 ?>
  
