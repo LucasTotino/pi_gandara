@@ -74,7 +74,7 @@ if ($stmt) {
         </div>
         <div class="row">
             <div class="col m-5 d-flex justify-content-center">
-                <h1>Agendamento de um novo Plantio</h1>
+                <h1>Medição da Produção</h1>
             </div>
         </div>
         <div class="form-group">
