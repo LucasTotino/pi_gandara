@@ -43,7 +43,11 @@
       <div class="card-body">
         <h5 class="card-title">Contas a Pagar</h5>
         <div class="table-responsive">
+<<<<<<< HEAD
           <table style="text-align:center;" class="table table-striped table-hover">
+=======
+          <table class="table table-striped table-hover">
+>>>>>>> 78db1f9ed088c79be38694425d220a1f99691f16
             <thead>
               <tr>
                 <th>Número da Fatura</th>
@@ -128,7 +132,12 @@
                             <td>R$ ${conta.valor.toFixed(2)}</td>
                             <td>${conta.status}</td>
                             <td>
+<<<<<<< HEAD
                             <button class="btn btn-sm btn-success">Extrair relatório</button>
+=======
+                                <button class="btn btn-sm btn-info">Editar</button>
+                                <button class="btn btn-sm btn-danger">Excluir</button>
+>>>>>>> 78db1f9ed088c79be38694425d220a1f99691f16
                             </td>
                         </tr>
                     `;
