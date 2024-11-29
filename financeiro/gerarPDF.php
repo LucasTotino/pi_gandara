@@ -1,6 +1,6 @@
 <?php
 require_once('../utils/conexao.php');
-require_once('tcpdf/tcpdf.php'); // Ajuste o caminho conforme necessário
+require_once('c:/xampp/htdocs/pi_gandara/vendor/tecnickcom/tcpdf/tcpdf.php');
 
 // Criar novo PDF
 $pdf = new TCPDF();
@@ -19,7 +19,7 @@ $pdf->AddPage();
 $pdf->SetFont('helvetica', '', 12);
 
 // Consultar os dados das vendas
-$sql = "SELECT * FROM cad_vendas;";
+$sql = "SELECT * FROM cad_venda;";
 $stmt = $conn->prepare($sql);
 $stmt->execute();
 $dados = $stmt->get_result();
@@ -41,7 +41,7 @@ $html .= '<thead>
 while ($linha = $dados->fetch_assoc()) {
     $valorVenda = number_format($linha['quantidade'] * $linha['valor'], 2, ',', '.');
     $html .= '<tr>
-                <td>' . $linha['id_venda'] . '</td>
+                <td>' . $linha['id'] . '</td>
                 <td>' . $linha['nome'] . '</td>
                 <td>' . $linha['dia_venda'] . '</td>
                 <td>' . $linha['produto'] . '</td>
