@@ -68,6 +68,7 @@ $result_cliente = $stmt_cliente->get_result();
 
     <h1 class="mb-4 text-center">Contas a Receber</h1>
 
+<<<<<<< HEAD
     <br>
 
     <div class="d-flex justify-content-center">
@@ -79,10 +80,31 @@ $result_cliente = $stmt_cliente->get_result();
 
     <br><br>
 
+=======
+    <div class="row mb-4">
+      <div class="col-md-4">
+        <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#novoRecebimentoModal">
+          <i class="fas fa-plus-circle mr-2"></i>Novo Recebimento
+        </button>
+      </div>
+      <div class="col-md-4">
+        <button class="btn btn-info btn-block" data-toggle="modal" data-target="#verFaturasModal">
+          <i class="fas fa-file-invoice mr-2"></i>Ver Faturas
+        </button>
+      </div>
+      <div class="col-md-4">
+        <button class="btn btn-secondary btn-block" data-toggle="modal" data-target="#historicoModal">
+          <i class="fas fa-history mr-2"></i>Histórico de Recebimento
+        </button>
+      </div>
+    </div>
+
+>>>>>>> 78db1f9ed088c79be38694425d220a1f99691f16
     <div class="card">
       <div class="card-body">
         <h5 class="card-title">Contas a Receber</h5>
         <div class="table-responsive">
+<<<<<<< HEAD
           <table style="text-align:center;" class="table table-striped table-hover">
             <thead>
               <tr>
@@ -113,10 +135,27 @@ $result_cliente = $stmt_cliente->get_result();
             }
             ?>
           </tbody>
+=======
+          <table class="table table-striped table-hover">
+            <thead>
+              <tr>
+                <th>Número da Fatura</th>
+                <th>Data da Fatura</th>
+                <th>Data Recebimento</th>
+                <th>Valor</th>
+                <th>Status</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="contasReceberList">
+              <!-- Dados serão carregados via JavaScript -->
+            </tbody>
+>>>>>>> 78db1f9ed088c79be38694425d220a1f99691f16
           </table>
         </div>
       </div>
     </div>
+<<<<<<< HEAD
 
     
   </main>
@@ -125,6 +164,11 @@ $result_cliente = $stmt_cliente->get_result();
 
 
   <!-- Modal para Novo Recebimento 
+=======
+  </main>
+
+  <!-- Modal para Novo Recebimento -->
+>>>>>>> 78db1f9ed088c79be38694425d220a1f99691f16
   <div class="modal fade" id="novoRecebimentoModal" tabindex="-1" role="dialog" aria-labelledby="novoRecebimentoModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -137,6 +181,7 @@ $result_cliente = $stmt_cliente->get_result();
         <div class="modal-body">
           <form id="novoPagamentoForm">
             <div class="form-group">
+<<<<<<< HEAD
               <label for="numeroFatura">Número do Pedido</label>
               <input type="text" class="form-control" id="numeroFatura" required>
             </div>
@@ -149,6 +194,16 @@ $result_cliente = $stmt_cliente->get_result();
               <input type="date" class="form-control" id="dataVenda" required>
             </div>
             <div class="form-group">
+=======
+              <label for="numeroFatura">Número da Fatura</label>
+              <input type="text" class="form-control" id="numeroFatura" required>
+            </div>
+            <div class="form-group">
+              <label for="dataRecebimento">Data de Recebimento</label>
+              <input type="date" class="form-control" id="dataRecebimento" required>
+            </div>
+            <div class="form-group">
+>>>>>>> 78db1f9ed088c79be38694425d220a1f99691f16
               <label for="valor">Valor</label>
               <input type="number" class="form-control" id="valor" step="0.01" required>
             </div>
@@ -157,10 +212,73 @@ $result_cliente = $stmt_cliente->get_result();
         </div>
       </div>
     </div>
+<<<<<<< HEAD
   </div> -->
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+=======
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      // Função para carregar as contas a receber
+      function carregarContasReceber() {
+        // Simular dados (substitua por uma chamada AJAX real)
+        const contas = [{
+            numero: "001",
+            dataFatura: "2023-05-01",
+            dataRecebimento: "2023-05-15",
+            valor: 1000.00,
+            status: "Pendente"
+          },
+          {
+            numero: "002",
+            dataFatura: "2023-05-02",
+            dataRecebimento: "2023-05-16",
+            valor: 1500.00,
+            status: "Pago"
+          },
+          // Adicione mais itens conforme necessário
+        ];
+
+        let html = '';
+        contas.forEach(conta => {
+          html += `
+                        <tr>
+                            <td>${conta.numero}</td>
+                            <td>${conta.dataFatura}</td>
+                            <td>${conta.dataRecebimento}</td>
+                            <td>R$ ${conta.valor.toFixed(2)}</td>
+                            <td>${conta.status}</td>
+                            <td>
+                                <button class="btn btn-sm btn-info">Editar</button>
+                                <button class="btn btn-sm btn-danger">Excluir</button>
+                            </td>
+                        </tr>
+                    `;
+        });
+
+        $('#contasReceberList').html(html);
+      }
+
+      // Carregar contas a receber ao iniciar a página
+      carregarContasReceber();
+
+      // Lidar com o envio do formulário de novo recebimento
+      $('#novoRecebimentoForm').submit(function(e) {
+        e.preventDefault();
+        // Aqui você faria uma chamada AJAX para salvar o novo recebimento
+        alert('Novo recebimento adicionado com sucesso!');
+        $('#novoRecebimentoModal').modal('hide');
+        carregarContasReceber(); // Recarregar a lista
+      });
+    });
+  </script>
+
+>>>>>>> 78db1f9ed088c79be38694425d220a1f99691f16
   <script src="https://kit.fontawesome.com/74ecb76a40.js" crossorigin="anonymous"></script>
 </body>
 
