@@ -51,7 +51,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_agendamento'])) {
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.css"
     crossorigin="anonymous">
   <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+<style>
 
+.card{
+  height: auto;
+  width: 100%;
+  background-color: transparent;
+
+}
+</style>
 
  
 
@@ -81,7 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_agendamento'])) {
         <h3>Relatório das plantações</h3>
       </div>
       
-      <div class="container mt-5">
+      <div class="card  p-5">
 
       <h3 class="text-center">Custos por Área de Plantio</h3>
 
