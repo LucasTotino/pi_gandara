@@ -4,7 +4,7 @@ require '../utils/conexao.php';
 $id = isset($_GET['id']) ? $_GET['id'] : false;
 
 if ($id) {
-  $sql = "SELECT * FROM cad_vendas WHERE id_venda=?;";
+  $sql = "SELECT * FROM cad_venda WHERE id=?;";
   $stmt = $conn->prepare($sql);
 
 
@@ -28,9 +28,7 @@ if ($id) {
   }
 }
 
-
-
-$sql = "SELECT * FROM cad_vendas;";
+$sql = "SELECT * FROM cad_venda;";
 
 $stmt = $conn->prepare($sql);
 
@@ -44,12 +42,6 @@ numero, complemento, bairro, cidade, estado, cep FROM cad_cliente"; // Ajuste os
 $stmt_cliente = $conn->prepare($sql_cliente);
 $stmt_cliente->execute();
 $result_cliente = $stmt_cliente->get_result();
-
-// Prepara a consulta SQL da tabela de descontos
-$sql_descontos = "SELECT id_promo, nomepromocao, iniciopromo, fimpromo, cod_produto, produto, porcen_promo FROM cad_descontos"; // Ajuste os campos conforme necessário
-$stmt_descontos = $conn->prepare($sql_descontos);
-$stmt_descontos->execute();
-$result_descontos = $stmt_descontos->get_result();
 
 ?>
 
@@ -94,9 +86,9 @@ $result_descontos = $stmt_descontos->get_result();
           <table style="text-align:center;" class="table table-striped table-hover">
             <thead>
               <tr>
-                <th>Número Pedido</th>
+                <th>Número do Pedido</th>
                 <th>Nome do Cliente</th>
-                <th>Data Venda</th>
+                <th>Data da Venda</th>
                 <th>Produto</th>
                 <th>Valor da Venda</th> <!-- CRIAR NOVO BANCO DE DADOS RECEBENDO INFORMAÇÕES DO cadVendas.php -->
                 <th>Ação</th>
@@ -110,10 +102,10 @@ $result_descontos = $stmt_descontos->get_result();
 
             ?>
               <tr>
-                <td><?= $linha['id_venda'] ?></td>
+                <td><?= $linha['id'] ?></td>
                 <td><?= $linha['nome'] ?></td>
-                <td><?= $linha['dia_venda'] ?></td>
-                <td><?= $linha['produto'] ?></td>
+                <td><?= $linha['data_venda'] ?></td>
+                <td><?= $linha['id_produto'] ?></td>
                 <td>R$: <?= number_format($linha['quantidade'] * $linha['valor'], 2, ',', '.') ?></td>
                 <td><a href="gerarPDF.php" class="btn btn-primary">Gerar Relatório PDF</a></td>
               </tr>
