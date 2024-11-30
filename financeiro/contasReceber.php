@@ -98,12 +98,19 @@ $result_cliente = $stmt_cliente->get_result();
                 <th>Data da Venda</th>
                 <th>Produto</th>
                 <th>Valor da Venda</th>
-                <th>Ação</th>
               </tr>
             </thead>
             <tbody>
               <?php
+              // ... (código anterior)
+
+              $totalQuantidade = 0;
+              $totalValor = 0;
+
+              $dadosArray = [];
+
               while ($linha = $dados->fetch_assoc()) {
+                $dadosArray[] = $linha;
               ?>
                 <tr>
                   <td><?= $linha['id'] ?></td>
@@ -111,18 +118,49 @@ $result_cliente = $stmt_cliente->get_result();
                   <td><?= date('d/m/Y', strtotime($linha['data_venda'])) ?></td>
                   <td><?= $linha['produto'] ?></td>
                   <td>R$: <?= number_format($linha['qtd'] * $linha['valor'], 2, ',', '.') ?></td>
-                  <td><a href="gerarPDF.php" target="_blank" class="btn btn-success">Gerar Relatório</a></td>
                 </tr>
               <?php
+                // Calcule a quantidade e o valor total para cada linha
+                $totalQuantidade = $dados->num_rows; // Conta o número de registros retornados
+                $totalValor += $linha['qtd'] * $linha['valor']; // Calcula o valor total
               }
               ?>
             </tbody>
           </table>
 
+          <div class="card mt-4">
+            <div class="card-body">
+              <h5 class="card-title">Resumo</h5>
+              <div class="table-responsive">
+                <table style="text-align:center;" class="table table-striped table-hover">
+                  <thead>
+                    <tr>
+                      <th>Quantidade Total de Pedidos</th>
+                      <th>Valor Total dos Pedidos</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><?= $totalQuantidade ?></td>
+                      <td>R$: <?= number_format($totalValor, 2, ',', '.') ?></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="row p-3 d-flex justify-content-end align-items-end">
+          <a style="text-align: center;" type="button" href="gerarPDF.php" target="_blank" class="col-2 btn btn-success" href="/pi_gandara/dashboard.php">Gerar Relatório</a>
         </div>
       </div>
+
     </div>
 
+
+
+    <!-- ... (o restante do código permanece inalterado) -->
 
   </main>
 
