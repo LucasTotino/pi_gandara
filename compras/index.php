@@ -73,6 +73,17 @@
           </div>
         </a>
 
+        <a href="cadCliente.php" class="btn">
+          <div class="col-2 p-2 m-1">
+            <div style="width: 10rem;">
+              <span class="fa fa-cart-plus fa-5x" aria-hidden="true"></span>
+              <div class="card-body">
+                <h3>Arrumem esse botão "CadClientes"!! (Renan)</h3>
+              </div>
+            </div>
+          </div>
+        </a>
+
         <!--Fim da row -->
       </div>
 

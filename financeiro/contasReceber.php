@@ -104,10 +104,10 @@ $result_cliente = $stmt_cliente->get_result();
             ?>
               <tr>
                 <td><?= $linha['id'] ?></td>
-                <td><?= $linha['nome'] ?></td>
+                <td><?= $linha['nomeCliente'] ?></td>
                 <td><?= $linha['data_venda'] ?></td>
-                <td><?= $linha['id_produto'] ?></td>
-                <td>R$: <?= number_format($linha['quantidade'] * $linha['valor'], 2, ',', '.') ?></td>
+                <td><?= $linha['produto'] ?></td>
+                <td>R$: <?= number_format($linha['qtd'] * $linha['valor'], 2, ',', '.') ?></td>
                 <td><a href="gerarPDF.php" class="btn btn-primary">Gerar Relatório PDF</a></td>
               </tr>
             <?php

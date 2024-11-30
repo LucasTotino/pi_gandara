@@ -4,7 +4,7 @@ require '../utils/conexao.php';
 $id = isset($_GET['id']) ? $_GET['id'] : false;
 
 if ($id) {
-  $sql = "SELECT * FROM cad_venda WHERE id_venda=?;";
+  $sql = "SELECT * FROM cad_venda WHERE id=?;";
   $stmt = $conn->prepare($sql);
 
 
@@ -78,24 +78,24 @@ $result_descontos = $stmt_descontos->get_result();
       <div class="card card-cds">
         <form class="mt-3 mb-3 ml-3 mr-3" id="userform" action="../comercial/bd/bd-cadvendas.php" method="POST">
 
-          <input type="hidden" id="id_venda" name="id_venda" value="<?= isset($_GET['id']) ? $_GET['id'] : null ?>">
+          <input type="hidden" id="id" name="id" value="<?= isset($_GET['id']) ? $_GET['id'] : null ?>">
           <input type="hidden" name="acao" id="acao" value="<?= isset($_GET['id']) ? "ALTERAR" : "INCLUIR" ?>">
 
           <div class="form-row">
             <div class="form-group col-sm-2">
               <label for="" class="font-weight-bold">Nº Pedido:</label>
               <input type="text" id="" name="" class="form-control" readonly
-              value="<?= ($id) ? $user['id_venda'] : null ?>">
+              value="<?= ($id) ? $user['id'] : null ?>">
             </div>
 
             <div class="form-group col-md-8 text-white">
-              <label class="text-dark" for="nome"><b>Nome/Razão Social Cliente:</b></label>
-              <select id="nome" name="nome" class="form-control">
+              <label class="text-dark" for="nomeCliente"><b>Nome/Razão Social Cliente:</b></label>
+              <select id="nomeCliente" name="nomeCliente" class="form-control">
                 <option value="" selected>-- ESCOLHA --</option>
                 <?php
                 while ($cliente = $result_cliente->fetch_assoc()) {
-                  $selectP = ($id && $user['nome'] == $cliente['nome']) ? 'selected' : '';
-                  echo "<option value='{$cliente['nome']}' $selectP>{$cliente['nome']}</option>";
+                  $selectP = ($id && $user['nomeCliente'] == $cliente['nomeCliente']) ? 'selected' : '';
+                  echo "<option value='{$cliente['nomeCliente']}' $selectP>{$cliente['nomeCliente']}</option>";
                 }
                 ?>
               </select>
@@ -141,9 +141,9 @@ $result_descontos = $stmt_descontos->get_result();
               </select>
             </div>
             <div class="form-group col-md-3 text-white">
-              <label class="text-dark" for="dia_venda"><b>Dia da venda:</b></label>
-              <input type="date" class="form-control" id="dia_venda" name="dia_venda"
-                value="<?= ($id) ? $user['dia_venda'] : null ?>">
+              <label class="text-dark" for="data_venda"><b>Dia da venda:</b></label>
+              <input type="date" class="form-control" id="dia_venda" name="data_venda"
+                value="<?= ($id) ? $user['data_venda'] : null ?>">
             </div>
             <div class="form-group col-md-3 text-white">
               <label class="text-dark" for=""><b>Vendedor Responsável:</b></label>
@@ -167,9 +167,9 @@ $result_descontos = $stmt_descontos->get_result();
                 value="<?= ($id) ? $user['produto'] : null ?>">
             </div>
             <div class="form-group col-md-2 text-white">
-              <label class="text-dark" for="quantidade"><b>Quantidade:</b></label>
-              <input type="number" class="form-control" id="quantidade" name="quantidade"
-                value="<?= ($id) ? $user['quantidade'] : null ?>">
+              <label class="text-dark" for="qtd"><b>Quantidade:</b></label>
+              <input type="number" class="form-control" id="qtd" name="qtd"
+                value="<?= ($id) ? $user['qtd'] : null ?>">
             </div>
             <div class="form-group col-md-2 text-white">
               <label class="text-dark" for="valor"><b>Valor P/un.:</b></label>
@@ -218,18 +218,18 @@ $result_descontos = $stmt_descontos->get_result();
 
             ?>
               <tr>
-                <td><?= $linha['id_venda'] ?></td>
-                <td><?= $linha['nome'] ?></td>
-                <td><?= $linha['dia_venda'] ?></td>
+                <td><?= $linha['id'] ?></td>
+                <td><?= $linha['nomeCliente'] ?></td>
+                <td><?= $linha['data_venda'] ?></td>
                 <td><?= $linha['produto'] ?></td>
-                <td><?= $linha['quantidade'] ?></td>
+                <td><?= $linha['qtd'] ?></td>
                 <td><?= $linha['valor'] ?></td>
                 <td>
                   <!-- Chamo a pagina de formulario e envio o id do usuario que sera alterado. -->
-                  <a href="cadVendas.php?id=<?= $linha['id_venda']?>" class="btn btn-warning">Editar</a>
+                  <a href="cadVendas.php?id=<?= $linha['id']?>" class="btn btn-warning">Editar</a>
 
                   <button class="btn btn-danger btn-excluir"
-                    data-table="cad_venda" data-id="<?= $linha['id_venda'] ?>"> Excluir</button>
+                    data-table="cad_venda" data-id="<?= $linha['id'] ?>"> Excluir</button>
                 </td>
               </tr>
             <?php

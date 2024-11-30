@@ -39,11 +39,11 @@ $html .= '<thead>
           <tbody>';
 
 while ($linha = $dados->fetch_assoc()) {
-    $valorVenda = number_format($linha['quantidade'] * $linha['valor'], 2, ',', '.');
+    $valorVenda = number_format($linha['qtd'] * $linha['valor'], 2, ',', '.');
     $html .= '<tr>
                 <td>' . $linha['id'] . '</td>
-                <td>' . $linha['nome'] . '</td>
-                <td>' . $linha['dia_venda'] . '</td>
+                <td>' . $linha['nomeCliente'] . '</td>
+                <td>' . $linha['data_venda'] . '</td>
                 <td>' . $linha['produto'] . '</td>
                 <td>R$: ' . $valorVenda . '</td>
               </tr>';
