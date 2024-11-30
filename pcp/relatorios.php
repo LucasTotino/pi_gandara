@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_agendamento'])) {
     ['atividade' => 'Início da plantação', 'tempo' => 2, 'material' => 'Superfosfato Simples', 'quantidade' => 167, 'un' => 'kg', 'preco' => 3.08],
     ['atividade' => 'Adubação de cobertura', 'tempo' => 8, 'material' => 'Sulfato de amônio', 'quantidade' => 333, 'un' => 'kg', 'preco' => 3.60],
     ['atividade' => 'Adubação de cobertura', 'tempo' => 16, 'material' => 'Cloreto de Potássio', 'quantidade' => 220, 'un' => 'kg', 'preco' => 5.86],
-    ['atividade' => 'Colheita', 'tempo' => 12, 'material' => 'Caminhão para transporte', 'quantidade' => 0.9, 'un' => 'Un', 'preco' => 2280.00],
+    ['atividade' => 'Colheita e transporte', 'tempo' => 12, 'material' => 'Caminhão para transporte', 'quantidade' => 0.9, 'un' => 'Un', 'preco' => 2280.00],
   ];
 }
 ?>
