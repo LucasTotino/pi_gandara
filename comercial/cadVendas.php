@@ -89,13 +89,13 @@ $result_descontos = $stmt_descontos->get_result();
             </div>
 
             <div class="form-group col-md-8 text-white">
-              <label class="text-dark" for="nomeCliente"><b>Nome/Razão Social Cliente:</b></label>
-              <select id="nomeCliente" name="nomeCliente" class="form-control">
+              <label class="text-dark" for="nome"><b>Nome/Razão Social Cliente:</b></label>
+              <select id="nome" name="nome" class="form-control">
                 <option value="" selected>-- ESCOLHA --</option>
                 <?php
                 while ($cliente = $result_cliente->fetch_assoc()) {
-                  $selectP = ($id && $user['nomeCliente'] == $cliente['nomeCliente']) ? 'selected' : '';
-                  echo "<option value='{$cliente['nomeCliente']}' $selectP>{$cliente['nomeCliente']}</option>";
+                  $selectP = ($id && $user['nome'] == $cliente['nome']) ? 'selected' : '';
+                  echo "<option value='{$cliente['nome']}' $selectP>{$cliente['nome']}</option>";
                 }
                 ?>
               </select>

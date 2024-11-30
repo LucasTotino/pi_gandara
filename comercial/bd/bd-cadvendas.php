@@ -1,7 +1,7 @@
 <?php
 require "../../utils/conexao.php";
 
-$nomeCliente = isset($_POST['nomeCliente']) && !empty($_POST['nomeCliente']) ? $_POST['nomeCliente'] : null;
+$nomeCliente = isset($_POST['nome']) && !empty($_POST['nome']) ? $_POST['nome'] : null;
 $tipovenda = isset($_POST['tipo_venda']) && !empty($_POST['tipo_venda']) ? $_POST['tipo_venda'] : null;
 $origemvenda = isset($_POST['origemvenda']) && !empty($_POST['origemvenda']) ? $_POST['origemvenda'] : null;
 $nomepromocao = isset($_POST['nomepromocao']) && !empty($_POST['nomepromocao']) ? $_POST['nomepromocao'] : null;

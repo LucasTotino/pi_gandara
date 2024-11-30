@@ -30,10 +30,17 @@ if ($id) {
 
 $sql = "SELECT * FROM cad_venda;";
 
+// Inicializa a variável de busca
+$buscar = isset($_GET['buscar']) ? $_GET['buscar'] : '';
+
+// Prepara a consulta SQL
+$sql = "SELECT * FROM cad_venda WHERE nomeCliente LIKE ? OR produto LIKE ?";
+
+
 $stmt = $conn->prepare($sql);
-
+$likeBuscar = "%" . $buscar . "%";
+$stmt->bind_param("ss", $likeBuscar, $likeBuscar);
 $stmt->execute();
-
 $dados = $stmt->get_result();
 
 // Prepara a consulta SQL da tabela de cliente
@@ -51,12 +58,11 @@ $result_cliente = $stmt_cliente->get_result();
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" type="text/css" href="styles.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.css" crossorigin="anonymous">
   <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
   <link rel="stylesheet" href="/pi_gandara/css/styleFinanceiro.css">
   <link rel="stylesheet" href="/pi_gandara/css/style.css">
-  
+
   <title>Contas a Receber</title>
 </head>
 
@@ -72,8 +78,8 @@ $result_cliente = $stmt_cliente->get_result();
     <br>
 
     <div class="d-flex justify-content-center">
-      <form class="form-inline">
-        <input class="form-control mr-sm-2" type="text" placeholder="Pesquisar conta...">
+      <form method="GET" action="contasReceber.php">
+        <input class="form-control mr-sm-2" type="text" name="buscar" placeholder="Pesquisar conta...">
         <button class="btn btn-primary my-2 my-sm-0" type="submit">Buscar</button>
       </form>
     </div>
@@ -91,38 +97,36 @@ $result_cliente = $stmt_cliente->get_result();
                 <th>Nome do Cliente</th>
                 <th>Data da Venda</th>
                 <th>Produto</th>
-                <th>Valor da Venda</th> <!-- CRIAR NOVO BANCO DE DADOS RECEBENDO INFORMAÇÕES DO cadVendas.php -->
+                <th>Valor da Venda</th>
                 <th>Ação</th>
               </tr>
             </thead>
             <tbody>
-            <?php
-            // Aqui adicionamos o laço de repetição que irá exibir uma linha da tabela para cada registro no BD.
-            // Adiciona cada registro na variavel linha como um array. 
-            while ($linha = $dados->fetch_assoc()) {
-
-            ?>
-              <tr>
-                <td><?= $linha['id'] ?></td>
-                <td><?= $linha['nomeCliente'] ?></td>
-                <td><?= $linha['data_venda'] ?></td>
-                <td><?= $linha['produto'] ?></td>
-                <td>R$: <?= number_format($linha['qtd'] * $linha['valor'], 2, ',', '.') ?></td>
-                <td><a href="gerarPDF.php" class="btn btn-primary">Gerar Relatório PDF</a></td>
-              </tr>
-            <?php
-            }
-            ?>
-          </tbody>
+              <?php
+              while ($linha = $dados->fetch_assoc()) {
+              ?>
+                <tr>
+                  <td><?= $linha['id'] ?></td>
+                  <td><?= $linha['nomeCliente'] ?></td>
+                  <td><?= date('d/m/Y', strtotime($linha['data_venda'])) ?></td>
+                  <td><?= $linha['produto'] ?></td>
+                  <td>R$: <?= number_format($linha['qtd'] * $linha['valor'], 2, ',', '.') ?></td>
+                  <td><a href="gerarPDF.php" target="_blank" class="btn btn-success">Gerar Relatório</a></td>
+                </tr>
+              <?php
+              }
+              ?>
+            </tbody>
           </table>
+
         </div>
       </div>
     </div>
 
-    
+
   </main>
 
-  
+
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://kit.fontawesome.com/74ecb76a40.js" crossorigin="anonymous"></script>

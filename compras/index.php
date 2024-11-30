@@ -78,7 +78,7 @@
             <div style="width: 10rem;">
               <span class="fa fa-cart-plus fa-5x" aria-hidden="true"></span>
               <div class="card-body">
-                <h3>Arrumem esse botão "CadClientes"!! (Renan)</h3>
+                <h3>Arrumar esse botão "CadClientes"!! (pertence ao Comercial)</h3>
               </div>
             </div>
           </div>
