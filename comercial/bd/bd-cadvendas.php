@@ -1,13 +1,13 @@
 <?php
 require "../../utils/conexao.php";
 
-$nomeCliente = isset($_POST['nome']) && !empty($_POST['nome']) ? $_POST['nome'] : null;
-$tipovenda = isset($_POST['tipo_venda']) && !empty($_POST['tipo_venda']) ? $_POST['tipo_venda'] : null;
+$nomecliente = isset($_POST['nome']) && !empty($_POST['nome']) ? $_POST['nome'] : null;
+$tipovenda = isset($_POST['tipovenda']) && !empty($_POST['tipovenda']) ? $_POST['tipovenda'] : null;
 $origemvenda = isset($_POST['origemvenda']) && !empty($_POST['origemvenda']) ? $_POST['origemvenda'] : null;
 $nomepromocao = isset($_POST['nomepromocao']) && !empty($_POST['nomepromocao']) ? $_POST['nomepromocao'] : null;
-$data_venda = isset($_POST['data_venda']) && !empty($_POST['data_venda']) ? $_POST['data_venda'] : null;
+$dia_venda = isset($_POST['dia_venda']) && !empty($_POST['dia_venda']) ? $_POST['dia_venda'] : null;
 $produto = isset($_POST['produto']) && !empty($_POST['produto']) ? $_POST['produto'] : null;
-$qtd = isset($_POST['qtd']) && !empty($_POST['qtd']) ? $_POST['qtd'] : null;
+$quantidade = isset($_POST['quantidade']) && !empty($_POST['quantidade']) ? $_POST['quantidade'] : null;
 $valor = isset($_POST['valor']) && !empty($_POST['valor']) ? $_POST['valor'] : null;
 $id_venda = isset($_POST['id_venda']) && !empty($_POST['id_venda']) ? $_POST['id_venda'] : null;
 
@@ -15,8 +15,8 @@ $acao = isset($_POST['acao']) && !empty($_POST['acao']) ? $_POST['acao'] : null;
 
 if ($acao == "INCLUIR") {
 
-    $sql = "INSERT INTO cad_venda (nomeCliente, tipo_venda, origemvenda, nomepromocao, 
-    data_venda, produto, qtd, valor) 
+    $sql = "INSERT INTO cad_vendas (nome, tipovenda, origemvenda, nomepromocao, 
+    dia_venda, produto, quantidade, valor) 
     VALUE (?, ?, ?, ?, ?, ?, ?, ?);";
 
     // Utilizaremos o Prepare Statement para manipular os dados no BD 
@@ -30,13 +30,13 @@ if ($acao == "INCLUIR") {
     // i = inteiro, d = flutuante (casas decaimais), s = texto(com tudo que não é numero)
     $stmt->bind_param(
         "ssssssid",
-        $nomeCliente,
+        $nomecliente,
         $tipovenda,
         $origemvenda,
         $nomepromocao,
-        $data_venda,
+        $dia_venda,
         $produto,
-        $qtd,
+        $quantidade,
         $valor
     );
     try {
@@ -67,28 +67,28 @@ if ($acao == "INCLUIR") {
     print_r($_POST);
     echo "</pre>";
 } else if ($acao == "ALTERAR") {
-    $sql = "UPDATE cad_venda SET
-        nomeCliente = ?,
-        tipo_venda = ?,
+    $sql = "UPDATE cad_vendas SET
+        nome = ?,
+        tipovenda = ?,
         origemvenda = ?,
         nomepromocao = ?,
-        data_venda = ?,
+        dia_venda = ?,
         produto = ?,
-        qtd = ?,
+        quantidade = ?,
         valor = ?
         WHERE id_venda = ?;";
 
     $stmt = $conn->prepare($sql);
 
     $stmt->bind_param(
-        "sssssssid",
-        $nomeCliente,
+        "ssssssidi",
+        $nomecliente,
         $tipovenda,
         $origemvenda,
         $nomepromocao,
-        $data_venda,
+        $dia_venda,
         $produto,
-        $qtd,
+        $quantidade,
         $valor,
         $id_venda
 
@@ -116,7 +116,7 @@ if ($acao == "INCLUIR") {
 } else if ($acao == "DELETAR") {
     // Neste bloco será excluido um registro que ja existe no BD
 
-    $sql = "DELETE FROM cad_venda WHERE id_venda = ?";
+    $sql = "DELETE FROM cad_vendas WHERE id_venda = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $id_venda);
 
