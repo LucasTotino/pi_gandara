@@ -69,7 +69,7 @@ $result_fornecedores = $stmt_fornecedores->get_result();
     <link rel="stylesheet" href="/pi_gandara/css/styleFinanceiro.css">
     <link rel="stylesheet" href="/pi_gandara/css/style.css">
 
-    <title>Aprovação de Cotação</title>
+    <title>Cotação Pendentes</title>
 </head>
 
 <body>
@@ -82,7 +82,7 @@ $result_fornecedores = $stmt_fornecedores->get_result();
     <main class="container card">
         <div class="row p-3 justify-content-center d-flex align-items-center">
             <a type="button" style="text-align: left;" class="col-1 btn btn-primary justify-content-center d-flex" href="/pi_gandara/financeiro/">Voltar</a>
-            <h1 style="text-align: center;" class="col-11 display-4">Aprovação de Cotação</h1>
+            <h1 style="text-align: center;" class="col-11 display-4">Aprovação de Cotação Pendente</h1>
         </div>
 
 

@@ -4,7 +4,7 @@ require '../utils/conexao.php';
 $id = isset($_GET['id']) ? $_GET['id'] : false;
 
 if ($id) {
-  $sql = "SELECT * FROM cad_vendas WHERE id_venda=?;";
+  $sql = "SELECT * FROM cad_venda WHERE id_venda=?;";
   $stmt = $conn->prepare($sql);
 
 
@@ -30,7 +30,7 @@ if ($id) {
 
 
 
-$sql = "SELECT * FROM cad_vendas;";
+$sql = "SELECT * FROM cad_venda;";
 
 $stmt = $conn->prepare($sql);
 
@@ -229,7 +229,7 @@ $result_descontos = $stmt_descontos->get_result();
                   <a href="cadVendas.php?id=<?= $linha['id_venda']?>" class="btn btn-warning">Editar</a>
 
                   <button class="btn btn-danger btn-excluir"
-                    data-table="cad_vendas" data-id="<?= $linha['id_venda'] ?>"> Excluir</button>
+                    data-table="cad_venda" data-id="<?= $linha['id_venda'] ?>"> Excluir</button>
                 </td>
               </tr>
             <?php
