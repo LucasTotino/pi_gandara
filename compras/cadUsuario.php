@@ -262,7 +262,7 @@ $corNivel = array(
                             <tr>
                                 <td><?= $linha['nome'] ?></td>
                                 <td><?= $linha['email'] ?></td>
-                                <td><?= $linha['cpf'] ?></td>
+                                <td><?= $linha['celular'] ?></td>
                                 <td>
                                     <span class="badge <?= $corNivel[$linha['nivel_acesso']] ?>">
                                         <?= $nivel[$linha['nivel_acesso']] ?>

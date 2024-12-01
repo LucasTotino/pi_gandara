@@ -142,7 +142,6 @@ $dados = $stmt->get_result();
                                 <td>
                                     <!-- Chamo a página do formulario e envio o Id do Produto que será alterado-->
                                     <a href="cadProduto.php?id=<?= $linha['id'] ?>" class="btn btn-warning">Editar</a>
-                                    <button class="btn btn-danger btn-excluir" data-table="produto" data-id="<?= $linha['id'] ?>">Excluir</button>
                                 </td>
                             </tr>
                         <?php

@@ -157,7 +157,7 @@ $result_cliente = $stmt_cliente->get_result();
 
         </div>
         <div class="row p-3 d-flex justify-content-end align-items-end">
-          <a style="text-align: center;" type="button" href="gerarPDF.php" target="_blank" class="col-2 btn btn-success" href="/pi_gandara/dashboard.php">Gerar Relatório</a>
+          <a style="text-align: center;" type="button" href="gerarPDFcr.php" target="_blank" class="col-2 btn btn-success" href="/pi_gandara/dashboard.php">Gerar Relatório</a>
         </div>
       </div>
 

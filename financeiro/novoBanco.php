@@ -73,7 +73,7 @@ $dados = $stmt->get_result();
 
         <div class="card card-cds">
             <form class="mt-3 mb-3 ml-3 mr-3" action="/pi_gandara/financeiro/bd/bd_novoBanco.php" method="POST">
-                <input type="hidden" id="id" name="id" value="<?= isset($_GET['id']) ? $_GET['id'] : null ?>">
+                <input type="hidden" id="instituicao" name="instituicao" value="<?= isset($_GET['id']) ? $_GET['id'] : null ?>">
                 <input type="hidden" name="acao" id="acao" value="<?= isset($_GET['id']) ? "ALTERAR" : "INCLUIR" ?>">
                 <div class="form-group">
 
@@ -87,12 +87,6 @@ $dados = $stmt->get_result();
                             <label for="numeroConta">Número da Conta + Digito verificador</label>
                             <input type="numeroConta" class="form-control" id="numeroConta" name="numeroConta"
                                 value="<?= ($id) ? $instituicao['numeroConta'] : null ?>">
-                        </div>
-                        <div class="col-sm-2">
-                            <label for="codBanco">Código do Banco</label>
-                            <span href="https://proplad.furg.br/images/Lista_Cdigo_de_Bancos.pdf" class="fa-solid fa-circle-question fa-beat" style="--fa-animation-duration: 5s;" aria-hidden="true"></span>
-                            <input type="text" class="form-control" id="codBanco" name="codBanco"
-                                value="<?= ($id) ? $instituicao['codBanco'] : null ?>">
                         </div>
 
                     </div>
@@ -126,15 +120,16 @@ $dados = $stmt->get_result();
                             </select>
                         </div>
 
-
-                        <div class="form-group col-md-6">
-                            <label for="anotacoes">Anotações:</label>
-                            <textarea class="text" id="anotacoes" placeholder="Insira anotações"></textarea>
+                        <div class="col-sm-2">
+                            <label for="codBanco" href="https://proplad.furg.br/images/Lista_Cdigo_de_Bancos.pdf">Código do Banco:</label>
+                            <span href="https://proplad.furg.br/images/Lista_Cdigo_de_Bancos.pdf" aria-hidden="true"></span>
+                            <input type="text" class="form-control" id="codBanco" name="codBanco"
+                                value="<?= ($id) ? $instituicao['codBanco'] : null ?>">
                         </div>
                     </div>
 
                     <!-- Botões -->
-                    <div class="form-row justify-content-center">
+                    <div class="form-row justify-content-center mt-2">
                         <div class="col-sm-3 mt-3">
                             <button type="submit" name="submit" class="btn btn-success">Cadastrar</button>
                         </div>
@@ -157,7 +152,6 @@ $dados = $stmt->get_result();
                     <th>Cód do Banco</th>
                     <th>Tipo da Conta</th>
                     <th>Moeda</th>
-                    <th>Anotações</th>
                     <th>AÇÕES</th>
                 </thead>
                 <tbody>
@@ -173,7 +167,6 @@ $dados = $stmt->get_result();
                             <td><?= $linha['codBanco'] ?></td>
                             <td><?= $linha['tipoConta'] ?></td>
                             <td><?= $linha['moeda'] ?></td>
-                            <td><?= $linha['anotacoes'] ?></td>
                             <td>
                                 <!-- Chamo a página do formulario e envio o Id do Produto que será alterado-->
                                 <a href="novoBanco.php?id=<?= $linha['id'] ?>" class="btn btn-warning">Editar</a>

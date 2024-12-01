@@ -20,7 +20,15 @@
   <main>
     <h1 class="text-center">COMPRAS</h1>
     <div class="container">
-
+    
+    <a href="../dashboard.php" class="btn">
+        <div class="col-2">
+          <div style="width: 18rem;">
+            <span class="fa fa-chevron-left fa-2x p-3" aria-hidden=" true"></span>
+          </div>
+        </div>
+      </a>
+      
       <div class="row p-3 justify-content-center d-flex align-items-center">
 
         <a href="cadFornecedor.php" class="btn">
@@ -45,9 +53,18 @@
           </div>
         </a>
 
+        <a href="cadProduto.php" class="btn">
+          <div class="col-2 p-2 m-1">
+            <div style="width: 10rem;">
+              <span class="fa fa-box-open fa-5x" aria-hidden="true"></span>
+              <div class="card-body">
+                <h3>Cadastro de Produtos</h3>
+              </div>
+            </div>
+          </div>
+        </a>
+
       </div> <!--Fim da row -->
-
-
 
       <div class="row p-3 justify-content-center d-flex align-items-center">
 
@@ -73,40 +90,7 @@
           </div>
         </a>
 
-        <a href="cadCliente.php" class="btn">
-          <div class="col-2 p-2 m-1">
-            <div style="width: 10rem;">
-              <span class="fa fa-cart-plus fa-5x" aria-hidden="true"></span>
-              <div class="card-body">
-                <h3>Arrumar botão "CadClientes"!! (pertence ao Comercial)</h3>
-              </div>
-            </div>
-          </div>
-        </a>
-
-        <a href="cadProduto.php" class="btn">
-          <div class="col-2 p-2 m-1">
-            <div style="width: 10rem;">
-              <span class="fa fa-cart-plus fa-5x" aria-hidden="true"></span>
-              <div class="card-body">
-                <h3>Arrumar botão "CadProduto"!! (pertence ao estoque)</h3>
-              </div>
-            </div>
-          </div>
-        </a>
-
-        <a href="cadUsuario.php" class="btn">
-          <div class="col-2 p-2 m-1">
-            <div style="width: 10rem;">
-              <span class="fa fa-cart-plus fa-5x" aria-hidden="true"></span>
-              <div class="card-body">
-                <h3>Arrumar botão "CadUsuario"!! (pertence ao estoque)</h3>
-              </div>
-            </div>
-          </div>
-        </a>
-
-        <!--Fim da row -->
+       <!--Fim da row -->
       </div>
 
   </main>
