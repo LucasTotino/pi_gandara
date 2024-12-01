@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 22-Nov-2024 às 01:50
--- Versão do servidor: 10.4.32-MariaDB
--- versão do PHP: 8.2.12
+-- Tempo de geração: 01/12/2024 às 22:51
+-- Versão do servidor: 10.4.28-MariaDB
+-- Versão do PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `agendamento_plantacao`
+-- Estrutura para tabela `agendamento_plantacao`
 --
 
 CREATE TABLE `agendamento_plantacao` (
@@ -40,11 +40,11 @@ CREATE TABLE `agendamento_plantacao` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `cadastro_funcionarios`
+-- Estrutura para tabela `cadastro_funcionarios`
 --
 
 CREATE TABLE `cadastro_funcionarios` (
-  `id_cad_funcionario` int(11) NOT NULL,
+  `idFuncionario` int(11) NOT NULL,
   `fpNome` varchar(255) NOT NULL,
   `fpRg` varchar(20) NOT NULL,
   `fpCpf` varchar(14) NOT NULL,
@@ -59,14 +59,14 @@ CREATE TABLE `cadastro_funcionarios` (
   `fpEmail` varchar(255) NOT NULL,
   `fpTelefone` varchar(15) DEFAULT NULL,
   `fpCelular` varchar(15) NOT NULL,
-  `fpDependentes` int(11) NOT NULL,
-  `fpIdadeDependentes` varchar(50) NOT NULL,
+  `fpDependentes` int(11) DEFAULT NULL,
+  `fpIdadeDependentes` varchar(50) DEFAULT NULL,
   `fpEstadoCivil` varchar(20) NOT NULL,
   `fpCargo` varchar(100) NOT NULL,
   `fpSetor` varchar(100) NOT NULL,
   `fpDataAdimissao` date NOT NULL,
   `fpDataDemissao` date DEFAULT NULL,
-  `fpSalarioBruto` float NOT NULL,
+  `fpSalarioBruto` decimal(10,0) NOT NULL,
   `fpMetodoPagamento` varchar(50) NOT NULL,
   `fpChavePix` varchar(50) DEFAULT NULL,
   `fpAgenciaConta` varchar(20) DEFAULT NULL,
@@ -76,7 +76,7 @@ CREATE TABLE `cadastro_funcionarios` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `cadastro_insumo`
+-- Estrutura para tabela `cadastro_insumo`
 --
 
 CREATE TABLE `cadastro_insumo` (
@@ -91,7 +91,7 @@ CREATE TABLE `cadastro_insumo` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `cadastro_nota_saida`
+-- Estrutura para tabela `cadastro_nota_saida`
 --
 
 CREATE TABLE `cadastro_nota_saida` (
@@ -107,7 +107,7 @@ CREATE TABLE `cadastro_nota_saida` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `cadastro_vendas`
+-- Estrutura para tabela `cadastro_vendas`
 --
 
 CREATE TABLE `cadastro_vendas` (
@@ -123,7 +123,7 @@ CREATE TABLE `cadastro_vendas` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `cad_cliente`
+-- Estrutura para tabela `cad_cliente`
 --
 
 CREATE TABLE `cad_cliente` (
@@ -145,7 +145,7 @@ CREATE TABLE `cad_cliente` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `cad_descontos`
+-- Estrutura para tabela `cad_descontos`
 --
 
 CREATE TABLE `cad_descontos` (
@@ -161,7 +161,7 @@ CREATE TABLE `cad_descontos` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `cad_distribuidor`
+-- Estrutura para tabela `cad_distribuidor`
 --
 
 CREATE TABLE `cad_distribuidor` (
@@ -176,7 +176,21 @@ CREATE TABLE `cad_distribuidor` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `cad_fornecedor`
+-- Estrutura para tabela `cad_expedicao`
+--
+
+CREATE TABLE `cad_expedicao` (
+  `id_expedicao` int(20) NOT NULL,
+  `id_venda` int(20) NOT NULL,
+  `nome` varchar(150) NOT NULL,
+  `nometransportador` varchar(254) NOT NULL,
+  `dataenvio` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `cad_fornecedor`
 --
 
 CREATE TABLE `cad_fornecedor` (
@@ -195,10 +209,17 @@ CREATE TABLE `cad_fornecedor` (
   `cep` varchar(9) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Despejando dados para a tabela `cad_fornecedor`
+--
+
+INSERT INTO `cad_fornecedor` (`id`, `nome`, `cpf_cnpj`, `tipo_fornecedor`, `email`, `celular`, `logradouro`, `numero`, `complemento`, `bairro`, `cidade`, `estado`, `cep`) VALUES
+(1, '  ', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `cad_nat_financeira`
+-- Estrutura para tabela `cad_nat_financeira`
 --
 
 CREATE TABLE `cad_nat_financeira` (
@@ -215,7 +236,7 @@ CREATE TABLE `cad_nat_financeira` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `cad_nfs`
+-- Estrutura para tabela `cad_nfs`
 --
 
 CREATE TABLE `cad_nfs` (
@@ -232,7 +253,7 @@ CREATE TABLE `cad_nfs` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `cad_novobanco`
+-- Estrutura para tabela `cad_novobanco`
 --
 
 CREATE TABLE `cad_novobanco` (
@@ -248,7 +269,7 @@ CREATE TABLE `cad_novobanco` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `cad_produtos`
+-- Estrutura para tabela `cad_produtos`
 --
 
 CREATE TABLE `cad_produtos` (
@@ -262,7 +283,7 @@ CREATE TABLE `cad_produtos` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `cad_transportadores`
+-- Estrutura para tabela `cad_transportadores`
 --
 
 CREATE TABLE `cad_transportadores` (
@@ -280,22 +301,25 @@ CREATE TABLE `cad_transportadores` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `cad_venda`
+-- Estrutura para tabela `cad_vendas`
 --
 
-CREATE TABLE `cad_venda` (
-  `id` int(11) NOT NULL,
-  `id_vendedor` int(11) DEFAULT NULL,
-  `tipo_venda` int(11) DEFAULT NULL,
-  `data_venda` date DEFAULT NULL,
-  `id_produto` int(11) DEFAULT NULL,
-  `qtd` float DEFAULT NULL
+CREATE TABLE `cad_vendas` (
+  `id_venda` int(20) NOT NULL,
+  `nome` varchar(150) NOT NULL,
+  `tipovenda` varchar(15) NOT NULL,
+  `origemvenda` varchar(10) NOT NULL,
+  `nomepromocao` varchar(254) NOT NULL,
+  `dia_venda` date NOT NULL,
+  `produto` varchar(254) NOT NULL,
+  `quantidade` int(50) NOT NULL,
+  `valor` float(5,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `cad_vendedores`
+-- Estrutura para tabela `cad_vendedores`
 --
 
 CREATE TABLE `cad_vendedores` (
@@ -318,7 +342,7 @@ CREATE TABLE `cad_vendedores` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `cotacao`
+-- Estrutura para tabela `cotacao`
 --
 
 CREATE TABLE `cotacao` (
@@ -336,7 +360,22 @@ CREATE TABLE `cotacao` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `insumos`
+-- Estrutura para tabela `estoque`
+--
+
+CREATE TABLE `estoque` (
+  `id_estoque` int(11) NOT NULL,
+  `id_produto` int(11) NOT NULL,
+  `quantidade` float NOT NULL,
+  `localizacao` varchar(255) DEFAULT NULL,
+  `data_entrada` date DEFAULT NULL,
+  `data_saida` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `insumos`
 --
 
 CREATE TABLE `insumos` (
@@ -349,7 +388,7 @@ CREATE TABLE `insumos` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `medicao_producao`
+-- Estrutura para tabela `medicao_producao`
 --
 
 CREATE TABLE `medicao_producao` (
@@ -367,7 +406,7 @@ CREATE TABLE `medicao_producao` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `pecas`
+-- Estrutura para tabela `pecas`
 --
 
 CREATE TABLE `pecas` (
@@ -380,7 +419,7 @@ CREATE TABLE `pecas` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `pedido_compra`
+-- Estrutura para tabela `pedido_compra`
 --
 
 CREATE TABLE `pedido_compra` (
@@ -402,7 +441,7 @@ CREATE TABLE `pedido_compra` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `produtos`
+-- Estrutura para tabela `produtos`
 --
 
 CREATE TABLE `produtos` (
@@ -415,13 +454,14 @@ CREATE TABLE `produtos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
+
 --
--- Estrutura da tabela `qualidade`
+-- Estrutura para tabela `qualidade`
 --
 
 CREATE TABLE `qualidade` (
   `id_qualidade` int(11) NOT NULL,
-  `nome_plantio` varchar(100) NOT NULL,  
+  `nome_plantio` varchar(100) NOT NULL,
   `data_medicao` date NOT NULL,
   `diametro_med` float NOT NULL,
   `conformidade_venda` varchar(20) NOT NULL
@@ -430,7 +470,7 @@ CREATE TABLE `qualidade` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `solicitacao_produtos`
+-- Estrutura para tabela `solicitacao_produtos`
 --
 
 CREATE TABLE `solicitacao_produtos` (
@@ -444,7 +484,7 @@ CREATE TABLE `solicitacao_produtos` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `sol_compra`
+-- Estrutura para tabela `sol_compra`
 --
 
 CREATE TABLE `sol_compra` (
@@ -462,7 +502,7 @@ CREATE TABLE `sol_compra` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `usuarios`
+-- Estrutura para tabela `usuarios`
 --
 
 CREATE TABLE `usuarios` (
@@ -483,108 +523,121 @@ CREATE TABLE `usuarios` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- Despejando dados para a tabela `usuarios`
+--
+
+INSERT INTO `usuarios` (`id_usuario`, `nome`, `email`, `celular`, `data_nascimento`, `cpf`, `nivel_acesso`, `cep`, `endereco`, `numero`, `complemento`, `cidade`, `estado`, `senha`) VALUES
+(1, 'Atual', 'atual@atual.com', NULL, '2024-12-01', '465.897.908-09', 0, '11111-111', 'Fatec Jahu', NULL, NULL, 'Jau', 'SP', '1234');
+
+--
 -- Índices para tabelas despejadas
 --
 
 --
--- Índices para tabela `agendamento_plantacao`
+-- Índices de tabela `agendamento_plantacao`
 --
 ALTER TABLE `agendamento_plantacao`
   ADD PRIMARY KEY (`id_agendamento`);
 
 --
--- Índices para tabela `cadastro_funcionarios`
+-- Índices de tabela `cadastro_funcionarios`
 --
 ALTER TABLE `cadastro_funcionarios`
-  ADD PRIMARY KEY (`id_cad_funcionario`);
+  ADD PRIMARY KEY (`idFuncionario`);
 
 --
--- Índices para tabela `cadastro_insumo`
+-- Índices de tabela `cadastro_insumo`
 --
 ALTER TABLE `cadastro_insumo`
   ADD PRIMARY KEY (`id_solicitacao_cad`);
 
 --
--- Índices para tabela `cadastro_nota_saida`
+-- Índices de tabela `cadastro_nota_saida`
 --
 ALTER TABLE `cadastro_nota_saida`
   ADD PRIMARY KEY (`id_cad_nota_saida`),
   ADD UNIQUE KEY `cnpj_saida` (`cnpj_saida`);
 
 --
--- Índices para tabela `cadastro_vendas`
+-- Índices de tabela `cadastro_vendas`
 --
 ALTER TABLE `cadastro_vendas`
   ADD PRIMARY KEY (`id_cad_venda`);
 
 --
--- Índices para tabela `cad_cliente`
+-- Índices de tabela `cad_cliente`
 --
 ALTER TABLE `cad_cliente`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `cad_descontos`
+-- Índices de tabela `cad_descontos`
 --
 ALTER TABLE `cad_descontos`
   ADD PRIMARY KEY (`id_promo`);
 
 --
--- Índices para tabela `cad_distribuidor`
+-- Índices de tabela `cad_distribuidor`
 --
 ALTER TABLE `cad_distribuidor`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `cad_fornecedor`
+-- Índices de tabela `cad_expedicao`
+--
+ALTER TABLE `cad_expedicao`
+  ADD PRIMARY KEY (`id_expedicao`);
+
+--
+-- Índices de tabela `cad_fornecedor`
 --
 ALTER TABLE `cad_fornecedor`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `cad_nat_financeira`
+-- Índices de tabela `cad_nat_financeira`
 --
 ALTER TABLE `cad_nat_financeira`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `cad_nfs`
+-- Índices de tabela `cad_nfs`
 --
 ALTER TABLE `cad_nfs`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `cad_novobanco`
+-- Índices de tabela `cad_novobanco`
 --
 ALTER TABLE `cad_novobanco`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `cad_produtos`
+-- Índices de tabela `cad_produtos`
 --
 ALTER TABLE `cad_produtos`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `cad_transportadores`
+-- Índices de tabela `cad_transportadores`
 --
 ALTER TABLE `cad_transportadores`
   ADD PRIMARY KEY (`id_transportador`);
 
 --
--- Índices para tabela `cad_venda`
+-- Índices de tabela `cad_vendas`
 --
-ALTER TABLE `cad_venda`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE `cad_vendas`
+  ADD PRIMARY KEY (`id_venda`);
 
 --
--- Índices para tabela `cad_vendedores`
+-- Índices de tabela `cad_vendedores`
 --
 ALTER TABLE `cad_vendedores`
   ADD PRIMARY KEY (`id_vendedor`);
 
 --
--- Índices para tabela `cotacao`
+-- Índices de tabela `cotacao`
 --
 ALTER TABLE `cotacao`
   ADD PRIMARY KEY (`id`),
@@ -592,26 +645,33 @@ ALTER TABLE `cotacao`
   ADD KEY `id_fk_fornecedor_cotacao` (`id_fornecedor`);
 
 --
--- Índices para tabela `insumos`
+-- Índices de tabela `estoque`
+--
+ALTER TABLE `estoque`
+  ADD PRIMARY KEY (`id_estoque`),
+  ADD KEY `id_produto` (`id_produto`);
+
+--
+-- Índices de tabela `insumos`
 --
 ALTER TABLE `insumos`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `medicao_producao`
+-- Índices de tabela `medicao_producao`
 --
 ALTER TABLE `medicao_producao`
   ADD PRIMARY KEY (`id_medicao`),
   ADD KEY `id_nome_plantio` (`id_nome_plantio`);
 
 --
--- Índices para tabela `pecas`
+-- Índices de tabela `pecas`
 --
 ALTER TABLE `pecas`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `pedido_compra`
+-- Índices de tabela `pedido_compra`
 --
 ALTER TABLE `pedido_compra`
   ADD PRIMARY KEY (`id`),
@@ -619,19 +679,25 @@ ALTER TABLE `pedido_compra`
   ADD KEY `id_fk_fornecedor` (`id_fornecedor`);
 
 --
--- Índices para tabela `produtos`
+-- Índices de tabela `produtos`
 --
 ALTER TABLE `produtos`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `solicitacao_produtos`
+-- Índices de tabela `qualidade`
+--
+ALTER TABLE `qualidade`
+  ADD PRIMARY KEY (`id_qualidade`);
+
+--
+-- Índices de tabela `solicitacao_produtos`
 --
 ALTER TABLE `solicitacao_produtos`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `sol_compra`
+-- Índices de tabela `sol_compra`
 --
 ALTER TABLE `sol_compra`
   ADD PRIMARY KEY (`id`),
@@ -639,30 +705,32 @@ ALTER TABLE `sol_compra`
   ADD KEY `id_fk_usuario` (`id_usuario`);
 
 --
--- Índices para tabela `usuarios`
+-- Índices de tabela `usuarios`
 --
 ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`id_usuario`);
 
 --
--- AUTO_INCREMENT de tabelas despejadas
+-- AUTO_INCREMENT para tabelas despejadas
+--
+
+--
+-- AUTO_INCREMENT de tabela `agendamento_plantacao`
 --
 ALTER TABLE `agendamento_plantacao`
   MODIFY `id_agendamento` int(11) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `cadastro_insumo`
-  MODIFY `id_solicitacao_cad` int(11) NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE `medicao_producao`
-  MODIFY `id_medicao` int(11) NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE `qualidade`
-MODIFY `id_qualidade` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de tabela `cadastro_funcionarios`
 --
 ALTER TABLE `cadastro_funcionarios`
-  MODIFY `id_cad_funcionario` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idFuncionario` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `cadastro_insumo`
+--
+ALTER TABLE `cadastro_insumo`
+  MODIFY `id_solicitacao_cad` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `cadastro_nota_saida`
@@ -695,10 +763,16 @@ ALTER TABLE `cad_distribuidor`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de tabela `cad_expedicao`
+--
+ALTER TABLE `cad_expedicao`
+  MODIFY `id_expedicao` int(20) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de tabela `cad_fornecedor`
 --
 ALTER TABLE `cad_fornecedor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de tabela `cad_nat_financeira`
@@ -710,6 +784,12 @@ ALTER TABLE `cad_nat_financeira`
 -- AUTO_INCREMENT de tabela `cad_nfs`
 --
 ALTER TABLE `cad_nfs`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `cad_novobanco`
+--
+ALTER TABLE `cad_novobanco`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -725,10 +805,10 @@ ALTER TABLE `cad_transportadores`
   MODIFY `id_transportador` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de tabela `cad_venda`
+-- AUTO_INCREMENT de tabela `cad_vendas`
 --
-ALTER TABLE `cad_venda`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `cad_vendas`
+  MODIFY `id_venda` int(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `cad_vendedores`
@@ -743,10 +823,22 @@ ALTER TABLE `cotacao`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de tabela `estoque`
+--
+ALTER TABLE `estoque`
+  MODIFY `id_estoque` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de tabela `insumos`
 --
 ALTER TABLE `insumos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `medicao_producao`
+--
+ALTER TABLE `medicao_producao`
+  MODIFY `id_medicao` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `pecas`
@@ -767,6 +859,12 @@ ALTER TABLE `produtos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de tabela `qualidade`
+--
+ALTER TABLE `qualidade`
+  MODIFY `id_qualidade` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de tabela `solicitacao_produtos`
 --
 ALTER TABLE `solicitacao_produtos`
@@ -782,34 +880,34 @@ ALTER TABLE `sol_compra`
 -- AUTO_INCREMENT de tabela `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT de tabela `cad_novobancoo`
---
-ALTER TABLE `cad_novobanco`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- Restrições para despejos de tabelas
+-- Restrições para tabelas despejadas
 --
 
 --
--- Limitadores para a tabela `cotacao`
+-- Restrições para tabelas `cotacao`
 --
 ALTER TABLE `cotacao`
   ADD CONSTRAINT `id_fk_fornecedor_cotacao` FOREIGN KEY (`id_fornecedor`) REFERENCES `cad_fornecedor` (`id`),
   ADD CONSTRAINT `id_fk_sol_compra` FOREIGN KEY (`id_sol_compra`) REFERENCES `sol_compra` (`id`);
 
 --
--- Limitadores para a tabela `pedido_compra`
+-- Restrições para tabelas `estoque`
+--
+ALTER TABLE `estoque`
+  ADD CONSTRAINT `estoque_ibfk_1` FOREIGN KEY (`id_produto`) REFERENCES `cad_produtos` (`id`);
+
+--
+-- Restrições para tabelas `pedido_compra`
 --
 ALTER TABLE `pedido_compra`
   ADD CONSTRAINT `id_fk_fornecedor` FOREIGN KEY (`id_fornecedor`) REFERENCES `cad_fornecedor` (`id`),
   ADD CONSTRAINT `id_fk_solicitacao` FOREIGN KEY (`id_solicitacao`) REFERENCES `sol_compra` (`id`);
 
 --
--- Limitadores para a tabela `sol_compra`
+-- Restrições para tabelas `sol_compra`
 --
 ALTER TABLE `sol_compra`
   ADD CONSTRAINT `id_fk_produto` FOREIGN KEY (`id_produto`) REFERENCES `cad_produtos` (`id`),
