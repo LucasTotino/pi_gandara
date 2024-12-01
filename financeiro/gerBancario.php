@@ -161,15 +161,8 @@ $dados = $stmt->get_result();
             <ul class="list-group">
               <li class="list-group-item">
                 <span class="fa fa-file" aria-hidden="true"></span>
-                <span>Relatório de Movimentações Bancárias</span>
-              </li>
-              <li class="list-group-item">
-                <span class="fa fa-file" aria-hidden="true"></span>
-                <span>Relatório de Saldo Bancário</span>
-              </li>
-              <li class="list-group-item">
-                <span class="fa fa-file" aria-hidden="true"></span>
-                <span>Relatório de Investimentos Bancários</span>
+                <span>Relatório de Movimentações Bancárias</span> &nbsp &nbsp
+                <a style="text-align: center;" type="button" href="gerarPDF.php" target="_blank" class="col-sm-2 btn btn-success" href="/pi_gandara/dashboard.php">Gerar Relatório</a>
               </li>
             </ul>
           </div>
