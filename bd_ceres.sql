@@ -91,38 +91,6 @@ CREATE TABLE `cadastro_insumo` (
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `cadastro_nota_saida`
---
-
-CREATE TABLE `cadastro_nota_saida` (
-  `id_cad_nota_saida` int(11) NOT NULL,
-  `cnpj_saida` float NOT NULL,
-  `ie_saida` float NOT NULL,
-  `cep_saida` float NOT NULL,
-  `rua_saida` varchar(255) NOT NULL,
-  `estado_saida` char(2) NOT NULL,
-  `bairro_saida` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Estrutura para tabela `cadastro_vendas`
---
-
-CREATE TABLE `cadastro_vendas` (
-  `id_cad_venda` int(11) NOT NULL,
-  `razaosocial_vend` varchar(255) NOT NULL,
-  `tipovenda` char(1) NOT NULL,
-  `data_vend` date NOT NULL,
-  `codigo_vend` float NOT NULL,
-  `produto_vend` varchar(255) NOT NULL,
-  `quantidade_vend` float NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Estrutura para tabela `cad_cliente`
 --
 
@@ -156,21 +124,6 @@ CREATE TABLE `cad_descontos` (
   `cod_produto` varchar(20) NOT NULL,
   `produto` varchar(254) NOT NULL,
   `porcen_promo` float(5,2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Estrutura para tabela `cad_distribuidor`
---
-
-CREATE TABLE `cad_distribuidor` (
-  `id` int(11) NOT NULL,
-  `nome` varchar(150) DEFAULT NULL,
-  `cpf_cnpj` varchar(18) DEFAULT NULL,
-  `veiculo` varchar(100) DEFAULT NULL,
-  `placa` varchar(7) DEFAULT NULL,
-  `estado` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -236,18 +189,23 @@ CREATE TABLE `cad_nat_financeira` (
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `cad_nfs`
+-- Estrutura para tabela `cad_nfse`
 --
 
-CREATE TABLE `cad_nfs` (
-  `id` int(11) NOT NULL,
-  `id_cliente` int(11) DEFAULT NULL,
-  `IE` varchar(20) DEFAULT NULL,
-  `cep` varchar(6) DEFAULT NULL,
-  `rua` varchar(150) DEFAULT NULL,
-  `estado` varchar(2) DEFAULT NULL,
-  `bairro` varchar(50) DEFAULT NULL,
-  `cidade` varchar(150) DEFAULT NULL
+CREATE TABLE cad_nfse (
+  id_nfse int(11) NOT NULL,
+  dataemissao date NOT NULL,
+  cpf_cnpj varchar(18) NOT NULL,
+  nome varchar(150) NOT NULL,
+  estado varchar(10) NOT NULL,
+  logradouro varchar(150) NOT NULL,
+  email varchar(150) NOT NULL,
+  complemento varchar(20) NOT NULL,
+  id_venda int(11) NOT NULL,
+  produto varchar(50) NOT NULL,
+  quantidade int(50) NOT NULL,
+  valor float(10,2) NOT NULL,
+  valortotal float(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -552,19 +510,6 @@ ALTER TABLE `cadastro_insumo`
   ADD PRIMARY KEY (`id_solicitacao_cad`);
 
 --
--- Índices de tabela `cadastro_nota_saida`
---
-ALTER TABLE `cadastro_nota_saida`
-  ADD PRIMARY KEY (`id_cad_nota_saida`),
-  ADD UNIQUE KEY `cnpj_saida` (`cnpj_saida`);
-
---
--- Índices de tabela `cadastro_vendas`
---
-ALTER TABLE `cadastro_vendas`
-  ADD PRIMARY KEY (`id_cad_venda`);
-
---
 -- Índices de tabela `cad_cliente`
 --
 ALTER TABLE `cad_cliente`
@@ -575,12 +520,6 @@ ALTER TABLE `cad_cliente`
 --
 ALTER TABLE `cad_descontos`
   ADD PRIMARY KEY (`id_promo`);
-
---
--- Índices de tabela `cad_distribuidor`
---
-ALTER TABLE `cad_distribuidor`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Índices de tabela `cad_expedicao`
@@ -601,10 +540,10 @@ ALTER TABLE `cad_nat_financeira`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices de tabela `cad_nfs`
+-- Índices de tabela `cad_nfse`
 --
-ALTER TABLE `cad_nfs`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE `cad_nfse`
+  ADD PRIMARY KEY (`id_nfse`);
 
 --
 -- Índices de tabela `cad_novobanco`
@@ -733,18 +672,6 @@ ALTER TABLE `cadastro_insumo`
   MODIFY `id_solicitacao_cad` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de tabela `cadastro_nota_saida`
---
-ALTER TABLE `cadastro_nota_saida`
-  MODIFY `id_cad_nota_saida` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de tabela `cadastro_vendas`
---
-ALTER TABLE `cadastro_vendas`
-  MODIFY `id_cad_venda` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT de tabela `cad_cliente`
 --
 ALTER TABLE `cad_cliente`
@@ -755,12 +682,6 @@ ALTER TABLE `cad_cliente`
 --
 ALTER TABLE `cad_descontos`
   MODIFY `id_promo` int(10) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de tabela `cad_distribuidor`
---
-ALTER TABLE `cad_distribuidor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `cad_expedicao`
@@ -781,10 +702,10 @@ ALTER TABLE `cad_nat_financeira`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de tabela `cad_nfs`
+-- AUTO_INCREMENT de tabela `cad_nfse`
 --
-ALTER TABLE `cad_nfs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `cad_nfse`
+  MODIFY `id_nfse` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `cad_novobanco`
