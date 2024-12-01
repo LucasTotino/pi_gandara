@@ -785,6 +785,12 @@ ALTER TABLE `usuarios`
   MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de tabela `cad_novobancoo`
+--
+ALTER TABLE `cad_novobanco`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- Restrições para despejos de tabelas
 --
 
