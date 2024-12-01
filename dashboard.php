@@ -85,7 +85,7 @@
             <div style="width: 18rem;">
               <span class="fa fa-chart-line fa-5x" aria-hidden="true"></span>
               <div class="card-body">
-                <h3>Comercial</h3>
+                <h3>Comercial e Faturamento</h3>
               </div>
             </div>
           </div>
