@@ -47,10 +47,12 @@ $dados = $stmt->get_result();
 Liga os resultados a variáveis para serem utilizadas no HTML
 */
 $nivel = array(
+    '',
     'Pessoa Juridica', // Posição 0
     'Pessoa Fisica' //Posição 1
 );
 $corNivel = array(
+    '',
     'badge-danger', // Posição 0
     'badge-primary' // Posição 1
 )
@@ -105,10 +107,10 @@ $corNivel = array(
                                 <label for="tipo_fornecedor" class="text-danger font-weight-bold">Tipo de Fornecedor:</label>
                                 <select class="form-control" id="tipo_fornecedor" name="tipo_fornecedor">
                                     <option value=""> -- ESCOLHA -- </option>
+                                    <option <?= (isset($_GET['id']) && $fornecedor['tipo_fornecedor'] == 2) ? "selected" : null ?>
+                                        value="2">Pessoa Física</option>
                                     <option <?= (isset($_GET['id']) && $fornecedor['tipo_fornecedor'] == 1) ? "selected" : null ?>
-                                        value="1">Pessoa Física</option>
-                                    <option <?= (isset($_GET['id']) && $fornecedor['tipo_fornecedor'] == 0) ? "selected" : null ?>
-                                        value="0">Pessoa Jurídica</option>
+                                        value="1">Pessoa Jurídica</option>
                                 </select>
                             </div>
                             <div class="col-sm-6">
