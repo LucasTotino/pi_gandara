@@ -5,10 +5,10 @@ require_once('c:/xampp/htdocs/pi_gandara/vendor/tecnickcom/tcpdf/tcpdf.php');
 // Criar novo PDF
 $pdf = new TCPDF();
 $pdf->SetCreator(PDF_CREATOR);
-$pdf->SetAuthor('Seu Nome');
-$pdf->SetTitle('Relatório de Vendas');
+$pdf->SetAuthor('CERES - Financeiro');
+$pdf->SetTitle('CERES - Financeiro - Relatório de Vendas');
 $dateTime = new DateTime('now', new DateTimeZone('America/Sao_Paulo'));
-$pdf->SetHeaderData('', 0, 'Relatório de Vendas', 'Gerado em: ' . $dateTime->format('d/m/Y H:i:s') . ' (Horário de Brasília)');
+$pdf->SetHeaderData('', 0, 'CERES - Financeiro - Relatório de Vendas', 'Gerado em: ' . $dateTime->format('d/m/Y H:i:s') . ' (Horário de Brasília)');
 $pdf->setHeaderFont(array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
 $pdf->setFooterFont(array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
 $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
@@ -20,7 +20,7 @@ $pdf->AddPage();
 $pdf->SetFont('helvetica', '', 12);
 
 // Consultar os dados das vendas
-$sql = "SELECT * FROM cad_venda;";
+$sql = "SELECT * FROM cad_vendas;";
 $stmt = $conn->prepare($sql);
 $stmt->execute();
 $dados = $stmt->get_result();
@@ -43,17 +43,17 @@ $html .= '<thead>
           <tbody>';
 
 while ($linha = $dados->fetch_assoc()) {
-  $valorVenda = number_format($linha['qtd'] * $linha['valor'], 2, ',', '.');
+  $valorVenda = number_format($linha['quantidade'] * $linha['valor'], 2, ',', '.');
   $html .= '<tr>
-                <td align="center">' . $linha['id'] . '</td>
-                <td align="center">' . $linha['nomeCliente'] . '</td>
-                <td align="center">' . $linha['data_venda'] . '</td>
+                <td align="center">' . $linha['id_venda'] . '</td>
+                <td align="center">' . $linha['nome'] . '</td>
+                <td align="center">' . $linha['dia_venda'] . '</td>
                 <td align="center">R$: ' . $valorVenda . '</td>
               </tr>';
 
   // Calcule a quantidade e o valor total
   $totalQuantidade++; // Incrementa a quantidade total
-  $totalValor += $linha['qtd'] * $linha['valor']; // Soma o valor total
+  $totalValor += $linha['quantidade'] * $linha['valor']; // Soma o valor total
 }
 
 $html .= '</tbody></table>';

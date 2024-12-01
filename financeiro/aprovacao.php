@@ -82,7 +82,7 @@ $result_fornecedores = $stmt_fornecedores->get_result();
     <main class="container card">
         <div class="row p-3 justify-content-center d-flex align-items-center">
             <a type="button" style="text-align: left;" class="col-1 btn btn-primary justify-content-center d-flex" href="/pi_gandara/financeiro/">Voltar</a>
-            <h1 style="text-align: center;" class="col-11 display-4">Aprovação de Cotação Pendente</h1>
+            <h1 style="text-align: center;" class="col-11 display-4"> <b>Aprovação de Cotação Pendente</b></h1>
         </div>
 
 
@@ -113,7 +113,7 @@ $result_fornecedores = $stmt_fornecedores->get_result();
                         <td><?= $linha['valor'] ?></td>
                         <td><?= $linha['observacao'] ?></td>
                         <td>
-                            <button class="btn btn-success btn-aceitar" data-table="cotacao" data-id="<?= $linha['id'] ?>" >APROVAR</button>
+                            <button class="btn btn-success btn-aceitar" data-table="cotacao" data-id="<?= $linha['id'] ?>">APROVAR</button>
                             <button class="btn btn-danger btn-recusar" data-table="cotacao" data-id="<?= $linha['id'] ?>">RECUSAR</button>
                         </td>
                     </tr>
@@ -122,11 +122,11 @@ $result_fornecedores = $stmt_fornecedores->get_result();
                 ?>
             </tbody>
         </table>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script>
-        $(document).ready(function() {
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script>
+            $(document).ready(function() {
                 // Handle the click event for the "APROVAR" button
                 $('.btn-aceitar').click(function() {
                     var quoteId = $(this).data('id'); // Get the quote ID from the data attribute
@@ -143,7 +143,7 @@ $result_fornecedores = $stmt_fornecedores->get_result();
                                 status: 2
                             },
                             success: function(response) {
-                                    location.reload(); // Reload the page to reflect changes
+                                location.reload(); // Reload the page to reflect changes
 
                             },
                             error: function(xhr, status, error) {
@@ -168,7 +168,7 @@ $result_fornecedores = $stmt_fornecedores->get_result();
                                 status: 1
                             },
                             success: function(response) {
-                                    location.reload(); // Reload the page to reflect changes
+                                location.reload(); // Reload the page to reflect changes
                             },
                             error: function(xhr, status, error) {
                                 console.error(xhr);

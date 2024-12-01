@@ -78,7 +78,29 @@
             <div style="width: 10rem;">
               <span class="fa fa-cart-plus fa-5x" aria-hidden="true"></span>
               <div class="card-body">
-                <h3>Arrumar esse botão "CadClientes"!! (pertence ao Comercial)</h3>
+                <h3>Arrumar botão "CadClientes"!! (pertence ao Comercial)</h3>
+              </div>
+            </div>
+          </div>
+        </a>
+
+        <a href="cadProduto.php" class="btn">
+          <div class="col-2 p-2 m-1">
+            <div style="width: 10rem;">
+              <span class="fa fa-cart-plus fa-5x" aria-hidden="true"></span>
+              <div class="card-body">
+                <h3>Arrumar botão "CadProduto"!! (pertence ao estoque)</h3>
+              </div>
+            </div>
+          </div>
+        </a>
+
+        <a href="cadUsuario.php" class="btn">
+          <div class="col-2 p-2 m-1">
+            <div style="width: 10rem;">
+              <span class="fa fa-cart-plus fa-5x" aria-hidden="true"></span>
+              <div class="card-body">
+                <h3>Arrumar botão "CadUsuario"!! (pertence ao estoque)</h3>
               </div>
             </div>
           </div>
