@@ -178,7 +178,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_agendamento'])) {
         $produtividade_por_planta = 800;
         $producao_por_hectare_un = $plantas_por_hectare * $produtividade_por_planta;
         $peso_caixa_kg = 40;
-        $producao_por_hectare_kg = $producao_por_hectare_un;
+        $producao_por_hectare_kg = $producao_por_hectare_un * 0.100;
         $preco_por_kg = 6.00;
         $valor_safra_por_hectare = $producao_por_hectare_kg * $preco_por_kg;
         $custo_producao_por_hectare = 332596.24;
@@ -206,24 +206,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_agendamento'])) {
               <td><?= 667 * $area_selecionada['area_plantio'] ?></td>
             </tr>
             <tr>
-              <td>Tempo/anos</td>
-              <td>4,08</td>
-              <td>4,08</td>
-            </tr>
-            <tr>
-              <td>Produtividade por planta</td>
-              <td>800</td>
-              <td>800</td>
-            </tr>
-            <tr>
               <td>Produção/unidade</td>
               <td><?= number_format($producao_por_hectare_un, 0, ',', '.') ?></td>
               <td><?= number_format($producao_total_un, 0, ',', '.') ?></td>
-            </tr>
-            <tr>
-              <td>Peso por caixa (kg)</td>
-              <td>40</td>
-              <td>40</td>
             </tr>
             <tr>
               <td>Produção total (Kg)</td>
