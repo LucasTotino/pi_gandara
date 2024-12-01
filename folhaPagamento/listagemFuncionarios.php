@@ -43,110 +43,117 @@ $corNivel = array(
 <html lang="pt-br">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lista de Funcionários</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="/pi_gandara/css/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.css" crossorigin="anonymous">
+  <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
 
-  <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-
-
-  <!-- Admin Lte-->
-  <link rel="stylesheet" href="../dist/css/adminlte.min.css">
-
-  <!-- Admin Lte-->
-  <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
-
-  <link rel="stylesheet" href="CSS/style.css">
-
+  <title>Cadastro de Funcionários</title>
 </head>
 
 <body>
+  <header>
+    <?php
+    include_once('../utils/menu.php');
+    ?>
+  </header>
+  <>
 
-  <div class="container mt-5">
-    <table class="table">
-      <thead class="thead-dark">
-        <tr>
-          <th scope="col">Id:</th>
-          <th scope="col">Nome:</th>
-          <th scope="col">CPF:</th>
-          <th scope="col">Cargo:</th>
-          <th scope="col">Salário Bruto:</th>
-          <th scope="col">FGTS:</th>
-          <th scope="col">INSS:</th>
-          <th scope="col">Valor a receber:</th>
-          <th scope="col">Ações:</th>
-        </tr>
-      </thead>
-      <tbody>
+    <div class="container">
+      <div class="card card-cds">
+        <table class="table">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Id:</th>
+              <th scope="col">Nome:</th>
+              <th scope="col">CPF:</th>
+              <th scope="col">Cargo:</th>
+              <th scope="col">Salário Bruto:</th>
+              <th scope="col">FGTS:</th>
+              <th scope="col">INSS:</th>
+              <th scope="col">Valor a receber:</th>
+              <th scope="col">Ações:</th>
+            </tr>
+          </thead>
+          <tbody>
 
-        <?php
+            <?php
 
-        // Aqui adicionamos o laço de repetição que ira exibir uma linha da tabela para cada registro no BD
+            // Aqui adicionamos o laço de repetição que ira exibir uma linha da tabela para cada registro no BD
 
-        // Adiciona cada registro na variavel linha como um array.
-        while ($linha = $dados->fetch_assoc()) {
+            // Adiciona cada registro na variavel linha como um array.
+            while ($linha = $dados->fetch_assoc()) {
 
-        ?>
+            ?>
 
-        <tr>
-          <th scope="row">
-            <?= $linha['idFuncionario'] ?>
-          </th>
-          <td>
-            <?= $linha['fpNome'] ?>
-          </td>
-          <td>
-            <?= $linha['fpCpf'] ?>
-          </td>
-          <td>
-            <?= $linha['fpCargo'] ?>
-          </td>
-          <td>R$
-            <?= $linha['fpSalarioBruto'] ?>
-          </td>
-          <td>R$
-            <?= $linha['fpSalarioBruto'] * 0.08 ?>
-          </td>
-          <?php
+              <tr>
+                <th scope="row">
+                  <?= $linha['idFuncionario'] ?>
+                </th>
+                <td>
+                  <?= $linha['fpNome'] ?>
+                </td>
+                <td>
+                  <?= $linha['fpCpf'] ?>
+                </td>
+                <td>
+                  <?= $linha['fpCargo'] ?>
+                </td>
+                <td>R$
+                  <?= $linha['fpSalarioBruto'] ?>
+                </td>
+                <td>R$
+                  <?= $linha['fpSalarioBruto'] * 0.08 ?>
+                </td>
+                <?php
 
-$salarioBruto = $linha['fpSalarioBruto'];
-$aliquotaINSS = 0;
+                $salarioBruto = $linha['fpSalarioBruto'];
+                $aliquotaINSS = 0;
 
-if ($salarioBruto <= 1412) {
-    $aliquotaINSS = 7.5;
-} elseif ($salarioBruto <= 2666.68) {
-    $aliquotaINSS = 9;
-} elseif ($salarioBruto <= 4000.03) {
-    $aliquotaINSS = 12;
-} else {
-    $aliquotaINSS = 14;
-}
+                if ($salarioBruto <= 1412) {
+                  $aliquotaINSS = 7.5;
+                } elseif ($salarioBruto <= 2666.68) {
+                  $aliquotaINSS = 9;
+                } elseif ($salarioBruto <= 4000.03) {
+                  $aliquotaINSS = 12;
+                } else {
+                  $aliquotaINSS = 14;
+                }
 
-$descontoINSS = $salarioBruto * ($aliquotaINSS / 100);
+                $descontoINSS = $salarioBruto * ($aliquotaINSS / 100);
 
-echo "<td>R$" . number_format($descontoINSS, 2, ',', '.') . "</td>";
+                echo "<td>R$" . number_format($descontoINSS, 2, ',', '.') . "</td>";
 
-?>
+                ?>
 
-          <td>R$
-            <?= number_format(($linha['fpSalarioBruto'] - $descontoINSS) * 0.92, 2, ',', '.') ?>
-          </td>
-          <td>
-          <a href="holerite.php?id=<?= $linha['idFuncionario'] ?>" class="btn btn-primary">Ver Holerite</a>
-          </td>
-        </tr>
-        <?php
-        }
-        ?>
-      </tbody>
-    </table>
-  </div>
+                <td>R$
+                  <?= number_format(($linha['fpSalarioBruto'] - $descontoINSS) * 0.92, 2, ',', '.') ?>
+                </td>
+                <td>
+                  <a href="holerite.php?id=<?= $linha['idFuncionario'] ?>" class="btn btn-primary">Ver Holerite</a>
+                </td>
+              </tr>
+            <?php
+            }
+            ?>
+          </tbody>
+        </table>
+        <div class="form-row justify-content-center">
+          <div class="mr-3">
+            <a href="/pi_gandara/folhaPagamento/index.php"><button type="button" class="btn btn-success">Voltar</button></a>
+          </div>
+        </div>
+      </div>
 
-  <script src="../plugins/jquery/jquery.min.js"></script>
-  <script src="../plugins/bootstrap/js/bootstrap.min.js"></script>
-  <script src="../dist/js/adminlte.min.js"></script>
+    </div>
+
+    </main>
+    <script src="../js/script.js"></script>
+    <script src="https://kit.fontawesome.com/74ecb76a40.js" crossorigin="anonymous"></script>
+    <scrip src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js">
+      </script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
 
 </body>
 

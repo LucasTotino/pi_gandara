@@ -2,31 +2,29 @@
 <html lang="pt-br">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lista de ponto</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="/pi_gandara/css/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.css" crossorigin="anonymous">
+  <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
 
-  <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-
-
-  <!-- Admin Lte-->
-  <link rel="stylesheet" href="../dist/css/adminlte.min.css">
-
-  <!-- Admin Lte-->
-  <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
-
-  <link rel="stylesheet" href="CSS/style.css">
-
+  <title>Cadastro de Funcionários</title>
 </head>
 
 <body>
+<header>
+    <?php
+    include_once('../utils/menu.php');
+    ?>
+  </header>
+  <main>
 
-  <div class="container mt-5">
+  <div class="container">
+    <div class="card card-cds">
     <table class="table">
       <thead class="thead-dark">
         <tr>
-          <th scope="col">Id:</th>
+          <th scope="col">NSR</th>
           <th scope="col">Nome:</th>
           <th scope="col">Data:</th>
           <th scope="col">Entrada:</th>
@@ -250,11 +248,19 @@
           
       </tbody>
     </table>
+    <br>
+    <div class="form-row justify-content-center">
+            <div class="mr-3">
+              <a href="/pi_gandara/folhaPagamento/index.php"><button type="button" class="btn btn-success">Voltar</button></a>
+            </div>
+          </div>
   </div>
 
-  <script src="../plugins/jquery/jquery.min.js"></script>
-  <script src="../plugins/bootstrap/js/bootstrap.min.js"></script>
-  <script src="../dist/js/adminlte.min.js"></script>
+  <script src="../js/script.js"></script>
+  <script src="https://kit.fontawesome.com/74ecb76a40.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+  <scrip src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous">
+    </script>
 
 </body>
 
