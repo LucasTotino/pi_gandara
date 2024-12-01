@@ -98,12 +98,12 @@ $dados = $stmt->get_result();
                             <label for="tipoConta">Tipo da Conta:</label>
                             <select class="form-control" id="tipoConta" name="tipoConta">
                                 <option value=""> -- ESCOLHA -- </option>
-                                <option <?= (isset($_GET['id']) && $instituicao['tipoConta'] == "corrente") ? "selected" : null ?>
+                                <option <?= (isset($_GET['id']) && $instituicao['tipoConta'] == "Corrente") ? "selected" : null ?>
                                     value="Corrente">CORRENTE</option>
-                                <option <?= (isset($_GET['id']) && $instituicao['tipoConta'] == "poupanca") ? "selected" : null ?>
+                                <option <?= (isset($_GET['id']) && $instituicao['tipoConta'] == "Poupanca") ? "selected" : null ?>
                                     value="Poupança">POUPANÇA</option>
-                                <option <?= (isset($_GET['id']) && $instituicao['tipoConta'] == "salario") ? "selected" : null ?>
-                                    value="Salário">SALÁRIO</option>
+                                <option <?= (isset($_GET['id']) && $instituicao['tipoConta'] == "Salario") ? "selected" : null ?>
+                                    value="Salario">SALÁRIO</option>
                             </select>
                         </div>
 

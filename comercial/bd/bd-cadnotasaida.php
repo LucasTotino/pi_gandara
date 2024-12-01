@@ -8,18 +8,18 @@ $estado = isset($_POST['estado']) && !empty($_POST['estado']) ? $_POST['estado']
 $logradouro = isset($_POST['logradouro']) && !empty($_POST['logradouro']) ? $_POST['logradouro'] : null;
 $email = isset($_POST['email']) && !empty($_POST['email']) ? $_POST['email'] : null;
 $complemento = isset($_POST['complemento']) && !empty($_POST['complemento']) ? $_POST['complemento'] : null;
-$id = isset($_POST['id']) && !empty($_POST['id']) ? $_POST['id'] : null;
+$idVenda = isset($_POST['id_venda']) && !empty($_POST['id_venda']) ? $_POST['id_venda'] : null;
 $produto = isset($_POST['produto']) && !empty($_POST['produto']) ? $_POST['produto'] : null;
 $quantidade = isset($_POST['quantidade']) && !empty($_POST['quantidade']) ? $_POST['quantidade'] : null;
 $valor = isset($_POST['valor']) && !empty($_POST['valor']) ? $_POST['valor'] : null;
-$valortotal = isset($_POST['valortotal']) && !empty($_POST['valortotal']) ? $_POST['valortotal'] : null;
+$valortotal = $quantidade * $valor;
 $idNota = isset($_POST['id_nfse']) && !empty($_POST['id_nfse']) ? $_POST['id_nfse'] : null;
 
 $acao = isset($_POST['acao']) && !empty($_POST['acao']) ? $_POST['acao'] : null;
 
 if ($acao == "INCLUIR") {
 
-    $sql = "INSERT INTO cad_nfse (dataemissao, cpf_cnpj, nome, estado, logradouro, email, complemento, id,
+    $sql = "INSERT INTO cad_nfse (dataemissao, cpf_cnpj, nome, estado, logradouro, email, complemento, id_venda,
     produto, quantidade, valor, valortotal)
     VALUE (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
@@ -41,7 +41,7 @@ if ($acao == "INCLUIR") {
         $logradouro,
         $email,
         $complemento,
-        $id,
+        $idVenda,
         $produto,
         $quantidade,
         $valor,
@@ -84,7 +84,7 @@ if ($acao == "INCLUIR") {
         logradouro = ?,
         email = ?,
         complemento = ?,
-        id = ?,
+        id_venda = ?,
         produto = ?,
         quantidade = ?,
         valor = ?,
@@ -102,7 +102,7 @@ if ($acao == "INCLUIR") {
         $logradouro,
         $email,
         $complemento,
-        $id,
+        $idVenda,
         $produto,
         $quantidade,
         $valor,

@@ -10,7 +10,7 @@ $codBanco = isset($_POST['codBanco']) && !empty($_POST['codBanco']) ? $_POST['co
 $tipoConta = isset($_POST['tipoConta']) && !empty($_POST['tipoConta']) ? $_POST['tipoConta'] : null;
 $moeda = isset($_POST['moeda']) && !empty($_POST['moeda']) ? $_POST['moeda'] : null;
 $anotacoes = isset($_POST['anotacoes']) && !empty($_POST['anotacoes']) ? $_POST['anotacoes'] : null;
-$instituicao = isset($_POST['id']) && !empty($_POST['id']) ? $_POST['id'] : null;
+$instituicao = isset($_POST['instituicao']) && !empty($_POST['instituicao']) ? $_POST['instituicao'] : null;
 $acao = isset($_POST['acao']) && !empty($_POST['acao']) ? $_POST['acao'] : null;
 
 // Verificamos qual operação está sendo feita .

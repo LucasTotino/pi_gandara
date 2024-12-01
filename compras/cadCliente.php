@@ -195,18 +195,19 @@ $tipo = isset($_GET['tipo_cliente']) && !empty($_GET['tipo_cliente']) ? $_GET['t
                             </div>
                         </div>
 
-                        <!-- Botões -->
-                        <div class="form-row justify-content-center">
-                            <div class="col-sm-3 mt-3">
-                                <button type="submit" name="submit" class="btn btn-success">Cadastrar</button>
+                        <hr>
+                        
+                        <div class="form-row mt-3">
+                            <div class="col-md-4 text-left">
+                                <a class="btn btn-warning" href="../comercial/index.php">Voltar</a>
                             </div>
-                            <div class="col-sm-3 mt-3">
-                                <button type="reset" class="btn btn-warning">Cancelar</button>
+                            <div class="col-md-4 text-center">
+                                <button type="reset" class="btn btn-outline-secondary">Limpar</button>
                             </div>
-                            <div class="col-sm-3 mt-3">
-                                <a href="/pi_gandara/compras/index.php"><button type="button" class="btn btn-danger">Voltar</button></a>
+                            <div class="col-md-4 text-right">
+                                <button type="submit" class="btn btn-success">Cadastrar</button>
                             </div>
-                        </div>
+                        </div> <!-- BOTÕES -->
                     </div>
                 </form>
             </div>
