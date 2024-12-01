@@ -29,6 +29,7 @@ if ($id) {
 }
 
 $sql = "SELECT * FROM cad_vendas;";
+$sql = "SELECT * FROM cad_nfse;";
 
 // Inicializa a variável de busca
 $buscar = isset($_GET['buscar']) ? $_GET['buscar'] : '';
@@ -46,6 +47,8 @@ $dados = $stmt->get_result();
 // Prepara a consulta SQL da tabela de cliente
 $sql_cliente = "SELECT id, nome, cpf_cnpj, tipo_cliente, email, celular, logradouro,
 numero, complemento, bairro, cidade, estado, cep FROM cad_cliente"; // Ajuste os campos conforme necessário
+
+
 $stmt_cliente = $conn->prepare($sql_cliente);
 $stmt_cliente->execute();
 $result_cliente = $stmt_cliente->get_result();
@@ -116,7 +119,7 @@ $result_cliente = $stmt_cliente->get_result();
               ?>
                 <tr>
                   <td><?= $linha['id_venda'] ?></td>
-                  <td><?= $linha['nome'] ?></td>
+                  <td><?= $linha['id_nfse'] ?></td>
                   <td><?= date('d/m/Y', strtotime($linha['dia_venda'])) ?></td>
                   <td><?= $linha['produto'] ?></td>
                   <td>R$: <?= number_format($linha['quantidade'] * $linha['valor'], 2, ',', '.') ?></td>
