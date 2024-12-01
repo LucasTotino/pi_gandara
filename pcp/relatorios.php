@@ -84,8 +84,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_agendamento'])) {
       </div>
     </a>
 
-    <div class="col-6 m-5 d-flex justify-content-center">
-      <h3>Relatório das plantações</h3>
+    <div class="col m-5 d-flex justify-content-center">
+      <h1>Relatório das plantações</h1>
     </div>
 
     <div class="card  p-5">
@@ -114,6 +114,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_agendamento'])) {
             (<?= $area_selecionada['area_plantio'] ?>
             ha)</h3>
         </div>
+
+        <?php
+
+        // Recupera as datas de plantio e colheita com base na seleção do usuário
+        $sql_datas = "SELECT data_plantio, data_colheita FROM agendamento_plantacao WHERE id_agendamento = ?";
+        $stmt_datas = $conn->prepare($sql_datas);
+        $stmt_datas->bind_param('i', $id_selecionado);
+        $stmt_datas->execute();
+        $result_datas = $stmt_datas->get_result();
+        $dados_datas = $result_datas->fetch_assoc();
+        ?>
+
+        <!-- Exibe as datas de plantio e colheita -->
+        <?php if (isset($dados_datas['data_plantio']) && isset($dados_datas['data_colheita'])): ?>
+          <p class="text-center text-bold">
+            Data estimada para Plantio: <?= date('d/m/Y', strtotime($dados_datas['data_plantio'])) ?><br>
+            Data estimada para Colheita: <?= date('d/m/Y', strtotime($dados_datas['data_colheita'])) ?>
+          </p>
+        <?php endif; ?>
+
+
         <table class="table table-striped">
           <thead>
             <tr>
@@ -343,6 +364,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_agendamento'])) {
     // Enviar os dados para o JavaScript
     echo "<script>const curvaSData = " . json_encode($curvaData) . ";</script>";
     ?>
+
 
     <div class="container mt-5">
       <h2 class="d-flex justify-content-center">Curva S - Progresso da Produção</h2>
