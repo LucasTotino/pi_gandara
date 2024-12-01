@@ -217,11 +217,11 @@ $tipo = isset($_GET['tipo_cliente']) && !empty($_GET['tipo_cliente']) ? $_GET['t
             <div class="card">
                 <table class="table table-hover table-striped">
                     <thead>
-                        <th>NOME</th>
-                        <th>EMAIL</th>
-                        <th>CELULAR</th>
-                        <th>NÍVEL</th>
-                        <th>AÇÕES</th>
+                        <th>Nome</th>
+                        <th>Email</th>
+                        <th>Celular</th>
+                        <th>Nivel</th>
+                        <th>Editar</th>
                     </thead>
                     <tbody>
                         <?php
@@ -242,7 +242,6 @@ $tipo = isset($_GET['tipo_cliente']) && !empty($_GET['tipo_cliente']) ? $_GET['t
                                 <td>
                                     <!-- Chamo a página do formulario e envio o Id do usuario que será alterado-->
                                     <a href="cadCliente.php?id=<?= $linha['id'] ?>" class="btn btn-warning">Editar</a>
-                                    <button class="btn btn-danger btn-excluir" onclick="excluirRegistro('<?= $linha['id'] ?>', 'cliente')">Excluir</button>
                                 </td>
                             </tr>
                         <?php
