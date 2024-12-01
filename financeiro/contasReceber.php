@@ -4,7 +4,7 @@ require '../utils/conexao.php';
 $id = isset($_GET['id']) ? $_GET['id'] : false;
 
 if ($id) {
-  $sql = "SELECT * FROM cad_venda WHERE id=?;";
+  $sql = "SELECT * FROM cad_vendas WHERE id=?;";
   $stmt = $conn->prepare($sql);
 
 
@@ -28,12 +28,19 @@ if ($id) {
   }
 }
 
-$sql = "SELECT * FROM cad_venda;";
+$sql = "SELECT * FROM cad_vendas;";
+
+// Inicializa a variável de busca
+$buscar = isset($_GET['buscar']) ? $_GET['buscar'] : '';
+
+// Prepara a consulta SQL
+$sql = "SELECT * FROM cad_vendas WHERE nome LIKE ? OR produto LIKE ?";
+
 
 $stmt = $conn->prepare($sql);
-
+$likeBuscar = "%" . $buscar . "%";
+$stmt->bind_param("ss", $likeBuscar, $likeBuscar);
 $stmt->execute();
-
 $dados = $stmt->get_result();
 
 // Prepara a consulta SQL da tabela de cliente
@@ -51,11 +58,11 @@ $result_cliente = $stmt_cliente->get_result();
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" type="text/css" href="styles.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.css" crossorigin="anonymous">
   <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
   <link rel="stylesheet" href="/pi_gandara/css/styleFinanceiro.css">
   <link rel="stylesheet" href="/pi_gandara/css/style.css">
+
   <title>Contas a Receber</title>
 </head>
 
@@ -64,221 +71,104 @@ $result_cliente = $stmt_cliente->get_result();
     <?php include_once('../utils/menu.php'); ?>
   </header>
 
-  <main class="container">
+  <main class="container card">
+    <div class="row p-3 justify-content-center d-flex align-items-center">
+      <a type="button" style="text-align: left;" class="col-1 btn btn-primary justify-content-center d-flex" href="/pi_gandara/financeiro/">Voltar</a>
+      <h1 style="text-align: center;" class="col-11 display-4"> <b>Contas a Receber</b></h1>
+    </div>
 
-    <h1 class="mb-4 text-center">Contas a Receber</h1>
-
-<<<<<<< HEAD
     <br>
 
     <div class="d-flex justify-content-center">
-      <form class="form-inline">
-        <input class="form-control mr-sm-2" type="text" placeholder="Pesquisar conta...">
-        <button class="btn btn-primary my-2 my-sm-0" type="submit">Buscar</button>
-      </form>
+      <form method="GET" action="contasReceber.php">
+        <input class="form-control" type="text" name="buscar" placeholder="Pesquisar conta..."> 
+      </form> &nbsp
+      <a style="text-align: center;" type="submit" class="btn btn-primary">Buscar</a>
     </div>
 
     <br><br>
 
-=======
-    <div class="row mb-4">
-      <div class="col-md-4">
-        <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#novoRecebimentoModal">
-          <i class="fas fa-plus-circle mr-2"></i>Novo Recebimento
-        </button>
-      </div>
-      <div class="col-md-4">
-        <button class="btn btn-info btn-block" data-toggle="modal" data-target="#verFaturasModal">
-          <i class="fas fa-file-invoice mr-2"></i>Ver Faturas
-        </button>
-      </div>
-      <div class="col-md-4">
-        <button class="btn btn-secondary btn-block" data-toggle="modal" data-target="#historicoModal">
-          <i class="fas fa-history mr-2"></i>Histórico de Recebimento
-        </button>
-      </div>
-    </div>
-
->>>>>>> 78db1f9ed088c79be38694425d220a1f99691f16
     <div class="card">
       <div class="card-body">
         <h5 class="card-title">Contas a Receber</h5>
         <div class="table-responsive">
-<<<<<<< HEAD
           <table style="text-align:center;" class="table table-striped table-hover">
             <thead>
               <tr>
                 <th>Número do Pedido</th>
-                <th>Nome do Cliente</th>
+                <th>NF-e</th>
                 <th>Data da Venda</th>
                 <th>Produto</th>
-                <th>Valor da Venda</th> <!-- CRIAR NOVO BANCO DE DADOS RECEBENDO INFORMAÇÕES DO cadVendas.php -->
-                <th>Ação</th>
+                <th>Valor da Venda</th>
               </tr>
             </thead>
             <tbody>
-            <?php
-            // Aqui adicionamos o laço de repetição que irá exibir uma linha da tabela para cada registro no BD.
-            // Adiciona cada registro na variavel linha como um array. 
-            while ($linha = $dados->fetch_assoc()) {
+              <?php
+              // ... (código anterior)
 
-            ?>
-              <tr>
-                <td><?= $linha['id'] ?></td>
-                <td><?= $linha['nome'] ?></td>
-                <td><?= $linha['data_venda'] ?></td>
-                <td><?= $linha['id_produto'] ?></td>
-                <td>R$: <?= number_format($linha['quantidade'] * $linha['valor'], 2, ',', '.') ?></td>
-                <td><a href="gerarPDF.php" class="btn btn-primary">Gerar Relatório PDF</a></td>
-              </tr>
-            <?php
-            }
-            ?>
-          </tbody>
-=======
-          <table class="table table-striped table-hover">
-            <thead>
-              <tr>
-                <th>Número da Fatura</th>
-                <th>Data da Fatura</th>
-                <th>Data Recebimento</th>
-                <th>Valor</th>
-                <th>Status</th>
-                <th>Ações</th>
-              </tr>
-            </thead>
-            <tbody id="contasReceberList">
-              <!-- Dados serão carregados via JavaScript -->
+              $totalQuantidade = 0;
+              $totalValor = 0;
+
+              $dadosArray = [];
+
+              while ($linha = $dados->fetch_assoc()) {
+                $dadosArray[] = $linha;
+              ?>
+                <tr>
+                  <td><?= $linha['id_venda'] ?></td>
+                  <td><?= $linha['nome'] ?></td>
+                  <td><?= date('d/m/Y', strtotime($linha['dia_venda'])) ?></td>
+                  <td><?= $linha['produto'] ?></td>
+                  <td>R$: <?= number_format($linha['quantidade'] * $linha['valor'], 2, ',', '.') ?></td>
+                </tr>
+              <?php
+                // Calcule a quantidade e o valor total para cada linha
+                $totalQuantidade = $dados->num_rows; // Conta o número de registros retornados
+                $totalValor += $linha['quantidade'] * $linha['valor']; // Calcula o valor total
+              }
+              ?>
             </tbody>
->>>>>>> 78db1f9ed088c79be38694425d220a1f99691f16
           </table>
+
+          <div class="card mt-4">
+            <div class="card-body">
+              <h5 class="card-title">Resumo</h5>
+              <div class="table-responsive">
+                <table style="text-align:center;" class="table table-striped table-hover">
+                  <thead>
+                    <tr>
+                      <th>Quantidade Total de Pedidos</th>
+                      <th>Valor Total dos Pedidos</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><?= $totalQuantidade ?></td>
+                      <td>R$: <?= number_format($totalValor, 2, ',', '.') ?></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="row p-3 d-flex justify-content-end align-items-end">
+          <a style="text-align: center;" type="button" href="gerarPDF.php" target="_blank" class="col-2 btn btn-success" href="/pi_gandara/dashboard.php">Gerar Relatório</a>
         </div>
       </div>
-    </div>
-<<<<<<< HEAD
 
-    
+    </div>
+
+
+
+    <!-- ... (o restante do código permanece inalterado) -->
+
   </main>
 
-  
-
-
-  <!-- Modal para Novo Recebimento 
-=======
-  </main>
-
-  <!-- Modal para Novo Recebimento -->
->>>>>>> 78db1f9ed088c79be38694425d220a1f99691f16
-  <div class="modal fade" id="novoRecebimentoModal" tabindex="-1" role="dialog" aria-labelledby="novoRecebimentoModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="novoRecebimentoModalLabel">Novo Recebimento</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form id="novoPagamentoForm">
-            <div class="form-group">
-<<<<<<< HEAD
-              <label for="numeroFatura">Número do Pedido</label>
-              <input type="text" class="form-control" id="numeroFatura" required>
-            </div>
-            <div class="form-group">
-              <label for="nomeCliente">Nome do Cliente</label>
-              <input type="text" class="form-control" id="nomeCliente" required>
-            </div>
-            <div class="form-group">
-              <label for="dataVenda">Data da Venda</label>
-              <input type="date" class="form-control" id="dataVenda" required>
-            </div>
-            <div class="form-group">
-=======
-              <label for="numeroFatura">Número da Fatura</label>
-              <input type="text" class="form-control" id="numeroFatura" required>
-            </div>
-            <div class="form-group">
-              <label for="dataRecebimento">Data de Recebimento</label>
-              <input type="date" class="form-control" id="dataRecebimento" required>
-            </div>
-            <div class="form-group">
->>>>>>> 78db1f9ed088c79be38694425d220a1f99691f16
-              <label for="valor">Valor</label>
-              <input type="number" class="form-control" id="valor" step="0.01" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Salvar</button>
-          </form>
-        </div>
-      </div>
-    </div>
-<<<<<<< HEAD
-  </div> -->
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-=======
-  </div>
-
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-    $(document).ready(function() {
-      // Função para carregar as contas a receber
-      function carregarContasReceber() {
-        // Simular dados (substitua por uma chamada AJAX real)
-        const contas = [{
-            numero: "001",
-            dataFatura: "2023-05-01",
-            dataRecebimento: "2023-05-15",
-            valor: 1000.00,
-            status: "Pendente"
-          },
-          {
-            numero: "002",
-            dataFatura: "2023-05-02",
-            dataRecebimento: "2023-05-16",
-            valor: 1500.00,
-            status: "Pago"
-          },
-          // Adicione mais itens conforme necessário
-        ];
-
-        let html = '';
-        contas.forEach(conta => {
-          html += `
-                        <tr>
-                            <td>${conta.numero}</td>
-                            <td>${conta.dataFatura}</td>
-                            <td>${conta.dataRecebimento}</td>
-                            <td>R$ ${conta.valor.toFixed(2)}</td>
-                            <td>${conta.status}</td>
-                            <td>
-                                <button class="btn btn-sm btn-info">Editar</button>
-                                <button class="btn btn-sm btn-danger">Excluir</button>
-                            </td>
-                        </tr>
-                    `;
-        });
-
-        $('#contasReceberList').html(html);
-      }
-
-      // Carregar contas a receber ao iniciar a página
-      carregarContasReceber();
-
-      // Lidar com o envio do formulário de novo recebimento
-      $('#novoRecebimentoForm').submit(function(e) {
-        e.preventDefault();
-        // Aqui você faria uma chamada AJAX para salvar o novo recebimento
-        alert('Novo recebimento adicionado com sucesso!');
-        $('#novoRecebimentoModal').modal('hide');
-        carregarContasReceber(); // Recarregar a lista
-      });
-    });
-  </script>
-
->>>>>>> 78db1f9ed088c79be38694425d220a1f99691f16
   <script src="https://kit.fontawesome.com/74ecb76a40.js" crossorigin="anonymous"></script>
 </body>
 

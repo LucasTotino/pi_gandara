@@ -66,18 +66,10 @@ $dados = $stmt->get_result();
 
 
   <main class="container">
-<<<<<<< HEAD
     <div class="row p-3 justify-content-center d-flex align-items-center">
       <a type="button" style="text-align: left;" class="col-1 btn btn-primary justify-content-center d-flex" href="/pi_gandara/financeiro/">Voltar</a>
-      <h1 style="text-align: center;" class="col-11 display-4">Gerenciamento Bancário</h1>
+      <h1 style="text-align: center;" class="col-11 display-4"> <b>Gerenciamento Bancário</b></h1>
     </div>
-=======
-      <div class="row p-3 justify-content-center d-flex align-items-center">
-        <a type="button" style="text-align: left;" class="col-1 btn btn-primary justify-content-center d-flex" href="/pi_gandara/financeiro/">Voltar</a>
-        <h1 style="text-align: center;" class="col-11 display-4">Gerenciamento Bancário</h1>
-      </div>
->>>>>>> 78db1f9ed088c79be38694425d220a1f99691f16
-
 
     <div class="row p-3 justify-content-center d-flex align-items-center">
       <div class="col-6">

@@ -201,7 +201,7 @@ $result_descontos = $stmt_descontos->get_result();
         <table class="table">
           <thead>
             <tr>
-              <th scope="col">Nº Pedido</th>
+              <th scope="col">Nº</th>
               <th scope="col">Nome Cliente</th>
               <th scope="col">Dia da Venda</th>
               <th scope="col">Produto</th>
