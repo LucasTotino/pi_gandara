@@ -4,7 +4,7 @@ require '../utils/conexao.php';
 $id = isset($_GET['id']) ? $_GET['id'] : false;
 
 if ($id) {
-  $sql = "SELECT * FROM cad_vendas WHERE id=?;";
+  $sql = "SELECT * FROM cad_venda WHERE id=?;";
   $stmt = $conn->prepare($sql);
 
 
@@ -28,19 +28,19 @@ if ($id) {
   }
 }
 
-$sql = "SELECT * FROM cad_vendas;";
-$sql = "SELECT * FROM cad_nfse;";
+$sql = "SELECT * FROM cad_venda;";
+//$sql = "SELECT * FROM cad_nfse;";
 
 // Inicializa a variável de busca
 $buscar = isset($_GET['buscar']) ? $_GET['buscar'] : '';
 
 // Prepara a consulta SQL
-$sql = "SELECT * FROM cad_vendas WHERE nome LIKE ? OR produto LIKE ?";
+//$sql = "SELECT * FROM cad_venda WHERE id_produto LIKE ?"; //OR produto LIKE ?";
 
 
 $stmt = $conn->prepare($sql);
-$likeBuscar = "%" . $buscar . "%";
-$stmt->bind_param("ss", $likeBuscar, $likeBuscar);
+// $likeBuscar = "%" . $buscar . "%";
+// $stmt->bind_param("ss", $likeBuscar, $likeBuscar);
 $stmt->execute();
 $dados = $stmt->get_result();
 

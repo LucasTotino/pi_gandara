@@ -4,7 +4,7 @@ require '../utils/conexao.php';
 $id = isset($_GET['id']) ? $_GET['id'] : false;
 
 if ($id) {
-  $sql = "SELECT * FROM cad_vendas WHERE id=?;";
+  $sql = "SELECT * FROM cad_venda WHERE id=?;";
   $stmt = $conn->prepare($sql);
 
 
@@ -28,24 +28,27 @@ if ($id) {
   }
 }
 
-$sql = "SELECT * FROM cad_vendas;";
+$sql = "SELECT * FROM cad_venda;";
+//$sql = "SELECT * FROM cad_nfse;";
 
 // Inicializa a variável de busca
 $buscar = isset($_GET['buscar']) ? $_GET['buscar'] : '';
 
 // Prepara a consulta SQL
-$sql = "SELECT * FROM cad_vendas WHERE nome LIKE ? OR produto LIKE ?";
+//$sql = "SELECT * FROM cad_venda WHERE id_produto LIKE ?"; //OR produto LIKE ?";
 
 
 $stmt = $conn->prepare($sql);
-$likeBuscar = "%" . $buscar . "%";
-$stmt->bind_param("ss", $likeBuscar, $likeBuscar);
+// $likeBuscar = "%" . $buscar . "%";
+// $stmt->bind_param("ss", $likeBuscar, $likeBuscar);
 $stmt->execute();
 $dados = $stmt->get_result();
 
 // Prepara a consulta SQL da tabela de cliente
 $sql_cliente = "SELECT id, nome, cpf_cnpj, tipo_cliente, email, celular, logradouro,
 numero, complemento, bairro, cidade, estado, cep FROM cad_cliente"; // Ajuste os campos conforme necessário
+
+
 $stmt_cliente = $conn->prepare($sql_cliente);
 $stmt_cliente->execute();
 $result_cliente = $stmt_cliente->get_result();
@@ -71,7 +74,7 @@ $result_cliente = $stmt_cliente->get_result();
     <?php include_once('../utils/menu.php'); ?>
   </header>
 
-  <main class="container">
+  <main class="container card">
     <div class="row p-3 justify-content-center d-flex align-items-center">
       <a type="button" style="text-align: left;" class="col-1 btn btn-primary justify-content-center d-flex" href="/pi_gandara/financeiro/">Voltar</a>
       <h1 style="text-align: center;" class="col-11 display-4"> <b>Contas a Pagar</b></h1>
@@ -80,10 +83,10 @@ $result_cliente = $stmt_cliente->get_result();
     <br>
 
     <div class="d-flex justify-content-center">
-      <form method="GET" action="contasReceber.php">
-        <input class="form-control mr-sm-2" type="text" name="buscar" placeholder="Pesquisar conta...">
-        <button class="btn btn-primary my-2 my-sm-0" type="submit">Buscar</button>
-      </form>
+      <form method="GET" action="contasPagar.php">
+        <input class="form-control" type="text" name="buscar" placeholder="Pesquisar conta..."> 
+      </form> &nbsp
+      <a style="text-align: center;" type="submit" class="btn btn-primary">Buscar</a>
     </div>
 
     <br><br>
@@ -96,7 +99,7 @@ $result_cliente = $stmt_cliente->get_result();
             <thead>
               <tr>
                 <th>Número do Pedido</th>
-                <th>Nome do Cliente</th>
+                <th>NF-e</th>
                 <th>Data da Venda</th>
                 <th>Produto</th>
                 <th>Valor da Venda</th>
@@ -115,16 +118,16 @@ $result_cliente = $stmt_cliente->get_result();
                 $dadosArray[] = $linha;
               ?>
                 <tr>
-                  <td><?= $linha['id'] ?></td>
-                  <td><?= $linha['nomeCliente'] ?></td>
-                  <td><?= date('d/m/Y', strtotime($linha['data_venda'])) ?></td>
+                  <td><?= $linha['id_venda'] ?></td>
+                  <td><?= $linha['id_nfse'] ?></td>
+                  <td><?= date('d/m/Y', strtotime($linha['dia_venda'])) ?></td>
                   <td><?= $linha['produto'] ?></td>
-                  <td>R$: <?= number_format($linha['qtd'] * $linha['valor'], 2, ',', '.') ?></td>
+                  <td>R$: <?= number_format($linha['quantidade'] * $linha['valor'], 2, ',', '.') ?></td>
                 </tr>
               <?php
                 // Calcule a quantidade e o valor total para cada linha
                 $totalQuantidade = $dados->num_rows; // Conta o número de registros retornados
-                $totalValor += $linha['qtd'] * $linha['valor']; // Calcula o valor total
+                $totalValor += $linha['quantidade'] * $linha['valor']; // Calcula o valor total
               }
               ?>
             </tbody>
@@ -154,7 +157,7 @@ $result_cliente = $stmt_cliente->get_result();
 
         </div>
         <div class="row p-3 d-flex justify-content-end align-items-end">
-          <a style="text-align: center;" type="button" href="gerarPDF.php" target="_blank" class="col-2 btn btn-success" href="/pi_gandara/dashboard.php">Gerar Relatório</a>
+          <a style="text-align: center;" type="button" href="gerarPDFcr.php" target="_blank" class="col-2 btn btn-success" href="/pi_gandara/dashboard.php">Gerar Relatório</a>
         </div>
       </div>
 

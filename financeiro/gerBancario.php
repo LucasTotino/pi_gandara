@@ -122,30 +122,30 @@ $dados = $stmt->get_result();
             <table class="table table-striped">
               <thead>
                 <tr>
-                  <th>Data</th>
-                  <th>Tipo</th>
-                  <th>Valor</th>
-                  <th>Conta</th>
+                  <th style="text-align: center;">Data</th>
+                  <th style="text-align: center;">Tipo</th>
+                  <th style="text-align: center;">Valor</th>
+                  <th style="text-align: center;">Conta</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td>2023-02-20</td>
-                  <td>Depósito</td>
-                  <td>R$ 1.000,00</td>
-                  <td>Conta Corrente - Banco do Brasil</td>
+                  <td style="text-align: center;">20/02/2024</td>
+                  <td style="text-align: center;">Depósito</td>
+                  <td style="text-align: center;">R$ 1.000,00</td>
+                  <td style="text-align: center;">Conta Corrente - Banco do Brasil</td>
                 </tr>
                 <tr>
-                  <td>2023-02-19</td>
-                  <td>Saque</td>
-                  <td>R$ 500,00</td>
-                  <td>Conta Poupança - Caixa Econômica</td>
+                  <td style="text-align: center;">19/02/2024</td>
+                  <td style="text-align: center;">Saque</td>
+                  <td style="text-align: center;">R$ 500,00</td>
+                  <td style="text-align: center;">Conta Poupança - Caixa Econômica</td>
                 </tr>
                 <tr>
-                  <td>2023-02-18</td>
-                  <td>Transferência</td>
-                  <td>R$ 2.000,00</td>
-                  <td>Conta Investimento - Banco Santander</td>
+                  <td style="text-align: center;">18/02/2024</td>
+                  <td style="text-align: center;">Transferência</td>
+                  <td style="text-align: center;">R$ 2.000,00</td>
+                  <td style="text-align: center;">Conta Investimento - Banco Santander</td>
                 </tr>
               </tbody>
             </table>
