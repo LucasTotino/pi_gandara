@@ -99,7 +99,7 @@ if ($stmt) {
                             }
 
                             //teste
-
+                            
                             ?>
                         </select>
                     </div>
@@ -169,6 +169,32 @@ if ($stmt) {
 
     </div>
 
+    <?php
+    // Obtém a menor data de medição para definir o início das etapas
+    $sql_primeira_data = "SELECT MIN(data_medicao) as primeira_data FROM medicao_producao;";
+    $result_primeira_data = $conn->query($sql_primeira_data);
+
+    if ($result_primeira_data->num_rows > 0) {
+        $primeira_data = $result_primeira_data->fetch_assoc()['primeira_data'];
+        $data_inicio = new DateTime($primeira_data);
+    } else {
+        $data_inicio = null; // Caso não haja medições
+    }
+
+    // Função para calcular a etapa atual (1 a 5)
+    function calcularEtapa($data_atual, $data_inicio)
+    {
+        $semanas_totais = 192;
+        $etapas = 5;
+        $semanas_por_etapa = ceil($semanas_totais / $etapas);
+
+        $diff = $data_inicio->diff(new DateTime($data_atual));
+        $semanas_passadas = floor($diff->days / 7);
+
+        return min(ceil($semanas_passadas / $semanas_por_etapa), $etapas); // Garante no máximo a etapa 5
+    }
+    ?>
+
     <div class="container mt-5">
         <h2 class="d-flex justify-content-center">Medições realizadas</h2>
         <div class="card p-3">
@@ -182,6 +208,7 @@ if ($stmt) {
                         <th>Necessário abudação?</th>
                         <th>Necessário Herbicida ou inseticida ?</th>
                         <th>Observação</th>
+                        <th>Imagem Representativa</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
@@ -196,9 +223,21 @@ if ($stmt) {
                             <td><?= $linha['praga'] ?></td>
                             <td><?= $linha['obs_medicao'] ?></td>
                             <td>
+                                <?php if ($data_inicio): ?>
+                                    <?php
+                                    $etapa = calcularEtapa($linha['data_medicao'], $data_inicio);
+                                    $imagem_url = "../imgs/Nível_$etapa.png"; // Substitua pelo caminho real
+                                    ?>
+                                    <img src="<?= $imagem_url ?>" alt="Nível <?= $etapa ?>" width="80" height="80">
+                                <?php else: ?>
+                                    <span>Sem dados suficientes</span>
+                                <?php endif; ?>
+                            </td>
+                            <td>
                                 <a href="medicaoProducao.php?id=<?= $linha['id_medicao'] ?>"
                                     class="btn btn-warning btn-sm">Editar</a>
-                                <button type="button" class="btn btn-danger btn-sm btn-excluir" data-id="<?= $linha['id_medicao'] ?>">Excluir</button>
+                                <button type="button" class="btn btn-danger btn-sm btn-excluir"
+                                    data-id="<?= $linha['id_medicao'] ?>">Excluir</button>
                             </td>
                         </tr>
                     <?php endwhile; ?>
@@ -216,12 +255,12 @@ if ($stmt) {
                 const id = button.getAttribute('data-id'); // Obtém o ID do botão
                 if (confirm('Tem certeza de que deseja excluir este registro?')) {
                     fetch('/pi_gandara/pcp/bd_pcp_medicao_prod.php', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/x-www-form-urlencoded'
-                            },
-                            body: `acao=DELETAR&id_medicao=${id}` // Certifique-se de que o nome corresponde ao esperado no PHP
-                        })
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        },
+                        body: `acao=DELETAR&id_medicao=${id}` // Certifique-se de que o nome corresponde ao esperado no PHP
+                    })
                         .then(response => response.json()) // Converte a resposta para JSON
                         .then(data => {
                             alert(data.message); // Exibe a mensagem do backend

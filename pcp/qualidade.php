@@ -71,7 +71,7 @@ if ($stmt) {
         </a>
 
         <div class="col-6 m-5">
-          <h3>Registro de Qualidade</h3>
+          <h1>Registro de Qualidade</h1>
         </div>
       </div>
 

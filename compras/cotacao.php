@@ -99,18 +99,14 @@ $result_fornecedores = $stmt_fornecedores->get_result();
                                     ?>
                                 </select>
                             </div>
-
-                            <div class="col-sm-2">
-                                <label for="status">Status</label>
-                                <input type="text" class="form-control" id="status" name="status">
-                            </div>
-                            <div class="col-sm-5">
+                            
+                            <div class="col-sm-7">
                                 <label for="descricao">Descrição</label>
                                 <input type="text" class="form-control" id="descricao" name="descricao" readonly>
                             </div>
                             <div class="col-sm-2">
                                 <label for="data_abertura">Data de Abertura</label>
-                                <input type="date" class="form-control" id="data_abertura" name="data_abertura">
+                                <input type="date" class="form-control" id="data_abertura" name="data_abertura" readonly>
                             </div>
                         </div>
                         <div class="row justify-content-center mt-2">
@@ -205,7 +201,6 @@ $result_fornecedores = $stmt_fornecedores->get_result();
                                 <td>
                                     <!-- Chamo o id da Solicitação para a página do formulario-->
                                     <a href="cotacao.php?id=<?= $linha['id'] ?>" class="btn btn-warning">Editar</a>
-                                    <button class="btn btn-danger btn-excluir" onclick="excluirRegistro('<?= $linha['id'] ?>', 'solicitacao')">Excluir</button>
                                 </td>
                             </tr>
                         <?php
@@ -218,7 +213,7 @@ $result_fornecedores = $stmt_fornecedores->get_result();
     </main>
 
     <script src="https://kit.fontawesome.com/74ecb76a40.js" crossorigin="anonymous"></script>
-    <script src="/pi_gandara/js/script.js"></script>
+    <script src="../js/script.js"></script>
     <script>
         document.getElementById('id_sol_compra').addEventListener('change', function carregaProduto() {
             const solCompraId = this.value;

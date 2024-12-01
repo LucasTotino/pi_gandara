@@ -213,7 +213,6 @@ $nivel = array(
                     <thead>
                         <th>Código</th>
                         <th>Produto</th>
-                        <th>Usuario</th>
                         <th>Origem</th>
                         <th>D. Entrega</th>
                         <th>D. Criação</th>
@@ -230,7 +229,6 @@ $nivel = array(
                             <tr>
                                 <td><?= $linha['cod_produto'] ?></td>
                                 <td><?= $linha['produto'] ?></td>
-                                <td><?= $linha['nome'] ?></td>
                                 <td>
                                     <span>
                                         <?= $nivel[$linha['origem']] ?>
@@ -242,7 +240,6 @@ $nivel = array(
                                 <td>
                                     <!-- Chamo o id da Solicitação para a página do formulario-->
                                     <a href="solicitacaoCompra.php?id=<?= $linha['id'] ?>" class="btn btn-warning">Editar</a>
-                                    <button class="btn btn-danger btn-excluir" onclick="excluirRegistro('<?= $linha['id'] ?>', 'solicitacao')">Excluir</button>
                                 </td>
                             </tr>
                         <?php
