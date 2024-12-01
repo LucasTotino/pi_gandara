@@ -207,7 +207,7 @@ $result_descontos = $stmt_descontos->get_result();
               <th scope="col">Produto</th>
               <th scope="col">Quantidade</th>
               <th scope="col">Valor P/un</th>
-              <th scope="col">Ações</th>
+              <th scope="col">Editar</th>
             </tr>
           </thead>
           <tbody>
@@ -227,9 +227,6 @@ $result_descontos = $stmt_descontos->get_result();
                 <td>
                   <!-- Chamo a pagina de formulario e envio o id do usuario que sera alterado. -->
                   <a href="cadVendas.php?id=<?= $linha['id_venda']?>" class="btn btn-warning">Editar</a>
-
-                  <button class="btn btn-danger btn-excluir"
-                    data-table="cad_vendas" data-id="<?= $linha['id_venda'] ?>"> Excluir</button>
                 </td>
               </tr>
             <?php

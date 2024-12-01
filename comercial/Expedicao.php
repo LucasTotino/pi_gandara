@@ -160,7 +160,7 @@ $result_transportador = $stmt_transportador->get_result();
                                 <th scope="col">Cliente</th>
                                 <th scope="col">Transportadora resp:</th>
                                 <th scope="col">Data de envio</th>
-                                <th scope="col">Ação</th>
+                                <th scope="col">Editar</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -178,9 +178,6 @@ $result_transportador = $stmt_transportador->get_result();
                                     <td>
                                         <!-- Chamo a pagina de formulario e envio o id do usuario que sera alterado. -->
                                         <a href="Expedicao.php?id=<?= $linha['id_expedicao'] ?>" class="btn btn-warning">Editar</a>
-
-                                        <button class="btn btn-danger btn-excluir"
-                                            data-table="cad_expedicao" data-id="<?= $linha['id_expedicao'] ?>"> Excluir</button>
                                     </td>
                                 </tr>
                             <?php

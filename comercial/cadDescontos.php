@@ -137,7 +137,7 @@ $dados = $stmt->get_result();  // Exclusivamente com SQL generico.
               <th scope="col">Inicio</th>
               <th scope="col">Término</th>
               <th scope="col">% Promoção</th>
-              <th scope="col">Ações</th>
+              <th scope="col">Editar</th>
             </tr>
           </thead>
           <tbody>
@@ -156,9 +156,6 @@ $dados = $stmt->get_result();  // Exclusivamente com SQL generico.
                 <td>
                   <!-- Chamo a pagina de formulario e envio o id do usuario que sera alterado. -->
                   <a href="cadDescontos.php?id=<?= $linha['id_promo'] ?>" class="btn btn-warning">Editar</a>
-
-                  <button class="btn btn-danger btn-excluir"
-                    data-table="cad_descontos" data-id="<?= $linha['id_promo'] ?>"> Excluir</button>
                 </td>
               </tr>
             <?php

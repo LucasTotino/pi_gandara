@@ -209,7 +209,7 @@ $result_venda = $stmt_venda->get_result();
                             <th scope="col">Data Emissão</th>
                             <th scope="col">Estado</th>
                             <th scope="col">Valor Total</th>
-                            <th scope="col">Ações</th>
+                            <th scope="col">Editar</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -228,9 +228,6 @@ $result_venda = $stmt_venda->get_result();
                                 <td><?= $linha['valortotal'] ?></td>
                                 <td><!-- Chamo a pagina de formulario e envio o id do usuario que sera alterado. -->
                                     <a href="cadNotaSaida.php?id=<?= $linha['id_nfse'] ?>" class="btn btn-warning">Editar</a>
-
-                                    <button class="btn btn-danger btn-excluir"
-                                        data-table="cad_nfse" data-id="<?= $linha['id_nfse'] ?>"> Excluir</button>
                                 </td>
                             </tr>
                         <?php

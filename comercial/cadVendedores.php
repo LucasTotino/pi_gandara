@@ -190,7 +190,7 @@ $dados = $stmt->get_result();  // Exclusivamente com SQL generico.
               <th scope="col">%Comissão</th>
               <th scope="col">Tipo</th>
               <th scope="col">Status</th>
-              <th scope="col">Ações</th>
+              <th scope="col">Editar</th>
             </tr>
           </thead>
           <tbody>
@@ -210,8 +210,6 @@ $dados = $stmt->get_result();  // Exclusivamente com SQL generico.
                   <!-- Chamo a pagina de formulario e envio o id do usuario que sera alterado. -->
                   <a href="cadVendedores.php?id=<?= $linha['id_vendedor'] ?>" class="btn btn-warning">Editar</a>
 
-                  <button class="btn btn-danger btn-excluir"
-                    data-table="cad_vendedores" data-id="<?= $linha['id_vendedor'] ?>"> Excluir</button>
                 </td>
               </tr>
             <?php
@@ -228,41 +226,6 @@ $dados = $stmt->get_result();  // Exclusivamente com SQL generico.
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.css" crossorigin="anonymous">
   <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
 
-  <script>
-    $(document).ready(function() {
-      $('.btn-excluir').click(function() {
-        var userId = $(this).data('id');
-        var tabela = $(this).data('table');
-
-        var confirma = confirm(`Você tem certeza que 
-                deseja excluir o cadastro [ ${userId} ] ?`);
-
-        if (confirma) {
-          $.ajax({
-            url: `../comercial/bd/bd-cadvendedores.php`,
-            type: 'POST',
-            data: {
-              acao: "DELETAR",
-              id_vendedor: userId
-            },
-            success: function(response) {
-              var result = JSON.parse(response);
-              if (result.status === "sucesso") {
-                alert(result.message);
-                location.reload();
-              } else {
-                alert(result.message);
-              }
-            },
-            error: function(xhr, status, error) {
-              console.error(xhr);
-              alert("Ocorreu um erro: " + error);
-            }
-          });
-        }
-      });
-    });
-  </script>
 </body>
 
 </html>
