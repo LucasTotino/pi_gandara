@@ -419,6 +419,79 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_agendamento'])) {
       });
     </script>
 
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // Preparar os dados para o gráfico Curva S
+        const semanas = curvaSData.map(item => item.semanas); // Tempo em semanas
+        const diametros = curvaSData.map(item => item.diametro); // Diâmetro acumulado
+
+        // Verificar se a medição de semanas ultrapassa 192
+        if (semanas.some(semana => semana > 192)) {
+          // Mostrar mensagem de aviso
+          const avisoElement = document.createElement('div');
+          avisoElement.style.position = 'fixed';
+          avisoElement.style.top = '20px';
+          avisoElement.style.left = '50%';
+          avisoElement.style.transform = 'translateX(-50%)';
+          avisoElement.style.padding = '15px';
+          avisoElement.style.backgroundColor = 'rgba(0, 255, 0, 0.8)';
+          avisoElement.style.color = 'white';
+          avisoElement.style.fontSize = '20px';
+          avisoElement.style.fontWeight = 'bold';
+          avisoElement.style.borderRadius = '5px';
+          avisoElement.textContent = 'A plantação está pronta para colheita';
+
+          document.body.appendChild(avisoElement);
+
+          // Remover o aviso após alguns segundos (opcional)
+          setTimeout(() => {
+            avisoElement.remove();
+          }, 5000); // Remover após 5 segundos
+        }
+
+        // Configuração do gráfico
+        const ctx = document.getElementById('graficoCurvaS').getContext('2d');
+        const graficoCurvaS = new Chart(ctx, {
+          type: 'line', // Gráfico de linha para a Curva S
+          data: {
+            labels: semanas, // Semanas como eixo X
+            datasets: [{
+              label: 'Progresso da Produção (Curva S)',
+              data: diametros, // Dados acumulados
+              borderColor: 'rgba(75, 192, 192, 1)',
+              backgroundColor: 'rgba(75, 192, 192, 0.2)',
+              borderWidth: 2,
+              tension: 0.6 // Curvatura da linha
+            }]
+          },
+          options: {
+            responsive: true,
+            plugins: {
+              legend: {
+                display: true
+              }
+            },
+            scales: {
+              x: {
+                title: {
+                  display: true,
+                  text: 'Semanas após plantio'
+                }
+              },
+              y: {
+                beginAtZero: true,
+                title: {
+                  display: true,
+                  text: 'Diâmetro (cm)'
+                }
+              }
+            }
+          }
+        });
+      });
+    </script>
+
+
     <script src="https://kit.fontawesome.com/74ecb76a40.js" crossorigin="anonymous"></script>
 
 </body>
