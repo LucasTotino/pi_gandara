@@ -179,7 +179,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_agendamento'])) {
         $producao_por_hectare_un = $plantas_por_hectare * $produtividade_por_planta;
         $peso_caixa_kg = 40;
         $producao_por_hectare_kg = $producao_por_hectare_un * 0.100;
-        $preco_por_kg = 6.00;
+        $preco_por_kg = 6.99;
         $valor_safra_por_hectare = $producao_por_hectare_kg * $preco_por_kg;
         $custo_producao_por_hectare = 332596.24;
         $lucro_bruto_por_hectare = $valor_safra_por_hectare - $custo_producao_por_hectare;
@@ -217,8 +217,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_agendamento'])) {
             </tr>
             <tr>
               <td>Preço por Kg</td>
-              <td>R$ 6,00</td>
-              <td>R$ 6,00</td>
+              <td>R$ 6.99</td>
+              <td>R$ 6.99</td>
             </tr>
             <tr>
               <td>Valor Safra</td>
@@ -231,7 +231,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_agendamento'])) {
               <td>R$ <?= number_format($custo_producao_total, 2, ',', '.') ?></td>
             </tr>
             <tr>
-              <td>Lucro bruto</td>
+              <td>Lucro bruto (Safra pós plantio)</td>
               <td>R$ <?= number_format($lucro_bruto_por_hectare, 2, ',', '.') ?></td>
               <td>R$ <?= number_format($lucro_bruto_total, 2, ',', '.') ?></td>
             </tr>
@@ -241,6 +241,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_agendamento'])) {
         <p class="text-center">Selecione uma área para visualizar os resultados.</p>
       <?php endif; ?>
     </div>
+
+
 
     <div class="container">
       <h3 class="mt-5 d-flex justify-content-center">Gráfico de Custos por Atividade</h3>
@@ -475,7 +477,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_agendamento'])) {
         });
       });
     </script>
-
 
     <script src="https://kit.fontawesome.com/74ecb76a40.js" crossorigin="anonymous"></script>
 
