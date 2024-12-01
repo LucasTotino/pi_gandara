@@ -104,7 +104,7 @@ if ($acao == "INCLUIR") {
 
 } else if ($acao == "DELETAR") {
     // Neste bloco será excluido um registro que já existe no BD.
-    
+    error_log(print_r($_POST, true)); // Log the incoming POST data
     $sql = "DELETE FROM cad_novobanco WHERE id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $instituicao);

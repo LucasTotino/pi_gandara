@@ -100,7 +100,7 @@ $dados = $stmt->get_result();
                                 <option value=""> -- ESCOLHA -- </option>
                                 <option <?= (isset($_GET['id']) && $instituicao['tipoConta'] == "Corrente") ? "selected" : null ?>
                                     value="Corrente">CORRENTE</option>
-                                <option <?= (isset($_GET['id']) && $instituicao['tipoConta'] == "Poupanca") ? "selected" : null ?>
+                                <option <?= (isset($_GET['id']) && $instituicao['tipoConta'] == "Poupança") ? "selected" : null ?>
                                     value="Poupança">POUPANÇA</option>
                                 <option <?= (isset($_GET['id']) && $instituicao['tipoConta'] == "Salario") ? "selected" : null ?>
                                     value="Salario">SALÁRIO</option>
@@ -196,11 +196,11 @@ $dados = $stmt->get_result();
 
                 if (confirma) {
                     $.ajax({
-                        url: `/pi_gandara/financeiro/bd/bd_${tabela}.php`,
+                        url: `/pi_gandara/financeiro/bd/bd_novoBanco.php`,
                         type: 'POST',
                         data: {
                             acao: "DELETAR",
-                            id: userId
+                            instituicao: userId
                         },
                         success: function(response) {
                             var result = JSON.parse(response);
