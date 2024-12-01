@@ -34,7 +34,17 @@ $stmt = $conn->prepare($sql);
 $stmt->execute();
 $dados = $stmt->get_result();
 
+$sql_cliente = "SELECT id, nome, cpf_cnpj, tipo_cliente, email, celular, logradouro,
+numero, complemento, bairro, cidade, estado, cep FROM cad_cliente"; // Ajuste os campos conforme necessário
+$stmt_cliente = $conn->prepare($sql_cliente);
+$stmt_cliente->execute();
+$result_cliente = $stmt_cliente->get_result();
 
+$sql_venda = "SELECT id_venda, nome, tipovenda, origemvenda, nomepromocao, dia_venda, produto,
+quantidade, valor FROM cad_vendas"; // Ajuste os campos conforme necessário
+$stmt_venda = $conn->prepare($sql_venda);
+$stmt_venda->execute();
+$result_venda = $stmt_venda->get_result();
 ?>
 
 <!doctype html>
@@ -83,7 +93,7 @@ $dados = $stmt->get_result();
                         <div class="form-group col-md-3 text-white">
                             <label class="text-dark" for="dataemissao"><b>Data de Emissão:</b></label>
                             <input type="date" class="form-control" id="dataemissao" name="dataemissao"
-                                value="<?= ($id) ? $user['dataemissao'] : null ?>">
+                                value="<?= ($id) ? $user['dataemissao'] : null ?>" required>
                         </div>
                     </div> <!-- Linha 1 -->
 
@@ -98,8 +108,15 @@ $dados = $stmt->get_result();
                         </div>
                         <div class="form-group col-md-6 text-white">
                             <label class="text-dark" for="nome"><b>Nome/Razão Social:</b></label>
-                            <input type="text" class="form-control" id="nome" name="nome"
-                                value="<?= ($id) ? $user['nome'] : null ?>">
+                            <select id="nome" name="nome" class="form-control" required>
+                                <option value="" selected>-- ESCOLHA --</option>
+                                <?php
+                                while ($cliente = $result_cliente->fetch_assoc()) {
+                                    $selectP = ($id && $user['nome'] == $cliente['nome']) ? 'selected' : '';
+                                    echo "<option value='{$cliente['nome']}' $selectP>{$cliente['nome']}</option>";
+                                }
+                                ?>
+                            </select>
                         </div>
                         <div class="form-group col-md-3 text-white">
                             <label class="text-dark" for="estado"><b>Estado:</b></label>
@@ -127,13 +144,20 @@ $dados = $stmt->get_result();
                     </div>
 
                     <hr>
-                    <h3>Detalhes do Produto:</h3>
+                    <h3>Detalhes da Venda:</h3>
 
                     <div class="form-row">
                         <div class="form-group col-md-2 text-white">
-                            <label class="text-dark" for="id"><b>Cod. Venda:</b></label>
-                            <input type="text" class="form-control" id="id" name="id"
-                                value="<?= ($id) ? $user['id'] : null ?>">
+                            <label class="text-dark" for="id_venda"><b>Cod. Venda:</b></label>
+                            <select id="id_venda" name="id_venda" class="form-control" required>
+                                <option value="" selected>-- ESCOLHA --</option>
+                                <?php
+                                while ($venda = $result_venda->fetch_assoc()) {
+                                    $selectP = ($id && $user['id_venda'] == $venda['id_venda']) ? 'selected' : '';
+                                    echo "<option value='{$venda['id_venda']}' $selectP>{$venda['id_venda']}</option>";
+                                }
+                                ?>
+                            </select>
                         </div>
                         <div class="form-group col-md-4 text-white">
                             <label class="text-dark" for="produto"><b>Produto Vendido:</b></label>
@@ -148,12 +172,12 @@ $dados = $stmt->get_result();
                         <div class="form-group col-md-2 text-white">
                             <label class="text-dark" for="valor"><b>Valor p/ Unidade:</b></label>
                             <input type="text" class="form-control" id="valor" name="valor"
-                                value="<?= ($id) ? $user['valor'] : null ?>" readonly>
+                                value="R$ <?= ($id) ? $user['valor'] : null ?>" readonly>
                         </div>
                         <div class="form-group col-md-2 text-white">
                             <label class="text-dark" for=""><b>Total:</b></label>
-                            <input type="text" class="form-control" id="" name=""
-                                value="<?= ($id) ? $user['valortotal'] : null ?>" readonly>
+                            <input type="text" class="form-control" id="" name="" readonly
+                                value="<?= ($id) ? $user['valortotal'] : null ?>">
                         </div>
                     </div>
 
@@ -222,7 +246,91 @@ $dados = $stmt->get_result();
     <script src="https://kit.fontawesome.com/74ecb76a40.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.css" crossorigin="anonymous">
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <script>
+        // Quando o campo "nome" mudar
+        document.getElementById('nome').addEventListener('change', function carregaCliente() {
+            const clienteId = this.value; // Obtem o ID do cliente
+
+            if (clienteId) {
+                // Faz a requisição ao backend para buscar os dados do cliente
+                fetch('utils/cliente.php?id=' + clienteId)
+                    .then(response => response.json()) // Converte a resposta para JSON
+                    .then(data => {
+                        if (!data.error) {
+                            // Preenche os campos com os dados retornados
+                            document.getElementById('cpf_cnpj').value = data.cpf_cnpj || '';
+                            document.getElementById('estado').value = data.estado || '';
+                            document.getElementById('logradouro').value = data.logradouro || '';
+                            document.getElementById('email').value = data.email || '';
+                            document.getElementById('complemento').value = data.complemento || '';
+                        } else {
+                            console.error(data.error);
+                            alert('Nenhum dado encontrado.');
+                        }
+                    })
+                    .catch(error => console.error('Erro:', error));
+            } else {
+                // Limpa os campos se o ID do cliente não estiver presente
+                document.getElementById('cpf_cnpj').value = '';
+                document.getElementById('estado').value = '';
+                document.getElementById('logradouro').value = '';
+                document.getElementById('email').value = '';
+                document.getElementById('complemento').value = '';
+            }
+        });
+
+        // Caso haja necessidade de preencher os campos ao carregar a página
+        window.addEventListener('DOMContentLoaded', function() {
+            const clienteCpf = document.getElementById('cpf_cnpj').value;
+            const clienteEstado = document.getElementById('estado').value;
+            const clienteLogradouro = document.getElementById('logradouro').value;
+            const clienteEmail = document.getElementById('email').value;
+            const clienteComplemento = document.getElementById('complemento').value;
+
+            carregaCliente(clienteCpf);
+            carregaCliente(clienteEstado);
+            carregaCliente(clienteLogradouro);
+            carregaCliente(clienteEmail);
+            carregaCliente(clienteComplemento);
+        });
+    </script>
+
+
+    <script>
+        document.getElementById('id_venda').addEventListener('change', function carregaVenda() {
+            const vendaId = this.value;
+
+            if (vendaId) {
+                fetch('utils/venda.php?id=' + vendaId)
+                    .then(response => response.json()) // Espera JSON da API
+                    .then(data => {
+                        if (!data.error) {
+                            // Preenche os campos com os valores retornados
+                            document.getElementById('id_venda').value = data.id_venda || '';
+                            document.getElementById('produto').value = data.produto || '';
+                            document.getElementById('quantidade').value = data.quantidade || '';
+                            document.getElementById('valor').value = data.valor || '';
+                        } else {
+                            console.error(data.error);
+                            alert('Nenhum dado encontrado.');
+                        }
+                    })
+                    .catch(error => console.error('Erro:', error));
+            } else {
+                // Limpa os campos se nenhum ID for selecionado
+                document.getElementById('id_venda').value = '';
+                document.getElementById('produto').value = '';
+                document.getElementById('quantidade').value = '';
+                document.getElementById('valor').value = '';
+            }
+        });
+
+        window.addEventListener('DOMContentLoaded', function() {
+            const vendaId = document.getElementById('id_venda').value;
+            if (vendaId) carregaVenda(vendaId); // Preenche os campos com base no valor inicial
+        });
+    </script>
+
 
 </body>
-
 </html>
