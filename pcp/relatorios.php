@@ -64,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_agendamento'])) {
 
 
 
-  <title>Trabalho Gandara!</title>
+  <title>Relatórios</title>
 </head>
 
 <header>

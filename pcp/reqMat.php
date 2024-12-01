@@ -9,7 +9,7 @@
     crossorigin="anonymous">
   <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
 
-  <title>Trabalho Gandara!</title>
+  <title>Requisição de Materiais</title>
 </head>
 <header>
   <?php

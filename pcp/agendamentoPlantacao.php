@@ -48,7 +48,7 @@ if ($stmt) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.css"
         crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/74ecb76a40.js" crossorigin="anonymous"></script>
-    <title>Trabalho Gandara!</title>
+    <title>Agendamento de plantação</title>
 </head>
 
 <header>

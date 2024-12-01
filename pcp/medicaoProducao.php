@@ -50,7 +50,7 @@ if ($stmt) {
         crossorigin="anonymous">
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
 
-    <title>Trabalho Gandara!</title>
+    <title>Acompanhamento da produção</title>
 </head>
 <header>
     <?php
@@ -208,7 +208,7 @@ if ($stmt) {
                         <th>Necessário abudação?</th>
                         <th>Necessário Herbicida ou inseticida ?</th>
                         <th>Observação</th>
-                        <th>Imagem Representativa</th>
+                        <th>Imagem ilustrativa</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
@@ -228,7 +228,7 @@ if ($stmt) {
                                     $etapa = calcularEtapa($linha['data_medicao'], $data_inicio);
                                     $imagem_url = "../imgs/Nível_$etapa.png"; // Substitua pelo caminho real
                                     ?>
-                                    <img src="<?= $imagem_url ?>" alt="Nível <?= $etapa ?>" width="80" height="80">
+                                    <img src="<?= $imagem_url ?>" alt="Nível <?= $etapa ?>" width="120" height="120">
                                 <?php else: ?>
                                     <span>Sem dados suficientes</span>
                                 <?php endif; ?>
