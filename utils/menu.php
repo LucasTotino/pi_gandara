@@ -27,7 +27,7 @@
   </a>
   <a href="/pi_gandara/comercial/index.php" title="Comercial">
     <span class="fa fa-chart-line"></span>
-    <span class="label">Comercial</span>
+    <span class="label">Comercial e Faturamento</span>
   </a>
   <a href="/pi_gandara/index.php" title="Logout" style="position: absolute; bottom:0px">
     <span class="fa fa-arrow-right-from-bracket" aria-hidden="true"></span>
