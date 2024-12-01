@@ -647,7 +647,17 @@ ALTER TABLE `usuarios`
 --
 -- AUTO_INCREMENT de tabelas despejadas
 --
+ALTER TABLE `agendamento_plantacao`
+  MODIFY `id_agendamento` int(11) NOT NULL AUTO_INCREMENT;
 
+ALTER TABLE `cadastro_insumo`
+  MODIFY `id_solicitacao_cad` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `medicao_producao`
+  MODIFY `id_medicao` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `qualidade`
+MODIFY `id_qualidade` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de tabela `cadastro_funcionarios`
 --
