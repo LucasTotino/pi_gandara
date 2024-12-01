@@ -243,7 +243,6 @@ $corNivel = array(
                                 <td>
                                     <!-- Chamo a página do formulario e envio o Id do Fornecedor que será alterado-->
                                     <a href="cadFornecedor.php?id=<?= $linha['id'] ?>" class="btn btn-warning">Editar</a>
-                                    <button class="btn btn-danger btn-excluir" onclick="excluirRegistro('<?= $linha['id'] ?>', 'fornecedor')">Excluir</button>
                                 </td>
                             </tr>
                         <?php
