@@ -20,7 +20,8 @@ $pdf->AddPage();
 $pdf->SetFont('helvetica', '', 12);
 
 // Consultar os dados das vendas
-$sql = "SELECT * FROM cad_vendas;";
+$sql = $sql = "SELECT  v.id_venda,  v.nome, v.dia_venda, v.produto, v.quantidade, v.valor,  n.id_nfse FROM cad_vendas v 
+LEFT JOIN cad_nfse n ON v.id_venda = n.id_venda;";
 $stmt = $conn->prepare($sql);
 $stmt->execute();
 $dados = $stmt->get_result();
@@ -46,7 +47,7 @@ while ($linha = $dados->fetch_assoc()) {
   $valorVenda = number_format($linha['quantidade'] * $linha['valor'], 2, ',', '.');
   $html .= '<tr>
                 <td align="center">' . $linha['id_venda'] . '</td>
-                <td align="center">' . $linha['nome'] . '</td>
+                <td align="center">' . $linha['id_nfse'] . '</td>
                 <td align="center">' . $linha['dia_venda'] . '</td>
                 <td align="center">R$: ' . $valorVenda . '</td>
               </tr>';

@@ -4,7 +4,9 @@ require '../utils/conexao.php';
 $id = isset($_GET['id']) ? $_GET['id'] : false;
 
 if ($id) {
-  $sql = "SELECT * FROM cad_venda WHERE id=?;";
+  $sql = "
+   SELECT  v.id_venda,  v.nome, v.dia_venda, v.produto, v.quantidade, v.valor,  n.id_nfse FROM cad_vendas v 
+   LEFT JOIN cad_nfse n ON v.id_venda = n.id_venda;";
   $stmt = $conn->prepare($sql);
 
 
@@ -28,7 +30,8 @@ if ($id) {
   }
 }
 
-$sql = "SELECT * FROM cad_venda;";
+$sql = "SELECT  v.id_venda,  v.nome, v.dia_venda, v.produto, v.quantidade, v.valor,  n.id_nfse FROM cad_vendas v 
+LEFT JOIN cad_nfse n ON v.id_venda = n.id_venda;";
 //$sql = "SELECT * FROM cad_nfse;";
 
 // Inicializa a variável de busca
