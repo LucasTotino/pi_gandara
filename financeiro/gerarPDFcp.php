@@ -6,9 +6,9 @@ require_once('c:/xampp/htdocs/pi_gandara/vendor/tecnickcom/tcpdf/tcpdf.php');
 $pdf = new TCPDF();
 $pdf->SetCreator(PDF_CREATOR);
 $pdf->SetAuthor('CERES - Financeiro');
-$pdf->SetTitle('CERES - Financeiro - Contas a Receber');
+$pdf->SetTitle('CERES - Financeiro - Contas a Pagar');
 $dateTime = new DateTime('now', new DateTimeZone('America/Sao_Paulo'));
-$pdf->SetHeaderData('', 0, 'CERES - Financeiro - Contas a Receber', 'Gerado em: ' . $dateTime->format('d/m/Y H:i:s') . ' (Horário de Brasília)');
+$pdf->SetHeaderData('', 0, 'CERES - Financeiro - Contas a Pagar', 'Gerado em: ' . $dateTime->format('d/m/Y H:i:s') . ' (Horário de Brasília)');
 $pdf->setHeaderFont(array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
 $pdf->setFooterFont(array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
 $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
@@ -31,7 +31,7 @@ $totalQuantidade = 0;
 $totalValor = 0;
 
 // Criar tabela HTML para os dados
-$html = '<h2>Contas a Receber</h2>';
+$html = '<h2>Contas a Pagar</h2>';
 $html .= '<table border="1" cellpadding="4">';
 $html .= '<thead>
             <tr>
@@ -46,10 +46,10 @@ $html .= '<thead>
 while ($linha = $dados->fetch_assoc()) {
   $valorVenda = number_format($linha['quantidade'] * $linha['valor'], 2, ',', '.');
   $html .= '<tr>
-                <td align="center">' . $linha['id_venda'] . '</td>
-                <td align="center">' . $linha['id_nfse'] . '</td>
-                <td align="center">' . $linha['dia_venda'] . '</td>
-                <td align="center">R$: ' . $valorVenda . '</td>
+                <td align="center"> (Aguardando Estoque) </td>
+                <td align="center"> (Aguardando Estoque) </td>
+                <td align="center"> (Aguardando Estoque) </td>
+                <td align="center">R$:  (Aguardando Estoque) </td>
               </tr>';
 
   // Calcule a quantidade e o valor total
@@ -70,8 +70,8 @@ $html .= '<thead>
           </thead>
           <tbody>';
 $html .= '<tr>
-            <td align="center">' . $totalQuantidade . '</td>
-            <td align="center">R$: ' . number_format($totalValor, 2, ',', '.') . '</td>
+            <td align="center">(Aguardando Estoque)</td>
+            <td align="center">R$: (Aguardando Estoque) </td>
           </tr>';
 $html .= '</tbody></table>';
 

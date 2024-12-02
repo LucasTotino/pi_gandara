@@ -67,7 +67,7 @@ $dados = $stmt->get_result();
     <main class="container">
         <div class="row p-3 justify-content-center d-flex align-items-center">
             <a type="button" style="text-align: left;" class="col-1 btn btn-primary justify-content-center d-flex" href="/pi_gandara/financeiro/">Voltar</a>
-            <h1 style="text-align: center;" class="col-11 display-4">Cadastrar nova conta bancária</h1>
+            <h1 style="text-align: center;" class="col-11 display-4"><b>Cadastrar nova conta bancária</b></h1>
         </div>
 
 
@@ -79,12 +79,12 @@ $dados = $stmt->get_result();
 
                     <div class="form-row justify-content-center mt-2">
                         <div class="col-sm-6">
-                            <label for="nomeInstituicao">Nome do Instituição Financeira</label>
+                            <label for="nomeInstituicao">Nome da Instituição Financeira:</label>
                             <input type="text" class="form-control" id="nomeInstituicao" name="nomeInstituicao"
                                 value="<?= ($id) ? $instituicao['nomeInstituicao'] : null ?>">
                         </div>
                         <div class="col-sm-4">
-                            <label for="numeroConta">Número da Conta + Digito verificador</label>
+                            <label for="numeroConta">Número da Conta + Digito verificador:</label>
                             <input type="numeroConta" class="form-control" id="numeroConta" name="numeroConta"
                                 value="<?= ($id) ? $instituicao['numeroConta'] : null ?>">
                         </div>

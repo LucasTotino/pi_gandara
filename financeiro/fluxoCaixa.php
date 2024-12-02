@@ -25,7 +25,7 @@
     </div>
 
 
-    <div class="container-fluid p-4">
+    <div class="align-items-center">
 
       <!-- Período -->
 
@@ -52,7 +52,7 @@
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">Saldo Inicial</h5>
-              <p class="card-text">-</p>
+              <p class="card-text" style="text-align: center;">(Aguardando integração dos Módulos)</p>
             </div>
           </div>
         </div>
@@ -60,7 +60,7 @@
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">Saldo Final</h5>
-              <p class="card-text">-</p>
+              <p class="card-text" style="text-align: center;">(Aguardando integração dos Módulos)</p>
             </div>
           </div>
         </div>
@@ -137,6 +137,9 @@
                 </tbody>
               </table>
             </div>
+          </div>
+          <div class="d-flex justify-content-end p-3">
+            <a type="button" class="btn btn-success" href="gerarPDFfc.php" target="_blank" style="margin-right: 20px;">Gerar Relatório</a>
           </div>
         </div>
       </section>

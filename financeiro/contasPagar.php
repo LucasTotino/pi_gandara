@@ -4,7 +4,7 @@ require '../utils/conexao.php';
 $id = isset($_GET['id']) ? $_GET['id'] : false;
 
 if ($id) {
-  $sql = "SELECT * FROM cad_venda WHERE id=?;";
+  $sql = "SELECT * FROM cad_vendas WHERE id=?;";
   $stmt = $conn->prepare($sql);
 
 
@@ -28,7 +28,7 @@ if ($id) {
   }
 }
 
-$sql = "SELECT * FROM cad_venda;";
+$sql = "SELECT * FROM cad_vendas;";
 //$sql = "SELECT * FROM cad_nfse;";
 
 // Inicializa a variável de busca
@@ -118,11 +118,11 @@ $result_cliente = $stmt_cliente->get_result();
                 $dadosArray[] = $linha;
               ?>
                 <tr>
-                  <td><?= $linha['id_venda'] ?></td>
-                  <td><?= $linha['id_nfse'] ?></td>
-                  <td><?= date('d/m/Y', strtotime($linha['dia_venda'])) ?></td>
-                  <td><?= $linha['produto'] ?></td>
-                  <td>R$: <?= number_format($linha['quantidade'] * $linha['valor'], 2, ',', '.') ?></td>
+                  <td><br><b>(AGUARDANDO O ESTOQUE) </b></td>
+                  <td><br><b>(AGUARDANDO O ESTOQUE) </b></td>
+                  <td><br><b>(AGUARDANDO O ESTOQUE) </b></td>
+                  <td><br><b>(AGUARDANDO O ESTOQUE) </b></td>
+                  <td>R$: <br><b>(AGUARDANDO O ESTOQUE) </b></td>
                 </tr>
               <?php
                 // Calcule a quantidade e o valor total para cada linha
@@ -146,8 +146,8 @@ $result_cliente = $stmt_cliente->get_result();
                   </thead>
                   <tbody>
                     <tr>
-                      <td><?= $totalQuantidade ?></td>
-                      <td>R$: <?= number_format($totalValor, 2, ',', '.') ?></td>
+                      <td><br><b>(AGUARDANDO O ESTOQUE) </b></td>
+                      <td>R$: <br><b>(AGUARDANDO O ESTOQUE) </b></td>
                     </tr>
                   </tbody>
                 </table>
@@ -157,7 +157,7 @@ $result_cliente = $stmt_cliente->get_result();
 
         </div>
         <div class="row p-3 d-flex justify-content-end align-items-end">
-          <a style="text-align: center;" type="button" href="gerarPDFcr.php" target="_blank" class="col-2 btn btn-success" href="/pi_gandara/dashboard.php">Gerar Relatório</a>
+          <a style="text-align: center;" type="button" href="gerarPDFcp.php" target="_blank" class="col-2 btn btn-success" href="/pi_gandara/dashboard.php">Gerar Relatório</a>
         </div>
       </div>
 

@@ -130,19 +130,19 @@ $dados = $stmt->get_result();
               </thead>
               <tbody>
                 <tr>
-                  <td style="text-align: center;">20/02/2024</td>
+                  <td style="text-align: center;">20/12/2024</td>
                   <td style="text-align: center;">Depósito</td>
                   <td style="text-align: center;">R$ 1.000,00</td>
                   <td style="text-align: center;">Conta Corrente - Banco do Brasil</td>
                 </tr>
                 <tr>
-                  <td style="text-align: center;">19/02/2024</td>
+                  <td style="text-align: center;">19/12/2024</td>
                   <td style="text-align: center;">Saque</td>
                   <td style="text-align: center;">R$ 500,00</td>
                   <td style="text-align: center;">Conta Poupança - Caixa Econômica</td>
                 </tr>
                 <tr>
-                  <td style="text-align: center;">18/02/2024</td>
+                  <td style="text-align: center;">18/12/2024</td>
                   <td style="text-align: center;">Transferência</td>
                   <td style="text-align: center;">R$ 2.000,00</td>
                   <td style="text-align: center;">Conta Investimento - Banco Santander</td>
@@ -159,10 +159,14 @@ $dados = $stmt->get_result();
           <div class="card-body">
             <h5 class="card-title">Relatórios Bancários</h5>
             <ul class="list-group">
-              <li class="list-group-item">
-                <span class="fa fa-file" aria-hidden="true"></span>
-                <span>Relatório de Movimentações Bancárias</span> &nbsp &nbsp
-                <a style="text-align: center;" type="button" href="gerarPDF.php" target="_blank" class="col-sm-2 btn btn-success" href="/pi_gandara/dashboard.php">Gerar Relatório</a>
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div class="text-start">
+                  <span class="fa fa-file" aria-hidden="true"></span>
+                  <span>Relatório de Movimentações Bancárias</span>
+                </div>
+                <div>
+                  <a type="button" href="gerarPDFgb.php" target="_blank" class="btn btn-success">Gerar Relatório</a>
+                </div>
               </li>
             </ul>
           </div>

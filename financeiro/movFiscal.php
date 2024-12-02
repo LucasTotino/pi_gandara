@@ -32,8 +32,8 @@
         <div class="col-6">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Saldo Atual</h5>
-              <p class="card-text">R$ 10.000,00</p>
+              <h5 class="card-title">Saldo Atual </h5>
+              <p class="card-text">R$ 250.000,00</p>
             </div>
           </div>
         </div>
@@ -42,8 +42,8 @@
             <div class="card-body">
               <h5 class="card-title">Movimentações Recentes</h5>
               <ul class="list-group">
-                <li class="list-group-item">Entrada: R$ 1.000,00</li>
-                <li class="list-group-item">Saída: R$ 500,00</li>
+                <li class="list-group-item">Entrada: R$ 12.000,00</li>
+                <li class="list-group-item">Saída: R$ 6.500,00</li>
                 <li class="list-group-item">Entrada: R$ 2.000,00</li>
               </ul>
             </div>
@@ -81,12 +81,13 @@
                   </tr>
                 </tbody>
               </table>
+              <div class="d-flex justify-content-end p-3">
+                <a type="button" class="btn btn-success" href="gerarPDFmf.php" target="_blank" style="margin-right: 20px;">Gerar Relatório</a>
+              </div>
             </div>
           </div>
         </div>
       </div>
-
-
     </div>
   </main>
 
